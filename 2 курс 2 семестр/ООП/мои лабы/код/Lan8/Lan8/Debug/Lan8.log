@@ -1,0 +1,10 @@
+﻿  Cyclic_code.cpp
+C:\Users\500a5\source\repos\Lan8\Lan8\cyclic_code.h(21,19): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\500a5\source\repos\Lan8\Lan8\Cyclic_code.cpp(14,28): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\Lan8\Lan8\Cyclic_code.cpp(93,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\Lan8\Lan8\Cyclic_code.cpp(136,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\Lan8\Lan8\Cyclic_code.cpp(160,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\Lan8\Lan8\Cyclic_code.cpp(237,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\Lan8\Lan8\Cyclic_code.cpp(238,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\Lan8\Lan8\Cyclic_code.cpp(281,14): warning C4018: <: несоответствие типов со знаком и без знака
+  Lan8.vcxproj -> C:\Users\500a5\source\repos\Lan8\Debug\Lan8.exe

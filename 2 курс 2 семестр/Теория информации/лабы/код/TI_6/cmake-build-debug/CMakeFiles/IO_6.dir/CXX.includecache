@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/TI_6/main.cpp
+polynom.h
+C:/Users/500a5/CLionProjects/TI_6/polynom.h
+locale.h
+-
+
+C:/Users/500a5/CLionProjects/TI_6/polynom.h
+iostream
+-
+sstream
+-
+string
+-
+fstream
+-
+cstdlib
+-
+ctime
+-
+conio.h
+-
+

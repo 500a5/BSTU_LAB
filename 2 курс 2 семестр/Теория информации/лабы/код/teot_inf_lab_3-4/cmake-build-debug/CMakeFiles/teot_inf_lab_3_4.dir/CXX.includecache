@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/teot_inf_lab_3-4/coding.h
+string
+-
+vector
+-
+iostream
+-
+fstream
+-
+math.h
+-
+
+C:/Users/500a5/CLionProjects/teot_inf_lab_3-4/main.cpp
+windows.h
+-
+coding.h
+C:/Users/500a5/CLionProjects/teot_inf_lab_3-4/coding.h
+

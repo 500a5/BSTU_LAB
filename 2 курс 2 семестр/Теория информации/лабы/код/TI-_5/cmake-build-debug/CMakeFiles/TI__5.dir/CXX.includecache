@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/TI-_5/main.cpp
+pch.h
+C:/Users/500a5/CLionProjects/TI-_5/pch.h
+iostream
+-
+cstddef
+-
+vector
+-
+stdint.h
+-
+cstdlib
+-
+iostream
+-
+string
+-
+windows.h
+-
+cmath
+-
+
+C:/Users/500a5/CLionProjects/TI-_5/pch.h
+
