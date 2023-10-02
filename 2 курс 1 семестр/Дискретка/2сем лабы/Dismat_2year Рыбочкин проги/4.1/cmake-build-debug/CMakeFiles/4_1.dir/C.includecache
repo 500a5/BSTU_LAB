@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/graphs.c
+stdio.h
+-
+malloc.h
+-
+graphs.h
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/graphs.h
+
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/graphs.h
+
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/main.c
+stdio.h
+-
+windows.h
+-
+tasks.h
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/tasks.h
+tasks.c
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/tasks.c
+
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/tasks.c
+stdio.h
+-
+malloc.h
+-
+graphs.c
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/graphs.c
+graphs.h
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/graphs.h
+
+C:/Users/admin/CLionProjects/Dismat_2year/4.1/tasks.h
+

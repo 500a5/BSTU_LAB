@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1508617458 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\Поиск\main.c
+	<stdio.h>
+	<stdlib.h>
+	"poisk.h"
+
+1508617450 c:\users\hystou\desktop\Учёбка\2 r\АСД\Поиск\poisk.h
+
+1508617450 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\Поиск\poisk.c
+	<stdio.h>
+	<stdlib.h>
+

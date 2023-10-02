@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1510483150 source:c:\users\acer\desktop\лабы\асд\main.c
+	<stdio.h>
+	"StackArray.h"
+
+1510483116 c:\users\acer\desktop\лабы\асд\stackarray.h
+

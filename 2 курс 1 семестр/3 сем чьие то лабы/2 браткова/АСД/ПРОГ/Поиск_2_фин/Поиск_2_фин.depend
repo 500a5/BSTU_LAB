@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1508669406 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\Ïîèñê_2_ôèí\main.c
+	<stdio.h>
+	<stdlib.h>
+	"poissk.h"
+	<math.h>
+	<locale.h>
+	<time.h>
+
+1508657602 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\Ïîèñê_2_ôèí\poissk.h
+
+1508668770 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\Ïîèñê_2_ôèí\poissk.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	<time.h>
+
+1508669406 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\ÏÐÎÃ\Ïîèñê_2_ôèí\main.c
+	<stdio.h>
+	<stdlib.h>
+	"poissk.h"
+	<math.h>
+	<locale.h>
+	<time.h>
+
+1508657602 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\ÏÐÎÃ\Ïîèñê_2_ôèí\poissk.h
+
+1508668770 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\ÏÐÎÃ\Ïîèñê_2_ôèí\poissk.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	<time.h>
+

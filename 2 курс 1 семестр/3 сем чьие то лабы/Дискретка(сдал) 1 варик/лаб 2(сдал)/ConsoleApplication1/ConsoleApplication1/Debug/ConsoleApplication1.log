@@ -1,0 +1,7 @@
+﻿  ConsoleApplication1.cpp
+e:\учеба\лабы\дискретка\лаб 2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(106): warning C4101: d1: неиспользованная локальная переменная
+e:\учеба\лабы\дискретка\лаб 2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(107): warning C4101: y: неиспользованная локальная переменная
+e:\учеба\лабы\дискретка\лаб 2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(107): warning C4101: x: неиспользованная локальная переменная
+e:\учеба\лабы\дискретка\лаб 2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(105): warning C4101: l: неиспользованная локальная переменная
+e:\учеба\лабы\дискретка\лаб 2\consoleapplication1\consoleapplication1\consoleapplication1.cpp(106): warning C4101: d2: неиспользованная локальная переменная
+  ConsoleApplication1.vcxproj -> E:\Учеба\Лабы\Дискретка\лаб 2\ConsoleApplication1\Debug\ConsoleApplication1.exe

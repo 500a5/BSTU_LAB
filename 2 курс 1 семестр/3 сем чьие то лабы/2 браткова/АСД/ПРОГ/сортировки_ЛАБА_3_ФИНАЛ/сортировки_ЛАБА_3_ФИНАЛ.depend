@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1507479558 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\сортировки_ЛАБА_3_ФИНАЛ\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	<time.h>
+
+1507479558 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\ПРОГ\сортировки_ЛАБА_3_ФИНАЛ\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	<time.h>
+

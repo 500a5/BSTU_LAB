@@ -1,0 +1,6 @@
+﻿  main.cpp
+main.obj : error LNK2019: ёё√ыър эр эхЁрчЁх°хээ√щ тэх°эшщ ёшьтюы "void __cdecl generatorTasks(void)" (?generatorTasks@@YAXXZ) т ЇєэъЎшш _main
+main.obj : error LNK2019: ёё√ыър эр эхЁрчЁх°хээ√щ тэх°эшщ ёшьтюы "void __cdecl systemInit(void)" (?systemInit@@YAXXZ) т ЇєэъЎшш _main
+main.obj : error LNK2019: ёё√ыър эр эхЁрчЁх°хээ√щ тэх°эшщ ёшьтюы "void __cdecl doSystem(int)" (?doSystem@@YAXH@Z) т ЇєэъЎшш _main
+main.obj : error LNK2019: ёё√ыър эр эхЁрчЁх°хээ√щ тэх°эшщ ёшьтюы "int __cdecl isFinishSystem(void)" (?isFinishSystem@@YAHXZ) т ЇєэъЎшш _main
+E:\╙ўхср\╦рс√\└ыуюЁшЄь√ ш ёЄЁєъЄєЁ√ фрээ√ї\ырс 6\lab 6\Debug\lab 6.exe : fatal error LNK1120: эхЁрчЁх°хээ√ї тэх°эшї ¤ыхьхэЄют: 4

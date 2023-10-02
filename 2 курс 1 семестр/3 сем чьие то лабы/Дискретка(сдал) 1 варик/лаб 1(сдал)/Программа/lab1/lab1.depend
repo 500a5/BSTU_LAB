@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1537665432 source:c:\users\Александр\desktop\Лабы\Дискретка\лаб 1\Программа\lab1\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1538416688 source:e:\Учеба\Лабы\Дискретка\лаб 1\Программа\lab1\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1539007855 source:e:\Учеба\Лабы\Дискретка\лаб 1(готово)\Программа\lab1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+

@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/vych_6/main.c
+stdio.h
+-
+min_f.h
+C:/Users/500a5/CLionProjects/vych_6/min_f.h
+
+C:/Users/500a5/CLionProjects/vych_6/min_f.c
+min_f.h
+C:/Users/500a5/CLionProjects/vych_6/min_f.h
+stdio.h
+C:/Users/500a5/CLionProjects/vych_6/stdio.h
+math.h
+C:/Users/500a5/CLionProjects/vych_6/math.h
+
+C:/Users/500a5/CLionProjects/vych_6/min_f.h
+

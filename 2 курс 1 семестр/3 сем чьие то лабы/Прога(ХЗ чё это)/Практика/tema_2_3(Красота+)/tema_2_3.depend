@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1530103371 source:c:\users\Александр\desktop\Прога\Практика\tema_2_3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+
+1530730290 source:c:\users\Александр\desktop\Прога\Практика\tema_2_3(Красота+)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+

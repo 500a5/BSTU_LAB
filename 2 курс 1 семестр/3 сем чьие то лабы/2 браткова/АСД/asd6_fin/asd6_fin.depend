@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1511636836 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd6_fin\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Zap.h"
+	"Sttacck.h"
+
+1511636545 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd6_fin\zap.h
+
+1511636545 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd6_fin\sttacck.c
+	<stdio.h>
+	<stdlib.h>
+	"Zap.h"
+	"Sttacck.h"
+
+1511636545 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd6_fin\sttacck.h
+	"Zap.h"
+

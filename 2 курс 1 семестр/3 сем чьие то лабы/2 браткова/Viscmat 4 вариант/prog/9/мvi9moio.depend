@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1512300430 source:c:\users\hystou\desktop\Учёбка\2 r\Вычмат\мvi9moio\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

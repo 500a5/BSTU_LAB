@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1512923841 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\zan\derevo.c
+	<stdio.h>
+	<stdlib.h>
+	"Derevo.h"
+
+1512923776 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\zan\derevo.h
+
+1512923982 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\zan\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Derevo.h"
+

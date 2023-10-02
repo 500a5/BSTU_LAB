@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1508693224 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\Поисктейбл\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ttabll.h"
+
+1508693133 c:\users\hystou\desktop\Учёбка\2 r\АСД\Поисктейбл\ttabll.h
+	<stdio.h>
+	<stdlib.h>
+
+1508693298 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\Поисктейбл\ttabll.c
+	<stdio.h>
+	<stdlib.h>
+	"ttabll.h"
+

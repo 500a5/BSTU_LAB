@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1525018129 source:c:\users\Александр\desktop\Прога\lab_7d superstar\main.c
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+

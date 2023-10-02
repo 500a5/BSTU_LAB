@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/lab_1_3-a/arr_sort.c
+stdio.h
+-
+stdbool.h
+-
+
+C:/Users/500a5/CLionProjects/lab_1_3-a/main.c
+stdio.h
+-
+process.h
+-
+zagalovok_arr_sort.h
+C:/Users/500a5/CLionProjects/lab_1_3-a/zagalovok_arr_sort.h
+
+C:/Users/500a5/CLionProjects/lab_1_3-a/zagalovok_arr_sort.h
+

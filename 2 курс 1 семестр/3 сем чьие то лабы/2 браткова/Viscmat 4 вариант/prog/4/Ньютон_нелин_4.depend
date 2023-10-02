@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1508084850 source:c:\users\hystou\desktop\Учёбка\2 r\Вычмат\ПРОГИ\Ньютон_нелин_4\mod_4.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	"mod_4.h"
+
+1508084678 c:\users\hystou\desktop\Учёбка\2 r\Вычмат\ПРОГИ\Ньютон_нелин_4\mod_4.h
+
+1508084909 source:c:\users\hystou\desktop\Учёбка\2 r\Вычмат\ПРОГИ\Ньютон_нелин_4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	"mod_4.h"
+

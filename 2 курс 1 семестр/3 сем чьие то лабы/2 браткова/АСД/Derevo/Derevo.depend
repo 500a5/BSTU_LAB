@@ -1,0 +1,57 @@
+# depslib dependency file v1.0
+1481892883 source:c:\users\serjio\desktop\derevo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Fifo.h"
+
+1481889617 source:c:\users\serjio\desktop\derevo\derevo.c
+	<stdio.h>
+	<stdlib.h>
+	"Derevo.h"
+
+1481892438 c:\users\serjio\desktop\derevo\derevo.h
+
+1481882611 source:c:\users\serjio\desktop\derevo\fifo.c
+	<stdio.h>
+	<stdlib.h>
+	"Fifo.h"
+
+1481882611 c:\users\serjio\desktop\derevo\fifo.h
+	"LIST.h"
+
+1481882258 c:\users\serjio\desktop\derevo\list.h
+	"Derevo.h"
+
+1481888781 source:c:\users\serjio\desktop\derevo\list.c
+	<stdio.h>
+	<stdlib.h>
+	"LIST.h"
+
+1512920706 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\derevo\derevo.c
+	<stdio.h>
+	<stdlib.h>
+	"Derevo.h"
+
+1512920706 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\derevo\derevo.h
+
+1512920706 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\derevo\fifo.c
+	<stdio.h>
+	<stdlib.h>
+	"Fifo.h"
+
+1512920706 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\derevo\fifo.h
+	"LIST.h"
+
+1512920706 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\derevo\list.h
+	"Derevo.h"
+
+1512920706 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\derevo\list.c
+	<stdio.h>
+	<stdlib.h>
+	"LIST.h"
+
+1512920706 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\derevo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Fifo.h"
+

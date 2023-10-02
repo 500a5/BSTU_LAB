@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1511112837 source:c:\users\hystou\desktop\Учёбка\2 r\Вычмат\vish7\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+

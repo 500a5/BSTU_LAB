@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1511109652 source:c:\users\acer\desktop\лабы\вычмат\5\5\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+

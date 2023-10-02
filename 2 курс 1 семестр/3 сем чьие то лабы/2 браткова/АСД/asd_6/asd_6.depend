@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1446667744 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1511636268 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6\stt.c
+
+1511636268 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6\zapr.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"Zapr.h"
+
+1511636268 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6\zapr.h
+

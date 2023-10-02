@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1481571670 source:d:\-=documents=-\dropbox\sd_lb7\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tree.h"
+
+1481571670 d:\-=documents=-\dropbox\sd_lb7\tree.h
+	<stdlib.h>
+	<stdio.h>
+

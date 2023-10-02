@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1509089634 source:c:\users\hystou\desktop\Учёбка\2 r\дискр\упрт множества\main.c
+	<stdio.h>
+	<stdlib.h>
+	"uprtmodul.h"
+
+1509089433 source:c:\users\hystou\desktop\Учёбка\2 r\дискр\упрт множества\uprtmodul.c
+	<stdio.h>
+	<stdlib.h>
+	"uprtmodul.h"
+
+1509089708 c:\users\hystou\desktop\Учёбка\2 r\дискр\упрт множества\uprtmodul.h
+

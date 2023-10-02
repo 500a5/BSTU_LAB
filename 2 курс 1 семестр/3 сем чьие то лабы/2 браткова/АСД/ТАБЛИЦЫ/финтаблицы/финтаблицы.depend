@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1508684294 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\ôèíòàáëèöû\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tabbl.h"
+
+1508684657 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\ôèíòàáëèöû\tabbl.h
+
+1508684218 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\ôèíòàáëèöû\tabbl.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<math.h>
+	"tabbl.h"
+
+1508684400 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\ôèíòàáëèöû\poisk.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<time.h>
+	"poisk.h"
+
+1508684449 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\ôèíòàáëèöû\poisk.h
+	"tabbl.h"
+

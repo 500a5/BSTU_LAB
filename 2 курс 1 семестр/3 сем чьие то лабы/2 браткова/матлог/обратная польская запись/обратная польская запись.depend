@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1505538039 source:c:\users\hystou\desktop\Учёбка\2 r\матлог\обратная польская запись\main.c
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+

@@ -1,0 +1,13 @@
+﻿  Source.cpp
+c:\users\stepa\onedrive\рабочий стол\всё необходимо для учёбы\лабы сд\laba6\laba6\structs.h(14): warning C4091: typedef : пропускается слева от "TInquiry", когда ни одна переменная не объявлена
+c:\users\stepa\onedrive\рабочий стол\всё необходимо для учёбы\лабы сд\laba6\laba6\structs.h(21): warning C4091: typedef : пропускается слева от "CPU", когда ни одна переменная не объявлена
+  System.cpp
+c:\users\stepa\onedrive\рабочий стол\всё необходимо для учёбы\лабы сд\laba6\laba6\structs.h(14): warning C4091: typedef : пропускается слева от "TInquiry", когда ни одна переменная не объявлена
+c:\users\stepa\onedrive\рабочий стол\всё необходимо для учёбы\лабы сд\laba6\laba6\structs.h(21): warning C4091: typedef : пропускается слева от "CPU", когда ни одна переменная не объявлена
+c:\users\stepa\onedrive\рабочий стол\всё необходимо для учёбы\лабы сд\laba6\laba6\system.cpp(36): warning C4477: "scanf": в строке форматирования "%d" требуется аргумент типа "int *", но вариативный аргумент "1" имеет тип "TypeTask *"
+  c:\users\stepa\onedrive\рабочий стол\всё необходимо для учёбы\лабы сд\laba6\laba6\system.cpp(36): note: рекомендуется использовать "%hhd" в строке форматирования
+  processors.cpp
+c:\users\stepa\onedrive\рабочий стол\всё необходимо для учёбы\лабы сд\laba6\laba6\structs.h(14): warning C4091: typedef : пропускается слева от "TInquiry", когда ни одна переменная не объявлена
+c:\users\stepa\onedrive\рабочий стол\всё необходимо для учёбы\лабы сд\laba6\laba6\structs.h(21): warning C4091: typedef : пропускается слева от "CPU", когда ни одна переменная не объявлена
+  Создание кода...
+  laba6.vcxproj -> C:\Users\stepa\OneDrive\Рабочий стол\Всё необходимо для учёбы\Лабы СД\laba6\Debug\laba6.exe

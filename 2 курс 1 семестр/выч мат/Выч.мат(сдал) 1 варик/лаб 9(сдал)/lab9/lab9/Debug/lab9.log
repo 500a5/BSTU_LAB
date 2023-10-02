@@ -1,0 +1,3 @@
+﻿  Source.cpp
+e:\учеба\лабы\выч.мат\лаб 9\lab9\lab9\source.cpp(132): warning C4244: return: преобразование "double" в "int", возможна потеря данных
+  lab9.vcxproj -> E:\Учеба\Лабы\Выч.мат\лаб 9\lab9\Debug\lab9.exe

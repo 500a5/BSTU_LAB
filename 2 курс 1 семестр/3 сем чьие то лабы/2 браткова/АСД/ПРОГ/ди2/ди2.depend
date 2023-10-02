@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1506313415 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\äè2\form4.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"form4.h"
+
+1506313427 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\äè2\form4.h
+
+1506284894 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\äè2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"form4.h"
+

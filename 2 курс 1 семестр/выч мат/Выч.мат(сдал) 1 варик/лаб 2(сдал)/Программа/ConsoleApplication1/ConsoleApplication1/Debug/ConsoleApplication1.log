@@ -1,0 +1,11 @@
+﻿  ConsoleApplication1.cpp
+e:\учеба\лабы\выч.мат\лаб 2\программа\consoleapplication1\consoleapplication1\consoleapplication1.cpp(44): warning C4477: "scanf_s": в строке форматирования "%d" требуется аргумент типа "int *", но вариативный аргумент "1" имеет тип "double *"
+e:\учеба\лабы\выч.мат\лаб 2\программа\consoleapplication1\consoleapplication1\consoleapplication1.cpp(55): warning C4477: "scanf_s": в строке форматирования "%f" требуется аргумент типа "float *", но вариативный аргумент "1" имеет тип "double *"
+  e:\учеба\лабы\выч.мат\лаб 2\программа\consoleapplication1\consoleapplication1\consoleapplication1.cpp(55): note: рекомендуется использовать "%lf" в строке форматирования
+e:\учеба\лабы\выч.мат\лаб 2\программа\consoleapplication1\consoleapplication1\consoleapplication1.cpp(58): error C2660: fopen_s: функция не принимает 2 аргументов
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(97): note:  см. объявление "fopen_s"
+e:\учеба\лабы\выч.мат\лаб 2\программа\consoleapplication1\consoleapplication1\consoleapplication1.cpp(59): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1197): note:  см. объявление "fscanf"
+e:\учеба\лабы\выч.мат\лаб 2\программа\consoleapplication1\consoleapplication1\consoleapplication1.cpp(68): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1197): note:  см. объявление "fscanf"
+e:\учеба\лабы\выч.мат\лаб 2\программа\consoleapplication1\consoleapplication1\consoleapplication1.cpp(80): warning C4244: инициализация: преобразование "double" в "int", возможна потеря данных

@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1506861382 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\сорт_3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"sort.h"
+
+1506861374 c:\users\hystou\desktop\Учёбка\2 r\АСД\сорт_3\sort.h
+

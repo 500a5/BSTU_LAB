@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1505504234 source:c:\users\hystou\desktop\Учёбка\2 r\матлог\(кнф1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+

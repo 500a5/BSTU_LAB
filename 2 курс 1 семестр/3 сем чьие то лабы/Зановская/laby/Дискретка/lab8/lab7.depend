@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1482220449 source:c:\users\serjio\desktop\lab8\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<locale.h>
+

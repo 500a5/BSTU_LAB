@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1508269361 source:c:\users\hystou\desktop\Учёбка\2 r\дискр\фактормнож\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+

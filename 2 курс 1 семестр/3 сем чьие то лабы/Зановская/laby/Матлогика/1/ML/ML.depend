@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1506749582 source:c:\users\acer\desktop\лабы\матлогика\ml\fals.c
+	<stdlib.h>
+	<stdio.h>
+	<locale.h>
+	<math.h>
+
+1506749707 source:c:\users\acer\desktop\лабы\матлогика\ml\true.c
+	<stdlib.h>
+	<stdio.h>
+	<locale.h>
+	<math.h>
+
+1506749634 source:c:\users\acer\desktop\лабы\матлогика\ml\main.c
+	<stdlib.h>
+	<stdio.h>
+	<locale.h>
+	<math.h>
+
