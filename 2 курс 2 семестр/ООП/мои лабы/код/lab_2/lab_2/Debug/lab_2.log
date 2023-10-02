@@ -1,0 +1,7 @@
+﻿  interface.cpp
+C:\Users\500a5\source\repos\lab_2\lab_2\interface.cpp(11,24): error C2084: функция "info_film::info_film(void)" уже имеет текст реализации
+C:\Users\500a5\source\repos\lab_2\lab_2\interface.h(13): message : см. предыдущее определение "{ctor}"
+C:\Users\500a5\source\repos\lab_2\lab_2\interface.cpp(168,14): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+C:\Users\500a5\source\repos\lab_2\lab_2\interface.cpp(282,24): error C2264: info_film::info_film: ошибка в определении или объявлении функции; функция не вызвана
+  lab_2.cpp
+  Создание кода...

@@ -1,0 +1,4 @@
+﻿  MyForm.cpp
+C:\Users\500a5\source\repos\lab_1_3\lab_1_3\MyForm.cpp(6,34): warning C4829: Возможно, неправильные параметры функции main. Рекомендуемый вариант - "int main(Platform::Array<Platform::String^>^ argv)"
+  MyForm.obj : обнаружен модуль MSIL; для MSIL последовательная компоновка отключена; выполняется полная компоновка
+  lab_1_3.vcxproj -> C:\Users\500a5\source\repos\lab_1_3\Debug\lab_1_3.exe

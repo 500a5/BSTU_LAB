@@ -1,0 +1,7 @@
+﻿  IO_TI_1.cpp
+C:\Users\500a5\source\repos\IO_TI_1\IO_TI_1\IO_TI_1.cpp(86,9): warning C4101: max: неиспользованная локальная переменная
+C:\Users\500a5\source\repos\IO_TI_1\IO_TI_1\IO_TI_1.cpp(84,6): warning C4101: k: неиспользованная локальная переменная
+C:\Users\500a5\source\repos\IO_TI_1\IO_TI_1\IO_TI_1.cpp(411,10): warning C4101: j1: неиспользованная локальная переменная
+C:\Users\500a5\source\repos\IO_TI_1\IO_TI_1\IO_TI_1.cpp(411,6): warning C4101: i1: неиспользованная локальная переменная
+C:\Users\500a5\source\repos\IO_TI_1\IO_TI_1\IO_TI_1.cpp(237): warning C4715: compBoolMas: значение возвращается не при всех путях выполнения
+  IO_TI_1.vcxproj -> C:\Users\500a5\source\repos\IO_TI_1\Debug\IO_TI_1.exe
