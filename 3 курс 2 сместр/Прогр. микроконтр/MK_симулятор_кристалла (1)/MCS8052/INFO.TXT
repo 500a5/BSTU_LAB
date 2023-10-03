@@ -1,0 +1,12 @@
+PROGRAM NAME: 8052 Simulator for Windows v3.600 (10 jan 99)
+     CRACKER: SS MASTER
+  CRACK DATE: 23 MAY 1999
+    LOCATION: http://www.vaultbbs.com/sim8052/
+       NOTES: Install 8052 program. Register with anything you like. Hit OK,
+	      then exit the program. Now it's time to crack the SOFABitch 
+              protection which is in s8052run.dll. So, just copy my patch
+	      where that dll is located (usually c:\sim8052) and run it. Enjoy!
+
+	      Thanks to razzia's tutorial for Visual Basic cracking!
+
+ Mail me to join cracking groups at ssequ@hotmail.com.

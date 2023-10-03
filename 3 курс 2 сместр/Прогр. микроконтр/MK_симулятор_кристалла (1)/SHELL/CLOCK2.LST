@@ -1,0 +1,70 @@
+MCS-51 MACRO ASSEMBLER    CLOCK2                                                                    04/10/;9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\SHELL\CLOCK2.OBJ
+ASSEMBLER INVOKED BY:  C:\PROGRA~1\KOMPIL\ASM51.EXE C:\SHELL\CLOCK2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0h
+0000 028100            2     LJMP ST
+8100                   3     ORG 8100h
+                       4     ST:
+8100 D290              5             SETB P1.0
+8102 78FF              6             MOV R0,#0FFh
+8104 00                7     IF: NOP
+8105 00                8     NOP
+8106 00                9     NOP
+8107 00               10     NOP
+8108 00               11     NOP
+8109 00               12     NOP
+810A 00               13     NOP
+810B 00               14     NOP
+810C 00               15     NOP
+810D 00               16     NOP
+810E 00               17     NOP
+810F 00               18     NOP
+8110 00               19     NOP
+8111 00               20     NOP
+8112 00               21     NOP
+8113 00               22     NOP
+8114 00               23     NOP
+8115 00               24     NOP
+8116 00               25     NOP
+8117 00               26     NOP
+8118 00               27     NOP
+8119 00               28     NOP
+811A 00               29     NOP
+811B 00               30     NOP
+811C 00               31     NOP
+811D 00               32     NOP
+811E 00               33     NOP
+811F 00               34     NOP
+8120 00               35     NOP
+8121 00               36     NOP
+8122 00               37     NOP
+8123 00               38     NOP
+8124 00               39     NOP
+8125 D8DD             40             DJNZ R0,IF
+                      41             
+8127 028100           42     LJMP ST 
+                      43     END
+MCS-51 MACRO ASSEMBLER    CLOCK2                                                                    04/10/;9   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+IF . . . .  C ADDR    8104H   A       
+P1 . . . .  D ADDR    0090H   A       
+ST . . . .  C ADDR    8100H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

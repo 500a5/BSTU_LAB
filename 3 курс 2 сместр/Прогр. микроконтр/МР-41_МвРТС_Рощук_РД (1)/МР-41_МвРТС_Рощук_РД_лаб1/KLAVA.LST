@@ -1,0 +1,283 @@
+MCS-51 MACRO ASSEMBLER    KLAVA                                                                     10/18/<0   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\SIM8052\KLAVA.OBJ
+ASSEMBLER INVOKED BY:  C:\SIM8052\ASM51.EXE C:\SIM8052\KLAVA.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0h
+0000 020113            2             jmp main
+                       3     t0ISR: 
+000B                   4             ORG 0Bh;Sj`g{b`el cde m`undhrq^ nap`anrwhj opep{b`mh^ r`ilep` 0
+000B C28D              5             CLR TF0;Oepbni jnl`mdni nap`anrwhj` ^bk^erq^ jnl`md` nwhqrjh tk`c` opep{b`mh^
+000D 758CEC            6             MOV TH0,#0ECh;g`d`el qleyemhe qp`a`r{b`mh^ r`ilep`
+0010 758A78            7             MOV TL0,#078h
+                       8             ;m`whm`el vhjkhweqjh lem^r| m`op^femhe m` onprs P0 h opnbep^r| o`demhe m`op^femhi m
+                             ` khmh^u P1
+0013 7801              9             MOV R0,#1b;Osqr| hgm`w`k|mn opnbep^el oepbs~ khmh~
+                      10             L:
+0015 8880             11             MOV P0,R0;g`cpsf`el q pechqrp` b onpr
+0017 208009           12             jb P0.0,stroca1;Eqkh ahr p`bem 1 rn nop`xhb`el qnnrberqrbs~ys~ qrpnjs
+001A 20813C           13             jb P0.1,stroca2
+001D 20826F           14             jb P0.2,stroca3
+                      15             ;Gm`whr 4-^ qrpnj`:
+0020 0200C5           16             jmp stroca4
+                      17             stroca1:
+0023 30900F           18                 JNB P1.0,CH1;Oepeund eqkh ahr p`bem 0 (m`f`rhe jk`bhxh q`dhr ohm m` gelk~)
+                      19                 Stolbik2:
+0026 309113           20                 JNB P1.1,CH2
+                      21                 Stolbik3:
+0029 309217           22                 JNB P1.2,CH3
+                      23                 Stolbik4:
+002C 30931B           24                 JNB P1.3,CHC
+                      25                 Stolbik5:
+002F 30941F           26                 JNB P1.4,CHD
+0032 0200F8           27                 jmp netnacshatiy
+                      28                 CH1:
+0035 7431             29                    MOV A,#31h
+0037 120108           30                    LCall Uart;G`osqj ondopncp`ll{ on b{bnds qhlbnk`
+003A 80EA             31                    jmp Stolbik2;Bngbp`y`elq^ dk^ opndnkfemh^ nopnq` qrnkavnb
+                      32                 CH2:
+003C 7432             33                    MOV A,#32h
+003E 120108           34                    LCall Uart
+0041 80E6             35                    jmp Stolbik3
+                      36                 CH3:
+0043 7433             37                    MOV A,#33h
+0045 120108           38                    LCall Uart
+0048 80E2             39                    jmp Stolbik4
+                      40                 CHC:
+004A 7443             41                    MOV A,#43h
+004C 120108           42                    LCall Uart
+004F 80DE             43                    jmp Stolbik5
+                      44                 CHD:
+0051 7444             45                    MOV A,#44h
+0053 120108           46                    LCall Uart
+0056 0200F8           47                    jmp netnacshatiy
+                      48             stroca2:
+0059 30900F           49                 JNB P1.0,CH4;Oepeund eqkh ahr p`bem 0 (m`f`rhe jk`bhxh q`dhr ohm m` gelk~)
+MCS-51 MACRO ASSEMBLER    KLAVA                                                                     10/18/<0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      50                 Stolbik22:
+005C 309113           51                 JNB P1.1,CH5
+                      52                 Stolbik32:
+005F 309217           53                 JNB P1.2,CH6
+                      54                 Stolbik42:
+0062 30931B           55                 JNB P1.3,CHE
+                      56                 Stolbik52:
+0065 30941F           57                 JNB P1.4,CHF
+0068 0200F8           58                 jmp netnacshatiy
+                      59                 CH4:
+006B 7434             60                    MOV A,#34h
+006D 120108           61                    LCall Uart;G`osqj ondopncp`ll{ on b{bnds qhlbnk` 4
+0070 80EA             62                    jmp Stolbik22;Bngbp`y`elq^ dk^ opndnkfemh^ nopnq` qrnkavnb }rni qrpnjh
+                      63                 CH5:
+0072 7435             64                    MOV A,#35h
+0074 120108           65                    LCall Uart
+0077 80E6             66                    jmp Stolbik32
+                      67                 CH6:
+0079 7436             68                    MOV A,#36h
+007B 120108           69                    LCall Uart
+007E 80E2             70                    jmp Stolbik42
+                      71                 CHE:
+0080 7445             72                    MOV A,#45h
+0082 120108           73                    LCall Uart
+0085 80DE             74                    jmp Stolbik52
+                      75                 CHF:
+0087 7446             76                    MOV A,#46h
+0089 120108           77                    LCall Uart
+008C 0200F8           78                    jmp netnacshatiy
+                      79             stroca3:
+008F 30900F           80                 JNB P1.0,CH7;Oepeund eqkh ahr p`bem 0 (m`f`rhe jk`bhxh q`dhr ohm m` gelk~)
+                      81                 Stolbik23:
+0092 309113           82                 JNB P1.1,CH8
+                      83                 Stolbik33:
+0095 309217           84                 JNB P1.2,CH9
+                      85                 Stolbik43:
+0098 30931B           86                 JNB P1.3,CHG
+                      87                 Stolbik53:
+009B 30941F           88                 JNB P1.4,CHH
+009E 0200F8           89                 jmp netnacshatiy
+                      90                 CH7:
+00A1 7437             91                    MOV A,#37h
+00A3 120108           92                    LCall Uart;G`osqj ondopncp`ll{ on b{bnds qhlbnk`
+00A6 80EA             93                    jmp Stolbik23;Bngbp`y`elq^ dk^ opndnkfemh^ nopnq` qrnkavnb
+                      94                 CH8:
+00A8 7438             95                    MOV A,#38h
+00AA 120108           96                    LCall Uart
+00AD 80E6             97                    jmp Stolbik33
+                      98                 CH9:
+00AF 7439             99                    MOV A,#39h
+00B1 120108          100                    LCall Uart
+00B4 80E2            101                    jmp Stolbik43
+                     102                 CHG:
+00B6 7447            103                    MOV A,#47h
+00B8 120108          104                    LCall Uart
+MCS-51 MACRO ASSEMBLER    KLAVA                                                                     10/18/<0   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+00BB 80DE            105                    jmp Stolbik53
+                     106                 CHH:
+00BD 7448            107                    MOV A,#48h
+00BF 120108          108                    LCall Uart
+00C2 0200F8          109                    jmp netnacshatiy
+                     110             stroca4:
+00C5 30900F          111                 JNB P1.0,CHA;Oepeund eqkh ahr p`bem 0 (m`f`rhe jk`bhxh q`dhr ohm m` gelk~)
+                     112                 Stolbik24:
+00C8 309113          113                 JNB P1.1,CH0
+                     114                 Stolbik34:
+00CB 309217          115                 JNB P1.2,CHB
+                     116                 Stolbik44:
+00CE 30931B          117                 JNB P1.3,CHI
+                     118                 Stolbik54:
+00D1 30941F          119                 JNB P1.4,CHJ
+00D4 0200F8          120                 jmp netnacshatiy
+                     121                 CHA:
+00D7 7441            122                    MOV A,#41h
+00D9 120108          123                    LCall Uart;G`osqj ondopncp`ll{ on b{bnds qhlbnk`
+00DC 80EA            124                    jmp Stolbik24;Bngbp`y`elq^ dk^ opndnkfemh^ nopnq` qrnkavnb
+                     125                 CH0:
+00DE 7430            126                    MOV A,#30h
+00E0 120108          127                    LCall Uart
+00E3 80E6            128                    jmp Stolbik34
+                     129                 CHB:
+00E5 7442            130                    MOV A,#42h
+00E7 120108          131                    LCall Uart
+00EA 80E2            132                    jmp Stolbik44
+                     133                 CHI:
+00EC 7449            134                    MOV A,#49h
+00EE 120108          135                    LCall Uart
+00F1 80DE            136                    jmp Stolbik54
+                     137                 CHJ:
+00F3 744A            138                    MOV A,#4Ah
+00F5 120108          139                    LCall Uart
+                     140             netnacshatiy:
+00F8 E8              141             MOV A,R0;Dek`el qdbhc ahr` bkebn q onlny|~ @jjslsk^rnp`
+00F9 23              142             RL A
+00FA F8              143             MOV R0,A
+00FB B81002          144             CJNE R0,#00010000b,LL;Qp`bmemhe pechqrp` q jnmqr`mrni h oepeund, eqkh me p`bmn
+00FE 8003            145             sjmp D
+0100 020015          146             LL: ljmp L;Jnqr{k| dk^ rncn wrna{ bepmsr|q^ j L
+                     147             D:
+0103 7800            148             MOV R0,#0b;Qap`q{b`el R0 h A b hqundmne qnqrn^mhe wrna{ opep{b`mhe me bkh^kn m` pec
+                             hqrp{ h }lsk^rnp me b{d`b`k nxhajs
+0105 7400            149             MOV A,#0b
+0107 32              150             RETI;B{und hg nap`anrwhj` opep{b`mhi
+                     151     Uart:   
+0108 F599            152             MOV SBUF,A;nrop`bk^el b onqkednb`rek|m{i onpr m`f`rs~ jk`bhxs
+                     153             ;Oepebnd m` mnbs~ qrpnjs
+010A 740D            154             MOV A,#13
+010C F599            155             MOV SBUF,A
+010E 740A            156             MOV A,#10
+0110 F599            157             MOV SBUF,A
+0112 22              158             RET
+MCS-51 MACRO ASSEMBLER    KLAVA                                                                     10/18/<0   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     159     main:        
+                     160             ;T1 M1=1 M0=0 b{bnd b lnmhrnp onpr`
+                     161             ;T0 M1=0 M0=1 dk^ nopnqnb jk`bh`rsp{/16ahr
+0113 758921          162             MOV TMOD,#00100001b
+                     163             ;oeped`w` q qjnpnqr|~ 9600=(2^smod*Fosc)/(32*12*[256-TH])=31250/(256-TH)
+0116 758DFD          164             MOV TH1,#0FDh
+                     165             ;1-i pefhl oeped`wh (`qhmupnmm{i 8 ahr b j`dpe)
+0119 D29E            166             SETB SM1
+011B C29F            167             CLR SM0
+                     168             ;nopnq jk`bh`rsp{ q w`qrnrni 200cv(5lq)
+011D 758CEC          169             MOV TH0,#0ECh;2^16-5000=60536=0EC78h
+0120 758A78          170             MOV TL0,#78h
+                     171             ;p`gpex`el opep{b`mhe nr r`ilep` 0
+0123 D2A9            172             SETB ET0
+                     173             ;p`gpex`el b{onkmemhe opep{b`mhi
+0125 D2AF            174             SETB EA
+0127 D28C            175             SETB TR0;g`osqj`el r`ilep 0
+0129 80FE            176             jmp $;aeqjnmewm{i vhjk nfhd`mh^
+                     177     END
+MCS-51 MACRO ASSEMBLER    KLAVA                                                                     10/18/<0   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E       T Y P E   V A L U E       A T T R I B U T E S
+
+CH0. . . . .  C ADDR    00DEH   A       
+CH1. . . . .  C ADDR    0035H   A       
+CH2. . . . .  C ADDR    003CH   A       
+CH3. . . . .  C ADDR    0043H   A       
+CH4. . . . .  C ADDR    006BH   A       
+CH5. . . . .  C ADDR    0072H   A       
+CH6. . . . .  C ADDR    0079H   A       
+CH7. . . . .  C ADDR    00A1H   A       
+CH8. . . . .  C ADDR    00A8H   A       
+CH9. . . . .  C ADDR    00AFH   A       
+CHA. . . . .  C ADDR    00D7H   A       
+CHB. . . . .  C ADDR    00E5H   A       
+CHC. . . . .  C ADDR    004AH   A       
+CHD. . . . .  C ADDR    0051H   A       
+CHE. . . . .  C ADDR    0080H   A       
+CHF. . . . .  C ADDR    0087H   A       
+CHG. . . . .  C ADDR    00B6H   A       
+CHH. . . . .  C ADDR    00BDH   A       
+CHI. . . . .  C ADDR    00ECH   A       
+CHJ. . . . .  C ADDR    00F3H   A       
+D. . . . . .  C ADDR    0103H   A       
+EA . . . . .  B ADDR    00A8H.7 A       
+ET0. . . . .  B ADDR    00A8H.1 A       
+L. . . . . .  C ADDR    0015H   A       
+LL . . . . .  C ADDR    0100H   A       
+MAIN . . . .  C ADDR    0113H   A       
+NETNACSHATIY  C ADDR    00F8H   A       
+P0 . . . . .  D ADDR    0080H   A       
+P1 . . . . .  D ADDR    0090H   A       
+SBUF . . . .  D ADDR    0099H   A       
+SM0. . . . .  B ADDR    0098H.7 A       
+SM1. . . . .  B ADDR    0098H.6 A       
+STOLBIK2 . .  C ADDR    0026H   A       
+STOLBIK22. .  C ADDR    005CH   A       
+STOLBIK23. .  C ADDR    0092H   A       
+STOLBIK24. .  C ADDR    00C8H   A       
+STOLBIK3 . .  C ADDR    0029H   A       
+STOLBIK32. .  C ADDR    005FH   A       
+STOLBIK33. .  C ADDR    0095H   A       
+STOLBIK34. .  C ADDR    00CBH   A       
+STOLBIK4 . .  C ADDR    002CH   A       
+STOLBIK42. .  C ADDR    0062H   A       
+STOLBIK43. .  C ADDR    0098H   A       
+STOLBIK44. .  C ADDR    00CEH   A       
+STOLBIK5 . .  C ADDR    002FH   A       
+STOLBIK52. .  C ADDR    0065H   A       
+STOLBIK53. .  C ADDR    009BH   A       
+STOLBIK54. .  C ADDR    00D1H   A       
+STROCA1. . .  C ADDR    0023H   A       
+STROCA2. . .  C ADDR    0059H   A       
+STROCA3. . .  C ADDR    008FH   A       
+MCS-51 MACRO ASSEMBLER    KLAVA                                                                     10/18/<0   PAGE    6
+
+
+N A M E       T Y P E   V A L U E       A T T R I B U T E S
+
+STROCA4. . .  C ADDR    00C5H   A       
+T0ISR. . . .  C ADDR    0003H   A       
+TF0. . . . .  B ADDR    0088H.5 A       
+TH0. . . . .  D ADDR    008CH   A       
+TH1. . . . .  D ADDR    008DH   A       
+TL0. . . . .  D ADDR    008AH   A       
+TMOD . . . .  D ADDR    0089H   A       
+TR0. . . . .  B ADDR    0088H.4 A       
+UART . . . .  C ADDR    0108H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

@@ -1,0 +1,103 @@
+MCS-51 MACRO ASSEMBLER    SIMDPT                                                                    12/13/;2   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\US41\MYLAB\SIMDPT.OBJ
+ASSEMBLER INVOKED BY:  C:\US41\MYLAB\ASM51.EXE C:\US41\MYLAB\SIMDPT.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1        ;
+                       2     
+0000                   3     org 0h
+0000 028100            4     jmp MAIN
+8100                   5     org 8100h
+                       6     
+                       7     MAIN:
+8100 7E32              8     MOV R6, #50   ; v R6 gamma 0..100
+8102 7482              9     MOV A,#10000010b
+8104 758203           10     MOV DPL,#3                      ;nastraivaem BB55
+8107 F0               11     MOVX @DPTR,A
+                      12     
+8108 D294             13     setb P1.4
+810A D295             14     setb P1.5
+810C D296             15     setb P1.6
+810E D297             16     setb P1.7
+                      17     
+                      18     
+8110 E589             19     mov A, TMOD
+8112 4401             20     orl A, #00000001b
+8114 54FD             21     anl A, #11111101b
+8116 F589             22     mov TMOD, A ; taimer 1 rezgim
+                      23     WORKING:
+8118 758A00           24      mov TL0, #0
+811B 758C00           25      mov TH0, #0
+811E 7F64             26      mov R7, #100 ; 100mc period povtorenia
+                      27        PERIOD:
+                      28         ; zapuskaem timer na 1 mc
+8120 758CFC           29          mov TH0, #HIGH(-1000)
+8123 758A18           30          mov TL0, #LOW(-1000)
+8126 EF               31          mov A, R7
+8127 9E               32          subb A, R6
+8128 4006             33          jc fwd
+812A 128145           34          CALL right
+812D 028133           35          jmp go
+                      36     fwd:
+8130 12813C           37          CALL left
+                      38     go:
+8133 D28C             39          Setb TR0
+                      40          WaitTH0:                 ;zgdem perepolnenia timera
+8135 308DFD           41          JNB TF0, WaitTH0
+8138 DFE6             42          DJNZ R7, PERIOD
+813A 80DC             43          jmp WORKING
+                      44     
+                      45              left:
+813C C295             46          CLR P1.5
+813E C297             47          CLR P1.7 ; vpered
+8140 D294             48          SETB P1.4
+8142 D296             49          SETB P1.6
+8144 22               50              RET
+MCS-51 MACRO ASSEMBLER    SIMDPT                                                                    12/13/;2   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      51     
+                      52              right:
+8145 C294             53          CLR P1.4
+8147 C296             54          CLR P1.6    ;nazad
+8149 D295             55          SETB P1.5
+814B D297             56          SETB P1.7
+814D 22               57              RET
+                      58     
+                      59     end
+MCS-51 MACRO ASSEMBLER    SIMDPT                                                                    12/13/;2   PAGE    3
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+DPL. . . .  D ADDR    0082H   A       
+FWD. . . .  C ADDR    8130H   A       
+GO . . . .  C ADDR    8133H   A       
+LEFT . . .  C ADDR    813CH   A       
+MAIN . . .  C ADDR    8100H   A       
+P1 . . . .  D ADDR    0090H   A       
+PERIOD . .  C ADDR    8120H   A       
+RIGHT. . .  C ADDR    8145H   A       
+TF0. . . .  B ADDR    0088H.5 A       
+TH0. . . .  D ADDR    008CH   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+WAITTH0. .  C ADDR    8135H   A       
+WORKING. .  C ADDR    8118H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

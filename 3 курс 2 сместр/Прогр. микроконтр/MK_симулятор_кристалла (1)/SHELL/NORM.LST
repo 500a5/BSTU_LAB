@@ -1,0 +1,192 @@
+MCS-51 MACRO ASSEMBLER    NORM                                                                      06/10/;9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN NORM.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE NORM.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0h
+0000 028100            2     JMP START
+                       3     
+8100                   4     org 8100h
+                       5     START:
+8100 1281BC            6            call stop
+8103 7482              7            MOV A,#10000010b
+8105 758203            8            MOV DPL,#3
+8108 F0                9            MOVX @DPTR,A
+8109 7411             10            MOV A,#00010001b
+810B 758200           11            MOV DPL,#0
+810E F0               12            MOVX @DPTR,A
+810F E589             13            MOV A,TMOD
+8111 4401             14            ORL A,#0000001b
+8113 F589             15            MOV TMOD,A 
+                      16     
+8115 C2D3             17     clr PSW.3
+8117 C2D4             18     clr PSW.4  ; b{anp a`mj`
+8119 7400             19     mov a,#0
+811B 908600           20     mov dptr, #8600h;
+811E F0               21     movx  @dptr,A;
+                      22     
+                      23     glavnii:
+811F 908600           24     mov dptr, #8600h;
+8122 E0               25     movx A, @dptr;
+8123 7008             26     jnz dvijenie
+8125 128161           27     call ACP
+8128 128190           28     call vivod
+812B 80F2             29     jmp glavnii
+                      30     
+                      31     dvijenie:
+812D 908600           32     mov dptr, #8600h;
+8130 E0               33     movx a,@dptr;
+8131 F5F0             34     mov b,a
+8133 E8               35            mov A,R0
+8134 B5F003           36            cjne A,B,m1
+8137 028159           37            jmp stoim
+                      38     m1:
+813A 05F0             39             inc b
+813C B5F003           40            cjne A,B,m2
+813F 028159           41            jmp stoim
+                      42     m2:
+8142 15F0             43             dec b
+8144 15F0             44             dec b
+8146 B5F003           45            cjne A,B,dvij
+8149 028159           46            jmp stoim
+                      47            dvij:
+814C 95F0             48                   subb A,B
+814E 4006             49                   jc vp
+8150 1281C6           50                     call nazad
+MCS-51 MACRO ASSEMBLER    NORM                                                                      06/10/;9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8153 028159           51                     jmp stoim
+                      52                     vp:
+8156 1281C1           53                      call vpered
+                      54              stoim:
+8159 128161           55     call ACP
+815C 128190           56     call vivod
+815F 80CC             57     jmp dvijenie
+                      58     
+                      59     
+                      60     ACP:
+                      61            ;SETB P1.0
+8161 D296             62             SETB P1.6
+                      63            ;SETB P1.1
+8163 D297             64             SETB P1.7
+8165 C3               65            CLR C 
+                      66            ;CLR P1.0
+8166 C297             67             CLR P1.7 
+                      68            ;JB P1.1, $ ; Fd8l qhcm`k` q @VO
+8168 2096FD           69             JB P1.6, $ ; Fd8l qhcm`k` q @VO
+                      70     
+816B 900001           71            MOV DPTR,#01h
+816E E0               72            MOVX  A,@DPTR
+816F F8               73            mov R0,A;  qhcm`k q `vo
+8170 75F00A           74             mov B,#10;
+8173 84               75             div Ab
+8174 AFF0             76             mov r7,b
+8176 75F007           77             mov b, #7
+8179 A4               78             mul ab
+817A F8               79             mov r0,a
+817B EF               80             mov a, r7
+817C 75F007           81             mov b, #7
+817F A4               82             mul ab
+8180 75F00A           83             mov b, #10
+8183 84               84             div ab
+8184 98               85             subb a,r0
+8185 F8               86             mov r0,a
+8186 7E00             87             mov  R6, #0b
+                      88     delenie:
+8188 FF               89     mov R7, A
+8189 0E               90     INC R6
+818A 940A             91     subb a, #00001010b
+818C 50FA             92     jnc delenie
+818E 1E               93     DEC R6
+818F 22               94     ret
+                      95     
+                      96     vivod:
+8190 900002           97            mov DPTR,#2
+8193 EE               98            MOV A,R6
+8194 540F             99             ANL A, #0001111b
+8196 4440            100             ORL a,#01000000b
+8198 F0              101            MOVX @DPTR,A
+8199 1281AC          102            CALL jdem
+819C 7400            103     mov A, #0h
+819E F0              104     movx @DPTR, A
+819F EF              105            MOV A,R7
+MCS-51 MACRO ASSEMBLER    NORM                                                                      06/10/;9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+81A0 540F            106             ANL A, #00001111b
+81A2 4480            107             ORL a,#10000000b
+81A4 F0              108            MOVX @DPTR,A
+81A5 1281AC          109            CALL jdem
+81A8 7400            110     mov A, #0h
+81AA F0              111     movx @DPTR, A
+81AB 22              112     ret
+                     113     
+                     114     jdem:
+81AC 758CFA          115            MOV TH0,#HIGH(64000)
+81AF 758A00          116            MOV TL0,#LOW(64000)
+81B2 D28C            117            SETB TR0
+81B4 308DFD          118            JNB TF0,$
+81B7 C28D            119            CLR TF0
+81B9 C28C            120            CLR TR0
+81BB 22              121     RET
+                     122     stop:
+81BC C296            123            clr P1.6
+81BE C297            124            clr P1.7
+81C0 22              125     ret
+                     126     vpered:
+81C1 C297            127            clr P1.7
+81C3 D296            128            setb P1.6
+81C5 22              129     ret
+                     130     nazad:
+81C6 C296            131            clr P1.6
+81C8 D297            132            setb P1.7
+81CA 22              133     ret
+                     134     END
+MCS-51 MACRO ASSEMBLER    NORM                                                                      06/10/;9   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACP. . . .  C ADDR    8161H   A       
+B. . . . .  D ADDR    00F0H   A       
+DELENIE. .  C ADDR    8188H   A       
+DPL. . . .  D ADDR    0082H   A       
+DVIJ . . .  C ADDR    814CH   A       
+DVIJENIE .  C ADDR    812DH   A       
+GLAVNII. .  C ADDR    811FH   A       
+JDEM . . .  C ADDR    81ACH   A       
+M1 . . . .  C ADDR    813AH   A       
+M2 . . . .  C ADDR    8142H   A       
+NAZAD. . .  C ADDR    81C6H   A       
+P1 . . . .  D ADDR    0090H   A       
+PSW. . . .  D ADDR    00D0H   A       
+START. . .  C ADDR    8100H   A       
+STOIM. . .  C ADDR    8159H   A       
+STOP . . .  C ADDR    81BCH   A       
+TF0. . . .  B ADDR    0088H.5 A       
+TH0. . . .  D ADDR    008CH   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+VIVOD. . .  C ADDR    8190H   A       
+VP . . . .  C ADDR    8156H   A       
+VPERED . .  C ADDR    81C1H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

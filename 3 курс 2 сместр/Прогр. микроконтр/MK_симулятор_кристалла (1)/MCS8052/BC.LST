@@ -1,0 +1,29 @@
+MCS-51 MACRO ASSEMBLER    BC                                                                        02/21/;9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\MCS8052\BC.OBJ
+ASSEMBLER INVOKED BY:  C:\MCS8052\ASM51.EXE C:\MCS8052\BC.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0H
+0000 E51F              2             MOV A, 1FH
+0002 85171F            3             MOV 1FH, 17H
+0005 F517              4             MOV 17H, A
+                       5     END
+MCS-51 MACRO ASSEMBLER    BC                                                                        02/21/;9   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

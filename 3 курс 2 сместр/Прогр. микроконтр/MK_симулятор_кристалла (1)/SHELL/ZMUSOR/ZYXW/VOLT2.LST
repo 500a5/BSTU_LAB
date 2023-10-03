@@ -1,0 +1,278 @@
+MCS-51 MACRO ASSEMBLER    VOLT2                                                                     12/15/;1   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN ZYXW\VOLT2.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE ZYXW\VOLT2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; PEREMENNIE
+  0090                 2     MK_ADC BIT P1.0                 ;SIGNAL GASHENIE/PREOBRAZOVANIE
+  0030                 3     INF_ADC DATA 30h        ;HRANITCA PRINYATOE OT ADC CHISLO
+  0091                 4     ADC_MK BIT P1.1         ;SIGNAL GOTOV
+  0031                 5     SOTNI DATA 31h          ;SOTNI VIVODIMOGO CHISLA
+  0032                 6     DES DATA 32h            ;DESYATKI
+  0033                 7     EDIN DATA 33h           ;EDINICI
+  1388                 8     TIME EQU 5000           ;5ms
+  0082                 9     INIT_PPI EQU 10000010b  ;A-VIVOD, B-VVOD, C-VIVOD(INDIKACIA) DLYA BB55
+  0010                10     INIT_KN EQU 0010000b    ;VIBOR 2-OGO KOMMUTATORA NAPRYASHGENIA I 1 PORT
+  0000                11     P_A EQU 0               ;ADDRESS PORTA A V BB55
+  0001                12     P_B EQU 1               ;ADDRESS PORTA B
+  0002                13     P_C EQU 2               ;ADDRESS PORTA C
+  0003                14     RWCU EQU 3              ;ADDRESS UPRAV. SLOVA BB55
+  0034                15     C_TIME0 DATA 34h        ;YACHEIKA PAMATI - CONSTANTI TAIMERA
+  0035                16     N_P DATA 35h            ;SHETHIK DLYA POL. CHISEL
+  0036                17     PHS DATA 36h            ;PHASA OTOBRAJENIYA
+  0002                18     C_F_P EQU 2             ;7*20ms
+  007F                19     B_Z BIT 2Fh.7           ;FLAG OTRICATELNOGO CHISLA
+  0093                20     SEC BIT P1.3            ;VIVOD NA SECUNDOMER
+  0037                21     N_SEC DATA 37h          ;YACHEIKA PAMATI SCHITAUSCHYAIA 1sec 100*5ms=500ms clrSEC, ZATEM 50
+                             0ms setbSEC
+  0064                22     C_SEC EQU 100           ;CONSTANTA DLYA SECUNDOMERA
+                      23     
+0000                  24     ORG 0h
+0000 028100           25     JMP START
+                      26     
+8100                  27     ORG 8100h
+                      28     START:
+8100 7482             29             MOV A,#INIT_PPI
+8102 758203           30             MOV DPL,#RWCU                   ;NASTROIKA BB55 NA NEOBHODIMYI REZHIM
+8105 F0               31             MOVX @DPTR,A
+8106 7410             32             MOV A,#INIT_KN
+8108 758200           33             MOV DPL,#P_A                    ;NASTROIKA KOMUTATOROV NAPRYASHGENIA
+810B F0               34             MOVX @DPTR,A
+810C E589             35             MOV A,TMOD
+810E 4401             36             ORL A,#0000001b
+8110 F589             37             MOV TMOD,A                      ;T/C0 - 16 BITNUYI TAIMER (T/C1 NE TROGHEAM, T.K. O
+                             N ZANAT NA RXD,TXD
+8112 758CEC           38             MOV TH0,#HIGH(NOT(TIME-1))
+8115 758A78           39             MOV TL0,#LOW(NOT(TIME-1))
+8118 D2D3             40             SETB RS0
+811A D2D4             41             SETB RS1
+811C 753600           42                     MOV PHS,#0
+811F 753764           43             MOV N_SEC,#C_SEC                ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+                      44             GO:
+8122 128130           45                     CALL ADC
+8125 2091FD           46                     JB ADC_MK,$     ;ZHDEM 30mks - PREOBRAZOVANIE "ADC"
+8128 028139           47                     JMP OBSCH
+                      48                     M2:
+MCS-51 MACRO ASSEMBLER    VOLT2                                                                     12/15/;1   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      49                     ;CYCLE:
+812B 1281B4           50                             CALL VIVOD
+                      51                             ;DJNZ N_P,CYCLE
+812E 80F2             52                     SJMP GO
+                      53     
+                      54     ;PODPROGRAMMA STARTA "ADC"
+                      55     ADC:
+8130 D290             56             SETB MK_ADC             ;SBROS "ADC"
+8132 00               57             NOP
+8133 00               58             NOP
+8134 00               59             NOP
+8135 00               60             NOP
+8136 C290             61             CLR MK_ADC               ;NACHAT' PREOBRAZOVANIE
+8138 22               62     RET
+                      63     
+                      64     
+                      65     ;PODPROGRAMA ZAPUSKAYUSHUASA PO SINGNALY GOTOV NA LINIY P1.1
+                      66     OBSCH:
+                      67     
+8139 758138           68     MOV 081h, #38h
+813C 753502           69             MOV N_P,#C_F_P
+813F 758201           70             MOV DPL,#P_B
+8142 7400             71             MOV A,#0
+8144 75F000           72             MOV B,#0
+8147 E0               73             MOVX A,@DPTR
+8148 753100           74             MOV SOTNI,#0
+814B 753200           75             MOV DES,#0
+814E 753300           76             MOV EDIN,#0
+8151 C3               77             CLR C
+8152 30E704           78             JNB ACC.7, OTRIC
+8155 947F             79             SUBB A,#127
+                      80             ;MOV ZNAK,#0
+8157 8003             81             SJMP M3
+                      82     
+                      83     ;------------otric------------
+8159 9480             84     OTRIC:  SUBB A,#128
+815B F4               85             CPL A
+                      86             ;MOV ZNAK,#0Ah
+                      87     
+                      88     M3:
+815C 75F00A           89             MOV B,#10
+815F 84               90             DIV AB
+8160 C0E0             91             PUSH ACC
+8162 7404             92             MOV A,#4
+8164 A4               93             MUL AB
+8165 940A             94             SUBB A,#10
+8167 20D70D           95             JB CY,ZAPIC1
+                      96     
+816A 240A             97             ADD A,#10
+816C 75F00A           98             MOV B,#10
+816F 84               99             DIV AB
+8170 85F033          100             MOV EDIN, B
+8173 F532            101             MOV DES,A
+8175 8004            102             SJMP DALEE
+                     103     
+MCS-51 MACRO ASSEMBLER    VOLT2                                                                     12/15/;1   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+8177 240A            104     ZAPIC1:  ADD A,#10
+8179 F533            105             MOV EDIN,A
+                     106     
+817B D0E0            107     DALEE:  POP ACC
+817D 0281AE          108             JMP KONEC
+                     109     DALEE2:
+8180 C3              110             CLR C
+8181 75F00A          111             MOV B,#10
+8184 84              112             DIV AB
+8185 C0F0            113             PUSH B
+8187 75F004          114             MOV B,#4
+818A A4              115             MUL AB
+818B F531            116             MOV SOTNI,A
+818D D0E0            117             POP ACC
+818F 75F004          118             MOV B,#4
+8192 A4              119             MUL AB
+8193 2532            120             ADD A,DES
+8195 940A            121             SUBB A,#10
+8197 20D710          122             JB CY,ZAPIC2
+                     123     
+819A 240A            124             ADD A,#10
+819C 75F00A          125             MOV B,#10
+819F 84              126             DIV AB
+81A0 2531            127             ADD A,SOTNI
+81A2 F531            128             MOV SOTNI,A
+81A4 85F032          129             MOV DES,B
+81A7 0281B1          130             JMP M1
+                     131     
+                     132     
+81AA 240A            133     ZAPIC2: ADD A,#10
+81AC F532            134             MOV DES,A
+81AE B400CF          135     KONEC:  CJNE A,#0,DALEE2
+81B1 212B            136     M1:     JMP M2
+81B3 22              137     RET
+                     138     
+                     139     
+                     140     
+                     141     ;PODPROGRAMMA VIVODA NA INDICATORY
+81B4 E531            142     VIVOD:  MOV A,SOTNI
+81B6 4420            143             ORL A,#00100000b                ;VIVOD 1 CIFRI
+81B8 758202          144             MOV DPL,#P_C
+81BB F0              145             MOVX @DPTR,A
+81BC 1281DD          146             CALL DELAY              ;ZADERSHKA 10ms
+81BF E536            147                     MOV A,PHS
+81C1 B40110          148                     CJNE A,#1,LB
+81C4 E532            149             MOV A,DES
+81C6 4440            150             ORL A,#01000000b
+81C8 F0              151             MOVX @DPTR,A
+81C9 1281DD          152             CALL DELAY
+81CC E533            153                     MOV A,EDIN
+81CE 4480            154             ORL A,#10000000b
+81D0 F0              155             MOVX @DPTR,A
+81D1 1281DD          156             CALL DELAY
+                     157                     LB:
+81D4 7400            158                     MOV A,#0
+MCS-51 MACRO ASSEMBLER    VOLT2                                                                     12/15/;1   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+81D6 7410            159             MOV A,#00010000b        ;VIVOD POSLEDNEI CIFRI (VSEGDA 0)
+81D8 F0              160             MOVX @DPTR,A
+81D9 1281DD          161             CALL DELAY
+81DC 22              162     RET
+                     163     
+                     164     ;PODPROGRAMMA REGULIRUEMOI ZADERZHKI
+                     165     DELAY:
+81DD D28C            166             SETB TR0
+81DF 308DFD          167             JNB TF0,$
+81E2 D5370D          168             DJNZ N_SEC,DALLEE
+                     169        ;     CPL SEC                 ;PODACHA SIGNALA NA SECUNDOMER
+81E5 753764          170                     MOV N_SEC,#C_SEC
+81E8 0536            171                     INC PHS
+81EA E536            172                     MOV A,PHS
+81EC B40203          173                     CJNE A,#2,DALLEE
+81EF 753600          174                     MOV PHS,#0
+                     175     DALLEE:
+81F2 C28D            176             CLR TF0
+81F4 C28C            177             CLR TR0
+81F6 758CEC          178             MOV TH0,#HIGH(NOT(TIME-1))
+81F9 758A78          179             MOV TL0,#LOW(NOT(TIME-1))
+81FC 22              180     RET
+                     181     
+                     182     END
+MCS-51 MACRO ASSEMBLER    VOLT2                                                                     12/15/;1   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . .  D ADDR    00E0H   A       
+ADC_MK . .  B ADDR    0090H.1 A       
+ADC. . . .  C ADDR    8130H   A       
+B_Z. . . .  B ADDR    002FH.7 A       
+B. . . . .  D ADDR    00F0H   A       
+C_F_P. . .    NUMB    0002H   A       
+C_SEC. . .    NUMB    0064H   A       
+C_TIME0. .  D ADDR    0034H   A       
+CY . . . .  B ADDR    00D0H.7 A       
+DALEE. . .  C ADDR    817BH   A       
+DALEE2 . .  C ADDR    8180H   A       
+DALLEE . .  C ADDR    81F2H   A       
+DELAY. . .  C ADDR    81DDH   A       
+DES. . . .  D ADDR    0032H   A       
+DPL. . . .  D ADDR    0082H   A       
+EDIN . . .  D ADDR    0033H   A       
+GO . . . .  C ADDR    8122H   A       
+INF_ADC. .  D ADDR    0030H   A       
+INIT_KN. .    NUMB    0010H   A       
+INIT_PPI .    NUMB    0082H   A       
+KONEC. . .  C ADDR    81AEH   A       
+LB . . . .  C ADDR    81D4H   A       
+M1 . . . .  C ADDR    81B1H   A       
+M2 . . . .  C ADDR    812BH   A       
+M3 . . . .  C ADDR    815CH   A       
+MK_ADC . .  B ADDR    0090H.0 A       
+N_P. . . .  D ADDR    0035H   A       
+N_SEC. . .  D ADDR    0037H   A       
+OBSCH. . .  C ADDR    8139H   A       
+OTRIC. . .  C ADDR    8159H   A       
+P_A. . . .    NUMB    0000H   A       
+P_B. . . .    NUMB    0001H   A       
+P_C. . . .    NUMB    0002H   A       
+P1 . . . .  D ADDR    0090H   A       
+PHS. . . .  D ADDR    0036H   A       
+RS0. . . .  B ADDR    00D0H.3 A       
+RS1. . . .  B ADDR    00D0H.4 A       
+RWCU . . .    NUMB    0003H   A       
+SEC. . . .  B ADDR    0090H.3 A       
+SOTNI. . .  D ADDR    0031H   A       
+START. . .  C ADDR    8100H   A       
+TF0. . . .  B ADDR    0088H.5 A       
+TH0. . . .  D ADDR    008CH   A       
+TIME . . .    NUMB    1388H   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+VIVOD. . .  C ADDR    81B4H   A       
+ZAPIC1 . .  C ADDR    8177H   A       
+ZAPIC2 . .  C ADDR    81AAH   A       
+
+MCS-51 MACRO ASSEMBLER    VOLT2                                                                     12/15/;1   PAGE    6
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

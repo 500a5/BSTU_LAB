@@ -1,0 +1,155 @@
+MCS-51 MACRO ASSEMBLER    CLOCK                                                                     04/10/;9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\SHELL\CLOCK.OBJ
+ASSEMBLER INVOKED BY:  C:\PROGRA~1\KOMPIL\ASM51.EXE C:\SHELL\CLOCK.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0h
+0000 028100            2     JMP BEGIN
+000B                   3     ORG 000BH 
+000B 028170            4     JMP TIME
+                       5     
+8100                   6     ORG 8100H 
+                       7     BEGIN:
+8100 7482              8     MOV A, #82h    ; m`qrpnij` onpr`
+8102 900003            9     MOV DPTR, #3
+8105 F0               10     MOVX @DPTR, A
+8106 900002           11     MOV DPTR, #2
+                      12     
+8109 D2AF             13     SETB EA                 ;p`gpex`el opep{b`mhe nr r`ilep`
+810B D2A9             14     SETB ET0
+810D E589             15     MOV A,TMOD      ;16-rh p`gp^dm{i r`ilep qwerwhj
+810F 4401             16     ORL A,#00000001B
+8111 F589             17     MOV TMOD,A
+8113 75B810           18     MOV IP, #00010000B
+                      19     
+8116 758C4C           20     MOV TH0, #4CH   ; ondcpsf`el jnmqr`mr{ b r`ilep dk^ nrqwer` qejsmd{
+8119 758A00           21     MOV TL0, #00h
+                      22     
+811C A900             23     MOV R1,0
+811E 7D0B             24     MOV R5, #11             ;w`q{
+8120 7E3B             25     MOV R6, #59             ;lhmsr{
+8122 7F00             26     MOV R7, #0              ;qejsmd{
+8124 D28C             27     SETB TR0
+                      28     
+                      29     PRINT:
+                      30     ;-------b{bnd-----------
+                      31     ;P`gahb`el whqkn w`qnb m` deq^rjh h edhmhv{ p`gdekhb m` deq^r|
+                      32     ;Deq^rjh b @, edhmhv{ b B
+8126 ED               33     MOV A, R5               
+8127 75F00A           34     MOV B, #10              ;1i hmdhj`rnp
+812A 84               35     DIV AB
+812B 2410             36     ADD A, #10h
+812D F0               37     MOVX @DPTR, A
+812E 7B00             38     MOV R3, #0
+8130 12818F           39     CALL DELAY
+                      40     
+8133 E5F0             41     MOV A, B                
+8135 2420             42     ADD A, #20h             ;2i hmdhj`rnp
+8137 F0               43     MOVX @DPTR, A
+8138 7B00             44     MOV R3, #0
+813A 12818F           45     CALL DELAY
+                      46     
+                      47     
+813D 7400             48     MOV A, #0
+813F F0               49     MOVX @DPTR, A
+8140 7B00             50     MOV R3, #0
+MCS-51 MACRO ASSEMBLER    CLOCK                                                                     04/10/;9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8142 12818F           51     CALL DELAY
+                      52     ;--------------------------------------------------------------------
+8145 75F002           53     mov B, #2               ;opnbepj` qejsmd{ m` wermnqr|. Eqkh werm`^, b{bndhl lhmsr{
+8148 EF               54     mov A, R7
+8149 84               55     DIV AB
+814A E5F0             56     MOV A, B
+814C B400D7           57     CJNE A , #0,  PRINT
+                      58     ;---------------------------------------------------------------------
+                      59     ;P`gahb`el whqkn lhmsr m` deq^rjh h edhmhv{ p`gdekhb m` deq^r|
+                      60     ;Deq^rjh b @, edhmhv{ b B
+814F EE               61     MOV A, R6               
+8150 75F00A           62     MOV B, #10
+8153 84               63     DIV AB
+8154 2440             64     ADD A, #40h             ;3i hmdhj`rnp
+8156 F0               65     MOVX @DPTR, A
+8157 7B00             66     MOV R3, #0
+8159 12818F           67     CALL DELAY
+                      68     
+815C E5F0             69     MOV A, B                
+815E 2480             70     ADD A, #80h             ;4i hmdhj`rnp
+8160 F0               71     MOVX @DPTR, A
+8161 7B00             72     MOV R3, #0
+8163 12818F           73     CALL DELAY
+                      74     
+8166 7400             75     MOV A, #0
+8168 F0               76     MOVX @DPTR, A
+8169 7B00             77     MOV R3, #0
+816B 12818F           78     CALL DELAY
+816E 80B6             79     JMP PRINT
+                      80     ;---------opep{b`mhe on r`ileps------
+                      81     TIME:
+8170 758C4C           82     MOV TH0, #4CH 
+8173 758A00           83     MOV TL0, #00h
+                      84     
+8176 09               85     INC R1
+8177 B91414           86     CJNE R1, #20, exit
+817A A900             87     MOV R1,0
+                      88     
+817C 0F               89     INC R7 ;sec
+817D BF3C0E           90     CJNE R7, #60, exit
+8180 7F00             91     MOV R7, #0
+                      92     
+8182 0E               93     INC R6 ; min
+8183 BE3C08           94     CJNE R6, #60, exit
+8186 7E00             95     MOV R6, #0
+                      96     
+8188 0D               97     INC R5 ; hour
+8189 BD1802           98     CJNE R5, #24, exit
+818C 7D00             99     MOV R5, #0
+                     100     exit:
+818E 32              101     RETI
+                     102     ;----g`depfj`----------
+                     103     DELAY:
+818F 00              104     NOP
+8190 0B              105     INC R3
+MCS-51 MACRO ASSEMBLER    CLOCK                                                                     04/10/;9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+8191 BBC8FB          106     CJNE R3, #200, DELAY
+8194 22              107     RET
+                     108     END
+MCS-51 MACRO ASSEMBLER    CLOCK                                                                     04/10/;9   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+B. . . . .  D ADDR    00F0H   A       
+BEGIN. . .  C ADDR    8100H   A       
+DELAY. . .  C ADDR    818FH   A       
+EA . . . .  B ADDR    00A8H.7 A       
+ET0. . . .  B ADDR    00A8H.1 A       
+EXIT . . .  C ADDR    818EH   A       
+IP . . . .  D ADDR    00B8H   A       
+PRINT. . .  C ADDR    8126H   A       
+TH0. . . .  D ADDR    008CH   A       
+TIME . . .  C ADDR    8170H   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

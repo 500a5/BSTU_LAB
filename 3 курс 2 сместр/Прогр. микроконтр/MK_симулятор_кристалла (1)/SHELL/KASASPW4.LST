@@ -1,0 +1,164 @@
+MCS-51 MACRO ASSEMBLER    KASASPW4                                                                  12/01/;8   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\SHELL\KASASPW4.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE C:\SHELL\KASASPW4.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 028100            2     ljmp start
+                       3     
+8100                   4     org 8100h
+                       5     
+                       6             
+8100 D2D3              7     start:  setb rs0
+8102 C2D3              8             clr rs0
+                       9     
+8104 C297             10     start1: clr p1.7
+8106 00               11             nop
+8107 00               12             nop
+8108 C296             13             clr p1.6
+810A C295             14             clr p1.5
+810C C294             15             clr p1.4
+810E 900000           16             mov DPTR, #0
+8111 B297             17             cpl p1.7
+8113 00               18             nop
+8114 C297             19             clr p1.7
+8116 00               20             nop
+8117 E0               21             movx A,@dptr
+8118 F8               22             mov r0,a
+8119 A3               23             inc dptr
+811A C297             24             clr p1.7
+811C 00               25             nop
+811D 00               26             nop
+811E C296             27             clr p1.6
+8120 C295             28             clr p1.5
+8122 D294             29             setb p1.4
+8124 00               30             nop
+8125 B297             31             cpl p1.7
+8127 00               32             nop
+8128 C297             33             clr p1.7
+812A 00               34             nop
+812B E0               35             movx A,@dptr
+812C F9               36             mov r1,a
+812D A3               37             inc dptr
+812E C297             38     clr p1.7
+8130 00               39             nop
+8131 00               40             nop
+8132 C296             41             clr p1.6
+8134 D295             42             setb p1.5
+8136 C294             43             clr p1.4
+8138 00               44             nop
+8139 B297             45             cpl p1.7
+813B 00               46             nop
+813C C297             47             clr p1.7
+813E 00               48             nop
+813F E0               49             movx A,@dptr
+8140 FA               50             mov r2,a
+MCS-51 MACRO ASSEMBLER    KASASPW4                                                                  12/01/;8   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8141 A3               51             inc dptr
+8142 C297             52     clr p1.7
+8144 00               53             nop
+8145 00               54             nop
+8146 C296             55             clr p1.6
+8148 D295             56             setb p1.5
+814A D294             57             setb p1.4
+814C 00               58             nop
+814D B297             59             cpl p1.7
+814F 00               60             nop
+8150 C297             61             clr p1.7
+8152 00               62             nop
+8153 E0               63             movx A,@dptr
+8154 FB               64             mov r3,a
+8155 A3               65             inc dptr
+8156 C297             66     clr p1.7
+8158 00               67             nop
+8159 00               68             nop
+815A D296             69             setb p1.6
+815C C295             70             clr p1.5
+815E C294             71             clr p1.4
+8160 00               72             nop
+8161 B297             73             cpl p1.7
+8163 00               74             nop
+8164 C297             75             clr p1.7
+8166 00               76             nop
+8167 E0               77             movx A,@dptr
+8168 FC               78             mov r4,a
+8169 A3               79             inc dptr
+816A C297             80     clr p1.7
+816C 00               81             nop
+816D 00               82             nop
+816E D296             83             setb p1.6
+8170 C295             84             clr p1.5
+8172 D294             85             setb p1.4
+8174 00               86             nop
+8175 B297             87             cpl p1.7
+8177 00               88             nop
+8178 C297             89             clr p1.7
+817A 00               90             nop
+817B E0               91             movx A,@dptr
+817C FD               92             mov r5,a
+817D A3               93             inc dptr
+817E C297             94     clr p1.7
+8180 00               95             nop
+8181 00               96             nop
+8182 D296             97             setb p1.6
+8184 D295             98             setb p1.5
+8186 C294             99             clr p1.4
+8188 00              100             nop
+8189 B297            101             cpl p1.7
+818B 00              102             nop
+818C C297            103             clr p1.7
+818E 00              104             nop
+818F E0              105             movx A,@dptr
+MCS-51 MACRO ASSEMBLER    KASASPW4                                                                  12/01/;8   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+8190 FE              106             mov r6,a
+8191 A3              107             inc dptr
+8192 C297            108     clr p1.7
+8194 00              109             nop
+8195 00              110             nop
+8196 D296            111             setb p1.6
+8198 D295            112             setb p1.5
+819A D294            113             setb p1.4
+819C 00              114             nop
+819D B297            115             cpl p1.7
+819F 00              116             nop
+81A0 C297            117             clr p1.7
+81A2 00              118             nop
+81A3 E0              119             movx A,@dptr
+81A4 FF              120             mov r7,a
+81A5 A3              121             inc dptr        
+                     122     
+81A6 B291            123             cpl p1.1
+81A8 2104            124             jmp start1
+                     125     
+                     126     end
+MCS-51 MACRO ASSEMBLER    KASASPW4                                                                  12/01/;8   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+P1 . . . .  D ADDR    0090H   A       
+RS0. . . .  B ADDR    00D0H.3 A       
+START. . .  C ADDR    8100H   A       
+START1 . .  C ADDR    8104H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

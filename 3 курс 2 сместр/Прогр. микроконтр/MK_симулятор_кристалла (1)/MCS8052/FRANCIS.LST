@@ -1,0 +1,40 @@
+MCS-51 MACRO ASSEMBLER    FRANCIS                                                                   03/07/;9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\MCS8052\FRANCIS.OBJ
+ASSEMBLER INVOKED BY:  C:\MCS8052\ASM51.EXE C:\MCS8052\FRANCIS.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0
+0000 781F              2             MOV R0,#1FH
+0002 7917              3             MOV R1,#17H
+0004 AA08              4             MOV R2,8H
+                       5             LOOP1:
+0006 E7                6                     MOV A,@R1
+0007 FB                7                     MOV R3,A
+0008 C6                8                     XCH A,@R0
+0009 C7                9                     XCH A,@R1
+000A EB               10                     MOV A,R3
+000B F6               11                     MOV @R0,A
+000C 18               12                     DEC R0
+000D 19               13                     DEC R1
+000E DAF6             14                     DJNZ R2,LOOP1
+                      15             END
+MCS-51 MACRO ASSEMBLER    FRANCIS                                                                   03/07/;9   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+LOOP1. . .  C ADDR    0006H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

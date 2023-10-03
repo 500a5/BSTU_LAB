@@ -1,0 +1,72 @@
+MCS-51 MACRO ASSEMBLER    LABA2                                                                     12/20/;0   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LABA2.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE LABA2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+  0064                 2     TIME EQU 100            ;0,1ms
+  0037                 3     N_SEC DATA 37h          ;YACHEIKA PAMATI SCHITAUSCHYAIA 1sec 100*5ms=500ms clrSEC, ZATEM 50
+                             0ms setbSEC
+  0064                 4     C_SEC EQU 100           ;CONSTANTA DLYA SECUNDOMERA
+                       5     
+0000                   6      org 00h
+0000 028100            7      jmp start
+                       8     
+8100                   9      org 8100h
+                      10     
+                      11      start:
+8100 900003           12             mov DPTR,#03h   ;B{anp pechqrp` sop`bkemh^ b 55-nl
+8103 7482             13             mov A,#82h      ;B{anp jnl`md{ (B-bbnd,C-b{bnd, A-b{bnd)
+8105 F0               14             movx @DPTR,A
+8106 F0               15             MOVX @DPTR,A
+8107 E589             16             MOV A,TMOD
+8109 4407             17             ORL A,#00000111b
+810B F589             18             MOV TMOD,A                      ;T/C0 - 16 BITNUYI TAIMER (T/C1 NE TROGHEAM, T.K. O
+                             N ZANAT NA RXD,TXD
+                      19     
+810D 759050           20             mov P1,#01010000b
+                      21     
+                      22             ;clr A
+                      23             ;mov th0,A
+                      24             ;mov TL0,A
+                      25             ;mov P1,#10100000b
+                      26             ;MOV TH0,#NOT(TIME-1)
+                      27             ;setb tr1
+                      28             ;jnb tf1,$
+                      29             ;mov P1,#00h
+                      30             ;MOV N_SEC,#C_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+                      31             ;clr TF1
+                      32     
+                      33            ;sjmp start
+                      34     
+                      35     
+                      36     ;Openap`gnb`mhe whqk`
+                      37     
+                      38     
+                      39     
+                      40      end
+MCS-51 MACRO ASSEMBLER    LABA2                                                                     12/20/;0   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+C_SEC. . .    NUMB    0064H   A       
+N_SEC. . .  D ADDR    0037H   A       
+P1 . . . .  D ADDR    0090H   A       
+START. . .  C ADDR    8100H   A       
+TIME . . .    NUMB    0064H   A       
+TMOD . . .  D ADDR    0089H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

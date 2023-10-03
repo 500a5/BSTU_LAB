@@ -1,0 +1,206 @@
+MCS-51 MACRO ASSEMBLER    DPT                                                                       02/03/;1   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN DPT.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE DPT.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 028100            2             jmp START
+                       3     
+000B                   4     org 000Bh
+000B 02818B            5             jmp COUNT
+                       6             
+001B                   7     org 001Bh
+001B 02818C            8             jmp TIMER
+                       9             
+8100                  10     org 8100h
+                      11     
+  0028                12     N EQU 28h ;skorost
+  0029                13     Tarea EQU 29h ;vremya uchastka
+  002A                14     etalon EQU 2Ah ;dlya zadaniya skvazhnosti
+  002B                15     k EQU 2Bh ; 3 schetnyh peremennyh
+  002C                16     i EQU 2Ch ;
+  002D                17     j EQU 2Dh ;
+  0040                18     REG0 EQU 40h
+  0041                19     REG1 EQU 41h
+  0042                20     REG2 EQU 42h
+  0043                21     REG3 EQU 43h
+  0044                22     REG4 EQU 44h
+  0046                23     REG5 EQU 46h
+  0045                24     area EQU 45h
+                      25     
+                      26     START:
+                      27       ;zagruzka upravl slova
+8100 D297             28       setb P1.7
+8102 D296             29       setb P1.6
+8104 D295             30       setb P1.5
+8106 D294             31       setb P1.4
+8108 900003           32       mov DPTR, #3h
+810B 7482             33       mov A,  #10000010b
+810D F0               34       movx @DPTR, A
+810E 900002           35       mov DPTR, #2h
+                      36       ;timer
+8111 852F55           37       mov 55h, 2Fh
+8114 85892F           38       mov 2Fh, TMOD
+8117 D278             39       setb 78h
+8119 D279             40       setb 79h
+811B D27A             41       setb 7Ah
+811D 852F89           42       mov TMOD, 2Fh
+8120 85552F           43       mov 2Fh, 55h
+8123 D2A9             44       setb ET0 ;dayem dobro na preryvanie
+8125 D2AB             45       setb ET1
+8127 D2AF             46       setb EA
+                      47       ;setb TR0 ; go!
+                      48       ;setb TR1
+                      49     
+                      50     BEGIN:
+MCS-51 MACRO ASSEMBLER    DPT                                                                       02/03/;1   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8129 754501           51       mov area, #1
+812C 752903           52       mov Tarea, #3
+812F 128146           53         call AREA1
+                      54             
+8132 D297             55       setb P1.7
+8134 D296             56       setb P1.6
+8136 D295             57       setb P1.5
+8138 D294             58       setb P1.4
+813A 80FE             59     jmp $
+                      60     
+                      61     VPERED:
+813C D297             62       setb P1.7
+813E C296             63       clr P1.6
+8140 22               64     RET
+                      65     
+                      66     NAZAD:
+8141 D296             67       setb P1.6
+8143 C297             68       clr P1.7
+8145 22               69     RET
+                      70     
+                      71     AREA1:
+8146 313C             72       call VPERED
+8148 7400             73       mov A, #0
+814A 752C00           74       mov i, #0
+814D 752D00           75       mov j, #0
+8150 752B00           76       mov k, #0
+8153 752A02           77       mov etalon, #2
+8156 D28E             78       setb TR1 ;zapuskaem taymer
+                      79       met1:
+8158 E540             80         mov A, REG0
+815A D295             81         setb P1.5
+815C C294             82             clr P1.4
+815E B52AFD           83             cjne A, etalon, $
+8161 C295             84             clr P1.5
+8163 D294             85             setb P1.4
+8165 B464FD           86       cjne A, #100, $ ;100
+8168 754000           87       mov REG0, #0
+816B 052C             88       inc i
+816D 0544             89       inc REG4
+816F E544             90       mov A, REG4
+8171 B40305           91       cjne A, #3, met2
+8174 052A             92         inc etalon
+8176 754400           93             mov REG4, #0
+                      94       met2:
+8179 E52C             95       mov A, i
+817B B464DA           96       cjne A, #100, met1 ;100
+817E 052D             97       inc j
+8180 752C00           98       mov i, #0
+8183 E52D             99       mov A, j
+8185 B529D0          100       cjne A, Tarea, met1
+8188 C28E            101       clr TR1
+818A 22              102     RET
+                     103     
+                     104     COUNT:
+                     105     
+MCS-51 MACRO ASSEMBLER    DPT                                                                       02/03/;1   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+818B 32              106     RETI
+                     107     
+                     108     TIMER: 
+818C 8843            109       mov REG3, R0
+818E 8946            110       mov REG5, R1
+8190 A945            111       mov R1, area
+8192 052B            112       inc k
+8194 A82B            113       mov R0, k
+8196 B9010A          114       cjne R1, #1, uch2
+8199 B80428          115         cjne R0, #4, exit1
+819C 04              116         inc A
+819D 752B00          117         mov k, #0
+81A0 0281C4          118             jmp exit1
+                     119       uch2:
+81A3 B9020A          120         cjne R1, #2, uch3
+81A6 B8021B          121           cjne R0, #2, exit1
+81A9 04              122           inc A
+81AA 752B00          123           mov k, #0
+81AD 0281C4          124               jmp exit1  
+                     125       uch3:
+81B0 B9030A          126         cjne R1, #3, uch5
+81B3 B8830E          127               cjne R0, #131, exit1
+81B6 04              128           inc A
+81B7 752B00          129           mov k, #0
+81BA 0281C4          130               jmp exit1  
+                     131       uch5:
+81BD B80404          132         cjne R0, #4, exit1
+81C0 04              133         inc A
+81C1 752B00          134         mov k, #0
+                     135     exit1:
+81C4 A843            136     mov R0, REG3
+81C6 A946            137     mov R1, REG5
+81C8 32              138     RETI
+                     139     
+                     140     END
+MCS-51 MACRO ASSEMBLER    DPT                                                                       02/03/;1   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+AREA . . .    NUMB    0045H   A       
+AREA1. . .  C ADDR    8146H   A       
+BEGIN. . .  C ADDR    8129H   A       
+COUNT. . .  C ADDR    818BH   A       
+EA . . . .  B ADDR    00A8H.7 A       
+ET0. . . .  B ADDR    00A8H.1 A       
+ET1. . . .  B ADDR    00A8H.3 A       
+ETALON . .    NUMB    002AH   A       
+EXIT1. . .  C ADDR    81C4H   A       
+I. . . . .    NUMB    002CH   A       
+J. . . . .    NUMB    002DH   A       
+K. . . . .    NUMB    002BH   A       
+MET1 . . .  C ADDR    8158H   A       
+MET2 . . .  C ADDR    8179H   A       
+N. . . . .    NUMB    0028H   A       
+NAZAD. . .  C ADDR    8141H   A       
+P1 . . . .  D ADDR    0090H   A       
+REG0 . . .    NUMB    0040H   A       
+REG1 . . .    NUMB    0041H   A       
+REG2 . . .    NUMB    0042H   A       
+REG3 . . .    NUMB    0043H   A       
+REG4 . . .    NUMB    0044H   A       
+REG5 . . .    NUMB    0046H   A       
+START. . .  C ADDR    8100H   A       
+TAREA. . .    NUMB    0029H   A       
+TIMER. . .  C ADDR    818CH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR1. . . .  B ADDR    0088H.6 A       
+UCH2 . . .  C ADDR    81A3H   A       
+UCH3 . . .  C ADDR    81B0H   A       
+UCH5 . . .  C ADDR    81BDH   A       
+VPERED . .  C ADDR    813CH   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

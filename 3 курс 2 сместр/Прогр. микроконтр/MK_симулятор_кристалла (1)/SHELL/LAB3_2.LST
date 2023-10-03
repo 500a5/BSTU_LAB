@@ -1,0 +1,429 @@
+MCS-51 MACRO ASSEMBLER    LAB3_2                                                                    11/30/;0   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LAB3_2.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE LAB3_2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 00H
+0000 028273            2       JMP START
+000B                   3     ORG 0BH
+000B 028100            4       JMP INTCOUNTER ;TL0
+001B                   5     ORG 1BH
+001B 028114            6       JMP INTTIMER ;TH0
+8100                   7     ORG 8100H
+                       8     
+                       9     INTCOUNTER:
+8100 758A83           10       MOV TL0,#-125
+8103 0E               11       INC R6
+8104 32               12       RETI
+                      13     
+                      14     M1:
+8105 028166           15       JMP MINUTE_1
+                      16     M2:
+8108 0281AE           17       JMP MINUTE_2
+                      18     M3:
+810B 0281F0           19       JMP MINUTE_3
+                      20     M4:
+810E 028234           21       JMP MINUTE_4
+                      22     T_0:
+8111 028271           23       jmp Tick
+                      24     
+                      25     INTTIMER:
+                      26       ;CLR TR1
+8114 758CB0           27       MOV TH0,#-80
+8117 E8               28       MOV A,R0
+8118 14               29       DEC A
+8119 60EA             30       JZ M1
+811B 14               31       DEC A
+811C 60EA             32       JZ M2
+811E 14               33       DEC A
+811F 60EA             34       JZ M3
+8121 14               35       DEC A
+8122 60EA             36       JZ M4
+                      37     
+                      38     MINUTE_0:
+8124 BDBEEA           39       CJNE R5,#190,T_0
+8127 BB0026           40       CJNE R3,#0,PERIODPART_0
+812A BA001B           41       CJNE R2,#0,PERIOD_0
+812D B90011           42       CJNE R1,#0,SECOND_0
+8130 08               43       INC R0
+8131 793B             44       MOV R1,#59
+8133 7A09             45       MOV R2,#9
+8135 7B05             46       MOV R3,#5
+8137 759050           47       MOV P1,#01010000B
+813A C202             48       CLR 02H
+813C 7D00             49       MOV R5,#0
+813E 02826E           50       JMP STARTTICK
+MCS-51 MACRO ASSEMBLER    LAB3_2                                                                    11/30/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      51     SECOND_0:
+8141 EE               52       MOV A,R6
+8142 FF               53       MOV R7,A
+8143 7E00             54       MOV R6,#0
+8145 19               55       DEC R1
+8146 7A0A             56       MOV R2,#10
+                      57     PERIOD_0:
+8148 1A               58       DEC R2
+8149 7B06             59       MOV R3,#6
+814B C202             60       CLR 02H
+814D 7590A0           61       mov p1,#10100000b
+                      62     PERIODPART_0:
+8150 1B               63       DEC R3
+8151 7D00             64       MOV R5,#0
+8153 200255           65       JB 02H,S
+8156 BB0200           66       CJNE R3,#2,NI_0
+                      67     NI_0:
+8159 4003             68       jc INACTIVE_0
+                      69       ;MOV P1,#10100000B
+815B 02826E           70       JMP STARTTICK
+                      71     INACTIVE_0:
+815E 759090           72       MOV P1,#10010000B
+8161 D202             73       SETB 02H
+8163 02826E           74       JMP STARTTICK
+                      75     MINUTE_1:
+8166 BDA13F           76       CJNE R5,#161,T
+8169 BB0023           77       CJNE R3,#0,PERIODPART_1
+816C BA001B           78       CJNE R2,#0,PERIOD_1
+816F B90011           79       CJNE R1,#0,SECOND_1
+8172 08               80       INC R0
+8173 793B             81       MOV R1,#59
+8175 7A09             82       MOV R2,#9
+8177 7B05             83       MOV R3,#5
+8179 7590A0           84       MOV P1,#10100000B
+817C C202             85       CLR 02H
+817E 7D00             86       MOV R5,#0
+8180 02826E           87       JMP STARTTICK
+                      88     SECOND_1:
+8183 EE               89       MOV A,R6
+8184 FF               90       MOV R7,A
+8185 7E00             91       MOV R6,#0
+8187 19               92       DEC R1
+8188 7A0A             93       MOV R2,#10
+                      94     PERIOD_1:
+818A 1A               95       DEC R2
+818B 7B06             96       MOV R3,#6
+818D C202             97       CLR 02H
+                      98     PERIODPART_1:
+818F 1B               99       DEC R3
+8190 7D00            100       MOV R5,#0
+8192 200216          101       JB 02H,S
+8195 BB0100          102       CJNE R3,#1,NI_1
+                     103     NI_1:
+8198 4006            104       JC INACTIVE_1
+819A 759050          105       MOV P1,#01010000B
+MCS-51 MACRO ASSEMBLER    LAB3_2                                                                    11/30/;0   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+819D 02826E          106       JMP STARTTICK
+                     107     INACTIVE_1:
+81A0 759090          108       MOV P1,#10010000B
+81A3 D202            109       SETB 02H
+81A5 02826E          110       JMP STARTTICK
+                     111     T:
+81A8 028271          112       JMP TICK
+                     113     S:
+81AB 02826E          114       JMP STARTTICK
+                     115     
+                     116     MINUTE_2:
+81AE BDA0F7          117       CJNE R5,#160,T
+81B1 BB0023          118       CJNE R3,#0,PERIODPART_2
+81B4 BA001B          119       CJNE R2,#0,PERIOD_2
+81B7 B90011          120       CJNE R1,#0,SECOND_2
+81BA 08              121       INC R0
+81BB 793B            122       MOV R1,#59
+81BD 7A09            123       MOV R2,#9
+81BF 7B05            124       MOV R3,#5
+81C1 759050          125       MOV P1,#01010000B
+81C4 C202            126       CLR 02H
+81C6 7D00            127       MOV R5,#0
+81C8 02826E          128       JMP STARTTICK
+                     129     SECOND_2:
+81CB EE              130       MOV A,R6
+81CC FF              131       MOV R7,A
+81CD 7E00            132       MOV R6,#0
+81CF 19              133       DEC R1
+81D0 7A0A            134       MOV R2,#10
+                     135     PERIOD_2:
+81D2 1A              136       DEC R2
+81D3 7B06            137       MOV R3,#6
+81D5 C202            138       CLR 02H
+                     139     PERIODPART_2:
+81D7 1B              140       DEC R3
+81D8 7D00            141       MOV R5,#0
+81DA 2002CE          142       JB 02H,S
+81DD BB0000          143       CJNE R3,#0,NI_2
+                     144     NI_2:
+81E0 4006            145       JC INACTIVE_2
+81E2 7590A0          146       MOV P1,#10100000B
+81E5 02826E          147       JMP STARTTICK
+                     148     INACTIVE_2:
+81E8 759090          149       MOV P1,#10010000B
+81EB D202            150       SETB 02H
+81ED 02826E          151       JMP STARTTICK
+                     152     
+                     153     MINUTE_3:
+81F0 BDBE7E          154       CJNE R5,#190,TICK
+81F3 BB0025          155       CJNE R3,#0,PERIODPART_3
+81F6 BA001D          156       CJNE R2,#0,PERIOD_3
+81F9 B90013          157       CJNE R1,#0,SECOND_3
+81FC 08              158       INC R0
+81FD 793B            159       MOV R1,#59
+81FF 7A09            160       MOV R2,#9
+MCS-51 MACRO ASSEMBLER    LAB3_2                                                                    11/30/;0   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+8201 7B59            161       MOV R3,#89
+8203 7C3B            162       MOV R4,#59
+8205 759050          163       MOV P1,#01010000B
+8208 C202            164       CLR 02H
+820A 7D00            165       MOV R5,#0
+820C 02826E          166       JMP STARTTICK
+                     167     SECOND_3:
+820F EE              168       MOV A,R6
+8210 FF              169       MOV R7,A
+8211 7E00            170       MOV R6,#0
+8213 19              171       DEC R1
+8214 7A0A            172       MOV R2,#10
+                     173     PERIOD_3:
+8216 1A              174       DEC R2
+8217 7B06            175       MOV R3,#6
+8219 C202            176       CLR 02H
+                     177     PERIODPART_3:
+821B 1B              178       DEC R3
+821C 7D00            179       MOV R5,#0
+821E 20024D          180       JB 02H,STARTTICK
+8221 BB0000          181       CJNE R3,#0,NI_3
+                     182     NI_3:
+8224 4006            183       JC INACTIVE_3
+8226 759050          184       MOV P1,#01010000B
+8229 02826E          185       JMP STARTTICK
+                     186     INACTIVE_3:
+822C 759090          187       MOV P1,#10010000B
+822F D202            188       SETB 02H
+8231 02826E          189       JMP STARTTICK
+                     190     MINUTE_4:
+8234 BD0B3A          191       CJNE R5,#11,TICK
+8237 BB001E          192       CJNE R3,#0,PERIODPART_4
+823A BA0014          193       CJNE R2,#0,PERIOD_4
+823D B9010A          194       CJNE R1,#1,SECOND_4
+8240 C28C            195       clr tr0
+8242 C28E            196       clr tr1
+8244 7590FF          197       mov p1,#11111111b
+8247 028272          198       JMP END_
+                     199     SECOND_4:
+824A EE              200       MOV A,R6
+824B FF              201       MOV R7,A
+824C 7E00            202       MOV R6,#0
+824E 19              203       DEC R1
+824F 7A0A            204       MOV R2,#10
+                     205     PERIOD_4:
+8251 1A              206       DEC R2
+8252 7B5A            207       MOV R3,#90
+8254 E9              208       MOV A,R1
+8255 FC              209       MOV R4,A
+8256 C202            210       CLR 02H
+                     211     PERIODPART_4:
+8258 1B              212       DEC R3
+8259 7D00            213       MOV R5,#0
+825B 200210          214       JB 02H,STARTTICK
+825E DC03            215       DJNZ R4,NI_4
+MCS-51 MACRO ASSEMBLER    LAB3_2                                                                    11/30/;0   PAGE    5
+
+
+LOC  OBJ            LINE     SOURCE
+
+8260 028269          216       JMP INACTIVE_4
+                     217     NI_4:
+                     218       ;dec r4
+                     219       ;JC INACTIVE_4
+8263 759050          220       MOV P1,#01010000B
+8266 02826E          221       JMP STARTTICK
+                     222     INACTIVE_4:
+8269 759090          223       MOV P1,#10010000B
+826C D202            224       SETB 02H
+                     225       ;JMP STARTTICK
+                     226     
+                     227     STARTTICK:
+                     228       ;MOV TH0,#-101
+                     229       ;SETB TR1
+826E 028272          230       JMP END_
+                     231     TICK:
+8271 0D              232       INC R5
+                     233       ;MOV TH0,#-101
+                     234       ;SETB TR1
+                     235     END_:
+8272 32              236       RETI
+                     237     
+                     238     START:
+8273 7590FF          239       MOV P1,#0FFH
+8276 C2D3            240       CLR PSW.3
+8278 C2D4            241       CLR PSW.4
+827A C28C            242       CLR TR0
+827C C28E            243       CLR TR1
+827E 758C9B          244       MOV TH0,#-101
+8281 758A83          245       MOV TL0,#-125
+8284 7800            246       MOV R0,#0 ;LHMSR@
+8286 793B            247       MOV R1,#59 ;QEJSMD@
+8288 7A09            248       MOV R2,#9 ;OEPHND ONBRNPEMH_
+828A 7B05            249       MOV R3,#5 ;W@QR\ OEPHND@ ONBRNPEMH_
+                     250       ;CLR 00H ;OP_LNE | NAP@RMNE BP@YEMHE
+                     251       ;MOV R4,#10100000B ;M@W@K\MNE GM@WEMHE
+828C 7D00            252       MOV R5,#0 ;16665==165*101
+828E 7E00            253       MOV R6,#0 ;JNK-BN NANPNRNB DBHC@REK_
+8290 7F00            254       MOV R7,#0 ;JNK-BN NANPNRNB DBHC@REK_ B QEJSMDS
+8292 751010          255       MOV 10H,#00010000B ;A@IR DK_ OEPBNCN QKEB@ HMDHJ@RNP@
+8295 751120          256       MOV 11H,#00100000B ;A@IR DK_ BRNPNCN QKEB@ HMDHJ@RNP@
+8298 751240          257       MOV 12H,#01000000B ;A@IR DK_ RPER\ECN QKEB@ HMDHJ@RNP@
+829B 751380          258       MOV 13H,#10000000B ;A@IR DK_ WERBEPRNCN QKEB@ HMDHJ@RNP@
+829E 7590A0          259       MOV P1,#10100000B
+82A1 758937          260       MOV TMOD,#00110111B
+82A4 75A88A          261       MOV IE,#10001010B
+82A7 900003          262       MOV DPTR,#03H
+82AA 7482            263       MOV A,#82H
+82AC F0              264       MOVX @DPTR,A
+82AD C202            265       CLR 02H
+82AF D28C            266       SETB TR0
+82B1 D28E            267       SETB TR1
+                     268     LABEL:
+82B3 EF              269       MOV A,R7
+                     270       ;MOV B,6H
+MCS-51 MACRO ASSEMBLER    LAB3_2                                                                    11/30/;0   PAGE    6
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     271       ;MUL AB
+82B4 75F00A          272       MOV B,#0AH
+82B7 84              273       DIV AB
+82B8 43F080          274       ORL B,#10000000B
+82BB 85F013          275       MOV 13H,B
+82BE 75F00A          276       MOV B,#0AH
+82C1 84              277       DIV AB
+82C2 43F040          278       ORL B,#01000000B
+82C5 85F012          279       MOV 12H,B
+                     280      ; SETB ACC.4
+                     281      ; MOV 10H,A
+82C8 900002          282       MOV DPTR,#02H ;@DPEQ ONPR@ Q
+                     283       ;mov a,#01000000b
+                     284       ;movx @dptr,a
+                     285       ;jmp Label
+                     286     OUTPUT:
+82CB 75140F          287       MOV 14H,#0fH
+                     288     OUTPUT_0:
+82CE 75150F          289       MOV 15H,#0FH
+                     290     
+                     291     OUTPUT_1:
+82D1 E513            292       MOV A,13H
+82D3 F0              293       MOVX @DPTR,A
+82D4 751700          294       MOV 17H,#00H
+                     295     PAUSE_0:
+82D7 D517FD          296       DJNZ 17H,PAUSE_0 ;G@DEPFJ@
+82DA E512            297       MOV A,12H
+82DC F0              298       MOVX @DPTR,A
+                     299     PAUSE_1:
+82DD D517FD          300       DJNZ 17H,PAUSE_1 ;G@DEPFJ@
+82E0 E511            301       MOV A,11H
+82E2 F0              302       MOVX @DPTR,A
+                     303     PAUSE_2:
+82E3 D517FD          304       DJNZ 17H,PAUSE_2
+82E6 E510            305       MOV A,10H
+82E8 F0              306       MOVX @DPTR,A
+                     307     PAUSE_3:
+82E9 D517FD          308       DJNZ 17H,PAUSE_3
+                     309     
+82EC D515E2          310       DJNZ 15H,OUTPUT_1
+82EF D514DC          311       DJNZ 14H,OUTPUT_0 ;BKNFEMM[E VHJK[
+                     312     
+82F2 80BF            313       JMP LABEL
+                     314     
+                     315       END
+MCS-51 MACRO ASSEMBLER    LAB3_2                                                                    11/30/;0   PAGE    7
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E       T Y P E   V A L U E       A T T R I B U T E S
+
+B. . . . . .  D ADDR    00F0H   A       
+END_ . . . .  C ADDR    8272H   A       
+IE . . . . .  D ADDR    00A8H   A       
+INACTIVE_0 .  C ADDR    815EH   A       
+INACTIVE_1 .  C ADDR    81A0H   A       
+INACTIVE_2 .  C ADDR    81E8H   A       
+INACTIVE_3 .  C ADDR    822CH   A       
+INACTIVE_4 .  C ADDR    8269H   A       
+INTCOUNTER .  C ADDR    8100H   A       
+INTTIMER . .  C ADDR    8114H   A       
+LABEL. . . .  C ADDR    82B3H   A       
+M1 . . . . .  C ADDR    8105H   A       
+M2 . . . . .  C ADDR    8108H   A       
+M3 . . . . .  C ADDR    810BH   A       
+M4 . . . . .  C ADDR    810EH   A       
+MINUTE_0 . .  C ADDR    8124H   A       
+MINUTE_1 . .  C ADDR    8166H   A       
+MINUTE_2 . .  C ADDR    81AEH   A       
+MINUTE_3 . .  C ADDR    81F0H   A       
+MINUTE_4 . .  C ADDR    8234H   A       
+NI_0 . . . .  C ADDR    8159H   A       
+NI_1 . . . .  C ADDR    8198H   A       
+NI_2 . . . .  C ADDR    81E0H   A       
+NI_3 . . . .  C ADDR    8224H   A       
+NI_4 . . . .  C ADDR    8263H   A       
+OUTPUT_0 . .  C ADDR    82CEH   A       
+OUTPUT_1 . .  C ADDR    82D1H   A       
+OUTPUT . . .  C ADDR    82CBH   A       
+P1 . . . . .  D ADDR    0090H   A       
+PAUSE_0. . .  C ADDR    82D7H   A       
+PAUSE_1. . .  C ADDR    82DDH   A       
+PAUSE_2. . .  C ADDR    82E3H   A       
+PAUSE_3. . .  C ADDR    82E9H   A       
+PERIOD_0 . .  C ADDR    8148H   A       
+PERIOD_1 . .  C ADDR    818AH   A       
+PERIOD_2 . .  C ADDR    81D2H   A       
+PERIOD_3 . .  C ADDR    8216H   A       
+PERIOD_4 . .  C ADDR    8251H   A       
+PERIODPART_0  C ADDR    8150H   A       
+PERIODPART_1  C ADDR    818FH   A       
+PERIODPART_2  C ADDR    81D7H   A       
+PERIODPART_3  C ADDR    821BH   A       
+PERIODPART_4  C ADDR    8258H   A       
+PSW. . . . .  D ADDR    00D0H   A       
+S. . . . . .  C ADDR    81ABH   A       
+SECOND_0 . .  C ADDR    8141H   A       
+SECOND_1 . .  C ADDR    8183H   A       
+SECOND_2 . .  C ADDR    81CBH   A       
+SECOND_3 . .  C ADDR    820FH   A       
+SECOND_4 . .  C ADDR    824AH   A       
+START. . . .  C ADDR    8273H   A       
+MCS-51 MACRO ASSEMBLER    LAB3_2                                                                    11/30/;0   PAGE    8
+
+
+N A M E       T Y P E   V A L U E       A T T R I B U T E S
+
+STARTTICK. .  C ADDR    826EH   A       
+T_0. . . . .  C ADDR    8111H   A       
+T. . . . . .  C ADDR    81A8H   A       
+TH0. . . . .  D ADDR    008CH   A       
+TICK . . . .  C ADDR    8271H   A       
+TL0. . . . .  D ADDR    008AH   A       
+TMOD . . . .  D ADDR    0089H   A       
+TR0. . . . .  B ADDR    0088H.4 A       
+TR1. . . . .  B ADDR    0088H.6 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

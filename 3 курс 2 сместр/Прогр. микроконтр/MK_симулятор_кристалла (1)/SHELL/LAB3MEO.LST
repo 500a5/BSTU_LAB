@@ -1,0 +1,211 @@
+MCS-51 MACRO ASSEMBLER    LAB3MEO                                                                   12/29/;0   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LAB3MEO.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE LAB3MEO.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+  0082                 1     INIT_PPI EQU 10000010b  ;A-VIVOD, B-VVOD, C-VIVOD(INDIKACIA) DLYA BB55
+  0011                 2     INIT_KN EQU  00010001b  ;VIBOR 2-OGO KOMMUTATORA NAPRYASHGENIA I 1 PORT
+  0090                 3     MK_ADC BIT P1.0                 ;SIGNAL GASHENIE/PREOBRAZOVANIE
+  0091                 4     ADC_MK BIT P1.1         ;SIGNAL GOTOV
+  0003                 5     RWCU EQU 3              ;ADDRESS UPRAV. SLOVA BB55
+  0033                 6     ZNACH DATA 33h          ;ADRESS ECHEIKI ZNACHENIJ YGLA
+  0034                 7     des DATA 34h          ;ADRESS ECHEIKI ZNACHENIJ YGLA
+  0035                 8     edin DATA 35h          ;ADRESS ECHEIKI ZNACHENIJ YGLA
+  1B58                 9     TIME EQU 7000          ;10ms
+  0037                10     N_SEC DATA 37h          ;YACHEIKA PAMATI SCHITAUSCHYAIA 1sec 100*5ms=500ms clrSEC, ZATEM 50
+                             0ms setbSEC
+  0064                11     C_SEC EQU 100           ;CONSTANTA DLYA SECUNDOMERA
+  0000                12     P_A EQU 0               ;ADDRESS PORTA A V BB55
+  0001                13     P_B EQU 1               ;ADDRESS PORTA B
+  0002                14     P_C EQU 2               ;ADDRESS PORTA C
+                      15     
+0000                  16     org 0h
+0000 028100           17       jmp start
+                      18     
+8100                  19     org 8100h
+                      20     start:
+8100 7482             21       mov A,#INIT_PPI
+8102 758203           22       mov DPL,#RWCU                   ;NASTROIKA BB55 NA NEOBHODIMYI REZHIM
+8105 F0               23       movx @DPTR,A
+8106 7411             24       mov A,#INIT_KN
+8108 758200           25       mov DPL,#P_A                    ;NASTROIKA KOMUTATOROV NAPRYASHGENIA
+810B F0               26       movx @DPTR,A
+810C 7801             27       mov R0,#01h                      ;ZNACHENIE PERVOGO KOFICIENTA
+810E 7900             28       mov R1,#00H
+8110 E589             29       mov A,TMOD
+8112 4401             30       orl A,#0000001b
+8114 F589             31       mov TMOD,A                    ;T/C0 - 16 BITNUYI TAIMER (T/C1 NE TROGHEAM, T.K. ON ZANAT
+                      32     
+8116 128164           33       call ADC
+8119 2091FD           34       jb ADC_MK,$     ;ZHDEM 30mks - PREOBRAZOVANIE "ADC"
+811C 758201           35       mov DPL,#01h
+811F E0               36       movx A,@DPTR
+8120 FB               37       mov R3,A
+                      38     
+                      39     met1:
+8121 EB               40       mov A,R3
+8122 B9000A           41       cjne R1,#00H,met5 ;OPNEPJ@ M@ G@D@MHE PEFHL@ BP@YEMH_
+8125 28               42       add A,R0
+8126 C297             43       clr p1.7
+8128 D296             44       setb p1.6
+812A 7901             45       mov R1,#01H
+812C 028136           46       jmp met6
+                      47     
+                      48     Met5:
+812F 98               49       subb A,R0
+MCS-51 MACRO ASSEMBLER    LAB3MEO                                                                   12/29/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8130 C296             50       clr p1.6
+8132 D297             51       setb p1.7
+8134 7900             52       mov R1,#00H
+                      53     
+                      54     met6:
+8136 F533             55       mov ZNACH,A
+                      56     
+                      57     met2:
+8138 128164           58       call ADC
+813B 2091FD           59       jb ADC_MK,$     ;ZHDEM 30mks - PREOBRAZOVANIE "ADC"
+813E 758201           60       mov DPL,#01h
+8141 E0               61       movx A,@DPTR
+8142 FE               62       mov R6,A
+8143 12816D           63       call rasch
+8146 12817F           64       call vivod
+8149 EE               65       mov A,R6
+814A B40003           66       cjne A,#00H,met3
+814D 0281B4           67       jmp exit
+                      68     
+                      69     met3:
+8150 B47703           70       cjne A,#119,met4
+8153 0281B4           71       jmp exit
+                      72     
+                      73     met4:
+8156 1281A6           74       call wait
+8159 B533DC           75       cjne A,ZNACH,met2 ;opnbepj` m` p`bemqrbn gm`weh~ nrjknmemh^
+815C E8               76       mov A,R0
+815D 75F002           77       mov B,#02h
+8160 A4               78       mul AB
+8161 F8               79       mov R0,A
+8162 80BD             80       jmp met1
+                      81     
+                      82     ;PODPROGRAMMA STARTA "ADC"
+                      83     ADC:
+8164 D290             84       setb MK_ADC             ;SBROS "ADC"
+8166 00               85       nop
+8167 00               86       nop
+8168 00               87       nop
+8169 00               88       nop
+816A C290             89       clr MK_ADC               ;NACHAT' PREOBRAZOVANIE
+816C 22               90     ret
+                      91     
+                      92     rasch:
+816D 75F004           93       mov B,#4
+8170 84               94       div AB
+8171 75F003           95       mov B,#3
+8174 A4               96       mul AB
+8175 75F00A           97       mov B,#10
+8178 84               98       div AB
+8179 85F035           99       mov edin,B
+817C F534            100       mov des,A
+817E 22              101     ret
+                     102     
+                     103     vivod:
+817F E534            104       mov A,des
+MCS-51 MACRO ASSEMBLER    LAB3MEO                                                                   12/29/;0   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+8181 4440            105       orl A,#01000000b
+8183 758202          106             MOV DPL,#P_C
+8186 F0              107             MOVX @DPTR,A
+8187 128196          108             CALL DELAY
+818A E535            109             MOV A,edin
+818C 4480            110             ORL A,#10000000b                ;VIVOD 1 CIFRI
+818E 758202          111             MOV DPL,#P_C
+8191 F0              112             MOVX @DPTR,A
+8192 128196          113             CALL DELAY              ;ZADERSHKA 10ms
+8195 22              114     ret
+                     115     
+                     116     delay:
+8196 D28C            117       setb TR0
+8198 308DFD          118       jnb TF0,$
+819B C28D            119       clr TF0
+819D C28C            120       clr TR0
+819F 758CE4          121       mov TH0,#HIGH(NOT(TIME-1))
+81A2 758AA8          122       mov TL0,#LOW(NOT(TIME-1))
+81A5 22              123     ret
+                     124     
+                     125     wait:
+81A6 758CE4          126       mov TH0,#HIGH(NOT(TIME-1))
+81A9 758AA8          127       mov TL0,#LOW(NOT(TIME-1))
+81AC 0C              128       inc R4
+81AD BC1403          129       cjne R4,#20,M0                ;1cek
+81B0 0D              130       inc R5
+81B1 7C00            131       mov R4,#0
+                     132     
+                     133     M0:
+                     134     
+81B3 32              135     reti
+                     136     
+                     137     exit:
+81B4 C297            138       clr p1.7
+81B6 C296            139       clr p1.6
+                     140     end
+MCS-51 MACRO ASSEMBLER    LAB3MEO                                                                   12/29/;0   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ADC_MK . .  B ADDR    0090H.1 A       
+ADC. . . .  C ADDR    8164H   A       
+B. . . . .  D ADDR    00F0H   A       
+C_SEC. . .    NUMB    0064H   A       
+DELAY. . .  C ADDR    8196H   A       
+DES. . . .  D ADDR    0034H   A       
+DPL. . . .  D ADDR    0082H   A       
+EDIN . . .  D ADDR    0035H   A       
+EXIT . . .  C ADDR    81B4H   A       
+INIT_KN. .    NUMB    0011H   A       
+INIT_PPI .    NUMB    0082H   A       
+M0 . . . .  C ADDR    81B3H   A       
+MET1 . . .  C ADDR    8121H   A       
+MET2 . . .  C ADDR    8138H   A       
+MET3 . . .  C ADDR    8150H   A       
+MET4 . . .  C ADDR    8156H   A       
+MET5 . . .  C ADDR    812FH   A       
+MET6 . . .  C ADDR    8136H   A       
+MK_ADC . .  B ADDR    0090H.0 A       
+N_SEC. . .  D ADDR    0037H   A       
+P_A. . . .    NUMB    0000H   A       
+P_B. . . .    NUMB    0001H   A       
+P_C. . . .    NUMB    0002H   A       
+P1 . . . .  D ADDR    0090H   A       
+RASCH. . .  C ADDR    816DH   A       
+RWCU . . .    NUMB    0003H   A       
+START. . .  C ADDR    8100H   A       
+TF0. . . .  B ADDR    0088H.5 A       
+TH0. . . .  D ADDR    008CH   A       
+TIME . . .    NUMB    1B58H   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+VIVOD. . .  C ADDR    817FH   A       
+WAIT . . .  C ADDR    81A6H   A       
+ZNACH. . .  D ADDR    0033H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

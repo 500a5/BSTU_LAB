@@ -1,0 +1,55 @@
+MCS-51 MACRO ASSEMBLER    BAYEL                                                                     03/21/;9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\MCS8052\BAYEL.OBJ
+ASSEMBLER INVOKED BY:  C:\MCS8052\ASM51.EXE C:\MCS8052\BAYEL.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0
+0000 020015            2             LJMP ST
+000B                   3             ORG 0BH
+000B 0F                4             INC R7
+000C 758C3C            5             MOV TH0,#3CH
+000F 758AAF            6             MOV TL0,#0AFH
+0012 C28D              7             CLR TF0
+0014 32                8             RETI
+                       9     ST:
+0015 D2AF             10             SETB EA
+0017 D2A9             11             SETB ET0
+0019 7E00             12             MOV R6,#0
+001B 758901           13             MOV TMOD,#1
+001E 853C8C           14             MOV TH0,3CH
+0021 758AAF           15             MOV TL0,#0AFH
+0024 D28C             16             SETB TR0
+0026 BF14FD           17     M:      CJNE R7,#20,$
+0029 7F00             18             MOV R7,#0
+002B 0E               19             INC R6
+002C BE3CFD           20             CJNE R6,#60,$
+002F 80F5             21             SJMP M
+                      22             END 
+MCS-51 MACRO ASSEMBLER    BAYEL                                                                     03/21/;9   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+EA . . . .  B ADDR    00A8H.7 A       
+ET0. . . .  B ADDR    00A8H.1 A       
+M. . . . .  C ADDR    0026H   A       
+ST . . . .  C ADDR    0015H   A       
+TF0. . . .  B ADDR    0088H.5 A       
+TH0. . . .  D ADDR    008CH   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

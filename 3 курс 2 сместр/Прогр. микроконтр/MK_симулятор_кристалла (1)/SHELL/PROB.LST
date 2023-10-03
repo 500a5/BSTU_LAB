@@ -1,0 +1,36 @@
+MCS-51 MACRO ASSEMBLER    PROB                                                                      02/12/;6   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\PROGRA~1\MCS8052\PROB.OBJ
+ASSEMBLER INVOKED BY:  C:\PROGRA~1\MCS8052\ASM51.EXE C:\PROGRA~1\MCS8052\PROB.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             org 0H
+0000 7808              2             mov R0,#08H
+0002 7910              3             mov R1,#10H
+0004 E6                4     M1:     mov A,@R0
+0005 C7                5             xch A,@R1
+0006 F6                6             mov @R0,A
+0007 08                7             inc R0
+0008 09                8             inc R1
+0009 B810F8            9             cjne R0,#10H,M1
+000C 80FE             10             sjmp $
+                      11             end
+MCS-51 MACRO ASSEMBLER    PROB                                                                      02/12/;6   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+M1 . . . .  C ADDR    0004H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

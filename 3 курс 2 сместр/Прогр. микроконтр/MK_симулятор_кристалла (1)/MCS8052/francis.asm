@@ -1,0 +1,15 @@
+	ORG 0
+	MOV R0,#1FH
+	MOV R1,#17H
+	MOV R2,8H
+        LOOP1:
+		MOV A,@R1
+		MOV R3,A
+		XCH A,@R0
+		XCH A,@R1
+		MOV A,R3
+		MOV @R0,A
+		DEC R0
+		DEC R1
+		DJNZ R2,LOOP1
+	END

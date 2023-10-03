@@ -1,0 +1,556 @@
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN OSCILL.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE OSCILL.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 0282B3            2     jmp initializeEngine
+                       3     
+000B                   4     org 000Bh
+000B 028225            5     jmp timer0Int
+                       6     
+001B                   7     org 001Bh
+001B 028233            8     jmp timer1Int
+                       9     ;----------------------------------------
+  0000                10     portA XDATA 0000h
+  0001                11     portB XDATA 0001h
+  0002                12     portC XDATA 0002h
+  0003                13     conPort XDATA 0003h
+                      14     
+  003D                15     easymode equ 03Dh    ;if easymode = 0 - function
+                      16                          ;if easymode <> 0 - constant velocity
+  0031                17     angle1 equ 031h ;current angle
+  0032                18     angle2 equ 032h ;target
+                      19     
+  003F                20     timeS1 equ 03Fh
+  003E                21     timeS2 equ 03Eh
+                      22     
+  0041                23     counter equ 041h
+  0042                24     divider equ 042h
+  0043                25     reminder equ 043h ;temporary variable
+  0044                26     hB equ 044h      ;high - byte
+  0045                27     lB equ 045h      ;low - byte
+                      28     
+  004A                29     mode equ 04Ah ;reverse=1 / direct=0
+                      30     
+  0046                31     moveFlag equ 046h
+                      32     
+  004B                33     uVar equ 04Bh  ;current u = current velocity
+  004C                34     uStep equ 04Ch
+                      35     
+  003C                36     timeOnOff equ 03Ch
+  004E                37     parity equ 04Eh
+                      38     
+  004F                39     currentTime equ 04Fh
+                      40     
+  0048                41     turnCounter equ 048h
+  0047                42     turnTime equ 047h
+                      43     
+  8050                44     period1 XDATA 8050h
+  8051                45     period2 XDATA 8051h
+                      46     ;----------------------------------------
+8100                  47     org 8100h
+                      48     ;----------------------------------------
+                      49     readT1:
+8100 908050           50             mov DPTR, #period1
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8103 E0               51             movx A, @DPTR
+                      52             ;mov B, #10
+                      53             ;div AB
+                      54             ;mov B, #16
+                      55             ;mul AB
+8104 22               56             ret
+                      57     ;----------------------------------------
+                      58     readT2:
+8105 908051           59             mov DPTR, #period2
+8108 E0               60             movx A, @DPTR
+                      61             ;mov B, #10
+                      62             ;div AB
+                      63             ;mov B, #16
+                      64             ;mul AB
+8109 22               65             ret
+                      66     ;----------------------------------------
+                      67     cycleShift:
+                      68             ;input - flag c
+810A E545             69             mov A,lB
+810C 33               70             rlc A
+810D F545             71             mov lB,A
+810F E544             72             mov A,hB
+8111 33               73             rlc A
+8112 F544             74             mov hB,A
+8114 E543             75             mov A, reminder
+8116 33               76             rlc A
+8117 F543             77             mov reminder,A
+8119 22               78     ret
+                      79     ;----------------------------------------
+                      80     division21:
+                      81     ; division 2-byte digit(hB:lB) by 1-byte digit(divider)
+                      82     ; result - 2-byte integer part(hB:lB) and 1-byte reminder(reminder)
+811A 754300           83             mov reminder,#00h
+811D 754100           84             mov counter, #0
+                      85     divCycle:
+8120 E543             86             mov A, reminder
+8122 C3               87             clr c
+8123 9542             88             subb A, divider
+8125 4006             89             jc addZero
+8127 D3               90             setb c
+8128 F543             91             mov reminder, A
+812A 02812E           92             jmp shiftLabel
+                      93     addZero:
+812D C3               94             clr c
+                      95     shiftLabel:
+812E 310A             96             call cycleShift
+8130 0541             97             inc counter
+8132 E541             98             mov A, counter
+8134 B411E9           99             cjne A,#17,divCycle
+                     100     
+8137 E543            101             mov A, reminder  ;correct reminder
+8139 13              102             rrc A
+813A F543            103             mov reminder,A
+813C 22              104     ret
+                     105     ;----------------------------------------
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     106     openTransistors:
+813D E54A            107             mov A, mode
+813F 7006            108             jnz reverseLabel
+8141 759050          109                     mov     P1, #01010000b
+8144 02814A          110                     jmp endProcOpen
+                     111     reverseLabel:
+8147 7590A0          112             mov     P1, #10100000b
+                     113     endProcOpen:
+814A 22              114     ret
+                     115     ;----------------------------------------
+                     116     closeTransistors:
+814B 759060          117             mov     P1, #01100000b
+814E 22              118     ret
+                     119     
+                     120     readAngles:
+814F 900000          121                     mov     DPTR,#0000h
+8152 7420            122                     mov     A,#20h
+8154 F0              123                     movx    @DPTR,A
+8155 128166          124                     call    readADC
+8158 F531            125                     mov     angle1,A            ;feedback
+815A 900000          126                     mov     DPTR,#0000h
+815D 7421            127                     mov     A,#21h
+815F F0              128                     movx    @DPTR,A
+8160 128166          129                     call    readADC
+8163 F532            130                     mov     angle2,A            ;job
+                     131     
+8165 22              132                     ret
+                     133     ;-------------------------------
+                     134     readADC:
+8166 C290            135                     clr     P1.0
+8168 2091FD          136                     jb      P1.1,$
+816B 900001          137                     mov     DPTR,#0001h
+816E E0              138                     movx    A,@DPTR
+816F F4              139                     cpl     A
+8170 D290            140                     setb    P1.0
+8172 D291            141                     setb    P1.1
+8174 22              142                     ret
+                     143     
+                     144     
+                     145     ;----------------------------------------
+                     146     moveEngine:
+8175 E546            147         mov A, moveFlag
+8177 606D            148             jz endProcMove
+8179 754600          149             mov moveFlag, #0
+817C E532            150             mov A, angle2
+817E C3              151             clr c
+817F 947F            152             subb A,#01111111b
+8181 4060            153             jc nullProcMove
+8183 C0E0            154             push acc
+8185 942F            155             subb A,#47
+                     156     
+8187 4007            157             jc nonmaxangle2
+8189 D0E0            158             pop acc
+818B 742D            159             mov A,#45
+818D 028192          160             jmp lab00
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     161     nonmaxangle2:
+8190 D0E0            162              pop acc
+                     163     lab00:
+8192 754A01          164             mov mode,#1
+                     165             ;mov A, #01111111b
+                     166             ;subb A, angle2
+                     167             ;jc endProcMove
+                     168     
+8195 75F004          169             mov B, #4
+8198 A4              170             mul AB
+8199 2432            171             add A, #50
+                     172     
+819B F54B            173             mov uVar,A
+                     174     
+819D 0281E6          175             jmp endProcMove
+                     176     ;nonRevProcMove:
+81A0 754A01          177             mov mode,#1
+81A3 9405            178             subb A,#5
+81A5 403C            179             jc nullProcMove
+81A7 E532            180             mov A, angle2
+81A9 947F            181             subb A,#01111111b
+81AB 400B            182             jc nextStep
+                     183     
+81AD 75F004          184             mov B, #4
+81B0 A4              185             mul AB
+                     186             ;mov lB, A
+                     187             ;mov hB, B
+                     188             ;mov divider,#100
+                     189             ;call division21
+                     190             ;mov A, lB ;A = A*44/100
+81B1 2432            191             add A, #50
+81B3 F54B            192             mov uVar,A
+81B5 0281DD          193             jmp endcond
+                     194     nextStep:
+81B8 C3              195             clr c
+81B9 E532            196             mov A,angle2
+81BB 9531            197             subb A, angle1
+81BD 400B            198             jc negative
+81BF 75F003          199             mov B,#3
+81C2 A4              200             mul AB
+81C3 254B            201             add A, uVar
+81C5 F54B            202             mov uVar,A
+                     203     
+81C7 0281DD          204             jmp endcond
+                     205     negative:
+81CA C3              206             clr c
+81CB F5F0            207             mov B,A
+81CD 74FF            208             mov A, #255
+81CF 95F0            209             subb A,B
+81D1 75F005          210             mov B,#5
+81D4 A4              211             mul AB
+81D5 F5F0            212             mov B,A
+81D7 E54B            213             mov A,uVar
+81D9 95F0            214             subb A,B
+81DB F54B            215             mov uVar,A
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    5
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     216     endcond:
+81DD 0281E6          217     jmp endProcMove
+                     218     maxEndProcMove:
+                     219      ;       mov uVar,#170
+81E0 0281E6          220     jmp endProcMove
+                     221     nullProcMove:
+81E3 754B00          222             mov uVar,#0
+                     223     endProcMove:
+81E6 22              224     ret
+                     225     ;----------------------------------------
+                     226     calculateStep:
+81E7 F5F0            227             mov B,A
+81E9 74FF            228             mov A, #0FFh
+81EB 84              229             div AB
+81EC F54C            230             mov uStep, A
+81EE 22              231     ret
+                     232     ;----------------------------------------
+                     233     calculateVelocity:
+81EF E53E            234                     mov A,timeS2
+81F1 B41630          235                     cjne A,#16h,noChange
+81F4 E53F            236                     mov A,timeS1
+81F6 B4A82B          237                     cjne A,#0A8h,noChange    ;if (B:54) - period=0,25mcs
+81F9 753F00          238                     mov timeS1, #0
+81FC 753E00          239                     mov timeS2, #0
+81FF E548            240                     mov A,turnCounter
+8201 75F03C          241                     mov B,#60
+8204 A4              242                     mul AB
+                     243     
+8205 F545            244                     mov lB, A
+8207 85F044          245                     mov hB, B
+820A 754264          246                     mov divider,#100
+820D 311A            247                     call division21
+                     248     
+820F E545            249                     mov A, lB
+8211 75F00A          250                     mov B, #10
+8214 84              251                     div AB
+8215 ADF0            252                     mov r5,B   ;2-digit
+8217 FC              253                     mov r4,A   ;1-digit
+                     254     
+8218 E543            255                     mov A, reminder
+821A 75F00A          256                     mov B, #10
+821D 84              257                     div AB
+821E AFF0            258                     mov r7,B   ;2-digit
+8220 FE              259                     mov r6,A   ;1-digit
+                     260     
+8221 754800          261                     mov turnCounter, #0
+                     262     
+                     263     noChange:
+8224 22              264     ret
+                     265     timer0Int:
+8225 C0E0            266             push acc
+8227 C0D0            267             push psw
+8229 0548            268             inc turnCounter
+                     269     
+822B 758A82          270             mov TL0,#82h
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    6
+
+
+LOC  OBJ            LINE     SOURCE
+
+822E D0D0            271             pop psw
+8230 D0E0            272             pop acc
+8232 32              273     reti
+                     274     ;----------------------------------------
+                     275     timer1Int:
+8233 758C29          276              mov TH0, #41
+                     277       ;save system data
+8236 C0E0            278             push acc
+8238 C0D0            279             push psw
+823A C2D4            280             clr rs1
+823C C2D3            281             clr rs0
+823E E54E            282             mov A,parity
+8240 6401            283             xrl A, #01h
+8242 F54E            284             mov parity,A
+8244 602A            285             jz endProcess
+                     286             ;each double tick
+8246 128281          287             call activateIndicators
+8249 053C            288             inc timeOnOff
+824B E53D            289             mov A, easymode
+824D 7010            290             jnz next1
+824F E53C            291             mov A, timeOnOff
+8251 B4FF0B          292             cjne A, #0FFh, next1
+                     293                     ;100ms finished
+8254 753C00          294                     mov timeOnOff,#0h
+                     295     
+8257 054F            296                    inc currentTime
+8259 754601          297                     mov moveFlag,#1 ;call moveEngine
+825C 028270          298                     jmp endProcess
+                     299     next1:
+825F E53C            300             mov A, timeOnOff
+8261 C3              301             clr c
+8262 954B            302             subb A, uVar
+8264 5005            303             jnc next2
+8266 313D            304                     call openTransistors
+8268 028270          305                     jmp endProcess
+                     306     next2:
+826B 314B            307                     call closeTransistors
+826D 028270          308                     jmp endProcess
+                     309     
+                     310     endProcess:
+                     311     
+8270 E53F            312             mov A,timeS1
+8272 2401            313             add A,#1h
+8274 F53F            314             mov timeS1,A
+8276 E53E            315             mov A,timeS2
+8278 3400            316             addc A,#0h
+827A F53E            317             mov timeS2, A
+                     318     
+827C D0D0            319             pop psw
+827E D0E0            320             pop acc
+8280 32              321     reti
+                     322     ;----------------------------------------
+                     323     ;r3 - current index
+                     324     ;r4 - 1 digit (left)
+                     325     ;r5 - 2 digit
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    7
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     326     ;r6 - 3 digit
+                     327     ;r7 - 4 digit
+                     328     activateIndicators:
+                     329      digit4:
+8281 BB0306          330             cjne r3,#3h,digit3
+8284 EF              331             mov A,r7
+8285 4480            332             orl A,#80h
+8287 0282A8          333             jmp outpDigit
+                     334      digit3:
+828A BB0206          335             cjne r3,#2h,digit2
+828D EE              336             mov A,r6
+828E 4440            337             orl A,#40h
+8290 0282A8          338             jmp outpDigit
+                     339     digit2:
+8293 BB0106          340             cjne r3,#1h,digit1
+8296 ED              341             mov A,r5
+8297 4420            342             orl A,#20h
+8299 0282A8          343             jmp outpDigit
+                     344     digit1:
+829C BB0009          345             cjne r3,#0h,outpDigit
+829F EC              346             mov A,r4
+82A0 4410            347             orl A,#10h
+82A2 BC0003          348             cjne r4,#0h,outpDigit
+82A5 0282AC          349             jmp noOut        ;if digit1 = 0 we don't need activate indicator
+                     350     outpDigit:
+82A8 900002          351             mov DPTR,#portC  ;write to PortC
+82AB F0              352             movx @DPTR,A
+                     353     noOut:
+82AC 0B              354             inc r3                  ;choose next indicator
+82AD BB0402          355             cjne r3,#04h,incIndex
+82B0 7B00            356             mov r3, #0
+                     357     incIndex:
+82B2 22              358             ret
+                     359     ;----------------------------------------
+                     360     initializeEngine:
+82B3 C2D4            361             clr rs1
+82B5 C2D3            362             clr rs0
+                     363     
+82B7 314B            364             call closeTransistors
+82B9 74FF            365             mov A,#0FFh
+82BB 2410            366             add A,#10h
+                     367     
+                     368     
+82BD 908050          369             mov DPTR, #period1
+82C0 740A            370             mov A, #10
+82C2 F0              371             movx @DPTR,A;
+                     372     
+82C3 908051          373             mov DPTR, #period2
+82C6 740A            374             mov A, #10
+82C8 F0              375             movx @DPTR,A;
+                     376     
+82C9 3100            377             call readT1
+82CB 31E7            378             call calculateStep
+                     379     ;        mov uVar,#100
+82CD 754F00          380             mov currentTime,#0
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    8
+
+
+LOC  OBJ            LINE     SOURCE
+
+82D0 754A01          381             mov mode,#1
+82D3 753C00          382             mov timeOnOff,#0
+82D6 754800          383             mov turnCounter,#0
+82D9 754700          384             mov turnTime,#0
+82DC 753D00          385             mov easymode,#0
+                     386     
+82DF 7482            387             mov A,#10000010b
+82E1 900003          388             mov DPTR,#conPort        ;set ports mode
+82E4 F0              389             movx @DPTR,A
+                     390     
+82E5 7B00            391             mov r3,#0 ;initialize indicator
+                     392     
+82E7 758A82          393         mov TL0, #82h
+82EA 758C41          394             mov TH0, #41h ;period = 0.000196s = 196mcs
+82ED E589            395             mov A,TMOD
+                     396     
+82EF 54F0            397             anl A,#11110000b
+82F1 4407            398             orl A,#00000111b ;
+                     399     
+82F3 F589            400             mov TMOD,A
+82F5 D2A9            401             setb IE.1          ;Interruption settings
+82F7 D2AB            402             setb IE.3
+82F9 D2AF            403             setb EA                            ;Allow interruptions
+82FB D28E            404             setb TR1
+82FD D28C            405             setb TR0
+                     406     
+                     407     mainCycle:
+82FF 314F            408                     call readAngles
+8301 3175            409                     call moveEngine
+8303 31EF            410                     call calculateVelocity
+8305 80F8            411             jmp mainCycle
+8307 22              412     ret
+                     413     ;----------------------------------------
+                     414     end
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE    9
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . . . . . .  D ADDR    00E0H   A       
+ACTIVATEINDICATORS  C ADDR    8281H   A       
+ADDZERO. . . . . .  C ADDR    812DH   A       
+ANGLE1 . . . . . .    NUMB    0031H   A       
+ANGLE2 . . . . . .    NUMB    0032H   A       
+B. . . . . . . . .  D ADDR    00F0H   A       
+CALCULATESTEP. . .  C ADDR    81E7H   A       
+CALCULATEVELOCITY.  C ADDR    81EFH   A       
+CLOSETRANSISTORS .  C ADDR    814BH   A       
+CONPORT. . . . . .  X ADDR    0003H   A       
+COUNTER. . . . . .    NUMB    0041H   A       
+CURRENTTIME. . . .    NUMB    004FH   A       
+CYCLESHIFT . . . .  C ADDR    810AH   A       
+DIGIT1 . . . . . .  C ADDR    829CH   A       
+DIGIT2 . . . . . .  C ADDR    8293H   A       
+DIGIT3 . . . . . .  C ADDR    828AH   A       
+DIGIT4 . . . . . .  C ADDR    8281H   A       
+DIVCYCLE . . . . .  C ADDR    8120H   A       
+DIVIDER. . . . . .    NUMB    0042H   A       
+DIVISION21 . . . .  C ADDR    811AH   A       
+EA . . . . . . . .  B ADDR    00A8H.7 A       
+EASYMODE . . . . .    NUMB    003DH   A       
+ENDCOND. . . . . .  C ADDR    81DDH   A       
+ENDPROCESS . . . .  C ADDR    8270H   A       
+ENDPROCMOVE. . . .  C ADDR    81E6H   A       
+ENDPROCOPEN. . . .  C ADDR    814AH   A       
+HB . . . . . . . .    NUMB    0044H   A       
+IE . . . . . . . .  D ADDR    00A8H   A       
+INCINDEX . . . . .  C ADDR    82B2H   A       
+INITIALIZEENGINE .  C ADDR    82B3H   A       
+LAB00. . . . . . .  C ADDR    8192H   A       
+LB . . . . . . . .    NUMB    0045H   A       
+MAINCYCLE. . . . .  C ADDR    82FFH   A       
+MAXENDPROCMOVE . .  C ADDR    81E0H   A       
+MODE . . . . . . .    NUMB    004AH   A       
+MOVEENGINE . . . .  C ADDR    8175H   A       
+MOVEFLAG . . . . .    NUMB    0046H   A       
+NEGATIVE . . . . .  C ADDR    81CAH   A       
+NEXT1. . . . . . .  C ADDR    825FH   A       
+NEXT2. . . . . . .  C ADDR    826BH   A       
+NEXTSTEP . . . . .  C ADDR    81B8H   A       
+NOCHANGE . . . . .  C ADDR    8224H   A       
+NONMAXANGLE2 . . .  C ADDR    8190H   A       
+NOOUT. . . . . . .  C ADDR    82ACH   A       
+NULLPROCMOVE . . .  C ADDR    81E3H   A       
+OPENTRANSISTORS. .  C ADDR    813DH   A       
+OUTPDIGIT. . . . .  C ADDR    82A8H   A       
+P1 . . . . . . . .  D ADDR    0090H   A       
+PARITY . . . . . .    NUMB    004EH   A       
+PERIOD1. . . . . .  X ADDR    8050H   A       
+PERIOD2. . . . . .  X ADDR    8051H   A       
+MCS-51 MACRO ASSEMBLER    OSCILL                                                                    10/29/;0   PAGE   10
+
+
+N A M E             T Y P E   V A L U E       A T T R I B U T E S
+
+PORTA. . . . . . .  X ADDR    0000H   A       
+PORTB. . . . . . .  X ADDR    0001H   A       
+PORTC. . . . . . .  X ADDR    0002H   A       
+PSW. . . . . . . .  D ADDR    00D0H   A       
+READADC. . . . . .  C ADDR    8166H   A       
+READANGLES . . . .  C ADDR    814FH   A       
+READT1 . . . . . .  C ADDR    8100H   A       
+READT2 . . . . . .  C ADDR    8105H   A       
+REMINDER . . . . .    NUMB    0043H   A       
+REVERSELABEL . . .  C ADDR    8147H   A       
+RS0. . . . . . . .  B ADDR    00D0H.3 A       
+RS1. . . . . . . .  B ADDR    00D0H.4 A       
+SHIFTLABEL . . . .  C ADDR    812EH   A       
+TH0. . . . . . . .  D ADDR    008CH   A       
+TIMEONOFF. . . . .    NUMB    003CH   A       
+TIMER0INT. . . . .  C ADDR    8225H   A       
+TIMER1INT. . . . .  C ADDR    8233H   A       
+TIMES1 . . . . . .    NUMB    003FH   A       
+TIMES2 . . . . . .    NUMB    003EH   A       
+TL0. . . . . . . .  D ADDR    008AH   A       
+TMOD . . . . . . .  D ADDR    0089H   A       
+TR0. . . . . . . .  B ADDR    0088H.4 A       
+TR1. . . . . . . .  B ADDR    0088H.6 A       
+TURNCOUNTER. . . .    NUMB    0048H   A       
+TURNTIME . . . . .    NUMB    0047H   A       
+USTEP. . . . . . .    NUMB    004CH   A       
+UVAR . . . . . . .    NUMB    004BH   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND
