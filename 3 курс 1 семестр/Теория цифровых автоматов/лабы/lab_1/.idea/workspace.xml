@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="lab_1" targetName="lab_1" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d13658c4-aa92-45de-8a50-745dd091df0c" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="clangTidyViaClangd" value="false" />
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ProjectId" id="1hGzx44BFTh18Cad7e6sV1LkSju" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="settings.editor.selected.configurable" value="CPPToolchains" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lab_1" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="lab_1" TARGET_NAME="lab_1" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="lab_1" RUN_TARGET_NAME="lab_1">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d13658c4-aa92-45de-8a50-745dd091df0c" name="Default Changelist" comment="" />
+      <created>1599652461882</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599652461882</updated>
+      <workItem from="1599652464297" duration="1004000" />
+      <workItem from="1599653557243" duration="314000" />
+      <workItem from="1603823749174" duration="8976000" />
+      <workItem from="1606850964247" duration="2632000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599653048806">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1599653048806" />
+    <state x="820" y="217" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603881204040">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="820" y="217" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1536.824@0.0.1536.824" timestamp="1603881204040" />
+    <state x="979" y="334" key="FileChooserDialogImpl" timestamp="1599653862339">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="979" y="334" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1599653862339" />
+    <state width="1493" height="249" key="GridCell.Tab.0.bottom" timestamp="1606857468416">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="249" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606857468416" />
+    <state width="1493" height="249" key="GridCell.Tab.0.center" timestamp="1606857468416">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="249" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606857468416" />
+    <state width="1493" height="249" key="GridCell.Tab.0.left" timestamp="1606857468416">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="249" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606857468416" />
+    <state width="1493" height="249" key="GridCell.Tab.0.right" timestamp="1606857468416">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="249" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606857468416" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1599653873887">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1599653873887" />
+    <state x="809" y="190" key="run.anything.popup" timestamp="1603874000128">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="809" y="190" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1603874000128" />
+    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1603873476303">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="814" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1603873476303" />
+  </component>
+</project>
