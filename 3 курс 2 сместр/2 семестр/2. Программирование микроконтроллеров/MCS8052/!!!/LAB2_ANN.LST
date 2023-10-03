@@ -1,0 +1,241 @@
+MCS-51 MACRO ASSEMBLER    LAB2_ANN                                                                  12/26/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LAB2_ANN.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE LAB2_ANN.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 028100            2             ljmp start
+                       3     
+000B                   4     org 0Bh
+000B 0281C5            5             JMP TIMERONE
+                       6     
+001B                   7     org 1Bh
+001B 028135            8             JMP TIMER
+                       9             
+8100                  10     ORG 8100h
+                      11     
+                      12     start:
+8100 E589             13             MOV A, TMOD                                     ;3 pefhl p`anr{ 0 r`ilep` (TL0-qw8r
+                             whj, TH0-r`ilep)
+8102 54F0             14             ANL A, #0F0h
+8104 4407             15             ORL A, #00000111b 
+8106 F589             16             MOV TMOD, A     
+                      17             
+8108 D28E             18             SETB TR1                                        ;g`osqrhkh r`ilep
+810A D28C             19             SETB TR0                                        ;g`osqrhkh qw8rwhj
+                      20             
+810C D2AF             21             SETB IE.7
+810E D2AB             22             SETB IE.3 
+8110 D2A9             23             SETB IE.1
+                      24             
+8112 758AF3           25             MOV TL0, #243
+                      26             
+8115 7900             27             MOV R1, #0                                      ;9 hmrepb`k` (0..100)
+8117 7C00             28         MOV R4, #0                  ;9 hmrepb`k` (1 - 100 .. 9 - 900)
+8119 7A00             29             MOV R2, #0                                      ;t1 nrjp{rh^
+811B 7B64             30             MOV R3, #100                            ;R onbrnpemh^
+811D 7D01             31         MOV R5, #1                  ;tk`c pebepq`
+                      32             
+811F 900003           33         MOV DPTR, #3h
+8122 7482             34         MOV A, #82h
+8124 F0               35         MOVX @DPTR, A       ;m`qrp`hb`el onpr{ BJ 55
+                      36         
+                      37     mloop:
+                      38             ;B{bndhl m` }jp`m
+8125 900002           39             mov DPTR, #2h           ;onpr Q
+                      40     
+                      41         ;mov A, 50h               ;1 vhtp`     
+                      42             ;ORL A, #00010000b
+                      43         ;movx @DPTR, A
+                      44             
+                      45             ;mov A, 51h             ;2 vhtp`   
+                      46             ;ORL A, #00100000b
+                      47             ;movx @DPTR, A
+                      48             
+8128 E552             49             mov A, 52h             ;3 vhtp`   
+MCS-51 MACRO ASSEMBLER    LAB2_ANN                                                                  12/26/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+812A 4440             50             ORL A, #01000000b
+812C F0               51         movx @DPTR, A
+                      52     
+812D E553             53             mov A, 53h             ;4 vhtp`     
+812F 4480             54             ORL A, #10000000b
+8131 F0               55         movx @DPTR, A
+                      56     
+8132 80F1             57             jmp mloop
+                      58             
+                      59     interval_END:
+                      60     
+8134 32               61             RETI
+                      62             
+                      63     TIMER:
+8135 ED               64         MOV A, R5
+8136 B4014C           65         CJNE A, #1, ReTIMER
+                      66     
+8139 1A               67             DEC R2
+813A EA               68             MOV A, R2
+813B 7004             69             JNZ NOTOFF
+813D 7460             70             MOV A, #01100000b            ;nrjp{b`el 1-i h 3-i rp`mghqrnp{
+813F F590             71             MOV P1, A
+                      72     
+                      73     NOTOFF:
+8141 1B               74             DEC R3
+8142 EB               75             MOV A, R3
+8143 70EF             76             JNZ interval_END
+8145 09               77             INC R1
+8146 E9               78         MOV A, R1
+8147 B46411           79         CJNE A, #100, not100 ;CJNE A, #100, not100 
+814A 7900             80         MOV R1, #0
+814C 0C               81             INC R4 
+814D EC               82         MOV A, R4
+                      83             
+814E 75F00B           84             MOV B, #11
+8151 A4               85             MUL AB
+8152 FF               86             MOV R7, A
+                      87             
+8153 EC               88             MOV A, R4
+8154 B40904           89         CJNE A, #9, not100
+8157 1D               90         DEC R5
+8158 02817B           91         JMP rever 
+                      92     
+                      93     not100: 
+815B EF               94             MOV A, R7
+815C FA               95             MOV R2, A 
+815D 7B64             96             MOV R3, #100
+815F 7450             97             MOV A, #01010000b            ;nrjp{b`el 1-i h 4-i rp`mghqrnp{
+8161 F590             98             MOV P1, A
+                      99             
+                     100             ;B{bnd dk^ }jp`m`
+                     101             ;Bpel^
+8163 75F00A          102             MOV B, #10
+8166 E9              103             MOV A, R1
+8167 84              104             DIV AB
+MCS-51 MACRO ASSEMBLER    LAB2_ANN                                                                  12/26/:9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+8168 F550            105             MOV 50h, A
+816A 85F051          106             MOV 51h, B
+                     107             
+                     108             ;Nanpnr{
+816D 75F00A          109             MOV B, #10
+8170 E8              110             MOV A, R0
+8171 84              111             DIV AB
+8172 F552            112             MOV 52h, A
+8174 85F053          113             MOV 53h, B
+                     114             
+8177 7800            115             MOV R0, #0
+                     116     
+8179 80B9            117             JMP interval_END
+                     118     
+                     119     rever:
+817B 7964            120         MOV R1, #100                         ;9 hmrepb`k` (0..100)
+817D 7C09            121         MOV R4, #9                   ;9 hmrepb`k` (1 - 100 .. 9 - 900)
+817F 7A64            122             MOV R2, #100                             ;t1 nrjp{rh^
+8181 7B64            123             MOV R3, #100                         ;R onbrnpemh^
+                     124     
+8183 80AF            125         JMP interval_END
+                     126     
+                     127     ReTIMER:
+8185 1A              128         DEC R2
+8186 EA              129             MOV A, R2
+8187 7004            130             JNZ NOTOFF2
+8189 7460            131             MOV A, #01100000b            ;nrjp{b`el 1-i h 3-i rp`mghqrnp{
+818B F590            132             MOV P1, A
+                     133     
+                     134     NOTOFF2:
+818D 1B              135             DEC R3
+818E EB              136             MOV A, R3
+818F 70A3            137             JNZ interval_END
+8191 19              138             DEC R1
+8192 E9              139         MOV A, R1
+8193 B4000F          140         CJNE A, #0, not0
+8196 7964            141             MOV R1, #100
+8198 1C              142         DEC R4 
+8199 EC              143         MOV A, R4
+                     144             
+819A 75F00B          145             MOV B, #11
+819D A4              146             MUL AB
+819E FF              147             MOV R7, A
+                     148             
+819F EC              149             MOV A, R4
+81A0 B40002          150         CJNE A, #0, not0
+81A3 2100            151             jmp start
+                     152     
+                     153     not0: 
+81A5 EF              154             MOV A, R7
+81A6 FA              155             MOV R2, A 
+81A7 7B64            156             MOV R3, #100
+81A9 74A0            157             MOV A, #10100000b            ;nrjp{b`el 2-i h 3-i rp`mghqrnp{
+81AB F590            158             MOV P1, A
+                     159             
+MCS-51 MACRO ASSEMBLER    LAB2_ANN                                                                  12/26/:9   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     160             ;B{bnd dk^ }jp`m`
+                     161             ;Bpel^
+81AD 75F00A          162             MOV B, #10
+81B0 E9              163             MOV A, R1
+81B1 84              164             DIV AB
+81B2 F550            165             MOV 50h, A
+81B4 85F051          166             MOV 51h, B
+                     167             
+                     168             ;Nanpnr{
+81B7 75F00A          169             MOV B, #10
+81BA E8              170             MOV A, R0
+81BB 84              171             DIV AB
+81BC F552            172             MOV 52h, A
+81BE 85F053          173             MOV 53h, B
+                     174             
+81C1 7800            175             MOV R0, #0
+81C3 2134            176             JMP interval_END
+                     177     
+                     178     TIMERONE:
+81C5 08              179             INC R0
+81C6 758AF3          180             MOV TL0, #243
+81C9 32              181             RETI
+                     182     
+                     183     end
+MCS-51 MACRO ASSEMBLER    LAB2_ANN                                                                  12/26/:9   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E       T Y P E   V A L U E       A T T R I B U T E S
+
+B. . . . . .  D ADDR    00F0H   A       
+IE . . . . .  D ADDR    00A8H   A       
+INTERVAL_END  C ADDR    8134H   A       
+MLOOP. . . .  C ADDR    8125H   A       
+NOT0 . . . .  C ADDR    81A5H   A       
+NOT100 . . .  C ADDR    815BH   A       
+NOTOFF . . .  C ADDR    8141H   A       
+NOTOFF2. . .  C ADDR    818DH   A       
+P1 . . . . .  D ADDR    0090H   A       
+RETIMER. . .  C ADDR    8185H   A       
+REVER. . . .  C ADDR    817BH   A       
+START. . . .  C ADDR    8100H   A       
+TIMER. . . .  C ADDR    8135H   A       
+TIMERONE . .  C ADDR    81C5H   A       
+TL0. . . . .  D ADDR    008AH   A       
+TMOD . . . .  D ADDR    0089H   A       
+TR0. . . . .  B ADDR    0088H.4 A       
+TR1. . . . .  B ADDR    0088H.6 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

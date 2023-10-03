@@ -1,0 +1,320 @@
+MCS-51 MACRO ASSEMBLER    LAB1_NV                                                                   12/28/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LAB1_NV.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE LAB1_NV.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0
+0000 759880            2     mov scon, #80h
+0003 D29F              3     setb SM0
+0005 D29B              4     setb TB8
+                       5     
+0007 E589              6     mov A,tmod
+0009 53890F            7     ANL TMOD, #00001111b
+000C 4389A0            8     orl tmod,#10100000b
+                       9     
+000F 758DFD           10     mov TH1, #0fdh
+0012 F589             11     mov tmod,A
+0014 020159           12     jmp listen
+                      13     
+                      14     setbit:         ;cnmhl mskebni tk`c on mnfj`l onpr` p0
+0017 30800C           15     jnb p0.0, sl1
+001A 308110           16     jnb p0.1, sl2
+001D 308214           17     jnb p0.2, sl3
+0020 308318           18     jnb p0.3, sl4
+0023 020042           19     jmp setfb
+                      20     sl1:
+0026 D280             21     setb p0.0
+0028 C281             22     clr p0.1
+002A 020044           23     jmp endpmz
+                      24     
+                      25     sl2:
+002D D281             26     setb p0.1
+002F C282             27     clr p0.2
+0031 020044           28     jmp endpmz
+                      29     
+                      30     sl3:
+0034 D282             31     setb p0.2
+0036 C283             32     clr p0.3
+0038 020044           33     jmp endpmz
+                      34     
+                      35     sl4:
+003B D283             36     setb p0.3
+003D C280             37     clr p0.0
+003F 020044           38     jmp endpmz
+                      39     
+                      40     setfb:
+0042 C280             41     clr p0.0
+                      42     endpmz:
+0044 02015C           43     jmp rmz
+                      44     
+                      45     chkprt: ; opnbep9el mnfjh onpr` p1 b onhqj`u jnd` jk`bhxh
+0047 308009           46     jnb p0.0, cl1
+004A 308127           47     jnb p0.1, cl2
+004D 308245           48     jnb p0.2, cl3
+0050 308363           49     jnb p0.3, cl4
+                      50     cl1:
+MCS-51 MACRO ASSEMBLER    LAB1_NV                                                                   12/28/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+0053 74FE             51     MOV A, #0feh
+0055 6590             52     XRL A, p1
+0057 607E             53     jz l1b1
+0059 74FD             54     MOV A, #0fdh
+005B 6590             55     XRL A, p1
+005D 607D             56     jz l1b2
+005F 74FB             57     MOV A, #0fbh
+0061 6590             58     XRL A, p1
+0063 607C             59     jz l1b3
+0065 74F7             60     MOV A, #0f7h
+0067 6590             61     XRL A, p1
+0069 607B             62     jz l1b4
+006B 74EF             63     MOV A, #0efh
+006D 6590             64     XRL A, p1
+006F 607A             65     jz l1b5
+0071 02013E           66     jmp ecp
+                      67     
+                      68     cl2:
+                      69     
+0074 74FE             70     MOV A, #0feh
+0076 6590             71     XRL A, p1
+0078 6076             72     jz l2b1
+007A 74FD             73     MOV A, #0fdh
+007C 6590             74     XRL A, p1
+007E 6075             75     jz l2b2
+0080 74FB             76     MOV A, #0fbh
+0082 6590             77     XRL A, p1
+0084 6074             78     jz l2b3
+0086 74F7             79     MOV A, #0f7h
+0088 6590             80     XRL A, p1
+008A 6073             81     jz l2b4
+008C 74EF             82     MOV A, #0efh
+008E 6590             83     XRL A, p1
+0090 6072             84     jz l2b5
+0092 02013E           85     jmp ecp
+                      86     cl3:
+0095 74FE             87     MOV A, #0feh
+0097 6590             88     XRL A, p1
+0099 606E             89     jz l3b1
+009B 74FD             90     MOV A, #0fdh
+009D 6590             91     XRL A, p1
+009F 606D             92     jz l3b2
+00A1 74FB             93     MOV A, #0fbh
+00A3 6590             94     XRL A, p1
+00A5 606C             95     jz l3b3
+00A7 74F7             96     MOV A, #0f7h
+00A9 6590             97     XRL A, p1
+00AB 606B             98     jz l3b4
+00AD 74EF             99     MOV A, #0efh
+00AF 6590            100     XRL A, p1
+00B1 606A            101     jz l3b5
+00B3 02013E          102     jmp ecp
+                     103     cl4:
+00B6 74FE            104     MOV A, #0feh
+00B8 6590            105     XRL A, p1
+MCS-51 MACRO ASSEMBLER    LAB1_NV                                                                   12/28/:9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+00BA 6066            106     jz l4b1
+00BC 74FD            107     MOV A, #0fdh
+00BE 6590            108     XRL A, p1
+00C0 6065            109     jz l4b2
+00C2 74FB            110     MOV A, #0fbh
+00C4 6590            111     XRL A, p1
+00C6 6064            112     jz l4b3
+00C8 74F7            113     MOV A, #0f7h
+00CA 6590            114     XRL A, p1
+00CC 6063            115     jz l4b4
+00CE 74EF            116     MOV A, #0efh
+00D0 6590            117     XRL A, p1
+00D2 6062            118     jz l4b5
+00D4 02013E          119     jmp ecp
+                     120     
+                     121     
+                     122     l1b1:
+00D7 7431            123     MOV A, #31H
+00D9 02013F          124     jmp ecpf
+                     125     l1b2:
+00DC 7432            126     MOV A, #32H
+00DE 02013F          127     jmp ecpf
+                     128     l1b3:
+00E1 7433            129     MOV A, #33H
+00E3 02013F          130     jmp ecpf
+                     131     l1b4:
+00E6 7443            132     MOV A, #043H
+00E8 02013F          133     jmp ecpf
+                     134     l1b5:
+00EB 7444            135     MOV A, #044H
+00ED 02013F          136     jmp ecpf
+                     137     l2b1:
+00F0 7434            138     MOV A, #34H
+00F2 02013F          139     jmp ecpf
+                     140     l2b2:
+00F5 7435            141     MOV A, #35H
+00F7 02013F          142     jmp ecpf
+                     143     l2b3:
+00FA 7436            144     MOV A, #36H
+00FC 02013F          145     jmp ecpf
+                     146     l2b4:
+00FF 7445            147     MOV A, #045H
+0101 02013F          148     jmp ecpf
+                     149     l2b5:
+0104 7446            150     MOV A, #046H
+0106 02013F          151     jmp ecpf
+                     152     l3b1:
+0109 7437            153     MOV A, #37H
+010B 02013F          154     jmp ecpf
+                     155     l3b2:
+010E 7438            156     MOV A, #38H
+0110 02013F          157     jmp ecpf
+                     158     l3b3:
+0113 7439            159     MOV A, #39H
+0115 02013F          160     jmp ecpf
+MCS-51 MACRO ASSEMBLER    LAB1_NV                                                                   12/28/:9   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     161     l3b4:
+0118 7447            162     MOV A, #047H
+011A 02013F          163     jmp ecpf
+                     164     l3b5:
+011D 7448            165     MOV A, #048H
+011F 02013F          166     jmp ecpf
+                     167     l4b1:
+0122 7441            168     MOV A, #041H
+0124 02013F          169     jmp ecpf
+                     170     l4b2:
+0127 7430            171     MOV A, #30H
+0129 02013F          172     jmp ecpf
+                     173     l4b3:
+012C 7442            174     MOV A, #042H
+012E 02013F          175     jmp ecpf
+                     176     l4b4:
+0131 7449            177     MOV A, #049H
+0133 02013F          178     jmp ecpf
+                     179     l4b5:
+0136 744A            180     MOV A, #04AH
+0138 02013F          181     jmp ecpf
+013B 02013E          182     jmp ecp
+                     183     ecp:
+013E E4              184     clr A
+                     185     ecpf:
+013F 02015E          186     jmp rcp
+                     187     
+                     188     mvcdexmem:
+0142 F0              189     movx @DPTR, A
+0143 A3              190     inc DPTR
+0144 020160          191     jmp rmem
+                     192     
+                     193     sndcd:
+0147 20D003          194     JB P, sett
+014A 020152          195     jmp us
+                     196     sett:
+014D D29B            197     setb TB8
+014F 020154          198     jmp s
+                     199     us:
+0152 C29B            200     clr tb8
+                     201     
+                     202     s:
+0154 F599            203     mov SBUF, A
+0156 020162          204     jmp rsnd
+                     205     
+                     206     listen:
+0159 E4              207     clr A
+015A 0117            208     jmp setbit
+                     209     rmz:
+015C 0147            210     jmp chkprt
+                     211     rcp:
+015E 70E2            212     jnz mvcdexmem
+                     213     rmem:
+0160 70E5            214     jnz sndcd
+                     215     rsnd:
+MCS-51 MACRO ASSEMBLER    LAB1_NV                                                                   12/28/:9   PAGE    5
+
+
+LOC  OBJ            LINE     SOURCE
+
+0162 80F5            216     jmp listen
+0164 80FE            217     jmp $
+                     218     end
+MCS-51 MACRO ASSEMBLER    LAB1_NV                                                                   12/28/:9   PAGE    6
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+CHKPRT . .  C ADDR    0047H   A       
+CL1. . . .  C ADDR    0053H   A       
+CL2. . . .  C ADDR    0074H   A       
+CL3. . . .  C ADDR    0095H   A       
+CL4. . . .  C ADDR    00B6H   A       
+ECP. . . .  C ADDR    013EH   A       
+ECPF . . .  C ADDR    013FH   A       
+ENDPMZ . .  C ADDR    0044H   A       
+L1B1 . . .  C ADDR    00D7H   A       
+L1B2 . . .  C ADDR    00DCH   A       
+L1B3 . . .  C ADDR    00E1H   A       
+L1B4 . . .  C ADDR    00E6H   A       
+L1B5 . . .  C ADDR    00EBH   A       
+L2B1 . . .  C ADDR    00F0H   A       
+L2B2 . . .  C ADDR    00F5H   A       
+L2B3 . . .  C ADDR    00FAH   A       
+L2B4 . . .  C ADDR    00FFH   A       
+L2B5 . . .  C ADDR    0104H   A       
+L3B1 . . .  C ADDR    0109H   A       
+L3B2 . . .  C ADDR    010EH   A       
+L3B3 . . .  C ADDR    0113H   A       
+L3B4 . . .  C ADDR    0118H   A       
+L3B5 . . .  C ADDR    011DH   A       
+L4B1 . . .  C ADDR    0122H   A       
+L4B2 . . .  C ADDR    0127H   A       
+L4B3 . . .  C ADDR    012CH   A       
+L4B4 . . .  C ADDR    0131H   A       
+L4B5 . . .  C ADDR    0136H   A       
+LISTEN . .  C ADDR    0159H   A       
+MVCDEXMEM.  C ADDR    0142H   A       
+P. . . . .  B ADDR    00D0H.0 A       
+P0 . . . .  D ADDR    0080H   A       
+P1 . . . .  D ADDR    0090H   A       
+RCP. . . .  C ADDR    015EH   A       
+RMEM . . .  C ADDR    0160H   A       
+RMZ. . . .  C ADDR    015CH   A       
+RSND . . .  C ADDR    0162H   A       
+S. . . . .  C ADDR    0154H   A       
+SBUF . . .  D ADDR    0099H   A       
+SCON . . .  D ADDR    0098H   A       
+SETBIT . .  C ADDR    0017H   A       
+SETFB. . .  C ADDR    0042H   A       
+SETT . . .  C ADDR    014DH   A       
+SL1. . . .  C ADDR    0026H   A       
+SL2. . . .  C ADDR    002DH   A       
+SL3. . . .  C ADDR    0034H   A       
+SL4. . . .  C ADDR    003BH   A       
+SM0. . . .  B ADDR    0098H.7 A       
+SNDCD. . .  C ADDR    0147H   A       
+TB8. . . .  B ADDR    0098H.3 A       
+TH1. . . .  D ADDR    008DH   A       
+MCS-51 MACRO ASSEMBLER    LAB1_NV                                                                   12/28/:9   PAGE    7
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+TMOD . . .  D ADDR    0089H   A       
+US . . . .  C ADDR    0152H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

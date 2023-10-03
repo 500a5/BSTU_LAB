@@ -1,0 +1,188 @@
+MCS-51 MACRO ASSEMBLER    LAB1_PV                                                                   12/25/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN D:\MCS8052\LAB1_PV.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE D:\MCS8052\LAB1_PV.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 020100            2     jmp start
+                       3     
+0023                   4     org 023h
+0023 32                5     reti
+0030                   6     org 030h
+0030 31                7             db 31h, 32h, 33h, 42h, 43h
+0031 32
+0032 33
+0033 42
+0034 43
+0035 34                8             db 34h, 35h, 36h, 44h, 45h
+0036 35
+0037 36
+0038 44
+0039 45
+003A 37                9             db 37h, 38h, 39h, 46h, 47h
+003B 38
+003C 39
+003D 46
+003E 47
+003F 40               10             db 40h, 30h, 41h, 48h, 49h
+0040 30
+0041 41
+0042 48
+0043 49
+0100                  11     org 100h
+                      12     
+                      13     start:
+0100 7E00             14     mov r6,#0
+0102 7D00             15     mov r5,#0
+0104 7C00             16     mov r4,#0
+0106 7598D0           17     mov scon,#11010000b
+0109 758920           18     mov tmod,#00100000b
+010C 758DFD           19     mov th1,#0fdh
+010F D28E             20     setb tr1
+0111 75A880           21     mov ie,#10000000b
+0114 75B800           22     mov ip,#0
+0117 7580FE           23     mov p0,#0FEh
+011A 7590FF           24     mov p1,#0FFh
+011D D299             25     setb ti
+011F 7904             26     mov r1,#4h
+0121 78FF             27     mov r0,#0FFh
+                      28     
+                      29     c1:
+0123 3099FD           30     jnb ti,c1
+0126 AF90             31     mov r7,p1
+0128 AE80             32     mov r6,p0
+012A 74FF             33     mov a,#0FFh
+012C 9F               34     subb a,r7
+MCS-51 MACRO ASSEMBLER    LAB1_PV                                                                   12/25/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+012D 7013             35     jnz me
+                      36     
+                      37     m1a:
+012F D903             38     djnz r1,m1c
+0131 02013B           39     jmp m1b
+                      40     m1c:
+0134 E580             41     mov a,p0
+0136 23               42     rl a
+0137 F580             43     mov p0,a
+0139 80E8             44     jmp c1
+                      45     
+                      46     m1b:
+013B 7904             47     mov r1,#4h
+013D 7580FE           48     mov p0,#0FEh
+0140 80E1             49     jmp c1
+                      50     
+                      51     me:
+0142 C299             52     clr ti
+0144 900030           53     mov dptr,#30h
+0147 EE               54     mov a,r6
+0148 540F             55     anl a,#00001111b
+014A 640F             56     xrl a,#00001111b
+014C 7A00             57     mov r2,#0
+                      58     
+                      59     m1:
+014E 20E007           60     jb acc.0,m2
+0151 75F002           61     mov b,#2
+0154 84               62     div ab
+0155 0A               63     inc r2
+0156 80F6             64     jmp m1
+                      65     
+                      66     m2:
+0158 EA               67     mov a,r2
+0159 75F005           68     mov b,#5
+015C A4               69     mul ab
+015D FA               70     mov r2,a
+015E EF               71     mov a,r7
+015F 541F             72     anl a,#00011111b
+0161 641F             73     xrl a,#00011111b
+0163 7B00             74     mov r3,#0
+                      75     
+                      76     m3:
+0165 20E007           77     jb acc.0,m4
+0168 75F002           78     mov b,#2
+016B 84               79     div ab
+016C 0B               80     inc r3
+016D 80F6             81     jmp m3
+                      82     
+                      83     m4:
+016F EA               84     mov a,r2
+0170 2B               85     add a,r3
+0171 93               86     movc a,@a+dptr
+0172 F5F0             87     mov b,a
+0174 98               88     subb a,r0
+0175 7004             89     jnz m4a
+MCS-51 MACRO ASSEMBLER    LAB1_PV                                                                   12/25/:9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+0177 D299             90     setb ti
+0179 80A8             91     jmp c1
+                      92     
+                      93     m4a:
+017B E5F0             94     mov a,b
+017D F8               95     mov r0,a
+017E C29B             96     clr tb8
+0180 30D002           97     jnb p,m5
+0183 D29B             98     setb tb8
+                      99     
+                     100     m5:
+0185 F599            101     mov sbuf,a
+0187 8D83            102     mov dph,r5
+0189 8C82            103     mov dpl,r4
+018B F0              104     movx @dptr,a
+018C A3              105     inc dptr
+018D AD83            106     mov r5,dph
+018F AC82            107     mov r4,dpl
+0191 8090            108     jmp c1
+                     109     
+                     110     end
+MCS-51 MACRO ASSEMBLER    LAB1_PV                                                                   12/25/:9   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . .  D ADDR    00E0H   A       
+B. . . . .  D ADDR    00F0H   A       
+C1 . . . .  C ADDR    0123H   A       
+DPH. . . .  D ADDR    0083H   A       
+DPL. . . .  D ADDR    0082H   A       
+IE . . . .  D ADDR    00A8H   A       
+IP . . . .  D ADDR    00B8H   A       
+M1 . . . .  C ADDR    014EH   A       
+M1A. . . .  C ADDR    012FH   A       
+M1B. . . .  C ADDR    013BH   A       
+M1C. . . .  C ADDR    0134H   A       
+M2 . . . .  C ADDR    0158H   A       
+M3 . . . .  C ADDR    0165H   A       
+M4 . . . .  C ADDR    016FH   A       
+M4A. . . .  C ADDR    017BH   A       
+M5 . . . .  C ADDR    0185H   A       
+ME . . . .  C ADDR    0142H   A       
+P. . . . .  B ADDR    00D0H.0 A       
+P0 . . . .  D ADDR    0080H   A       
+P1 . . . .  D ADDR    0090H   A       
+SBUF . . .  D ADDR    0099H   A       
+SCON . . .  D ADDR    0098H   A       
+START. . .  C ADDR    0100H   A       
+TB8. . . .  B ADDR    0098H.3 A       
+TH1. . . .  D ADDR    008DH   A       
+TI . . . .  B ADDR    0098H.1 A       
+TMOD . . .  D ADDR    0089H   A       
+TR1. . . .  B ADDR    0088H.6 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

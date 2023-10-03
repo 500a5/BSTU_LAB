@@ -1,0 +1,211 @@
+MCS-51 MACRO ASSEMBLER    1                                                                         12/28/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN 1.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE 1.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1         org 00h
+0000 0281B4            2         jmp start
+8100                   3         ORG 8100h
+                       4     OutpDigit_Cur:              ;B{bnd rejsyecn sck`
+8100 900002            5         mov dptr, #port_c       ;B{bnd wepeg onpr Q
+8103 EA                6         mov A, R2               ;B R2 edhmhv{
+8104 F0                7         movx @dptr, A           ;B{bndhl m` 2 hmdhj`rnp
+8105 1281A4            8         call Delay
+8108 E9                9         mov A, R1               ;B R1 deq^rjh
+8109 F0               10         movx @dptr, A           ;B{bndhl m` 1 hmdhj`rnp
+810A 1281A4           11         call Delay
+810D 22               12     ret
+                      13     OutpDigit_Targ:             ;B{bnd vekebncn sck`
+810E 900002           14         mov dptr, #port_c       ;B{bnd wepeg onpr Q
+8111 E553             15         mov A, 53h              ;B 53h deq^rjh
+                      16         ;mov A, #01h
+8113 4440             17         orl A, #40h             ;B{ahp`el 3 hmdhj`rnp
+                      18         ;add A, #40h
+                      19         ;orl A, #01000000b
+8115 F0               20         movx @dptr, A           ;B{bndhl m` 3 hmdhj`rnp
+8116 1281A4           21         call Delay
+8119 E554             22         mov A, 54h              ;B 54h edhmhv{
+                      23         ;mov A, #02h
+811B 4480             24         orl A, #80h             ;B{ahp`el 3 hmdhj`rnp
+                      25         ;add A, #80h
+                      26         ;orl A, #10000000b
+811D F0               27         movx @dptr, A           ;B{bndhl m` 3 hmdhj`rnp
+811E 1281A4           28         call Delay
+8121 22               29     ret
+                      30     Read_ADC:                   ;wremhe q @VO
+8122 7910             31         mov R1, #010h
+8124 7A20             32         mov R2, #020h
+                      33         ;mov R3, #040h
+                      34         ;mov R4, #080h
+8126 D290             35         setb p1.0
+8128 C290             36         clr p1.0
+812A 2091FD           37         jb p1.1,$
+812D 900001           38         mov DPTR, #port_b
+8130 E0               39         movx A, @DPTR
+8131 22               40     ret
+                      41     Perevod:
+8132 75F046           42         mov B, #46h
+8135 A4               43         mul AB
+8136 FF               44         mov R7, A
+8137 E5F0             45         mov A, B
+8139 75F00A           46         mov B, #0Ah
+813C 84               47         div AB
+813D C4               48         swap A
+813E FE               49         mov R6, A
+813F E5F0             50         mov A, B
+MCS-51 MACRO ASSEMBLER    1                                                                         12/28/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8141 EF               51         mov A, R7
+8142 C2E0             52         clr Acc.0
+8144 C2E1             53         clr Acc.1
+8146 C2E2             54         clr Acc.2
+8148 C2E3             55         clr Acc.3
+814A 25F0             56         add A, B
+814C C4               57         swap A
+814D 75F00A           58         mov B, #0Ah
+8150 84               59         div AB
+8151 2E               60         add A, R6
+8152 FE               61         mov R6, A
+8153 EF               62         mov A, R7
+8154 C2E4             63         clr Acc.4
+8156 C2E5             64         clr Acc.5
+8158 C2E6             65         clr Acc.6
+815A C2E7             66         clr Acc.7
+815C C4               67         swap A
+815D 25F0             68         add A, B
+815F C4               69         swap A
+8160 75F00A           70         mov B, #0Ah
+8163 84               71         div AB
+8164 FD               72         mov R5, A
+8165 E5F0             73         mov A, B
+8167 2C               74         add A, R4
+8168 FC               75         mov R4, A
+8169 EE               76         mov A, R6
+816A 75F00A           77         mov B, #0Ah
+816D 84               78         div AB
+816E C4               79         swap A
+816F FE               80         mov R6, A
+8170 ED               81         mov A, R5
+8171 C4               82         swap A
+8172 25F0             83         add A, B
+8174 C4               84         swap A
+8175 75F00A           85         mov B, #0Ah
+8178 84               86         div AB
+8179 2E               87         add A, R6
+817A FE               88         mov R6, A
+817B E5F0             89         mov A, B
+817D 2B               90         add A, R3
+817E FB               91         mov R3, A
+817F EE               92         mov A, R6
+8180 75F00A           93         mov B, #0Ah
+8183 84               94         div AB
+8184 29               95         add A, R1
+8185 F9               96         mov R1, A
+8186 E5F0             97         mov A, B
+8188 2A               98         add A, R2
+8189 FA               99         mov R2, A
+818A 22              100     ret
+                     101     Translate:                  ; Opnvedsp` oepebnd` qnahp`~y`^ R1 h R2 bleqre
+818B EA              102         mov A, R2
+818C C2E4            103         clr Acc.4
+818E C2E5            104         clr Acc.5
+8190 C2E6            105         clr Acc.6
+MCS-51 MACRO ASSEMBLER    1                                                                         12/28/:9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+8192 C2E7            106         clr Acc.7
+8194 FA              107         mov R2, A
+8195 E9              108         mov A, R1
+8196 C2E4            109         clr Acc.4
+8198 C2E5            110         clr Acc.5
+819A C2E6            111         clr Acc.6
+819C C2E7            112         clr Acc.7
+                     113         ;swap A
+819E 75F00A          114         mov B, #0Ah
+81A1 A4              115         mul AB
+81A2 2A              116         add A, R2
+81A3 22              117     ret
+                     118     Delay:
+81A4 753205          119         mov 32h, #5
+                     120     cicl:
+81A7 753364          121         mov 33h, #100
+81AA D533FD          122         djnz 33h, $
+81AD D532F7          123         djnz 32h, cicl
+81B0 22              124     ret
+                     125     
+  0000               126         port_a equ 0h
+  0001               127         port_b equ 01h
+  0002               128         port_c equ 02h
+  0003               129         port_d equ 03h
+  0082               130         _bis_ equ 82h
+  0011               131         for_A equ 011h
+                     132     
+81B1 2D              133     tbl: db 2dh,14h,50h
+81B2 14
+81B3 50
+                     134     
+                     135     
+                     136     start:
+                     137     
+81B4 75502D          138         mov 50h,#2dH
+81B7 755114          139         mov 51h,#14h
+81BA 755250          140         mov 52h,#50h
+81BD 755300          141         mov 53h,#00h
+                     142     
+81C0 908230          143         mov DPTR,#8230h
+81C3 742D            144         mov A,#2dh
+81C5 F0              145         movx @DPTR,A
+                     146         
+81C6 7400            147         mov A,#00h
+81C8 E0              148         movx A,@DPTR
+                     149         
+                     150     
+                     151     
+81C9 E530            152         mov A,30h
+                     153     
+81CB 7400            154         mov A,#0h
+81CD 93              155         movc A,@A + DPTR
+81CE 80FE            156         jmp $
+                     157     end
+MCS-51 MACRO ASSEMBLER    1                                                                         12/28/:9   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E         T Y P E   V A L U E       A T T R I B U T E S
+
+_BIS_. . . . .    NUMB    0082H   A       
+ACC. . . . . .  D ADDR    00E0H   A       
+B. . . . . . .  D ADDR    00F0H   A       
+CICL . . . . .  C ADDR    81A7H   A       
+DELAY. . . . .  C ADDR    81A4H   A       
+FOR_A. . . . .    NUMB    0011H   A       
+OUTPDIGIT_CUR.  C ADDR    8100H   A       
+OUTPDIGIT_TARG  C ADDR    810EH   A       
+P1 . . . . . .  D ADDR    0090H   A       
+PEREVOD. . . .  C ADDR    8132H   A       
+PORT_A . . . .    NUMB    0000H   A       
+PORT_B . . . .    NUMB    0001H   A       
+PORT_C . . . .    NUMB    0002H   A       
+PORT_D . . . .    NUMB    0003H   A       
+READ_ADC . . .  C ADDR    8122H   A       
+START. . . . .  C ADDR    81B4H   A       
+TBL. . . . . .  C ADDR    81B1H   A       
+TRANSLATE. . .  C ADDR    818BH   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND
