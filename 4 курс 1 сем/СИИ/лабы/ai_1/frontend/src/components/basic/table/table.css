@@ -1,0 +1,9 @@
+.ExtendSolution {
+    font-size: 14px;
+}
+
+.ExtendCell {
+    border: 2px solid black;
+    width: 15px;
+    height: 15px;
+}
