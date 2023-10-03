@@ -1,0 +1,84 @@
+#include <msp430.h>
+/* Initialize non-used ISR vectors with a trap function */
+/*
+DACDMA_VECTOR           (0 * 1u)       0xFFE0 DAC/DMA
+PORT2_VECTOR            (1 * 1u)       0xFFE2 Port 2
+USART1TX_VECTOR         (2 * 1u)       0xFFE4 USART 1 Transmit
+USART1RX_VECTOR         (3 * 1u)       0xFFE6 USART 1 Receive
+PORT1_VECTOR            (4 * 1u)       0xFFE8 Port 1
+TIMERA1_VECTOR          (5 * 1u)       0xFFEA Timer A CC1-2, TA
+TIMERA0_VECTOR          (6 * 1u)       0xFFEC Timer A CC0
+ADC12_VECTOR            (7 * 1u)       0xFFEE ADC
+USART0TX_VECTOR         (8 * 1u)       0xFFF0 USART 0 Transmit  // Прерывание используется
+USART0RX_VECTOR         (9 * 1u)       0xFFF2 USART 0 Receive   // Прерывание используется
+WDT_VECTOR              (10 * 1u)      0xFFF4 Watchdog Timer
+COMPARATORA_VECTOR      (11 * 1u)      0xFFF6 Comparator A
+TIMERB1_VECTOR          (12 * 1u)      0xFFF8 Timer B CC1-6, TB
+TIMERB0_VECTOR          (13 * 1u)      0xFFFA Timer B CC0
+NMI_VECTOR              (14 * 1u)      0xFFFC Non-maskable
+RESET_VECTOR            (15 * 1u)      0xFFFE Reset [Highest Priority]
+*/
+
+#pragma vector=DACDMA_VECTOR,PORT2_VECTOR,USART1TX_VECTOR,USART1RX_VECTOR,TIMERA1_VECTOR,  \
+               TIMERA0_VECTOR,ADC12_VECTOR,WDT_VECTOR,COMPARATORA_VECTOR,TIMERB1_VECTOR,TIMERB0_VECTOR, \
+               NMI_VECTOR,RESET_VECTOR
+__interrupt void ISR_trap(void)
+{
+  // Вызов неиспользуемого прерывания приведет к сбросу процессора (PUC reset)
+  WDTCTL = 0; 
+}
+
+// Добавим прерывание для клавиатуры. Клавиатура подключена к порту 1
+
+#pragma vector=PORT1_VECTOR
+__interrupt void KBD_ISR(void)
+{
+  switch(P1IFG&BIT3) {
+    case BIT3:
+            P1IFG &= ~BIT7;    // обнуляем флаг прерывания для P1.7
+
+            // выбираем регистр конфигурации направления (0x03)
+            //  и конфигурируем все на ввод (1-ввод, 0-вывод)
+            I2C_WriteByte(0x03, 0xFF, LED_i2c_addr);
+            // Сохраняем конфигурацию светодиодов
+            char saved = I2C_ReadByte(0x00, LED_i2c_addr);
+
+            // Теперь сканируем клавиатуру... Если получаем 5, 7, 9 - отправляем сигнал
+            LED_clear();
+            char key = KEYS_scannow()
+            switch (key)
+            {
+            case '5':
+                LED_clear();
+                LED_set(5);
+                break;
+            case '7':
+                LED_clear();
+                LED_set(6);
+                break;
+            case '9':
+                LED_clear();
+                LED_set(7);
+                break;
+            case '*':
+                // Время закругляться
+                // Отключаем прерывание, больше вызвать его нельзя
+                P1IE &= ~BIT7
+            default:
+                break;
+            }
+
+            wait_1ms(1000);
+
+            LED_clear();
+            // возвращаем состояние светодиодов
+            I2C_WriteByte(saved, LED_i2c_addr);
+            return;
+        default:
+            P1IFG = 0;   // Возможно в этом нет необходимости, но обнуляем
+                         // флаги всех прерываний в P1, на всякий случай. 
+                         // Хотя лучше было бы добавить обработчик ошибки.
+            return;
+    }
+
+}

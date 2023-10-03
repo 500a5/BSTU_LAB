@@ -1,0 +1,24 @@
+
+**** Build of configuration Debug for project MSP430-leds ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building target: "MSP430-leds.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-leds.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-leds_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-leds.out" "./I2C.obj" "./keys.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 4 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-leds.out"
+ 
+
+**** Build Finished ****

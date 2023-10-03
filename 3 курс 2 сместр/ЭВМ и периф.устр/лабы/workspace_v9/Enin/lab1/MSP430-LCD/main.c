@@ -1,0 +1,46 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+
+void main(void)
+{
+    WDTCTL = WDTPW + WDTHOLD;
+    Init_System_Clock();
+    Init_System();
+   // char* name = "Енин Георгий";
+  //  char* groupe = "Группа ВТ-31";
+    LCD_init();
+ //   LCD_set_pos(0,0);
+  //  LCD_message(groupe);
+ //   LCD_set_pos(1,0);
+ //   LCD_message(name);
+
+    LCD_WriteCommand(0x40);
+    LCD_WriteData(4);
+    LCD_WriteCommand(0x41);
+    LCD_WriteData(10);
+    LCD_WriteCommand(0x42);
+    LCD_WriteData(17);
+    LCD_WriteCommand(0x43);
+    LCD_WriteData(31);
+    LCD_WriteCommand(0x44);
+    LCD_WriteData(31);
+    LCD_WriteCommand(0x45);
+    LCD_WriteData(17);
+    LCD_WriteCommand(0x46);
+    LCD_WriteData(10);
+    LCD_WriteCommand(0x47);
+    LCD_WriteData(4);
+    LCD_set_pos(0,0);
+    LCD_set_cursor(1);
+    LCD_WriteData(0);
+
+    while (1);
+}

@@ -1,0 +1,59 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+# Add inputs and outputs from these tool invocations to the build variables 
+CMD_SRCS += \
+../lnk_msp430f1611.cmd 
+
+C_SRCS += \
+../I2C.c \
+../keys.c \
+../leds.c \
+../main.c \
+../msp430_initialize_unused_interrrupt_vectors.c \
+../sysfunc.c 
+
+C_DEPS += \
+./I2C.d \
+./keys.d \
+./leds.d \
+./main.d \
+./msp430_initialize_unused_interrrupt_vectors.d \
+./sysfunc.d 
+
+OBJS += \
+./I2C.obj \
+./keys.obj \
+./leds.obj \
+./main.obj \
+./msp430_initialize_unused_interrrupt_vectors.obj \
+./sysfunc.obj 
+
+OBJS__QUOTED += \
+"I2C.obj" \
+"keys.obj" \
+"leds.obj" \
+"main.obj" \
+"msp430_initialize_unused_interrrupt_vectors.obj" \
+"sysfunc.obj" 
+
+C_DEPS__QUOTED += \
+"I2C.d" \
+"keys.d" \
+"leds.d" \
+"main.d" \
+"msp430_initialize_unused_interrrupt_vectors.d" \
+"sysfunc.d" 
+
+C_SRCS__QUOTED += \
+"../I2C.c" \
+"../keys.c" \
+"../leds.c" \
+"../main.c" \
+"../msp430_initialize_unused_interrrupt_vectors.c" \
+"../sysfunc.c" 
+
+

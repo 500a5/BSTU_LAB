@@ -1,0 +1,120 @@
+#include <msp430.h>
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "I2C.h"
+#include "leds.h"
+#include "keys.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+
+void Disable_Watchdog()
+{
+    WDTCTL = WDTPW + WDTHOLD; // Disable watchdog timer
+}
+
+// Установим клавиатуру в состояние ожидания прерывания
+void KBD_wait_interrupt()
+{
+    // выбираем регистр конфигурации направления (0x03)
+    //  и конфигурируем на вывод (1-ввод, 0-вывод)
+    // P0-P3, а на ввод P4-P7
+    I2C_WriteByte(0x03, 0x0F, KEYS_i2c_addr);
+    // Записываем в P0-P3 единицы
+    I2C_WriteByte(0x01, 0x0F, KEYS_i2c_addr);
+}
+
+// Добавим прерывание для клавиатуры. Клавиатура подключена к порту 1
+
+#pragma vector=PORT1_VECTOR
+__interrupt void KBD_ISR(void)
+{
+    LED_clear();
+    wait_1ms(500);
+//  switch(P1IFG&BIT3) {
+//    case BIT3:
+//            P1IFG &= ~BIT7;    // обнуляем флаг прерывания для P1.7
+//
+//            // Сохраняем конфигурацию светодиодов
+//            char saved = I2C_ReadByte(0x00, LED_i2c_addr);
+//
+//            // Теперь сканируем клавиатуру... Если получаем 5, 7, 9 - отправляем сигнал
+//            LED_clear();
+//            char key = KEYS_scannow();
+//            switch (key)
+//            {
+//            case '5':
+//                LED_clear();
+//                LED_set(5);
+//                break;
+//            case '7':
+//                LED_clear();
+//                LED_set(6);
+//                break;
+//            case '9':
+//                LED_clear();
+//                LED_set(7);
+//                break;
+//            case '*':
+//                // Время закругляться
+//                // Отключаем прерывание, больше вызвать его нельзя
+//                P1IE &= ~BIT7;
+//            default:
+//                break;
+//            }
+//
+//            wait_1ms(1000);
+//
+//            LED_clear();
+//            // возвращаем состояние светодиодов
+//            I2C_WriteByte(0x00, saved, LED_i2c_addr);
+//            return;
+//        default:
+//            P1IFG = 0;   // Возможно в этом нет необходимости, но обнуляем
+//                         // флаги всех прерываний в P1, на всякий случай.
+//                         // Хотя лучше было бы добавить обработчик ошибки.
+//            return;
+//    }
+    KBD_wait_interrupt();
+
+}
+
+
+// Разработать программу, фиксирующую нажатия клавиш 5, 7 и 9 матричной
+// клавиатуры  включением  светодиодов  5,  6  и  7  соответственно.  Выход  из
+// цикла  опроса  осуществляется  при  нажатии  клавиши  *.  Частота  тактовых
+// импульсов на линии SCL – 20 кГц.
+
+void main(void)
+{
+    int speed = 100;
+    Disable_Watchdog();
+    Init_System_Clock();
+    Init_System();
+
+    P1IES |= BIT7;  // прерывание по переходу из 1 в 0,
+                    // устанавливается соответствующим битом IES.x = 1.
+    P1IFG &= ~BIT7; // Для предотвращения немедленного срабатывания прерывания,
+                    // обнуляем его флаг для P1.7 до разрешения прерываний
+    P1IE |= BIT7;   // Разрешаем прерывания для P1.7
+
+    // Теперь клавиатура будет выдавать прерывания
+    KBD_wait_interrupt();
+
+    // общее включение прерываний
+    _enable_interrupt();
+    Init_I2C();
+    //Init_I2C_custom_speed();
+    while (1)
+    {
+        LED_fx1(speed);
+        wait_1ms(5);
+        LED_fx2(speed);
+        wait_1ms(5);
+        LED_fx3(speed);
+        wait_1ms(5);
+    }
+}

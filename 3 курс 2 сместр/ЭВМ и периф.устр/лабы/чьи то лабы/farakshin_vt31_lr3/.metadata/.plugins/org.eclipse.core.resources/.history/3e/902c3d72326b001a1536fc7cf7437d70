@@ -1,0 +1,48 @@
+#include <msp430.h>
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "I2C.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+
+void Disable_Watchdog()
+{
+    WDTCTL = WDTPW + WDTHOLD; // Disable watchdog timer
+}
+
+// Разработать программу, фиксирующую нажатия клавиш 5, 7 и 9 матричной
+// клавиатуры  включением  светодиодов  5,  6  и  7  соответственно.  Выход  из
+// цикла  опроса  осуществляется  при  нажатии  клавиши  *.  Частота  тактовых
+// импульсов на линии SCL – 20 кГц.
+
+void main(void)
+{
+    int speed = 100;
+    Disable_Watchdog();
+    Init_System_Clock();
+    Init_System();
+
+    P1IES |= BIT7;  // прерывание по переходу из 1 в 0,
+                    // устанавливается соответствующим битом IES.x = 1.
+    P1IFG &= ~BIT7; // Для предотвращения немедленного срабатывания прерывания,
+                    // обнуляем его флаг для P1.7 до разрешения прерываний
+    P1IE |= BIT7;   // Разрешаем прерывания для P1.7
+
+    // общее включение прерываний
+    _enable_interrupt();
+    Init_I2C();
+    //Init_I2C_custom_speed();
+    while (1)
+    {
+        LED_fx1(speed);
+        wait_1ms(5);
+        LED_fx2(speed);
+        wait_1ms(5);
+        LED_fx3(speed);
+        wait_1ms(5);
+    }
+}

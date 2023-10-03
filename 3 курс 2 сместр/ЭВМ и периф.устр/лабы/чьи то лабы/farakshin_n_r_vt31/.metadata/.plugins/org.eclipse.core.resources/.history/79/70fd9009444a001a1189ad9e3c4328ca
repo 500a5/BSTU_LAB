@@ -1,0 +1,36 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+
+void Disable_Watchdog(){
+    WDTCTL = WDTPW+WDTHOLD; // Disable watchdog timer
+}
+
+void Print_Message(char *buf){
+    LCD_set_pos(0, 0);
+    int n = 0;
+    while (buf[n]){
+        if (buf[n] == '\n'){
+            LCD_set_pos(1, 0);
+        }
+    }
+}
+
+void main(void) {
+    Disable_Watchdog();
+    Init_System_Clock(); // Start generators
+    Init_System();      // Set port1 to output
+    LCD_init();         // Set ports for LCD
+    char msg[80] = "Farakshin NR\nVT-31";
+    LCD_message(msg);   // Output message
+    while(1){
+
+    }
+}
