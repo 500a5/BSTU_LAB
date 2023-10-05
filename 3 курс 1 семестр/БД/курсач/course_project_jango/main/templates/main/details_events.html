@@ -1,0 +1,13 @@
+{% extends 'main/layot.html' %}
+
+{% block title%}
+   {{ events_detail.title }}
+{% endblock %}
+
+{% block content%}
+    <div class="features" align="center">
+         <h1 align="center">{{ events_detail.title }}</h1>
+        <p style="margin-left: 10%; margin-right: 10% ">{{ events_detail.text }}</p>
+         <p>{{ events_detail.date }}</p>
+    </div>
+{% endblock %}
