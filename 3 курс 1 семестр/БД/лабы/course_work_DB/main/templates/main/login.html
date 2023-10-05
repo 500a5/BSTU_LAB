@@ -1,0 +1,28 @@
+{% extends 'main/layot.html' %}
+{% load static %}
+
+{% block title %}Авторизация{% endblock %}
+
+{% block content%}
+    <h1 align="center">
+        Авторизация
+    </h1>
+    <style>
+    .forms {
+        margin-top: 5vh;
+        margin-left: 30vw;
+        width: 40vw;
+        float: left;
+        color: black;
+            }
+    </style>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="forms">
+            {{ form.as_p }}
+            <button type="submit" style="margin-left: 10vw;" class="btn btn-warning">Войти</button>
+        </div>
+    </form>
+
+
+{% endblock %}

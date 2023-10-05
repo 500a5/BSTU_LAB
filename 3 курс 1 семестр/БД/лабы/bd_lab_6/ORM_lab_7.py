@@ -1,0 +1,986 @@
+import psycopg2
+from psycopg2 import OperationalError
+from tkinter import *
+from tkinter import ttk
+from models import *
+
+
+class BD:  # Класс "БД"
+    # Исполнение запроса
+
+    @staticmethod
+    def print_table(model):
+        header = model.get_names()
+        body = model.select()
+        max_len = max([len(x) for x in header])
+        for i in body:
+            for j in i:
+                if len(str(j)) > max_len:
+                    max_len = len(str(j))
+        max_len += 2
+        for i in header:
+            print("|", ("{:^" + str(max_len) + "s}").format(i), "|", end="")
+        print("\n| ", "-" * (max_len + 2) * len(header), " |")
+        for i in body:
+            for j in i:
+                print("|", ("{:^" + str(max_len) + "s}").format(str(j)), "|", end="")
+            print()
+
+    @staticmethod
+    def str_table(model):
+        res = []
+        header = model.get_names()
+        print(header)
+        body = model.select().dicts()
+        max_len = 0  # Найдем максимальную длину поля таблицы в строковом представлении
+        for i in header:
+            if len(i) > max_len:
+                max_len = len(i)
+        for i in body:
+            for j in i.values():
+                if len(str(j)) > max_len:
+                    max_len = len(str(j))
+        max_len += 2
+        bufStr = ""
+        for i in header:  # Выведем таблицу
+            bufStr += "|" + ("{:^" + str(max_len) + "s}").format(i) + "|"
+        res.append(bufStr)
+        res.append("|  " + "-" * (max_len + 2) * len(header) + "  |")
+        for i in body:
+            bufStr = ""
+            for j in i.values():
+                bufStr += "|" + ("{:^" + str(max_len) + "s}").format(str(j)) + "|"
+            res.append(bufStr)
+        return '\n'.join(res)
+
+
+# курьер
+def insert_courier_contact_details():
+    CourierContactDetails.create(
+        id=text_courier_contact_details_id.get(),
+        name=text_courier_contact_details_fio.get(),
+        phone=text_courier_contact_details_phone.get(),
+        email=text_courier_contact_details_email.get()
+    )
+
+
+def output_courier_contact_details():
+    textOutputCourier.delete(1.0, END)
+    textOutputCourier.insert(1.0, BD.str_table(CourierContactDetails))
+
+def insert_courier():
+    Courier.create(
+        id=text_courier_id.get(),
+        transport=text_courier_id_transport.get(),
+        location=text_courier_location.get(),
+        delivery_order=text_courier_id_delivery_order.get(),
+        contact_details=text_courier_id_contact_details.get()
+    )
+
+def output_courier():
+    textOutputCourier.delete(1.0, END)
+    textOutputCourier.insert(1.0, BD.str_table(Courier))
+
+def insert_type_transport():
+    TypeTransport.create(
+        id=text_type_transport_id.get(),
+        type=text_type_transport_type.get(),
+    )
+
+def output_type_transport():
+    textOutputTransport.delete(1.0, END)
+    textOutputTransport.insert(1.0, BD.str_table(TypeTransport))
+
+def insert_size_transport():
+    TypeSizeTransport(
+        id=text_size_transport_id.get(),
+        size=text_size_transport_size.get(),
+        type=text_size_transport_type.get()
+    )
+
+def output_size_transport():
+    textOutputTransport.delete(1.0, END)
+    textOutputTransport.insert(1.0, BD.str_table(TypeSizeTransport))
+
+def insert_model_transport():
+    ModelTransport.create(
+        id=text_model_transport_id.get(),
+        model=text_model_transport_model.get()
+    )
+
+def output_model_transport():
+    textOutputTransport.delete(1.0, END)
+    textOutputTransport.insert(1.0, BD.str_table(ModelTransport))
+
+def insert_transport():
+    Transport.create(
+        id=text_transport_id.get(),
+        type_size=text_transport_type_size.get(),
+        model=text_transport_model.get()
+    )
+
+def output_transport():
+    textOutputTransport.delete(1.0, END)
+    textOutputTransport.insert(1.0, BD.str_table(Transport))
+
+def insert_transport_company_contact():
+    TransportCompanyContactDetails.create(
+        id=text_transport_company_contact_id.get(),
+        name=text_transport_company_contact_name.get(),
+        description=text_transport_company_contact_dscription.get(),
+        email=text_transport_company_contact_email.get(),
+        phone=text_transport_company_contact_phone.get()
+    )
+
+def output_transport_company_contact():
+    textOutputTransportCompany.delete(1.0, END)
+    textOutputTransportCompany.insert(1.0, BD.str_table(TransportCompanyContactDetails))
+
+def insert_transport_company():
+    TransportCompany.create(
+        id=text_transport_company_id.get(),
+        courier=text_transport_company_id_courier.get(),
+        delivery_order=text_transport_company_id_order.get(),
+        adress=text_transport_company_id_adress.get(),
+        contact_details=text_transport_company_id_contact_details.get()
+    )
+
+def output_transport_company():
+    textOutputTransportCompany.delete(1.0, END)
+    textOutputTransportCompany.insert(1.0, BD.str_table(TransportCompany))
+
+def insert_delivery_order_type():
+    TypeDelivery.create(
+        id=text_delivery_order_type_id.get(),
+        type=text_delivery_order_type_type.get()
+    )
+
+def output_delivery_order_type():
+    textOutputDeliveryOrder.delete(1.0, END)
+    textOutputDeliveryOrder.insert(1.0, BD.str_table(TypeDelivery))
+
+def insert_delivery_order():
+    DeliveryOrder.create(
+        id=text_delivery_order_id.get(),
+        product=text_delivery_order_id_product.get(),
+        price=text_delivery_order_price.get(),
+        start_date=text_delivery_order_start_date.get(),
+        end_date=text_delivery_order_end_date.get(),
+        type_delivery=text_delivery_order_type_delivery.get()
+    )
+
+def output_delivery_order():
+    textOutputDeliveryOrder.delete(1.0, END)
+    textOutputDeliveryOrder.insert(1.0, BD.str_table(DeliveryOrder))
+
+def insert_provider_contact():
+    ProviderContactDetails.create(
+        id=text_provider_contact_details_id.get(),
+        name=text_provider_contact_details_name.get(),
+        description=text_provider_contact_details_dscription.get(),
+        email=text_provider_contact_details_email.get(),
+        phone=text_provider_contact_details_phone.get()
+    )
+
+def output_provider_contact():
+    textOutputProvider.delete(1.0, END)
+    textOutputProvider.insert(1.0, BD.str_table(ProviderContactDetails))
+
+def insert_provider():
+    Provider.create(
+        id=text_provider_id.get(),
+        product=text_provider_id_product.get(),
+        address=text_provider_id_adress.get(),
+        contact_details=text_provider_id_contact_details.get()
+    )
+
+def output_provider():
+    textOutputProvider.delete(1.0, END)
+    textOutputProvider.insert(1.0, BD.str_table(Provider))
+
+def insert_name_product():
+    NameProduct.create(
+        id=text_name_product_id.get(),
+        name=text_name_product_name.get()
+    )
+
+def output_name_product():
+    textOutputProduct.delete(1.0, END)
+    textOutputProduct.insert(1.0, BD.str_table(NameProduct))
+
+def insert_product():
+    Product.create(
+        id=text_product_id.get(),
+        size=text_product_size.get(),
+        weight=text_product_weight.get(),
+        name=text_product_id_name.get(),
+        address=text_product_id_adress.get()
+    )
+
+def output_product():
+    textOutputProduct.delete(1.0, END)
+    textOutputProduct.insert(1.0, BD.str_table(Product))
+
+def insert_consumer_contact():
+    ConsumerContactDetails.create(
+        id=text_consumer_contact_id.get(),
+        name=text_consumer_contact_name.get(),
+        description=text_consumer_contact_dscription.get(),
+        email=text_consumer_contact_email.get(),
+        phone=text_consumer_contact_phone.get()
+    )
+def output_consumer_contact():
+    textOutputСonsumer.delete(1.0, END)
+    textOutputСonsumer.insert(1.0, BD.str_table(CourierContactDetails))
+
+def insert_consumer():
+    Consumer.create(
+        id=text_consumer_id.get(),
+        id_delivery_order=text_consumer_id_order.get(),
+        id_address=text_consumer_id_adress.get(),
+        contact_details=text_consumer_id_contact_details.get()
+    )
+def output_consumer():
+    textOutputСonsumer.delete(1.0, END)
+    textOutputСonsumer.insert(1.0, BD.str_table(Consumer))
+
+def insert_stoc():
+    Storage.create(
+        id=text_stoc_id.get(),
+        id_product=text_size_transport_size.get(),
+        address_stoc=text_stoc_id_addres.get()
+    )
+
+def output_stoc():
+    textOutputStoc.delete(1.0, END)
+    textOutputStoc.insert(1.0, BD.str_table(Storage))
+
+def insert_addres_county():
+    Country.create(
+        id=text_addres_country_id.get(),
+        county=text_addres_country_name.get()
+    )
+
+def output_addres_county():
+    textOutputAddres.delete(1.0, END)
+    textOutputAddres.insert(1.0, BD.str_table(Country))
+
+def insert_addres_sity():
+    City.create(
+        id=text_addres_city_id.get(),
+        city=text_addres_city_name.get()
+    )
+
+def output_addres_sity():
+    textOutputAddres.delete(1.0, END)
+    textOutputAddres.insert(1.0, BD.str_table(City))
+
+def insert_addres_street():
+    Street.create(
+        id=text_addres_street_id.get(),
+        street=text_addres_street_name.get()
+    )
+
+def output_addres_street():
+    textOutputAddres.delete(1.0, END)
+    textOutputAddres.insert(1.0, BD.str_table(Street))
+
+def insert_addres_bilding():
+    Building.create(
+        id=text_addres_bilding_id.get(),
+        building=text_addres_bilding_name.get()
+    )
+
+def output_addres_bilding():
+    textOutputAddres.delete(1.0, END)
+    textOutputAddres.insert(1.0, BD.str_table(Building))
+
+def insert_addres():
+    Address.create(
+        id=text_addres_id.get(),
+        country=text_addres_county.get(),
+        city=text_addres_city.get(),
+        street=text_addres_street.get(),
+        bilding=text_addres_bilding.get()
+    )
+
+def output_addres():
+    textOutputAddres.delete(1.0, END)
+    textOutputAddres.insert(1.0, BD.str_table(Address))
+if __name__ == '__main__':
+
+
+
+    window = Tk()
+    window.title('База данных транспортной компании')
+    window.geometry('1200x800')
+    tables = ttk.Notebook(window)
+
+
+
+
+
+    # курьер
+    frame_courier = ttk.Frame(tables)
+    tables.add(frame_courier, text='Курьер')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_courier, text="Контактные данные куьера")
+    lbl.grid(row=0,column=1)
+
+    label_courier_contact_details_id = Label(frame_courier, text='id:')
+    label_courier_contact_details_id.grid(row=1, column=0)
+    text_courier_contact_details_id = Entry(frame_courier, width=40)
+    text_courier_contact_details_id.grid(row=1, column=1)
+
+    label_courier_id = Label(frame_courier, text='ФИО:')
+    label_courier_id.grid(row=2, column=0)
+    text_courier_contact_details_fio = Entry(frame_courier, width=40)
+    text_courier_contact_details_fio.grid(row=2, column=1)
+
+    label_courier_contact_details_phone = Label(frame_courier, text='телефон:')
+    label_courier_contact_details_phone.grid(row=3, column=0)
+    text_courier_contact_details_phone = Entry(frame_courier, width=40)
+    text_courier_contact_details_phone.grid(row=3, column=1)
+
+    label_courier_contact_details_email = Label(frame_courier, text='почта:')
+    label_courier_contact_details_email.grid(row=4, column=0)
+    text_courier_contact_details_email = Entry(frame_courier, width=40)
+    text_courier_contact_details_email.grid(row=4, column=1)
+
+    btn = Button(frame_courier, text='Добавить', command=insert_courier_contact_details)
+    btn.grid(row=5, column=0)
+
+    btnOutput = Button(frame_courier, text='Вывести таблицу', command=output_courier_contact_details)
+    btnOutput.grid(row=5, column=1)
+
+    lbl = Label(frame_courier, text="Курьер")
+    lbl.grid(row=6, column=1)
+
+    label_courier_id = Label(frame_courier, text='id:')
+    label_courier_id.grid(row=7, column=0)
+    text_courier_id = Entry(frame_courier, width=40)
+    text_courier_id.grid(row=7, column=1)
+
+    label_courier_id_transport = Label(frame_courier, text='id транспорта:')
+    label_courier_id_transport.grid(row=8, column=0)
+    text_courier_id_transport = Entry(frame_courier, width=40)
+    text_courier_id_transport.grid(row=8, column=1)
+
+    label_courier_location = Label(frame_courier, text='местоположение:')
+    label_courier_location.grid(row=9, column=0)
+    text_courier_location = Entry(frame_courier, width=40)
+    text_courier_location.grid(row=9, column=1)
+
+
+    label_courier_id_delivery_order = Label(frame_courier, text='id заказа:')
+    label_courier_id_delivery_order.grid(row=10, column=0)
+    text_courier_id_delivery_order = Entry(frame_courier, width=40)
+    text_courier_id_delivery_order.grid(row=10, column=1)
+
+
+    label_courier_id_contact_details = Label(frame_courier, text='id контактных данных:')
+    label_courier_id_contact_details.grid(row=11, column=0)
+    text_courier_id_contact_details = Entry(frame_courier, width=40)
+    text_courier_id_contact_details.grid(row=11, column=1)
+
+    btn = Button(frame_courier, text='Добавить', command=insert_courier)
+    btn.grid(row=12, column=0)
+
+    btnOutput = Button(frame_courier, text='Вывести таблицу', command=output_courier)
+    btnOutput.grid(row=12, column=1)
+
+    textOutputCourier = Text(frame_courier, width=200, height=20, font='Consolas 10')
+    textOutputCourier.place(x=10, y=300)
+
+    # транспорт
+    frame_transport = ttk.Frame(tables)
+    tables.add(frame_transport, text='Транспорт')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_transport, text="Тип транспорта")
+    lbl.grid(row=0, column=1)
+
+    label_type_transport_id = Label(frame_transport, text='id:')
+    label_type_transport_id.grid(row=1, column=0)
+    text_type_transport_id = Entry(frame_transport, width=40)
+    text_type_transport_id.grid(row=1, column=1)
+
+    label_type_transport_type = Label(frame_transport, text='тип:')
+    label_type_transport_type.grid(row=2, column=0)
+    text_type_transport_type = Entry(frame_transport, width=40)
+    text_type_transport_type.grid(row=2, column=1)
+
+    btn = Button(frame_transport, text='Добавить', command=insert_type_transport)
+    btn.grid(row=3, column=0)
+
+    btnOutput = Button(frame_transport, text='Вывести таблицу', command=output_type_transport)
+    btnOutput.grid(row=3, column=1)
+
+    lbl = Label(frame_transport, text="Размер транспорта")
+    lbl.grid(row=0, column=3)
+
+    label_size_transport_id = Label(frame_transport, text='id:')
+    label_size_transport_id.grid(row=1, column=2)
+    text_size_transport_id = Entry(frame_transport, width=40)
+    text_size_transport_id.grid(row=1, column=3)
+
+    label_size_transport_size = Label(frame_transport, text='размер:')
+    label_size_transport_size.grid(row=2, column=2)
+    text_size_transport_size = Entry(frame_transport, width=40)
+    text_size_transport_size.grid(row=2, column=3)
+
+    label_size_transport_type = Label(frame_transport, text='тип транспорта:')
+    label_size_transport_type.grid(row=3, column=2)
+    text_size_transport_type = Entry(frame_transport, width=40)
+    text_size_transport_type.grid(row=3, column=3)
+
+    btn = Button(frame_transport, text='Добавить', command=insert_size_transport)
+    btn.grid(row=4, column=2)
+
+    btnOutput = Button(frame_transport, text='Вывести таблицу', command=output_size_transport)
+    btnOutput.grid(row=4, column=3)
+
+    lbl = Label(frame_transport, text="Модель транспорта")
+    lbl.grid(row=0, column=5)
+
+    label_model_transport_id = Label(frame_transport, text='id:')
+    label_model_transport_id.grid(row=1, column=4)
+    text_model_transport_id = Entry(frame_transport, width=40)
+    text_model_transport_id.grid(row=1, column=5)
+
+    label_model_transport_model = Label(frame_transport, text='модель:')
+    label_model_transport_model.grid(row=2, column=4)
+    text_model_transport_model = Entry(frame_transport, width=40)
+    text_model_transport_model.grid(row=2, column=5)
+
+    btn = Button(frame_transport, text='Добавить', command=insert_model_transport)
+    btn.grid(row=3, column=4)
+
+    btnOutput = Button(frame_transport, text='Вывести таблицу', command=output_model_transport)
+    btnOutput.grid(row=3, column=5)
+
+    lbl = Label(frame_transport, text="Транспорт")
+    lbl.grid(row=5, column=1)
+
+    label_transport_id = Label(frame_transport, text='id:')
+    label_transport_id.grid(row=6, column=0)
+    text_transport_id = Entry(frame_transport, width=40)
+    text_transport_id.grid(row=6, column=1)
+
+    label_transport_type_size = Label(frame_transport, text='id типа и размера:')
+    label_transport_type_size.grid(row=7, column=0)
+    text_transport_type_size = Entry(frame_transport, width=40)
+    text_transport_type_size.grid(row=7, column=1)
+
+    label_transport_model = Label(frame_transport, text='модель:')
+    label_transport_model.grid(row=8, column=0)
+    text_transport_model = Entry(frame_transport, width=40)
+    text_transport_model.grid(row=8, column=1)
+
+    btn = Button(frame_transport, text='Добавить', command=insert_transport)
+    btn.grid(row=9, column=0)
+
+    btnOutput = Button(frame_transport, text='Вывести таблицу', command=output_transport)
+    btnOutput.grid(row=9, column=1)
+
+    textOutputTransport = Text(frame_transport, width=200, height=20, font='Consolas 10')
+    textOutputTransport.place(x=10, y=300)
+
+    # транспортная компания
+    frame_transport_company = ttk.Frame(tables)
+    tables.add(frame_transport_company, text='Транспортная компания')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_transport_company, text="контакты компании")
+    lbl.grid(row=0, column=1)
+
+    label_transport_company_contact_id = Label(frame_transport_company, text='id:')
+    label_transport_company_contact_id.grid(row=1, column=0)
+    text_transport_company_contact_id = Entry(frame_transport_company, width=40)
+    text_transport_company_contact_id.grid(row=1, column=1)
+
+    label_transport_company_contact_name = Label(frame_transport_company, text='название:')
+    label_transport_company_contact_name.grid(row=2, column=0)
+    text_transport_company_contact_name = Entry(frame_transport_company, width=40)
+    text_transport_company_contact_name.grid(row=2, column=1)
+
+    label_transport_company_contact_dscription = Label(frame_transport_company, text='описание:')
+    label_transport_company_contact_dscription.grid(row=3, column=0)
+    text_transport_company_contact_dscription = Entry(frame_transport_company, width=40)
+    text_transport_company_contact_dscription.grid(row=3, column=1)
+
+    label_transport_company_contact_email = Label(frame_transport_company, text='email:')
+    label_transport_company_contact_email.grid(row=4, column=0)
+    text_transport_company_contact_email = Entry(frame_transport_company, width=40)
+    text_transport_company_contact_email.grid(row=4, column=1)
+
+    label_transport_company_contact_phone = Label(frame_transport_company, text='телефон:')
+    label_transport_company_contact_phone.grid(row=5, column=0)
+    text_transport_company_contact_phone = Entry(frame_transport_company, width=40)
+    text_transport_company_contact_phone.grid(row=5, column=1)
+
+    btn = Button(frame_transport_company, text='Добавить', command=insert_transport_company_contact)
+    btn.grid(row=6, column=0)
+
+    btnOutput = Button(frame_transport_company, text='Вывести таблицу', command=output_transport_company_contact)
+    btnOutput.grid(row=6, column=1)
+
+    lbl = Label(frame_transport_company, text="транспортная компания")
+    lbl.grid(row=0, column=3)
+
+    label_transport_company_id = Label(frame_transport_company, text='id:')
+    label_transport_company_id.grid(row=1, column=2)
+    text_transport_company_id = Entry(frame_transport_company, width=40)
+    text_transport_company_id.grid(row=1, column=3)
+
+    label_transport_company_id_courier = Label(frame_transport_company, text='id курьера:')
+    label_transport_company_id_courier.grid(row=2, column=2)
+    text_transport_company_id_courier = Entry(frame_transport_company, width=40)
+    text_transport_company_id_courier.grid(row=2, column=3)
+
+    label_transport_company_id_order = Label(frame_transport_company, text='id заказа:')
+    label_transport_company_id_order.grid(row=3, column=2)
+    text_transport_company_id_order = Entry(frame_transport_company, width=40)
+    text_transport_company_id_order.grid(row=3, column=3)
+
+    label_transport_company_id_adress = Label(frame_transport_company, text='id адреса:')
+    label_transport_company_id_adress.grid(row=4, column=2)
+    text_transport_company_id_adress = Entry(frame_transport_company, width=40)
+    text_transport_company_id_adress.grid(row=4, column=3)
+
+    label_transport_company_id_contact_details = Label(frame_transport_company, text='id контактных данных:')
+    label_transport_company_id_contact_details.grid(row=5, column=2)
+    text_transport_company_id_contact_details = Entry(frame_transport_company, width=40)
+    text_transport_company_id_contact_details.grid(row=5, column=3)
+
+    btn = Button(frame_transport_company, text='Добавить', command=insert_transport_company)
+    btn.grid(row=6, column=2)
+
+    btnOutput = Button(frame_transport_company, text='Вывести таблицу', command=output_transport_company)
+    btnOutput.grid(row=6, column=3)
+
+
+    textOutputTransportCompany = Text(frame_transport_company, width=200, height=20, font='Consolas 10')
+    textOutputTransportCompany.place(x=10, y=300)
+
+    # заказ доставка
+    frame_delivery_order = ttk.Frame(tables)
+    tables.add(frame_delivery_order, text='Заказ доставки')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_delivery_order, text="тип доставки")
+    lbl.grid(row=0, column=1)
+
+    label_delivery_order_type_id = Label(frame_delivery_order, text='id:')
+    label_delivery_order_type_id.grid(row=1, column=0)
+    text_delivery_order_type_id = Entry(frame_delivery_order, width=40)
+    text_delivery_order_type_id.grid(row=1, column=1)
+
+    label_delivery_order_type_type = Label(frame_delivery_order, text='тип:')
+    label_delivery_order_type_type.grid(row=2, column=0)
+    text_delivery_order_type_type = Entry(frame_delivery_order, width=40)
+    text_delivery_order_type_type.grid(row=2, column=1)
+
+    btn = Button(frame_delivery_order, text='Добавить', command=insert_delivery_order_type)
+    btn.grid(row=3, column=0)
+
+    btnOutput = Button(frame_delivery_order, text='Вывести таблицу', command=output_delivery_order_type)
+    btnOutput.grid(row=3, column=1)
+
+    lbl = Label(frame_delivery_order, text="заказ доставки")
+    lbl.grid(row=0, column=3)
+
+    label_delivery_order_id = Label(frame_delivery_order, text='id:')
+    label_delivery_order_id.grid(row=1, column=2)
+    text_delivery_order_id = Entry(frame_delivery_order, width=40)
+    text_delivery_order_id.grid(row=1, column=3)
+
+    label_delivery_order_id_product = Label(frame_delivery_order, text='id товара:')
+    label_delivery_order_id_product.grid(row=2, column=2)
+    text_delivery_order_id_product = Entry(frame_delivery_order, width=40)
+    text_delivery_order_id_product.grid(row=2, column=3)
+
+    label_delivery_order_price = Label(frame_delivery_order, text='цена:')
+    label_delivery_order_price.grid(row=3, column=2)
+    text_delivery_order_price = Entry(frame_delivery_order, width=40)
+    text_delivery_order_price.grid(row=3, column=3)
+
+    label_delivery_order_start_date = Label(frame_delivery_order, text='дата поступления:')
+    label_delivery_order_start_date.grid(row=4, column=2)
+    text_delivery_order_start_date = Entry(frame_delivery_order, width=40)
+    text_delivery_order_start_date.grid(row=4, column=3)
+
+    label_delivery_order_end_date = Label(frame_delivery_order, text='дата завершения:')
+    label_delivery_order_end_date.grid(row=5, column=2)
+    text_delivery_order_end_date = Entry(frame_delivery_order, width=40)
+    text_delivery_order_end_date.grid(row=5, column=3)
+
+    label_delivery_order_type_delivery = Label(frame_delivery_order, text='id типа доставки:')
+    label_delivery_order_type_delivery.grid(row=6, column=2)
+    text_delivery_order_type_delivery = Entry(frame_delivery_order, width=40)
+    text_delivery_order_type_delivery.grid(row=6, column=3)
+
+    btn = Button(frame_delivery_order, text='Добавить', command=insert_delivery_order)
+    btn.grid(row=7, column=2)
+
+    btnOutput = Button(frame_delivery_order, text='Вывести таблицу', command=output_delivery_order)
+    btnOutput.grid(row=7, column=3)
+
+    textOutputDeliveryOrder = Text(frame_delivery_order, width=200, height=20, font='Consolas 10')
+    textOutputDeliveryOrder.place(x=10, y=300)
+
+    # поставщик
+    frame_provider_contact_details = ttk.Frame(tables)
+    tables.add(frame_provider_contact_details, text='Поставщик')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_provider_contact_details, text="контакты поставщика")
+    lbl.grid(row=0, column=1)
+
+    label_provider_contact_details_id = Label(frame_provider_contact_details, text='id:')
+    label_provider_contact_details_id.grid(row=1, column=0)
+    text_provider_contact_details_id = Entry(frame_provider_contact_details, width=40)
+    text_provider_contact_details_id.grid(row=1, column=1)
+
+    label_provider_contact_details_name = Label(frame_provider_contact_details, text='название:')
+    label_provider_contact_details_name.grid(row=2, column=0)
+    text_provider_contact_details_name = Entry(frame_provider_contact_details, width=40)
+    text_provider_contact_details_name.grid(row=2, column=1)
+
+    label_provider_contact_details_dscription = Label(frame_provider_contact_details, text='описание:')
+    label_provider_contact_details_dscription.grid(row=3, column=0)
+    text_provider_contact_details_dscription = Entry(frame_provider_contact_details, width=40)
+    text_provider_contact_details_dscription.grid(row=3, column=1)
+
+    label_provider_contact_details_email = Label(frame_provider_contact_details, text='email:')
+    label_provider_contact_details_email.grid(row=4, column=0)
+    text_provider_contact_details_email = Entry(frame_provider_contact_details, width=40)
+    text_provider_contact_details_email.grid(row=4, column=1)
+
+    label_provider_contact_details_phone = Label(frame_provider_contact_details, text='телефон:')
+    label_provider_contact_details_phone.grid(row=5, column=0)
+    text_provider_contact_details_phone = Entry(frame_provider_contact_details, width=40)
+    text_provider_contact_details_phone.grid(row=5, column=1)
+
+    btn = Button(frame_provider_contact_details, text='Добавить', command=insert_provider_contact)
+    btn.grid(row=6, column=0)
+
+    btnOutput = Button(frame_provider_contact_details, text='Вывести таблицу', command=output_provider_contact)
+    btnOutput.grid(row=6, column=1)
+
+    lbl = Label(frame_provider_contact_details, text="поставщик")
+    lbl.grid(row=0, column=3)
+
+    label_provider_id = Label(frame_provider_contact_details, text='id:')
+    label_provider_id.grid(row=1, column=2)
+    text_provider_id = Entry(frame_provider_contact_details, width=40)
+    text_provider_id.grid(row=1, column=3)
+
+    label_provider_id_product = Label(frame_provider_contact_details, text='id продукта:')
+    label_provider_id_product.grid(row=2, column=2)
+    text_provider_id_product = Entry(frame_provider_contact_details, width=40)
+    text_provider_id_product.grid(row=2, column=3)
+
+    label_provider_id_adress = Label(frame_provider_contact_details, text='id адреса:')
+    label_provider_id_adress.grid(row=3, column=2)
+    text_provider_id_adress = Entry(frame_provider_contact_details, width=40)
+    text_provider_id_adress.grid(row=3, column=3)
+
+    label_provider_id_contact_details = Label(frame_provider_contact_details, text='id контактных данных:')
+    label_provider_id_contact_details.grid(row=4, column=2)
+    text_provider_id_contact_details = Entry(frame_provider_contact_details, width=40)
+    text_provider_id_contact_details.grid(row=4, column=3)
+
+    btn = Button(frame_provider_contact_details, text='Добавить', command=insert_provider)
+    btn.grid(row=5, column=2)
+
+    btnOutput = Button(frame_provider_contact_details, text='Вывести таблицу', command=output_provider)
+    btnOutput.grid(row=5, column=3)
+
+    textOutputProvider = Text(frame_provider_contact_details, width=200, height=20, font='Consolas 10')
+    textOutputProvider.place(x=10, y=300)
+
+    # товар
+    frame_product = ttk.Frame(tables)
+    tables.add(frame_product, text='Товар')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_product, text="наименование товара")
+    lbl.grid(row=0, column=1)
+
+    label_name_product_id = Label(frame_product, text='id:')
+    label_name_product_id.grid(row=1, column=0)
+    text_name_product_id = Entry(frame_product, width=40)
+    text_name_product_id.grid(row=1, column=1)
+
+    label_name_product_name = Label(frame_product, text='название:')
+    label_name_product_name.grid(row=2, column=0)
+    text_name_product_name = Entry(frame_product, width=40)
+    text_name_product_name.grid(row=2, column=1)
+
+    btn = Button(frame_product, text='Добавить', command=insert_name_product)
+    btn.grid(row=3, column=0)
+
+    btnOutput = Button(frame_product, text='Вывести таблицу', command=output_name_product)
+    btnOutput.grid(row=3, column=1)
+
+    lbl = Label(frame_product, text="товар")
+    lbl.grid(row=0, column=3)
+
+    label_product_id = Label(frame_product, text='id:')
+    label_product_id.grid(row=1, column=2)
+    text_product_id = Entry(frame_product, width=40)
+    text_product_id.grid(row=1, column=3)
+
+    label_product_size = Label(frame_product, text='размер:')
+    label_product_size.grid(row=2, column=2)
+    text_product_size = Entry(frame_product, width=40)
+    text_product_size.grid(row=2, column=3)
+
+    label_product_weight = Label(frame_product, text='вес:')
+    label_product_weight.grid(row=3, column=2)
+    text_product_weight = Entry(frame_product, width=40)
+    text_product_weight.grid(row=3, column=3)
+
+    label_product_id_name = Label(frame_product, text='id наименования:')
+    label_product_id_name.grid(row=4, column=2)
+    text_product_id_name = Entry(frame_product, width=40)
+    text_product_id_name.grid(row=4, column=3)
+
+    label_product_id_adress = Label(frame_product, text='адрес где товар:')
+    label_product_id_adress.grid(row=5, column=2)
+    text_product_id_adress = Entry(frame_product, width=40)
+    text_product_id_adress.grid(row=5, column=3)
+
+    btn = Button(frame_product, text='Добавить', command=insert_product)
+    btn.grid(row=6, column=2)
+
+    btnOutput = Button(frame_product, text='Вывести таблицу', command=output_product)
+    btnOutput.grid(row=6, column=3)
+
+    textOutputProduct = Text(frame_product, width=200, height=20, font='Consolas 10')
+    textOutputProduct.place(x=10, y=300)
+
+    # потребитель
+    frame_consumer = ttk.Frame(tables)
+    tables.add(frame_consumer, text='Потребитель')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_consumer, text="контакты потребителя")
+    lbl.grid(row=0, column=1)
+
+    label_consumer_contact_id = Label(frame_consumer, text='id:')
+    label_consumer_contact_id.grid(row=1, column=0)
+    text_consumer_contact_id = Entry(frame_consumer, width=40)
+    text_consumer_contact_id.grid(row=1, column=1)
+
+    label_consumer_contact_name = Label(frame_consumer, text='название:')
+    label_consumer_contact_name.grid(row=2, column=0)
+    text_consumer_contact_name = Entry(frame_consumer, width=40)
+    text_consumer_contact_name.grid(row=2, column=1)
+
+    label_consumer_contact_dscription = Label(frame_consumer, text='описание:')
+    label_consumer_contact_dscription.grid(row=3, column=0)
+    text_consumer_contact_dscription = Entry(frame_consumer, width=40)
+    text_consumer_contact_dscription.grid(row=3, column=1)
+
+    label_consumer_contact_email = Label(frame_consumer, text='email:')
+    label_consumer_contact_email.grid(row=4, column=0)
+    text_consumer_contact_email = Entry(frame_consumer, width=40)
+    text_consumer_contact_email.grid(row=4, column=1)
+
+    label_consumer_contact_phone = Label(frame_consumer, text='телефон:')
+    label_consumer_contact_phone.grid(row=5, column=0)
+    text_consumer_contact_phone = Entry(frame_consumer, width=40)
+    text_consumer_contact_phone.grid(row=5, column=1)
+
+    btn = Button(frame_consumer, text='Добавить', command=insert_consumer_contact)
+    btn.grid(row=6, column=0)
+
+    btnOutput = Button(frame_consumer, text='Вывести таблицу', command=output_consumer_contact)
+    btnOutput.grid(row=6, column=1)
+
+    lbl = Label(frame_consumer, text="потребитель")
+    lbl.grid(row=0, column=3)
+
+    label_consumer_id = Label(frame_consumer, text='id:')
+    label_consumer_id.grid(row=1, column=2)
+    text_consumer_id = Entry(frame_consumer, width=40)
+    text_consumer_id.grid(row=1, column=3)
+
+    label_consumer_id_order = Label(frame_consumer, text='id заказа:')
+    label_consumer_id_order.grid(row=2, column=2)
+    text_consumer_id_order = Entry(frame_consumer, width=40)
+    text_consumer_id_order.grid(row=2, column=3)
+
+    label_consumer_id_adress = Label(frame_consumer, text='id адреса:')
+    label_consumer_id_adress.grid(row=3, column=2)
+    text_consumer_id_adress = Entry(frame_consumer, width=40)
+    text_consumer_id_adress.grid(row=3, column=3)
+
+    label_consumer_id_contact_details = Label(frame_consumer, text='id контактных данных:')
+    label_consumer_id_contact_details.grid(row=4, column=2)
+    text_consumer_id_contact_details = Entry(frame_consumer, width=40)
+    text_consumer_id_contact_details.grid(row=4, column=3)
+
+    btn = Button(frame_consumer, text='Добавить', command=insert_transport_company)
+    btn.grid(row=5, column=2)
+
+    btnOutput = Button(frame_consumer, text='Вывести таблицу', command=output_consumer)
+    btnOutput.grid(row=5, column=3)
+
+    textOutputСonsumer = Text(frame_consumer, width=200, height=20, font='Consolas 10')
+    textOutputСonsumer.place(x=10, y=200)
+
+    # склад
+    frame_stoc = ttk.Frame(tables)
+    tables.add(frame_stoc, text='Склад')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_stoc, text="склад")
+    lbl.grid(row=0, column=1)
+
+    label_stoc_id = Label(frame_stoc, text='id:')
+    label_stoc_id.grid(row=1, column=0)
+    text_stoc_id = Entry(frame_stoc, width=40)
+    text_stoc_id.grid(row=1, column=1)
+
+    label_stoc_id_product = Label(frame_stoc, text='id продукта:')
+    label_stoc_id_product.grid(row=2, column=0)
+    text_stoc_id_product = Entry(frame_stoc, width=40)
+    text_stoc_id_product.grid(row=2, column=1)
+
+    label_stoc_id_addres = Label(frame_stoc, text='id адреса:')
+    label_stoc_id_addres.grid(row=3, column=0)
+    text_stoc_id_addres = Entry(frame_stoc, width=40)
+    text_stoc_id_addres.grid(row=3, column=1)
+
+    btn = Button(frame_stoc, text='Добавить', command=insert_stoc)
+    btn.grid(row=4, column=0)
+
+    btnOutput = Button(frame_stoc, text='Вывести таблицу', command=output_stoc)
+    btnOutput.grid(row=4, column=1)
+
+    textOutputStoc = Text(frame_stoc, width=200, height=20, font='Consolas 10')
+    textOutputStoc.place(x=10, y=200)
+
+    # адресс
+    frame_addres = ttk.Frame(tables)
+    tables.add(frame_addres, text='Адрес')
+    tables.pack(expand=2, fill='both')
+
+    lbl = Label(frame_addres, text="страна")
+    lbl.grid(row=0, column=1)
+
+    label_addres_country_id = Label(frame_addres, text='id:')
+    label_addres_country_id.grid(row=1, column=0)
+    text_addres_country_id = Entry(frame_addres, width=40)
+    text_addres_country_id.grid(row=1, column=1)
+
+    label_addres_country_name = Label(frame_addres, text='название:')
+    label_addres_country_name.grid(row=2, column=0)
+    text_addres_country_name = Entry(frame_addres, width=40)
+    text_addres_country_name.grid(row=2, column=1)
+
+    btn = Button(frame_addres, text='Добавить', command=insert_addres_county)
+    btn.grid(row=3, column=0)
+
+    btnOutput = Button(frame_addres, text='Вывести таблицу', command=output_addres_county)
+    btnOutput.grid(row=3, column=1)
+
+    lbl = Label(frame_addres, text="город")
+    lbl.grid(row=0, column=3)
+
+    label_addres_city_id = Label(frame_addres, text='id:')
+    label_addres_city_id.grid(row=1, column=2)
+    text_addres_city_id = Entry(frame_addres, width=40)
+    text_addres_city_id.grid(row=1, column=3)
+
+    label_addres_city_name = Label(frame_addres, text='название:')
+    label_addres_city_name.grid(row=2, column=2)
+    text_addres_city_name = Entry(frame_addres, width=40)
+    text_addres_city_name.grid(row=2, column=3)
+
+    btn = Button(frame_addres, text='Добавить', command=insert_addres_sity)
+    btn.grid(row=3, column=2)
+
+    btnOutput = Button(frame_addres, text='Вывести таблицу', command=output_addres_sity)
+    btnOutput.grid(row=3, column=3)
+
+    lbl = Label(frame_addres, text="улица")
+    lbl.grid(row=0, column=5)
+
+    label_addres_street_id = Label(frame_addres, text='id:')
+    label_addres_street_id.grid(row=1, column=4)
+    text_addres_street_id = Entry(frame_addres, width=40)
+    text_addres_street_id.grid(row=1, column=5)
+
+    label_addres_street_name = Label(frame_addres, text='название:')
+    label_addres_street_name.grid(row=2, column=4)
+    text_addres_street_name = Entry(frame_addres, width=40)
+    text_addres_street_name.grid(row=2, column=5)
+
+    btn = Button(frame_addres, text='Добавить', command=insert_addres_street)
+    btn.grid(row=3, column=4)
+
+    btnOutput = Button(frame_addres, text='Вывести таблицу', command=output_addres_street)
+    btnOutput.grid(row=3, column=5)
+
+    lbl = Label(frame_addres, text="здание ")
+    lbl.grid(row=0, column=7)
+
+    label_addres_bilding_id = Label(frame_addres, text='id:')
+    label_addres_bilding_id.grid(row=1, column=6)
+    text_addres_bilding_id = Entry(frame_addres, width=40)
+    text_addres_bilding_id.grid(row=1, column=7)
+
+    label_addres_bilding_name = Label(frame_addres, text='название:')
+    label_addres_bilding_name.grid(row=2, column=6)
+    text_addres_bilding_name = Entry(frame_addres, width=40)
+    text_addres_bilding_name.grid(row=2, column=7)
+
+    btn = Button(frame_addres, text='Добавить', command=insert_addres_bilding)
+    btn.grid(row=3, column=6)
+
+    btnOutput = Button(frame_addres, text='Вывести таблицу', command=output_addres_bilding)
+    btnOutput.grid(row=3, column=7)
+
+    lbl = Label(frame_addres, text="адрес ")
+    lbl.grid(row=4, column=1)
+
+    label_addres_id = Label(frame_addres, text='id:')
+    label_addres_id.grid(row=5, column=0)
+    text_addres_id = Entry(frame_addres, width=40)
+    text_addres_id.grid(row=5, column=1)
+
+    label_addres_county = Label(frame_addres, text='id страны:')
+    label_addres_county.grid(row=6, column=0)
+    text_addres_county = Entry(frame_addres, width=40)
+    text_addres_county.grid(row=6, column=1)
+
+    label_addres_city = Label(frame_addres, text='id города:')
+    label_addres_city.grid(row=7, column=0)
+    text_addres_city = Entry(frame_addres, width=40)
+    text_addres_city.grid(row=7, column=1)
+
+    label_addres_street = Label(frame_addres, text='id улицы:')
+    label_addres_street.grid(row=8, column=0)
+    text_addres_street = Entry(frame_addres, width=40)
+    text_addres_street.grid(row=8, column=1)
+
+    label_addres_bilding = Label(frame_addres, text='id здания:')
+    label_addres_bilding.grid(row=9, column=0)
+    text_addres_bilding = Entry(frame_addres, width=40)
+    text_addres_bilding.grid(row=9, column=1)
+
+    btn = Button(frame_addres, text='Добавить', command=insert_addres)
+    btn.grid(row=10, column=0)
+
+    btnOutput = Button(frame_addres, text='Вывести таблицу', command=output_addres)
+    btnOutput.grid(row=10, column=1)
+
+    textOutputAddres = Text(frame_addres, width=200, height=20, font='Consolas 10')
+    textOutputAddres.place(x=10, y=300)
+
+    window.mainloop()

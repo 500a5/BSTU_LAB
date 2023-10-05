@@ -1,0 +1,18 @@
+body{
+    background: aliceblue;
+}
+.alert-warning{
+    text-align: center;
+    background: #d4ebf5;
+    width: 50%;
+}
+
+form {
+    width: 500px;
+    margin-top: 50px;
+}
+
+.textcenter{
+    margin-left: 10%;
+    margin-right: 10%
+}
