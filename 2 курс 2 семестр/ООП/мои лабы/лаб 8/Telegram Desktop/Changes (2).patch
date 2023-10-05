@@ -1,0 +1,37 @@
+Index: app/src/main/assets/data.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/assets/data.json b/app/src/main/assets/data.json
+--- a/app/src/main/assets/data.json	
++++ b/app/src/main/assets/data.json	
+@@ -1,1 +1,1 @@
+-{"host": "https://mdm-release.infinitower.fun"}
++{"host": "https://mdm-master.infinitower.space/"}
+Index: app/src/main/java/mdm/secure/agent/db/entity/SecurityEvent.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/db/entity/SecurityEvent.java b/app/src/main/java/mdm/secure/agent/db/entity/SecurityEvent.java
+--- a/app/src/main/java/mdm/secure/agent/db/entity/SecurityEvent.java	
++++ b/app/src/main/java/mdm/secure/agent/db/entity/SecurityEvent.java	
+@@ -161,7 +161,7 @@
+             }
+             case CODE_EVENT_DISABLE_WI_FI_CONNECT: {
+                 type = TYPE_MANAGEMENT;
+-                severity = SEVERITY_INFORMATION;
++                severity = SEVERITY_CRITICAL;
+                 break;
+             }
+             case CODE_EVENT_DISABLE_APP: {
+@@ -286,7 +286,7 @@
+             }
+             case CODE_EVENT_ENABLE_WI_FI: {
+                 type = TYPE_MANAGEMENT;
+-                severity = SEVERITY_INFORMATION;
++                severity = SEVERITY_CRITICAL;
+                 break;
+             }
+             case CODE_EVENT_INCORRECT_TOKEN: {
