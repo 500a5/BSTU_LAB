@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>558</width>
+    <height>340</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QVBoxLayout" name="verticalLayout_6">
+    <item>
+     <widget class="QComboBox" name="comboBox">
+      <item>
+       <property name="text">
+        <string>Критические секции</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Мьютексы</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>События</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Семафоры</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Ждущие таймеры</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLCDNumber" name="timer">
+      <property name="mode">
+       <enum>QLCDNumber::Dec</enum>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="start_timer">
+      <property name="text">
+       <string>Начать отсчет</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="stop_timer">
+      <property name="text">
+       <string>Сбросить таймер</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

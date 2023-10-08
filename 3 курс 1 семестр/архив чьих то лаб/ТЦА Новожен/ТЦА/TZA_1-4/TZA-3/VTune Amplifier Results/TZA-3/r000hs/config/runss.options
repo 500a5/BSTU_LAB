@@ -1,0 +1,15 @@
+-r
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\VTune Amplifier Results\TZA-3\r000hs
+--stack-stitching
+--data-limit-mb=1000
+--disk-space-limit=0
+--mrte-type=java,dotnet,python
+--itt-config=frame
+--itt-config=task,event,counter
+--stackwalk=offline
+--mrte-mode=auto
+--type=cpu:counters:nostack
+--type=cpu:stack
+--interval=10
+--
+C:\Users\Novoz\source\repos\TZA-3\Debug\TZA-3.exe

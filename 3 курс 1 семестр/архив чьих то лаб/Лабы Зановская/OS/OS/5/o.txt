@@ -1,0 +1,17 @@
+
+Available disk drives : C:\
+FreeBytesAvail   200117575680,  TotalNumOfBytes  499459813376,  TotalNumOfFreeBytes   200117575680
+	Maximum Component  Length 255
+	Volume Name  Acer
+	Volume Serial Number  2865879232
+	File System  NTFS
+	System flags 0x03E706FF
+Drive type FIXED
+Available disk drives : D:\
+FreeBytesAvail   4666114048,  TotalNumOfBytes  16039051264,  TotalNumOfFreeBytes   4666114048
+	Maximum Component  Length 255
+	Volume Name  Transcend
+	Volume Serial Number  58983278
+	File System  FAT32
+	System flags 0x00020206
+Drive type REMOVABLE

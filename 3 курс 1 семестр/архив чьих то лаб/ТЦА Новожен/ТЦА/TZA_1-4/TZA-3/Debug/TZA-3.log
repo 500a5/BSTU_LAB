@@ -1,0 +1,11 @@
+﻿TZA-3.cpp(1,12): warning : '#pragma optimize' is not supported [-Wignored-pragma-optimize]
+TZA-3.cpp(248,6): warning : unused variable 't' [-Wunused-variable]
+TZA-3.cpp(1039,6): warning : add explicit braces to avoid dangling else [-Wdangling-else]
+TZA-3.cpp(1069,7): warning : add explicit braces to avoid dangling else [-Wdangling-else]
+TZA-3.cpp(1100,7): warning : add explicit braces to avoid dangling else [-Wdangling-else]
+TZA-3.cpp(1131,7): warning : add explicit braces to avoid dangling else [-Wdangling-else]
+TZA-3.cpp(1224,7): warning : add explicit braces to avoid dangling else [-Wdangling-else]
+TZA-3.cpp(1254,7): warning : add explicit braces to avoid dangling else [-Wdangling-else]
+TZA-3.cpp(1285,7): warning : add explicit braces to avoid dangling else [-Wdangling-else]
+TZA-3.cpp(1316,7): warning : add explicit braces to avoid dangling else [-Wdangling-else]
+  TZA-3.vcxproj -> C:\Users\Novoz\source\repos\TZA-3\Debug\TZA-3.exe
