@@ -1,0 +1,7 @@
+LIBRARY lab8
+EXPORTS
+sortc
+_sorts@20 =_sorts@0
+@sortf@20 =_sortf@0
+sortc_arg
+sorts_arg
