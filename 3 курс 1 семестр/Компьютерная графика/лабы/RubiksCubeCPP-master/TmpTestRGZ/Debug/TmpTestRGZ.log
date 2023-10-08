@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\500a5\Desktop\RubiksCubeCPP-master\TmpTestRGZ\main.cpp(347,1): warning C4805: ==: небезопасное смешение типа "int" и типа "bool" в операции
+C:\Users\500a5\Desktop\RubiksCubeCPP-master\TmpTestRGZ\main.cpp(710,38): warning C4838: Преобразование из "double" в "GLfloat" требует сужающего преобразования.
+C:\Users\500a5\Desktop\RubiksCubeCPP-master\TmpTestRGZ\main.cpp(113): warning C4172: возвращение адреса локальной или временной переменной : _color
+  TmpTestRGZ.vcxproj -> C:\Users\500a5\Desktop\RubiksCubeCPP-master\Debug\RGZ_RubesCube.exe

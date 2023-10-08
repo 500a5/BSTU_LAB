@@ -1,0 +1,14 @@
+#include "model3d.h"
+
+Model3D::Model3D(const QString &name){
+    load_obj(name, v_d, indexes);
+    modelMatrix.setToIdentity();
+    /*for (int i = 0; i < v_d.size(); i++){
+        center.setX(center.x() + v_d[i].position.x());
+        center.setY(center.y() + v_d[i].position.y());
+        center.setZ(center.z() + v_d[i].position.z());
+    }
+    center.setX(center.x()/v_d.size());
+    center.setY(center.y()/v_d.size());
+    center.setZ(center.z()/v_d.size());*/
+}

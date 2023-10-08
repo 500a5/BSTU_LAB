@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>oboi.bmp</file>
+        <file>bottom.jpg</file>
+        <file>Top.jpg</file>
+        <file>left.jpg</file>
+        <file>right.jpg</file>
+        <file>Penguin Diffuse Color.png</file>
+        <file>PenguinStart.mtl</file>
+        <file>PenguinStart.obj</file>
+        <file>front.jpg</file>
+        <file>houseBok.jpg</file>
+        <file>houseKrisha.jpg</file>
+        <file>housePered.jpg</file>
+        <file>houseZad.jpg</file>
+        <file>Kolodec.jpg</file>
+        <file>Kolodec2.jpg</file>
+        <file>tex1.png</file>
+    </qresource>
+</RCC>
