@@ -1,2 +1,0 @@
-LIBRARY mmfdll
-EXPORTS function1 @1 NONAME

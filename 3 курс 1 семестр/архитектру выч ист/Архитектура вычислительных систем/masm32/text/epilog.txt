@@ -1,2 +1,0 @@
-OPTION PROLOGUE:PrologueDef
-OPTION EPILOGUE:EpilogueDef

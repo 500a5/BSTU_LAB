@@ -1,1 +1,0 @@
-"./I2C.obj" "./keys.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd" -llibc.a 

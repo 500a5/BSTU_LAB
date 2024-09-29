@@ -1,4 +1,0 @@
-printf
-#include
-int
-void

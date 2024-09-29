@@ -1,1 +1,0 @@
-"./I2C.obj" "./analogsensors.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "./uart.obj" "../lnk_msp430f1611.cmd" -l"libc.a" 

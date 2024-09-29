@@ -1,3 +1,0 @@
-    pop edi
-    pop esi
-    pop ebx

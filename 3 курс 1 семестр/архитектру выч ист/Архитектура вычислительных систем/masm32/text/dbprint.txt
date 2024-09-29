@@ -1,5 +1,0 @@
-    pushad
-    pushfd
-      print str$(eax)," text",13,10
-    popfd
-    popad

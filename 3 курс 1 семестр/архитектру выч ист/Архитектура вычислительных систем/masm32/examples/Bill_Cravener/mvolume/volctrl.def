@@ -1,4 +1,0 @@
-LIBRARY VolCtrl
-EXPORTS GetMasterVolume
-EXPORTS SetMasterVolume
-EXPORTS CloseMasterVolume

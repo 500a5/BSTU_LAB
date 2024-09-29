@@ -1,3 +1,0 @@
-C:/Users/500a5/CLionProjects/TVMS/cmake-build-debug/CMakeFiles/TVMS.dir
-C:/Users/500a5/CLionProjects/TVMS/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/500a5/CLionProjects/TVMS/cmake-build-debug/CMakeFiles/rebuild_cache.dir
