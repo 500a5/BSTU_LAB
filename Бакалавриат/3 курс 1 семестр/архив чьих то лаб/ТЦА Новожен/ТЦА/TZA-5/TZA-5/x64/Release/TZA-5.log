@@ -1,0 +1,7 @@
+﻿  TZA-5.cpp
+C:\Users\Novoz\source\repos\TZA-5\TZA-5\TZA-5.cpp(28,16): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 14 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  TZA-5.vcxproj -> C:\Users\Novoz\source\repos\TZA-5\x64\Release\TZA-5.exe

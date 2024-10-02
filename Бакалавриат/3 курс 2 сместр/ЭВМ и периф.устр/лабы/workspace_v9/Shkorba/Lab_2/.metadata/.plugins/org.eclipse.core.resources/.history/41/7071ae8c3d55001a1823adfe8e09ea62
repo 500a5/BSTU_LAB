@@ -1,0 +1,35 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+// speed = 0 - скорость обмена
+// databits = 8 - длинна символа
+// stopbits = 1, 2 - кол-во передаваемых стоповых бит
+// parity = 0 - без контроля четности
+// iface = 0 - USB
+void main(void) {
+    WDTCTL = WDTPW + WDTHOLD;
+    Init_System_Clock();
+    Init_System();
+    char s[50];
+    char i;
+    //char j = 20;
+    for(i = 0; i < 50; i++)
+    {
+        //UART_sendbyte(i);
+        s[i] = i+20;
+    }
+    UART_init(0, 8, 1, 0, 0);
+    while(1)
+    {
+        UART_message(s);
+        UART_off();
+    }
+
+}

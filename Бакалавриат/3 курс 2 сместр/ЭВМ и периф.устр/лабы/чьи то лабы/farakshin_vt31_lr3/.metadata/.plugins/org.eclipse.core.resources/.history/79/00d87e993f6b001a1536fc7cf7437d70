@@ -1,0 +1,73 @@
+#include <msp430.h>
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "I2C.h"
+#include "leds.h"
+#include "keys.h"
+#include "main.h"
+
+void Disable_Watchdog(){
+    WDTCTL = WDTPW + WDTHOLD; // Disable watchdog timer
+}
+
+// Установим клавиатуру в состояние ожидания прерывания
+void KBD_wait_interrupt(){
+    // выбираем регистр конфигурации направления (0x03)
+    //  и конфигурируем на вывод (1-ввод, 0-вывод)
+    // P0-P3, а на ввод P4-P7
+    I2C_WriteByte(0x03, 0xF0, KEYS_i2c_addr);
+    // Записываем в P0-P3 единицы
+    I2C_WriteByte(0x01, 0x0F, KEYS_i2c_addr);
+}
+
+// Добавим прерывание для клавиатуры. Клавиатура подключена к порту 1
+
+#pragma vector=PORT1_VECTOR
+__interrupt void KBD_ISR(void){
+    //LED_clear();
+    //LED_set(1);
+    //wait_1ms(500);
+    P1IFG = 0;
+   //KBD_wait_interrupt();
+}
+
+
+// Разработать программу, фиксирующую нажатия клавиш 5, 7 и 9 матричной
+// клавиатуры  включением  светодиодов  5,  6  и  7  соответственно.  Выход  из
+// цикла  опроса  осуществляется  при  нажатии  клавиши  *.  Частота  тактовых
+// импульсов на линии SCL – 20 кГц.
+
+void main(void)
+{
+    int speed = 100;
+    Disable_Watchdog();
+    Init_System_Clock();
+    Init_System();
+    P1DIR &= ~BIT7;
+    P1IE |= BIT7;   // Разрешаем прерывания для P1.7
+    P1IFG &= ~BIT7; // Для предотвращения немедленного срабатывания прерывания,
+                    // обнуляем его флаг для P1.7 до разрешения прерываний
+    P1IES |= BIT7;  // прерывание по переходу из 1 в 0,
+                    // устанавливается соответствующим битом IES.x = 1.
+
+    // общее включение прерываний
+    _enable_interrupt();
+
+    Init_I2C();
+    // Теперь клавиатура будет выдавать прерывания
+    KBD_wait_interrupt();
+
+    //Init_I2C_custom_speed();
+    while (1)
+    {
+        wait_1ms(50);
+        P1IFG |= BIT7;
+        //LED_fx1(speed);
+        //wait_1ms(5);
+        //LED_fx2(speed);
+        //wait_1ms(5);
+        //LED_fx3(speed);
+        //wait_1ms(5);
+    }
+}

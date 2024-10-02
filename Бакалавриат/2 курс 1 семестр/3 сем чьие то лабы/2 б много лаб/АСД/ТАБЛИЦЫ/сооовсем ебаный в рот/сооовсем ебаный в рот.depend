@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1508686781 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\сооовсем ебаный в рот\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tablo.h"
+
+1508687003 c:\users\hystou\desktop\Учёбка\2 r\АСД\сооовсем ебаный в рот\tablo.h
+
+1508686631 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\сооовсем ебаный в рот\tablo.c
+	<stdio.h>
+	<stdlib.h>
+	"tablo.h"
+

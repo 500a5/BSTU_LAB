@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1507839202 source:c:\users\hystou\desktop\”чЄбка\2 r\дискр\3.2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<time.h>
+

@@ -1,0 +1,102 @@
+MCS-51 MACRO ASSEMBLER    LABA3                                                                     01/31/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\SHELL\LABA3.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE C:\SHELL\LABA3.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0
+0000 5389F0            2             ANL TMOD,#11110000B
+0003 438900            3             ORL TMOD,#00000000B
+                       4             CRL RS0
+*** _____________________________________^
+*** ERROR #1, LINE #4 (0), SYNTAX ERROR
+                       5             CRL RS1
+*** _____________________________________^
+*** ERROR #1, LINE #5 (4), SYNTAX ERROR
+0006 D294              6             SETB P1.4
+0008 C295              7             CLR P1.5
+000A 7800              8             MOV R0,#0;20 OEPHNDNB ON 10C
+000C 7900              9     M1:     MOV R1,#0
+000E 7414             10             MOV A,#20
+0010 98               11             SUBB A,R0
+0011 FA               12             MOV R2,A
+                      13             SETB A,R0
+*** ______________________________________^
+*** ERROR #1, LINE #13 (5), SYNTAX ERROR
+0012 FA               14             MOV R2,A
+0013 D297             15             SETB P1.7
+0015 C296             16             CLR P1.6
+0017 02002A           17             JMP M6
+001A 758C9E           18     M5:     MOV TH0,#09EH
+001D 758A57           19             MOV TL0,#057H
+0020 D28C             20             SETB TR0
+0022 308DFD           21     M8:     JNB TF0,M8
+0025 C28C             22             CLR TR0
+0027 C28D             23             CLR TF0
+0029 1A               24             DEC R2
+002A BA00ED           25     M6:     CJNE R2,#0,M5
+                      26     
+002D E500             27     M2:     MOV A,RO
+*** ERROR #18, LINE #27 (13), (PASS 2) UNDEFINED SYMBOL
+002F FA               28             MOV R2,A
+0030 C297             29             CLR P1.7
+0032 D296             30             SETB P1.6
+0034 020047           31             JMP M4
+0037 758C9E           32     M3:     MOV TH0,#09EH
+003A 758A57           33             MOV TL0,#057H
+003D D28C             34             SETB TR0 
+003F 308DFD           35     M7:     JNB TF0,M7
+0042 C28C             36             CLR TR0
+0044 C28D             37             CLR TF0
+0046 1A               38             DEC R2
+0047 BA00ED           39     M4:     CJNE R2,#0,M3
+                      40     
+004A 09               41             INC R1
+004B B9C8DF           42             CJNE R1,#200,M2
+004E 08               43             INC R0
+MCS-51 MACRO ASSEMBLER    LABA3                                                                     01/31/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+004F B80ABA           44             CJNE R0,#10,M1
+0052 D297             45             SETB P1.7
+0054 C296             46             CLR P1.6
+0056 80FE             47             JMP $
+                      48     END
+MCS-51 MACRO ASSEMBLER    LABA3                                                                     01/31/:9   PAGE    3
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+CRL. . . .    ----    ----            
+M1 . . . .  C ADDR    000CH   A       
+M2 . . . .  C ADDR    002DH   A       
+M3 . . . .  C ADDR    0037H   A       
+M4 . . . .  C ADDR    0047H   A       
+M5 . . . .  C ADDR    001AH   A       
+M6 . . . .  C ADDR    002AH   A       
+M7 . . . .  C ADDR    003FH   A       
+M8 . . . .  C ADDR    0022H   A       
+P1 . . . .  D ADDR    0090H   A       
+RO . . . .    ----    ----            
+RS0. . . .  B ADDR    00D0H.3 A       
+RS1. . . .  B ADDR    00D0H.4 A       
+TF0. . . .  B ADDR    0088H.5 A       
+TH0. . . .  D ADDR    008CH   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, 4 ERRORS FOUND (27)

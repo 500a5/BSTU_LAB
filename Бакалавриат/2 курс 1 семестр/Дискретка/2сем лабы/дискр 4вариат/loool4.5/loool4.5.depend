@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1513686329 source:c:\users\Èðà\desktop\2k\dismat\prog\loool4.5\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+

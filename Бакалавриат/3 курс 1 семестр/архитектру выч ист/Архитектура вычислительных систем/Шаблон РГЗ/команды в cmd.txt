@@ -1,0 +1,3 @@
+cd \masm32\bin
+.\ml.exe /c /coff E:\lab_rgz_empty.asm
+.\link /SUBSYSTEM:CONSOLE /LIBPATH:E:\masm32\bin lab_rgz_empty.obj

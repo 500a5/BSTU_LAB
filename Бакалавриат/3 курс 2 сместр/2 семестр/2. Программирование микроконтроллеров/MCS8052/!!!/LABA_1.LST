@@ -1,0 +1,88 @@
+MCS-51 MACRO ASSEMBLER    LABA_1                                                                    10/29/;2   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LABA_1.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE LABA_1.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             org 0h
+                       2             ; Save initial state of keyboard in R1-R4
+0000 758001            3             mov P0, #1h
+0003 A990              4             mov R1, P1
+0005 758002            5             mov P0, #2h
+0008 AA90              6             mov R2, P1
+000A 758004            7             mov P0, #4h
+000D AB90              8             mov R3, P1
+000F 758008            9             mov P0, #8h
+0012 AC90             10             mov R4, P1
+                      11             ; Program main loop
+                      12     start:
+0014 758001           13             mov P0, #1h
+0017 7801             14             mov R0, #1h
+                      15     m1:
+                      16             ; Check changes in input port
+0019 E590             17             mov A, P1
+001B 66               18             xrl A, @R0
+001C 601F             19     jz m3
+                      20             ; Get a number of pressed key in row with number R0
+001E A690             21             mov @R0, P1
+0020 7D00             22             mov R5, #0h
+                      23     m2:
+0022 0D               24             inc R5
+0023 13               25             rrc A
+0024 70FC             26     jnz m2
+                      27             ; Set to A value (row * 5 + col + 'A' - 1)
+0026 E8               28             mov A, R0
+0027 75F005           29             mov B, #5h
+002A 14               30             dec A
+002B A4               31             mul AB
+002C 2D               32             add A, R5
+002D 2440             33             add A, #40h
+                      34     
+                      35             ; Print to console
+002F F599             36             mov SBUF, A
+0031 C299             37             clr TI
+0033 75990D           38             mov SBUF, #13
+0036 C299             39             clr TI
+0038 75990A           40             mov SBUF, #10
+003B C299             41             clr TI
+                      42     m3:
+                      43             ; Go to next row of keyboard
+003D E580             44             mov A, P0
+003F 23               45             rl A
+0040 F580             46             mov P0, A
+0042 08               47             inc R0
+0043 3084D3           48     jnb P0.4, m1
+0046 80CC             49     jmp start
+                      50             end
+MCS-51 MACRO ASSEMBLER    LABA_1                                                                    10/29/;2   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+MCS-51 MACRO ASSEMBLER    LABA_1                                                                    10/29/;2   PAGE    3
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+B. . . . .  D ADDR    00F0H   A       
+M1 . . . .  C ADDR    0019H   A       
+M2 . . . .  C ADDR    0022H   A       
+M3 . . . .  C ADDR    003DH   A       
+P0 . . . .  D ADDR    0080H   A       
+P1 . . . .  D ADDR    0090H   A       
+SBUF . . .  D ADDR    0099H   A       
+START. . .  C ADDR    0014H   A       
+TI . . . .  B ADDR    0098H.1 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>objects/book.obj</file>
+        <file>objects/Bulb.obj</file>
+        <file>objects/ChessBishop.obj</file>
+        <file>objects/ChessBishop_mir.obj</file>
+        <file>objects/ChessboardBase.obj</file>
+        <file>objects/ChessboardField.obj</file>
+        <file>objects/ChessKing.obj</file>
+        <file>objects/ChessKnight.obj</file>
+        <file>objects/ChessKnight_mir.obj</file>
+        <file>objects/ChessPawn.obj</file>
+        <file>objects/ChessQeen.obj</file>
+        <file>objects/ChessRook.obj</file>
+        <file>objects/cube.obj</file>
+        <file>objects/Lampara.obj</file>
+        <file>objects/Table1.obj</file>
+        <file>objects/Table.obj</file>
+        <file>objects/ChessboardBase2.obj</file>
+        <file>objects/Lamp.obj</file>
+        <file>objects/Lamp1.obj</file>
+    </qresource>
+</RCC>

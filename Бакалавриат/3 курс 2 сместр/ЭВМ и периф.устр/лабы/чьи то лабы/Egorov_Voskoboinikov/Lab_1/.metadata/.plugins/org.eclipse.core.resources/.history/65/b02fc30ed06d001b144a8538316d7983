@@ -1,0 +1,15 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+#include "lcd.h"
+
+/*
+ * main.c
+ */
+void main(void) {
+    char a[50] = "0x41";
+    LCD_massage(a)
+}

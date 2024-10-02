@@ -1,0 +1,55 @@
+{
+  "name": "ai_lab_1",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "@craco/craco": "^6.1.1",
+    "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
+    "@toast-ui/chart": "^4.3.6",
+    "antd": "^4.14.0",
+    "craco-less": "^1.17.1",
+    "dotenv": "^9.0.2",
+    "formik": "^2.2.6",
+    "http-proxy-middleware": "^1.0.6",
+    "ky": "^0.27.0",
+    "lodash": "^4.17.21",
+    "mobx": "^6.1.8",
+    "mobx-react-lite": "^3.2.0",
+    "moment": "^2.29.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-loader-spinner": "^4.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "yup": "^0.32.9"
+  },
+  "scripts": {
+    "start": "craco start",
+    "build": "craco build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "dotenv": "^9.0.2",
+    "stylelint": "^13.12.0",
+    "stylelint-config-dvpnt": "^1.4.0",
+    "stylelint-order": "^4.1.0"
+  }
+}

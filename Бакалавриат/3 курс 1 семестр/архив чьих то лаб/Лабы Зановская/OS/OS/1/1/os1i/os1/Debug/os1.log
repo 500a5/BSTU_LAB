@@ -1,0 +1,7 @@
+﻿  MyForm.cpp
+c:\users\acer\desktop\labs\os1\os1\MyForm.h(1697): warning C4996: 'GetVersionExW': объявлен deprecate
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.16299.0\um\sysinfoapi.h(445): note:  см. объявление "GetVersionExW"
+MyForm.cpp(9): warning C4829: Возможно, неправильные параметры функции main. Рекомендуемый вариант - "int main(Platform::Array<Platform::String^>^ argv)"
+c:\users\acer\desktop\labs\os1\os1\myform.h(1987): warning C4700: использована неинициализированная локальная переменная "cursor"
+  .NETFramework,Version=v4.6.1.AssemblyAttributes.cpp
+  os1.vcxproj -> C:\Users\Acer\Desktop\LABS\os1\Debug\os1.exe

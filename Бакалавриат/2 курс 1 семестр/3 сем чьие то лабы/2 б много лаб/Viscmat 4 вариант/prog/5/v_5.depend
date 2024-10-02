@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1509872088 source:c:\users\hystou\desktop\Учёбка\2 r\Вычмат\ПРОГИ\v_5\main.c
+	<stdio.h>
+	<stdlib.h>
+	"v_55.h"
+
+1509870076 c:\users\hystou\desktop\Учёбка\2 r\Вычмат\ПРОГИ\v_5\v_55.h
+	<stdlib.h>
+	<math.h>
+
+1509870813 source:c:\users\hystou\desktop\Учёбка\2 r\Вычмат\ПРОГИ\v_5\v_55.c
+	"v_55.h"
+	"math.h"
+	<stdio.h>
+	<stdlib.h>
+

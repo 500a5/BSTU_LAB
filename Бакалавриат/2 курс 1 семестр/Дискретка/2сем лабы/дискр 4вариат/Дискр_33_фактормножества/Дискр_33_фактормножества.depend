@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1508350528 source:c:\users\Сергей\desktop\Дискр_33_фактормножества\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"diskr3_3.h"
+
+1508350785 source:c:\users\Сергей\desktop\Дискр_33_фактормножества\diskr3_3.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"diskr3_3.h"
+
+1508350418 c:\users\Сергей\desktop\Дискр_33_фактормножества\diskr3_3.h
+
+1508438662 source:c:\users\hystou\desktop\Учёбка\2 r\дискр\Дискр_33_фактормножества\diskr3_3.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"diskr3_3.h"
+
+1508438633 c:\users\hystou\desktop\Учёбка\2 r\дискр\Дискр_33_фактормножества\diskr3_3.h
+
+1508438633 source:c:\users\hystou\desktop\Учёбка\2 r\дискр\Дискр_33_фактормножества\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"diskr3_3.h"
+

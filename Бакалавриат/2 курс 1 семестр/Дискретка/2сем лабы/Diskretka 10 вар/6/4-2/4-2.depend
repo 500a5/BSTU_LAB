@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1511865085 source:c:\users\acer\desktop\лабы\дискретка\6\4-2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+

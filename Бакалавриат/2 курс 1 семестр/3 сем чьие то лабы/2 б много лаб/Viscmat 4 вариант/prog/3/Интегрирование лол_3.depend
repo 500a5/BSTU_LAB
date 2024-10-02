@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1508017492 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\Èíòåãðèðîâàíèå ëîë_3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	"mod.h"
+
+1508014776 c:\users\hystou\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\Èíòåãðèðîâàíèå ëîë_3\mod.h
+
+1508015822 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\Èíòåãðèðîâàíèå ëîë_3\mod.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	"mod.h"
+
+1508017492 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\ÏÐÎÃÈ\Èíòåãðèðîâàíèå ëîë_3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	"mod.h"
+
+1508082576 c:\users\hystou\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\ÏÐÎÃÈ\Èíòåãðèðîâàíèå ëîë_3\mod.h
+
+1508015822 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\ÏÐÎÃÈ\Èíòåãðèðîâàíèå ëîë_3\mod.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	"mod.h"
+
+1509356104 source:c:\users\Èðà\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\ÏÐÎÃÈ\Èíòåãðèðîâàíèå ëîë_3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	"mod.h"
+
+1508082906 c:\users\Èðà\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\ÏÐÎÃÈ\Èíòåãðèðîâàíèå ëîë_3\mod.h
+
+1509355244 source:c:\users\Èðà\desktop\Ó÷¸áêà\2 r\Âû÷ìàò\ÏÐÎÃÈ\Èíòåãðèðîâàíèå ëîë_3\mod.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<locale.h>
+	"mod.h"
+

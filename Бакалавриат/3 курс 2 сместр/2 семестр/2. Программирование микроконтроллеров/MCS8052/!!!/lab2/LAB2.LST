@@ -1,0 +1,188 @@
+MCS-51 MACRO ASSEMBLER    LAB2                                                                      11/10/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN D:\MCS8052\LAB2\LAB2.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE D:\MCS8052\LAB2\LAB2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0h
+0000 0200A9            2     jmp main;
+                       3             
+                       4     ;opnvedsp` qj`mhpnb`mh^ jk`bh`rsp{. Onqke m`f`rh^ jk`bhxh b R4-qj`m-jnd
+                       5     scan:
+0003 111F              6             acall waitBisy
+0005 7C01              7             mov R4,#1                       ;qapnq scancode
+0007 7F04              8             mov R7,#4                       ;g`cpsgj` qwerwhj` qj`mhpnb`mh^
+0009 7EFE              9             mov R6,#11111110b       ;g`cpsgj` hqundmncn a`ir` qj`mhpnb`mh^
+                      10     cycle:
+000B EE               11             mov A,R6
+000C F590             12             mov P1,A                        ;b{bnd rejsyecn a`ir` qj`mhpnb`mh^ 
+000E 23               13             RL A                    ;qdbhc a`ir` qj`mhpnb`mh^ 
+000F FE               14             mov R6,A                ;qnup`memhe rejsyecn a`ir` qj`mhpnb`mh^ 
+0010 E5A0             15             mov A,P2                ;bbnd a`ir` bngbp`r` 
+0012 7D05             16             mov R5,#5               ;g`cpsgj` qwerwhj` nopnqnb 
+                      17     rotate:
+0014 13               18             RRC A                   ;qdbhc a`ir` bngbp`r` 
+0015 505F             19             JNC asciiByScan             ;b{und hg opnvedsp{ oph nam`psfemhh oepbni m`f`rni jk`b
+                             hxh 
+0017 0C               20             INC R4                  ;hmjpelemr SCANCODE 
+0018 DDFA             21             DJNZ R5,rotate          ;dejpelemr qwerwhj` nopnqnb h vhjk, eqkh me msk|
+001A DFEF             22             DJNZ R7,cycle           ;dejpelemr qwerwhj` qj`mhpnb`mh^ h vhjk, eqkh me 0
+001C 80E5             23             JMP SCAN                ;m`w`r| qj`mhpnb`mhe qm`w`k`    
+001E 22               24     ret
+                      25     
+                      26     ;Fd`r|, onj` jk`bhx` m`f`r`
+                      27     waitBisy:
+001F 74FF             28             mov A,#0FFH 
+                      29             sleep  : 
+0021 B5A0FD           30                     CJNE A,P2,sleep ;eqkh jk`bhx` m`f`r`, rn fd`r|
+0024 22               31     ret
+                      32     
+                      33     ; G`onkmemhe ASCII jndnb
+                      34     initAscii:
+0025 791F             35             mov R1, #1Fh 
+0027 7731             36             mov @R1, #031h  ;1
+0029 7920             37             mov R1, #20h 
+002B 7732             38             mov @R1, #032h  ;2
+002D 7921             39             mov R1, #21h 
+002F 7733             40             mov @R1, #033h  ;3
+0031 7922             41             mov R1, #22h 
+0033 7743             42             mov @R1, #043h  ;C
+0035 7923             43             mov R1, #23h    
+0037 7744             44             mov @R1, #044h  ;D
+0039 7924             45             mov R1, #024h   
+003B 7734             46             mov @R1, #034h  ;4
+003D 7925             47             mov R1, #025h
+003F 7735             48             mov @R1, #035h  ;5
+0041 7926             49             mov R1, #026h   
+MCS-51 MACRO ASSEMBLER    LAB2                                                                      11/10/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+0043 7736             50             mov @R1, #036h  ;6
+0045 7927             51             mov R1, #027h
+0047 7745             52             mov @R1, #045h  ;E
+0049 7928             53             mov R1, #028h
+004B 7746             54             mov @R1, #046h  ;F
+004D 7929             55             mov R1, #029h
+004F 7737             56             mov @R1, #037h  ;7
+0051 792A             57             mov R1, #02Ah   
+0053 7738             58             mov @R1, #038h  ;8
+0055 792B             59             mov R1, #02Bh
+0057 7739             60             mov @R1, #039h  ;9
+0059 792C             61             mov R1, #02Ch
+005B 7747             62             mov @R1, #047h  ;g
+005D 792D             63             mov R1, #02Dh
+005F 7748             64             mov @R1, #048h  ;h
+0061 792E             65             mov R1, #02Eh
+0063 7741             66             mov @R1, #041h  ;a
+0065 792F             67             mov R1, #02Fh
+0067 7730             68             mov @R1, #030h  ;0
+0069 7930             69             mov R1, #030h
+006B 7742             70             mov @R1, #042h  ;b
+006D 7931             71             mov R1, #031h
+006F 7749             72             mov @R1, #049h  ;i
+0071 7932             73             mov R1, #032h
+0073 774A             74             mov @R1, #04Ah  ;j
+0075 22               75     ret
+                      76     
+                      77     asciiByScan:
+0076 EC               78             mov A,R4
+0077 241E             79             add A,#30
+0079 F9               80             mov R1,A
+007A E7               81             mov A,@R1
+007B FC               82             mov R4,A
+007C 02009D           83             jmp sendAscii
+007F 22               84     ret
+                      85     
+                      86     ; M`qrpnij` opheln-oeped`rwhj`
+                      87     configUapp:
+0080 D29F             88             setb SCON.7             ; Sqr`m`bkhb`el 3-{i pefhl p`anr{ 
+0082 D29E             89             setb SCON.6     ; opheln-oeped`rwhj`
+0084 C29D             90             clr SCON.5              ; G`opey`el 
+0086 C29C             91             clr SCON.4              ; ophel
+0088 D29B             92             setb SCON.3     ; sqr`m`bkhb`el opncp`llhpsel{i deb^r{i ahr b edhmhvs.
+                      93             
+                      94             ; M`qrp`hb`el r`ilep
+008A 438920           95             orl TMOD,#00100000b ; Hqo. bmsrpemhhi cemep`rnp,  p`gpexhr| pefhl `brnondcpsgjh
+008D 759862           96             mov SCON,#01100010b ; Oepeirh b oepb{i pefhl p`anr{, g`operhr| ophel..... 
+0090 758CFD           97             mov TH0, #0fdh      ; M`qrpnhr| qjnpnqr| 
+0093 758AFD           98             mov TL0, #0fdh          ; m` 9600       
+0096 22               99     ret
+                     100     
+                     101     ; Bjk~w`el r`ilep sqr`m`bkhb`^ qnnrberqrbs~yhi ahr
+                     102     startTimer:
+0097 D28E            103             setb TCON.6  
+0099 22              104     ret
+MCS-51 MACRO ASSEMBLER    LAB2                                                                      11/10/:9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     105     
+                     106     ; B{jk~wemhe r`ilep`
+                     107     stopTImer:
+009A C28E            108             clr TCON.6
+009C 22              109     ret
+                     110     
+                     111     ; Nrop`bj` d`mm{u bn bmexm~~ o`l^r| 
+                     112     sendAscii:
+009D EC              113             mov A,R4
+009E A2D0            114             mov C,PSW.0
+00A0 929B            115             mov SCON.3,C
+00A2 F0              116             movx @DPTR,A
+00A3 A3              117             inc DPTR
+00A4 F599            118             mov SBUF,A
+00A6 0103            119             jmp scan
+00A8 22              120     ret
+                     121             
+                     122     main:
+00A9 900000          123             mov DPTR,#0
+00AC 1180            124             acall configUapp
+00AE 1197            125             acall startTimer
+00B0 1125            126             acall initAscii
+00B2 1103            127             acall scan
+                     128     exit:
+00B4 119A            129             acall stopTimer
+00B6 80FE            130             jmp $
+                     131     end
+MCS-51 MACRO ASSEMBLER    LAB2                                                                      11/10/:9   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E      T Y P E   V A L U E       A T T R I B U T E S
+
+ASCIIBYSCAN  C ADDR    0076H   A       
+CONFIGUAPP.  C ADDR    0080H   A       
+CYCLE . . .  C ADDR    000BH   A       
+EXIT. . . .  C ADDR    00B4H   A       
+INITASCII .  C ADDR    0025H   A       
+MAIN. . . .  C ADDR    00A9H   A       
+P1. . . . .  D ADDR    0090H   A       
+P2. . . . .  D ADDR    00A0H   A       
+PSW . . . .  D ADDR    00D0H   A       
+ROTATE. . .  C ADDR    0014H   A       
+SBUF. . . .  D ADDR    0099H   A       
+SCAN. . . .  C ADDR    0003H   A       
+SCON. . . .  D ADDR    0098H   A       
+SENDASCII .  C ADDR    009DH   A       
+SLEEP . . .  C ADDR    0021H   A       
+STARTTIMER.  C ADDR    0097H   A       
+STOPTIMER .  C ADDR    009AH   A       
+TCON. . . .  D ADDR    0088H   A       
+TH0 . . . .  D ADDR    008CH   A       
+TL0 . . . .  D ADDR    008AH   A       
+TMOD. . . .  D ADDR    0089H   A       
+WAITBISY. .  C ADDR    001FH   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

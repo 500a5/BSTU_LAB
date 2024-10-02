@@ -1,0 +1,5 @@
+# MCU 8051 IDE: Virtual HW configuration file
+# Project: lab2
+
+MultiplexedLedDisplay {{0 1 1 1 2 1 3 1 4 1 T0 3 5 1 T1 3 6 1 T2 3 7 1 T3 3} {0 7 1 6 2 5 3 4 4 3 T0 0 5 2 T1 1 6 1 T2 3 7 0 T3 4} 430x225+986+336 {} red 500 1 0}
+MatrixKeyPad {{4 0 0 0 5 0 1 0 6 0 2 0 7 0 3 0} {4 1 0 4 5 2 1 5 6 3 2 6 7 - 3 7} 225x240+775+323 {} {0 0 1 0 2 0 3 0 4 0 5 0 6 0 7 0 8 0 9 0 10 0 11 0 12 0 13 0 14 0 15 0} 1 0}

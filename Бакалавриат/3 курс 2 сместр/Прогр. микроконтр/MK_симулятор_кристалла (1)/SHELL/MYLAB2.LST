@@ -1,0 +1,138 @@
+MCS-51 MACRO ASSEMBLER    MYLAB2                                                                    11/18/;0   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN MYLAB2.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE MYLAB2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             org 00h
+0000 028100            2             jmp begin
+8100                   3             org 8100h
+                       4     begin:
+8100 C2D3              5             clr rs0
+8102 C2D4              6             clr rs1
+8104 900003            7             mov dptr,#03h         ;m`qrpnij` m` g`ohq|
+8107 7482              8             mov A,#10000010b
+8109 F0                9             movx @dptr,A
+810A 900000           10             mov dptr,#00h        ;?
+810D 7410             11             mov A,#00010000b      ;m` bbnd m`qrpnij` `dpeq` wremh^
+810F F0               12             movx @dptr,a
+                      13     strob:
+8110 D290             14             setb P1.0             ;sqr`mnbj` h qapnq qrpna` dk^ qwhr{b`mh^ m`op^femh^ 1;0
+8112 C290             15             clr P1.0              ; ond`w` g`dmecn tpnmr`  g`osqj `vo
+8114 2091FD           16             jb P1.1,$             ;opnbepj` qwhr`khkq| kh d`mm{e hkh mer eqkh P1.1 p`bem 1 hkh 
+                             me p`bem
+                      17     read:
+8117 900001           18             mov dptr,#01h         ;sqr`mnbj` `dpeq` nrvhtpnbemmncn gm`wemh^ q `vo
+811A E0               19             movx A,@dptr
+811B 7920             20             mov r1,#020h           ;? g`ohq| edhmhv
+811D 7A40             21             mov r2,#040h           ; qnrmh
+811F 7B80             22             mov r3,#080h           ;deq^rjh
+8121 9480             23             subb A,#080h
+8123 5004             24             jnc setminus
+8125 F4               25             cpl A
+8126 02812E           26             jmp setplus
+                      27     setminus:
+8129 7C1B             28             mov r4,#01Bh    ;r4-gm`j(lhmsq)
+812B 028130           29             jmp hextodec
+                      30     setplus:
+812E 7C01             31             mov r4,#01h     ;r4-gm`j(ok~q)
+                      32     hextodec:
+8130 75F004           33             mov B,#04h
+8133 A4               34             mul AB
+                      35     
+8134 F8               36             mov r0,A
+8135 C2E0             37             clr acc.0
+8137 C2E1             38             clr acc.1
+8139 C2E2             39             clr acc.2
+813B C2E3             40             clr acc.3
+813D 25F0             41             add A,B
+813F C4               42             swap A
+8140 75F00A           43             mov B,#0Ah
+8143 84               44             div AB
+8144 C8               45             xch A,r0
+8145 C2E4             46             clr acc.4
+8147 C2E5             47             clr acc.5
+8149 C2E6             48             clr acc.6
+814B C2E7             49             clr acc.7
+MCS-51 MACRO ASSEMBLER    MYLAB2                                                                    11/18/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+814D C5F0             50             xch A,B
+814F C4               51             swap A
+8150 25F0             52             add A,B
+8152 75F00A           53             mov B,#0Ah
+8155 84               54             div AB
+8156 FD               55             mov r5,A
+8157 E5F0             56             mov A,B
+8159 2B               57             add A,r3
+815A FB               58             mov r3,A                ;r3-edhmhv{
+815B ED               59             mov A,r5
+815C C8               60             xch A,r0
+815D C4               61             swap A
+815E 28               62             add A,r0
+815F 75F00A           63             mov B,#0Ah
+8162 84               64             div AB
+8163 29               65             add A,r1
+8164 F9               66             mov r1,A                ;r1-qnrmh
+8165 E5F0             67             mov A,B
+8167 2A               68             add A,r2
+8168 FA               69             mov r2,A                ;r2-deq^rjh
+                      70     out:
+8169 900002           71             mov dptr,#02h   ; sqr`mnbj` `dpeqnb hmdhj`rnpnb
+816C EC               72             mov A,r4
+816D F0               73             movx @dptr,a    ;b{bnd gm`j`
+816E 128182           74             call delay
+8171 E9               75             mov A,r1
+8172 F0               76             movx @dptr,a    ;b{bnd qnrem
+8173 128182           77             call delay
+8176 EA               78             mov A,r2
+8177 F0               79             movx @dptr,a    ;b{bnd deq^rjnb
+8178 128182           80             call delay
+817B EB               81             mov A,r3
+817C F0               82             movx @dptr,a    ;b{bnd edhmhv
+817D 128182           83             call delay
+8180 808E             84             jmp strob
+                      85     delay:
+8182 7E06             86             mov r6,#6
+                      87     cikl1:
+8184 7F64             88             mov r7,#100
+                      89     cikl2:
+8186 DFFE             90             djnz r7, cikl2
+8188 DEFA             91             djnz r6, cikl1
+818A 22               92     ret
+                      93     end
+MCS-51 MACRO ASSEMBLER    MYLAB2                                                                    11/18/;0   PAGE    3
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . .  D ADDR    00E0H   A       
+B. . . . .  D ADDR    00F0H   A       
+BEGIN. . .  C ADDR    8100H   A       
+CIKL1. . .  C ADDR    8184H   A       
+CIKL2. . .  C ADDR    8186H   A       
+DELAY. . .  C ADDR    8182H   A       
+HEXTODEC .  C ADDR    8130H   A       
+OUT. . . .  C ADDR    8169H   A       
+P1 . . . .  D ADDR    0090H   A       
+READ . . .  C ADDR    8117H   A       
+RS0. . . .  B ADDR    00D0H.3 A       
+RS1. . . .  B ADDR    00D0H.4 A       
+SETMINUS .  C ADDR    8129H   A       
+SETPLUS. .  C ADDR    812EH   A       
+STROB. . .  C ADDR    8110H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

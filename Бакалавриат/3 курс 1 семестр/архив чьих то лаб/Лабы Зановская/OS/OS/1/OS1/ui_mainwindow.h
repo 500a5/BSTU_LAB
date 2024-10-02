@@ -1,0 +1,766 @@
+/********************************************************************************
+** Form generated from reading UI file 'mainwindow.ui'
+**
+** Created by: Qt User Interface Compiler version 5.8.0
+**
+** WARNING! All changes made in this file will be lost when recompiling UI file!
+********************************************************************************/
+
+#ifndef UI_MAINWINDOW_H
+#define UI_MAINWINDOW_H
+
+#include <QtCore/QVariant>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
+#include <QtWidgets/QWidget>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_MainWindow
+{
+public:
+    QWidget *centralWidget;
+    QGridLayout *gridLayout;
+    QTabWidget *tabWidget;
+    QWidget *tab;
+    QLabel *label_2;
+    QLabel *label;
+    QLabel *label_computerName;
+    QLabel *label_userName;
+    QLabel *label_5;
+    QLabel *label_catalogWindows;
+    QLabel *label_6;
+    QLabel *label_9;
+    QLabel *label_7;
+    QLabel *label_10;
+    QLabel *label_11;
+    QLabel *label_12;
+    QWidget *tab_2;
+    QGridLayout *gridLayout_2;
+    QTableWidget *tableWidget;
+    QWidget *tab_3;
+    QLabel *label_13;
+    QLabel *label_15;
+    QLabel *label_16;
+    QLabel *label_14;
+    QLabel *label_17;
+    QLabel *label_18;
+    QLabel *label_19;
+    QLabel *label_20;
+    QLabel *label_21;
+    QLabel *label_22;
+    QLabel *label_23;
+    QLabel *label_24;
+    QLabel *label_25;
+    QLabel *label_26;
+    QLabel *label_27;
+    QLabel *label_28;
+    QLabel *label_29;
+    QLabel *label_30;
+    QLabel *label_31;
+    QLabel *label_32;
+    QLabel *label_33;
+    QLabel *label_34;
+    QLabel *label_35;
+    QLabel *label_36;
+    QLabel *label_37;
+    QLabel *label_38;
+    QLabel *label_39;
+    QLabel *label_40;
+    QLabel *label_41;
+    QLabel *label_42;
+    QLabel *label_43;
+    QLabel *label_44;
+    QLabel *label_45;
+    QLabel *label_46;
+    QLabel *label_47;
+    QLabel *label_48;
+    QLabel *label_49;
+    QLabel *label_50;
+    QLabel *label_51;
+    QLabel *label_52;
+    QLabel *label_53;
+    QLabel *label_54;
+    QLabel *label_55;
+    QLabel *label_56;
+    QLabel *label_57;
+    QLabel *label_217;
+    QLabel *label_218;
+    QLabel *label_219;
+    QLabel *label_220;
+    QWidget *tab_6;
+    QLabel *label_221;
+    QLineEdit *lineEdit_23;
+    QPushButton *pushButton_17;
+    QLabel *label_222;
+    QLineEdit *lineEdit_24;
+    QPushButton *pushButton_18;
+    QLineEdit *lineEdit_25;
+    QPushButton *pushButton_19;
+    QLabel *label_223;
+    QWidget *tab_4;
+    QLabel *label_63;
+    QLabel *label_64;
+    QLabel *label_65;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
+    QPushButton *pushButton_6;
+    QLabel *label_67;
+    QLabel *label_68;
+    QLabel *label_69;
+    QLabel *label_70;
+    QLabel *label_71;
+    QLabel *label_72;
+    QLabel *label_73;
+    QLabel *label_74;
+    QLabel *label_75;
+    QLabel *label_76;
+    QLabel *label_77;
+    QLabel *label_78;
+    QLabel *label_79;
+    QLabel *label_80;
+    QLabel *label_81;
+    QListWidget *listWidget;
+    QPushButton *pushButton_7;
+    QLabel *label_111;
+    QLabel *label_112;
+    QLabel *label_113;
+    QLabel *label_82;
+    QLabel *label_83;
+    QLabel *label_84;
+    QLabel *label_86;
+    QLabel *label_87;
+    QLabel *label_333;
+    QLabel *label_334;
+    QLabel *label_335;
+    QLabel *label_339;
+    QLabel *label_341;
+    QLabel *label_85;
+    QLabel *label_88;
+    QLabel *label_89;
+    QLabel *label_90;
+    QLabel *label_336;
+    QLabel *label_337;
+    QLabel *label_338;
+    QLabel *label_340;
+    QWidget *tab_5;
+    QPushButton *pushButton_8;
+    QLabel *label_66;
+    QLabel *label_91;
+    QLabel *label_92;
+    QLabel *label_95;
+    QLabel *label_96;
+    QLabel *label_99;
+    QLabel *label_106;
+    QLabel *label_107;
+    QLabel *label_93;
+    QLabel *label_97;
+    QMenuBar *menuBar;
+    QStatusBar *statusBar;
+
+    void setupUi(QMainWindow *MainWindow)
+    {
+        if (MainWindow->objectName().isEmpty())
+            MainWindow->setObjectName(QStringLiteral("MainWindow"));
+        MainWindow->resize(859, 791);
+        centralWidget = new QWidget(MainWindow);
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        label_2 = new QLabel(tab);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(0, 10, 111, 16));
+        label = new QLabel(tab);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(0, 40, 101, 21));
+        label_computerName = new QLabel(tab);
+        label_computerName->setObjectName(QStringLiteral("label_computerName"));
+        label_computerName->setGeometry(QRect(240, 40, 231, 16));
+        label_userName = new QLabel(tab);
+        label_userName->setObjectName(QStringLiteral("label_userName"));
+        label_userName->setGeometry(QRect(240, 10, 231, 21));
+        label_5 = new QLabel(tab);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setGeometry(QRect(0, 70, 111, 16));
+        label_catalogWindows = new QLabel(tab);
+        label_catalogWindows->setObjectName(QStringLiteral("label_catalogWindows"));
+        label_catalogWindows->setGeometry(QRect(240, 70, 497, 16));
+        label_6 = new QLabel(tab);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setGeometry(QRect(0, 90, 121, 16));
+        label_9 = new QLabel(tab);
+        label_9->setObjectName(QStringLiteral("label_9"));
+        label_9->setGeometry(QRect(240, 90, 497, 16));
+        label_7 = new QLabel(tab);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(0, 110, 497, 16));
+        label_10 = new QLabel(tab);
+        label_10->setObjectName(QStringLiteral("label_10"));
+        label_10->setGeometry(QRect(240, 110, 497, 16));
+        label_11 = new QLabel(tab);
+        label_11->setObjectName(QStringLiteral("label_11"));
+        label_11->setGeometry(QRect(240, 130, 71, 16));
+        label_12 = new QLabel(tab);
+        label_12->setObjectName(QStringLiteral("label_12"));
+        label_12->setGeometry(QRect(0, 130, 191, 16));
+        tabWidget->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QStringLiteral("tab_2"));
+        gridLayout_2 = new QGridLayout(tab_2);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        tableWidget = new QTableWidget(tab_2);
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
+
+        gridLayout_2->addWidget(tableWidget, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab_2, QString());
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QStringLiteral("tab_3"));
+        label_13 = new QLabel(tab_3);
+        label_13->setObjectName(QStringLiteral("label_13"));
+        label_13->setGeometry(QRect(10, 0, 601, 31));
+        label_15 = new QLabel(tab_3);
+        label_15->setObjectName(QStringLiteral("label_15"));
+        label_15->setGeometry(QRect(10, 30, 301, 16));
+        label_16 = new QLabel(tab_3);
+        label_16->setObjectName(QStringLiteral("label_16"));
+        label_16->setGeometry(QRect(10, 50, 471, 16));
+        label_14 = new QLabel(tab_3);
+        label_14->setObjectName(QStringLiteral("label_14"));
+        label_14->setGeometry(QRect(10, 70, 471, 16));
+        label_17 = new QLabel(tab_3);
+        label_17->setObjectName(QStringLiteral("label_17"));
+        label_17->setGeometry(QRect(10, 90, 471, 31));
+        label_18 = new QLabel(tab_3);
+        label_18->setObjectName(QStringLiteral("label_18"));
+        label_18->setGeometry(QRect(10, 130, 451, 16));
+        label_19 = new QLabel(tab_3);
+        label_19->setObjectName(QStringLiteral("label_19"));
+        label_19->setGeometry(QRect(10, 150, 471, 31));
+        label_20 = new QLabel(tab_3);
+        label_20->setObjectName(QStringLiteral("label_20"));
+        label_20->setGeometry(QRect(10, 180, 431, 31));
+        label_21 = new QLabel(tab_3);
+        label_21->setObjectName(QStringLiteral("label_21"));
+        label_21->setGeometry(QRect(10, 210, 441, 16));
+        label_22 = new QLabel(tab_3);
+        label_22->setObjectName(QStringLiteral("label_22"));
+        label_22->setGeometry(QRect(10, 230, 461, 16));
+        label_23 = new QLabel(tab_3);
+        label_23->setObjectName(QStringLiteral("label_23"));
+        label_23->setGeometry(QRect(10, 250, 401, 16));
+        label_24 = new QLabel(tab_3);
+        label_24->setObjectName(QStringLiteral("label_24"));
+        label_24->setGeometry(QRect(10, 270, 451, 16));
+        label_25 = new QLabel(tab_3);
+        label_25->setObjectName(QStringLiteral("label_25"));
+        label_25->setGeometry(QRect(10, 290, 481, 16));
+        label_26 = new QLabel(tab_3);
+        label_26->setObjectName(QStringLiteral("label_26"));
+        label_26->setGeometry(QRect(10, 310, 491, 16));
+        label_27 = new QLabel(tab_3);
+        label_27->setObjectName(QStringLiteral("label_27"));
+        label_27->setGeometry(QRect(10, 330, 461, 16));
+        label_28 = new QLabel(tab_3);
+        label_28->setObjectName(QStringLiteral("label_28"));
+        label_28->setGeometry(QRect(10, 350, 471, 16));
+        label_29 = new QLabel(tab_3);
+        label_29->setObjectName(QStringLiteral("label_29"));
+        label_29->setGeometry(QRect(10, 370, 291, 16));
+        label_30 = new QLabel(tab_3);
+        label_30->setObjectName(QStringLiteral("label_30"));
+        label_30->setGeometry(QRect(10, 390, 351, 16));
+        label_31 = new QLabel(tab_3);
+        label_31->setObjectName(QStringLiteral("label_31"));
+        label_31->setGeometry(QRect(10, 410, 431, 16));
+        label_32 = new QLabel(tab_3);
+        label_32->setObjectName(QStringLiteral("label_32"));
+        label_32->setGeometry(QRect(10, 430, 411, 16));
+        label_33 = new QLabel(tab_3);
+        label_33->setObjectName(QStringLiteral("label_33"));
+        label_33->setGeometry(QRect(530, 30, 47, 13));
+        label_34 = new QLabel(tab_3);
+        label_34->setObjectName(QStringLiteral("label_34"));
+        label_34->setGeometry(QRect(530, 50, 47, 13));
+        label_35 = new QLabel(tab_3);
+        label_35->setObjectName(QStringLiteral("label_35"));
+        label_35->setGeometry(QRect(530, 70, 47, 13));
+        label_36 = new QLabel(tab_3);
+        label_36->setObjectName(QStringLiteral("label_36"));
+        label_36->setGeometry(QRect(530, 100, 47, 13));
+        label_37 = new QLabel(tab_3);
+        label_37->setObjectName(QStringLiteral("label_37"));
+        label_37->setGeometry(QRect(530, 150, 47, 13));
+        label_38 = new QLabel(tab_3);
+        label_38->setObjectName(QStringLiteral("label_38"));
+        label_38->setGeometry(QRect(530, 180, 47, 13));
+        label_39 = new QLabel(tab_3);
+        label_39->setObjectName(QStringLiteral("label_39"));
+        label_39->setGeometry(QRect(530, 210, 47, 13));
+        label_40 = new QLabel(tab_3);
+        label_40->setObjectName(QStringLiteral("label_40"));
+        label_40->setGeometry(QRect(530, 230, 47, 13));
+        label_41 = new QLabel(tab_3);
+        label_41->setObjectName(QStringLiteral("label_41"));
+        label_41->setGeometry(QRect(530, 250, 47, 13));
+        label_42 = new QLabel(tab_3);
+        label_42->setObjectName(QStringLiteral("label_42"));
+        label_42->setGeometry(QRect(530, 270, 47, 13));
+        label_43 = new QLabel(tab_3);
+        label_43->setObjectName(QStringLiteral("label_43"));
+        label_43->setGeometry(QRect(530, 290, 47, 13));
+        label_44 = new QLabel(tab_3);
+        label_44->setObjectName(QStringLiteral("label_44"));
+        label_44->setGeometry(QRect(530, 310, 47, 13));
+        label_45 = new QLabel(tab_3);
+        label_45->setObjectName(QStringLiteral("label_45"));
+        label_45->setGeometry(QRect(530, 330, 47, 13));
+        label_46 = new QLabel(tab_3);
+        label_46->setObjectName(QStringLiteral("label_46"));
+        label_46->setGeometry(QRect(530, 350, 47, 13));
+        label_47 = new QLabel(tab_3);
+        label_47->setObjectName(QStringLiteral("label_47"));
+        label_47->setGeometry(QRect(530, 370, 47, 13));
+        label_48 = new QLabel(tab_3);
+        label_48->setObjectName(QStringLiteral("label_48"));
+        label_48->setGeometry(QRect(530, 390, 47, 13));
+        label_49 = new QLabel(tab_3);
+        label_49->setObjectName(QStringLiteral("label_49"));
+        label_49->setGeometry(QRect(530, 410, 47, 13));
+        label_50 = new QLabel(tab_3);
+        label_50->setObjectName(QStringLiteral("label_50"));
+        label_50->setGeometry(QRect(530, 430, 47, 13));
+        label_51 = new QLabel(tab_3);
+        label_51->setObjectName(QStringLiteral("label_51"));
+        label_51->setGeometry(QRect(10, 460, 491, 51));
+        label_52 = new QLabel(tab_3);
+        label_52->setObjectName(QStringLiteral("label_52"));
+        label_52->setGeometry(QRect(530, 460, 47, 13));
+        label_53 = new QLabel(tab_3);
+        label_53->setObjectName(QStringLiteral("label_53"));
+        label_53->setGeometry(QRect(10, 530, 501, 31));
+        label_54 = new QLabel(tab_3);
+        label_54->setObjectName(QStringLiteral("label_54"));
+        label_54->setGeometry(QRect(10, 570, 411, 16));
+        label_55 = new QLabel(tab_3);
+        label_55->setObjectName(QStringLiteral("label_55"));
+        label_55->setGeometry(QRect(10, 590, 411, 16));
+        label_56 = new QLabel(tab_3);
+        label_56->setObjectName(QStringLiteral("label_56"));
+        label_56->setGeometry(QRect(10, 610, 211, 16));
+        label_57 = new QLabel(tab_3);
+        label_57->setObjectName(QStringLiteral("label_57"));
+        label_57->setGeometry(QRect(10, 630, 211, 16));
+        label_217 = new QLabel(tab_3);
+        label_217->setObjectName(QStringLiteral("label_217"));
+        label_217->setGeometry(QRect(530, 570, 47, 13));
+        label_218 = new QLabel(tab_3);
+        label_218->setObjectName(QStringLiteral("label_218"));
+        label_218->setGeometry(QRect(530, 590, 47, 13));
+        label_219 = new QLabel(tab_3);
+        label_219->setObjectName(QStringLiteral("label_219"));
+        label_219->setGeometry(QRect(530, 610, 47, 13));
+        label_220 = new QLabel(tab_3);
+        label_220->setObjectName(QStringLiteral("label_220"));
+        label_220->setGeometry(QRect(530, 630, 47, 13));
+        tabWidget->addTab(tab_3, QString());
+        tab_6 = new QWidget();
+        tab_6->setObjectName(QStringLiteral("tab_6"));
+        label_221 = new QLabel(tab_6);
+        label_221->setObjectName(QStringLiteral("label_221"));
+        label_221->setGeometry(QRect(10, 20, 421, 41));
+        lineEdit_23 = new QLineEdit(tab_6);
+        lineEdit_23->setObjectName(QStringLiteral("lineEdit_23"));
+        lineEdit_23->setGeometry(QRect(450, 20, 101, 31));
+        pushButton_17 = new QPushButton(tab_6);
+        pushButton_17->setObjectName(QStringLiteral("pushButton_17"));
+        pushButton_17->setGeometry(QRect(600, 20, 111, 28));
+        label_222 = new QLabel(tab_6);
+        label_222->setObjectName(QStringLiteral("label_222"));
+        label_222->setGeometry(QRect(10, 70, 381, 41));
+        lineEdit_24 = new QLineEdit(tab_6);
+        lineEdit_24->setObjectName(QStringLiteral("lineEdit_24"));
+        lineEdit_24->setGeometry(QRect(450, 70, 101, 31));
+        pushButton_18 = new QPushButton(tab_6);
+        pushButton_18->setObjectName(QStringLiteral("pushButton_18"));
+        pushButton_18->setGeometry(QRect(600, 70, 111, 28));
+        lineEdit_25 = new QLineEdit(tab_6);
+        lineEdit_25->setObjectName(QStringLiteral("lineEdit_25"));
+        lineEdit_25->setGeometry(QRect(450, 120, 101, 31));
+        pushButton_19 = new QPushButton(tab_6);
+        pushButton_19->setObjectName(QStringLiteral("pushButton_19"));
+        pushButton_19->setGeometry(QRect(600, 120, 111, 28));
+        label_223 = new QLabel(tab_6);
+        label_223->setObjectName(QStringLiteral("label_223"));
+        label_223->setGeometry(QRect(10, 120, 381, 41));
+        tabWidget->addTab(tab_6, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QStringLiteral("tab_4"));
+        label_63 = new QLabel(tab_4);
+        label_63->setObjectName(QStringLiteral("label_63"));
+        label_63->setGeometry(QRect(20, 140, 181, 16));
+        label_64 = new QLabel(tab_4);
+        label_64->setObjectName(QStringLiteral("label_64"));
+        label_64->setGeometry(QRect(20, 340, 221, 16));
+        label_65 = new QLabel(tab_4);
+        label_65->setObjectName(QStringLiteral("label_65"));
+        label_65->setGeometry(QRect(30, 170, 31, 16));
+        pushButton_4 = new QPushButton(tab_4);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(260, 10, 93, 28));
+        pushButton_5 = new QPushButton(tab_4);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_5->setGeometry(QRect(260, 50, 93, 28));
+        pushButton_6 = new QPushButton(tab_4);
+        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
+        pushButton_6->setGeometry(QRect(260, 90, 93, 28));
+        label_67 = new QLabel(tab_4);
+        label_67->setObjectName(QStringLiteral("label_67"));
+        label_67->setGeometry(QRect(30, 190, 41, 16));
+        label_68 = new QLabel(tab_4);
+        label_68->setObjectName(QStringLiteral("label_68"));
+        label_68->setGeometry(QRect(30, 210, 91, 16));
+        label_69 = new QLabel(tab_4);
+        label_69->setObjectName(QStringLiteral("label_69"));
+        label_69->setGeometry(QRect(30, 230, 41, 16));
+        label_70 = new QLabel(tab_4);
+        label_70->setObjectName(QStringLiteral("label_70"));
+        label_70->setGeometry(QRect(30, 250, 31, 16));
+        label_71 = new QLabel(tab_4);
+        label_71->setObjectName(QStringLiteral("label_71"));
+        label_71->setGeometry(QRect(30, 270, 55, 16));
+        label_72 = new QLabel(tab_4);
+        label_72->setObjectName(QStringLiteral("label_72"));
+        label_72->setGeometry(QRect(30, 290, 55, 16));
+        label_73 = new QLabel(tab_4);
+        label_73->setObjectName(QStringLiteral("label_73"));
+        label_73->setGeometry(QRect(30, 310, 91, 16));
+        label_74 = new QLabel(tab_4);
+        label_74->setObjectName(QStringLiteral("label_74"));
+        label_74->setGeometry(QRect(130, 170, 55, 16));
+        label_75 = new QLabel(tab_4);
+        label_75->setObjectName(QStringLiteral("label_75"));
+        label_75->setGeometry(QRect(130, 190, 55, 16));
+        label_76 = new QLabel(tab_4);
+        label_76->setObjectName(QStringLiteral("label_76"));
+        label_76->setGeometry(QRect(130, 210, 55, 16));
+        label_77 = new QLabel(tab_4);
+        label_77->setObjectName(QStringLiteral("label_77"));
+        label_77->setGeometry(QRect(130, 230, 55, 16));
+        label_78 = new QLabel(tab_4);
+        label_78->setObjectName(QStringLiteral("label_78"));
+        label_78->setGeometry(QRect(130, 250, 55, 16));
+        label_79 = new QLabel(tab_4);
+        label_79->setObjectName(QStringLiteral("label_79"));
+        label_79->setGeometry(QRect(130, 270, 55, 16));
+        label_80 = new QLabel(tab_4);
+        label_80->setObjectName(QStringLiteral("label_80"));
+        label_80->setGeometry(QRect(130, 290, 55, 16));
+        label_81 = new QLabel(tab_4);
+        label_81->setObjectName(QStringLiteral("label_81"));
+        label_81->setGeometry(QRect(130, 310, 55, 16));
+        listWidget = new QListWidget(tab_4);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
+        listWidget->setGeometry(QRect(270, 330, 331, 71));
+        pushButton_7 = new QPushButton(tab_4);
+        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
+        pushButton_7->setGeometry(QRect(240, 470, 93, 28));
+        label_111 = new QLabel(tab_4);
+        label_111->setObjectName(QStringLiteral("label_111"));
+        label_111->setGeometry(QRect(20, 10, 211, 31));
+        label_112 = new QLabel(tab_4);
+        label_112->setObjectName(QStringLiteral("label_112"));
+        label_112->setGeometry(QRect(20, 60, 231, 16));
+        label_113 = new QLabel(tab_4);
+        label_113->setObjectName(QStringLiteral("label_113"));
+        label_113->setGeometry(QRect(20, 90, 211, 31));
+        label_82 = new QLabel(tab_4);
+        label_82->setObjectName(QStringLiteral("label_82"));
+        label_82->setGeometry(QRect(20, 470, 211, 16));
+        label_83 = new QLabel(tab_4);
+        label_83->setObjectName(QStringLiteral("label_83"));
+        label_83->setGeometry(QRect(10, 790, 211, 16));
+        label_84 = new QLabel(tab_4);
+        label_84->setObjectName(QStringLiteral("label_84"));
+        label_84->setGeometry(QRect(20, 490, 31, 16));
+        label_86 = new QLabel(tab_4);
+        label_86->setObjectName(QStringLiteral("label_86"));
+        label_86->setGeometry(QRect(20, 510, 41, 16));
+        label_87 = new QLabel(tab_4);
+        label_87->setObjectName(QStringLiteral("label_87"));
+        label_87->setGeometry(QRect(20, 530, 91, 16));
+        label_333 = new QLabel(tab_4);
+        label_333->setObjectName(QStringLiteral("label_333"));
+        label_333->setGeometry(QRect(20, 590, 55, 16));
+        label_334 = new QLabel(tab_4);
+        label_334->setObjectName(QStringLiteral("label_334"));
+        label_334->setGeometry(QRect(20, 630, 91, 16));
+        label_335 = new QLabel(tab_4);
+        label_335->setObjectName(QStringLiteral("label_335"));
+        label_335->setGeometry(QRect(20, 550, 41, 16));
+        label_339 = new QLabel(tab_4);
+        label_339->setObjectName(QStringLiteral("label_339"));
+        label_339->setGeometry(QRect(20, 570, 31, 16));
+        label_341 = new QLabel(tab_4);
+        label_341->setObjectName(QStringLiteral("label_341"));
+        label_341->setGeometry(QRect(20, 610, 55, 16));
+        label_85 = new QLabel(tab_4);
+        label_85->setObjectName(QStringLiteral("label_85"));
+        label_85->setGeometry(QRect(100, 490, 47, 13));
+        label_88 = new QLabel(tab_4);
+        label_88->setObjectName(QStringLiteral("label_88"));
+        label_88->setGeometry(QRect(100, 510, 47, 13));
+        label_89 = new QLabel(tab_4);
+        label_89->setObjectName(QStringLiteral("label_89"));
+        label_89->setGeometry(QRect(100, 530, 47, 13));
+        label_90 = new QLabel(tab_4);
+        label_90->setObjectName(QStringLiteral("label_90"));
+        label_90->setGeometry(QRect(100, 550, 47, 13));
+        label_336 = new QLabel(tab_4);
+        label_336->setObjectName(QStringLiteral("label_336"));
+        label_336->setGeometry(QRect(100, 570, 47, 13));
+        label_337 = new QLabel(tab_4);
+        label_337->setObjectName(QStringLiteral("label_337"));
+        label_337->setGeometry(QRect(100, 590, 47, 13));
+        label_338 = new QLabel(tab_4);
+        label_338->setObjectName(QStringLiteral("label_338"));
+        label_338->setGeometry(QRect(100, 610, 47, 13));
+        label_340 = new QLabel(tab_4);
+        label_340->setObjectName(QStringLiteral("label_340"));
+        label_340->setGeometry(QRect(100, 630, 47, 13));
+        tabWidget->addTab(tab_4, QString());
+        tab_5 = new QWidget();
+        tab_5->setObjectName(QStringLiteral("tab_5"));
+        pushButton_8 = new QPushButton(tab_5);
+        pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
+        pushButton_8->setGeometry(QRect(210, 167, 93, 21));
+        label_66 = new QLabel(tab_5);
+        label_66->setObjectName(QStringLiteral("label_66"));
+        label_66->setGeometry(QRect(20, 30, 561, 16));
+        label_91 = new QLabel(tab_5);
+        label_91->setObjectName(QStringLiteral("label_91"));
+        label_91->setGeometry(QRect(20, 60, 321, 16));
+        label_92 = new QLabel(tab_5);
+        label_92->setObjectName(QStringLiteral("label_92"));
+        label_92->setGeometry(QRect(20, 70, 321, 16));
+        label_95 = new QLabel(tab_5);
+        label_95->setObjectName(QStringLiteral("label_95"));
+        label_95->setGeometry(QRect(350, 60, 55, 16));
+        label_96 = new QLabel(tab_5);
+        label_96->setObjectName(QStringLiteral("label_96"));
+        label_96->setGeometry(QRect(350, 70, 55, 16));
+        label_99 = new QLabel(tab_5);
+        label_99->setObjectName(QStringLiteral("label_99"));
+        label_99->setGeometry(QRect(20, 130, 191, 16));
+        label_106 = new QLabel(tab_5);
+        label_106->setObjectName(QStringLiteral("label_106"));
+        label_106->setGeometry(QRect(350, 130, 55, 16));
+        label_107 = new QLabel(tab_5);
+        label_107->setObjectName(QStringLiteral("label_107"));
+        label_107->setGeometry(QRect(20, 170, 181, 16));
+        label_93 = new QLabel(tab_5);
+        label_93->setObjectName(QStringLiteral("label_93"));
+        label_93->setGeometry(QRect(20, 110, 301, 16));
+        label_97 = new QLabel(tab_5);
+        label_97->setObjectName(QStringLiteral("label_97"));
+        label_97->setGeometry(QRect(350, 110, 55, 16));
+        tabWidget->addTab(tab_5, QString());
+
+        gridLayout->addWidget(tabWidget, 0, 1, 1, 1);
+
+        MainWindow->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(MainWindow);
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 859, 21));
+        MainWindow->setMenuBar(menuBar);
+        statusBar = new QStatusBar(MainWindow);
+        statusBar->setObjectName(QStringLiteral("statusBar"));
+        MainWindow->setStatusBar(statusBar);
+
+        retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(3);
+
+
+        QMetaObject::connectSlotsByName(MainWindow);
+    } // setupUi
+
+    void retranslateUi(QMainWindow *MainWindow)
+    {
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+#ifndef QT_NO_TOOLTIP
+        tabWidget->setToolTip(QApplication::translate("MainWindow", "<html><head/><body><p>V</p></body></html>", Q_NULLPTR));
+#endif // QT_NO_TOOLTIP
+        label_2->setText(QApplication::translate("MainWindow", "\320\230\320\274\321\217 \320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\321\217", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "\320\230\320\274\321\217 \320\272\320\276\320\274\320\277\321\214\321\216\321\202\320\265\321\200\320\260", Q_NULLPTR));
+        label_computerName->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_userName->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainWindow", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 Windows", Q_NULLPTR));
+        label_catalogWindows->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_6->setText(QApplication::translate("MainWindow", "\320\241\320\270\321\201\321\202\320\265\320\274\320\275\321\213\320\271 \320\272\320\260\321\202\320\276\320\273\320\276\320\263", Q_NULLPTR));
+        label_9->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_7->setText(QApplication::translate("MainWindow", "\320\232\320\260\321\202\320\260\320\273\320\276\320\263 \320\262\321\200\320\265\320\274\320\265\320\275\320\275\321\213\321\205 \321\204\320\260\320\271\320\273\320\276\320\262 Windows", Q_NULLPTR));
+        label_10->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_11->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_12->setText(QApplication::translate("MainWindow", "\320\222\320\265\321\200\321\201\320\270\321\217 \320\276\320\277\320\265\321\200\320\260\321\206\320\270\320\276\320\275\320\275\320\276\320\271 \321\201\320\270\321\201\321\202\320\265\320\274\321\213", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "\320\241\320\262\320\265\320\264\320\265\320\275\320\270\321\217 \320\276 \320\272\320\276\320\274\320\277\321\214\321\216\321\202\320\265\321\200\320\265", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "\320\234\320\265\321\202\321\200\320\270\320\272\320\270", Q_NULLPTR));
+        label_13->setText(QApplication::translate("MainWindow", "SPI_SETICONMETRICS: \320\241\321\202\321\200\321\203\320\272\321\202\321\203\321\200\320\260 ICONMETRICS \321\201\320\276\320\264\320\265\321\200\320\266\320\270\321\202 \320\262 \321\201\320\265\320\261\320\265 \320\274\320\260\321\201\321\210\321\202\320\260\320\261\320\270\321\200\321\203\320\265\320\274\321\213\320\265 \321\200\320\260\320\267\320\274\320\265\321\200\321\213, \321\201\320\262\321\217\320\267\320\260\320\275\320\275\321\213\320\265 \321\201\320\276 \320\267\320\275\320\260\321\207\320\272\320\260\320\274\320\270", Q_NULLPTR));
+        label_15->setText(QApplication::translate("MainWindow", "cbSize: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \321\200\320\260\320\267\320\274\320\265\321\200 \321\201\321\202\321\200\321\203\320\272\321\202\321\203\321\200\321\213, \320\262 \320\261\320\260\320\271\321\202\320\260\321\205.", Q_NULLPTR));
+        label_16->setText(QApplication::translate("MainWindow", "iHorzSpacing: \320\263\320\276\321\200\320\270\320\267\320\276\320\275\321\202\320\260\320\273\321\214\320\275\320\276\320\265 \320\277\321\200\320\276\321\201\321\202\321\200\320\260\320\275\321\201\321\202\320\262\320\276 \320\264\320\273\321\217 \320\272\320\260\320\266\320\264\320\276\320\263\320\276 \321\200\320\260\320\267\320\274\320\265\321\211\320\265\320\275\320\275\320\276\320\263\320\276 \320\267\320\275\320\260\321\207\320\272\320\260, \320\262 \320\277\320\270\320\272\321\201\320\265\320\273\321\217\321\205.", Q_NULLPTR));
+        label_14->setText(QApplication::translate("MainWindow", "iVertSpacing: \320\262\320\265\321\200\321\202\320\270\320\272\320\260\320\273\321\214\320\275\320\276\320\265 \320\277\321\200\320\276\321\201\321\202\321\200\320\260\320\275\321\201\321\202\320\262\320\276 \320\264\320\273\321\217 \320\272\320\260\320\266\320\264\320\276\320\263\320\276 \321\200\320\260\320\267\320\274\320\265\321\211\320\265\320\275\320\275\320\276\320\263\320\276 \320\267\320\275\320\260\321\207\320\272\320\260, \320\262 \320\277\320\270\320\272\321\201\320\265\320\273\321\217\321\205.", Q_NULLPTR));
+        label_17->setText(QApplication::translate("MainWindow", "iTitleWrap: \321\204\320\273\320\260\320\266\320\276\320\272 \320\277\320\265\321\200\320\265\320\275\320\276\321\201\320\260 \320\275\320\260\320\264\320\277\320\270\321\201\320\270. \n"
+"\320\225\321\201\320\273\320\270 \320\275\320\265 0, \320\275\320\260\320\264\320\277\320\270\321\201\320\270 \320\267\320\275\320\260\321\207\320\272\320\260 \320\277\320\265\321\200\320\265\320\275\320\276\321\201\321\217\321\202\321\201\321\217 \320\275\320\260 \320\275\320\276\320\262\321\203\321\216 \321\201\321\202\321\200\320\276\320\272\321\203. \320\225\321\201\320\273\320\270 0, \320\275\320\260\320\264\320\277\320\270\321\201\320\270 \320\275\320\265 \320\277\320\265\321\200\320\265\320\275\320\276\321\201\321\217\321\202\321\201\321\217.", Q_NULLPTR));
+        label_18->setText(QApplication::translate("MainWindow", "lfFont: \321\201\321\202\321\200\321\203\320\272\321\202\321\203\321\200\320\260 \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \321\210\321\200\320\270\321\204\321\202, \320\272\320\276\321\202\320\276\321\200\321\213\320\271 \320\270\321\201\320\277\320\276\320\273\321\214\320\267\321\203\320\265\321\202\321\201\321\217 \320\264\320\273\321\217 \320\275\320\260\320\264\320\277\320\270\321\201\320\265\320\271 \320\267\320\275\320\260\321\207\320\272\320\260.", Q_NULLPTR));
+        label_19->setText(QApplication::translate("MainWindow", "lfHeight: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \320\262\321\213\321\201\320\276\321\202\321\203, \320\262 \320\273\320\276\320\263\320\270\321\207\320\265\321\201\320\272\320\270\321\205 \320\265\320\264\320\270\320\275\320\270\321\206\320\260\321\205 \320\270\320\267\320\274\320\265\321\200\320\265\320\275\320\270\321\217, \n"
+"\321\201\320\270\320\274\320\262\320\276\320\273\321\214\320\275\320\276\320\271 \321\217\321\207\320\265\320\271\320\272\320\270 \321\210\321\200\320\270\321\204\321\202\320\260 \320\270\320\273\320\270 \321\201\320\270\320\274\320\262\320\276\320\273\320\260.", Q_NULLPTR));
+        label_20->setText(QApplication::translate("MainWindow", "lfWidth: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \321\201\321\200\320\265\320\264\320\275\321\216\321\216 \321\210\320\270\321\200\320\270\320\275\321\203, \320\262 \320\273\320\276\320\263\320\270\321\207\320\265\321\201\320\272\320\270\321\205 \320\265\320\264\320\270\320\275\320\270\321\206\320\260\321\205 \320\270\320\267\320\274\320\265\321\200\320\265\320\275\320\270\321\217, \n"
+"\321\201\320\270\320\274\320\262\320\276\320\273\320\276\320\262 \320\262 \321\210\321\200\320\270\321\204\321\202\320\265.", Q_NULLPTR));
+        label_21->setText(QApplication::translate("MainWindow", "lfEscapement: \321\203\320\263\320\276\320\273 \320\275\320\260\320\272\320\273\320\276\320\275\320\260 \320\274\320\265\320\266\320\264\321\203 \320\262\320\265\320\272\321\202\320\276\321\200\320\276\320\274 \320\275\320\260\320\272\320\273\320\276\320\275\320\260 \320\270 \320\276\321\201\321\214\321\216 X", Q_NULLPTR));
+        label_22->setText(QApplication::translate("MainWindow", "lfOrientation: \321\203\320\263\320\276\320\273, \320\274\320\265\320\266\320\264\321\203 \320\276\321\201\320\275\320\276\320\262\320\275\320\276\320\271 \320\273\320\270\320\275\320\270\320\265\320\271 \320\272\320\260\320\266\320\264\320\276\320\263\320\276 \321\201\320\270\320\274\320\262\320\276\320\273\320\260 \320\270 \320\276\321\201\321\214\321\216 \320\245", Q_NULLPTR));
+        label_23->setText(QApplication::translate("MainWindow", "lfWeight: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \321\202\320\276\320\273\321\211\320\270\320\275\321\203 \321\210\321\200\320\270\321\204\321\202\320\260 \320\262 \320\264\320\270\320\260\320\277\320\260\320\267\320\276\320\275\320\265 \320\276\321\202 0 \320\264\320\276 1000.", Q_NULLPTR));
+        label_24->setText(QApplication::translate("MainWindow", "lfItalic: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \320\272\321\203\321\200\321\201\320\270\320\262\320\275\321\213\320\271 \321\210\321\200\320\270\321\204\321\202, \320\265\321\201\320\273\320\270 \320\262 \320\275\320\265\320\274 \321\203\321\201\321\202\320\260\320\275\320\276\320\262\320\273\320\265\320\275\320\276 \320\230\320\241\320\242\320\230\320\235\320\220.", Q_NULLPTR));
+        label_25->setText(QApplication::translate("MainWindow", "lfUnderline: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \320\277\320\276\320\264\321\207\320\265\321\200\320\272\320\275\321\203\321\202\321\213\320\271 \321\210\321\200\320\270\321\204\321\202, \320\265\321\201\320\273\320\270 \320\262 \320\275\320\265\320\274 \321\203\321\201\321\202\320\260\320\275\320\276\320\262\320\273\320\265\320\275\320\276 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 \320\230\320\241\320\242\320\230\320\235\320\220.", Q_NULLPTR));
+        label_26->setText(QApplication::translate("MainWindow", "lfStrikeOut: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \320\267\320\260\321\207\320\265\321\200\320\272\320\275\321\203\321\202\321\213\320\271 \321\210\321\200\320\270\321\204\321\202, \320\265\321\201\320\273\320\270 \320\262 \320\275\320\265\320\274 \321\203\321\201\321\202\320\260\320\275\320\276\320\262\320\273\320\265\320\275\320\276 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 \320\230\320\241\320\242\320\230\320\235\320\220.", Q_NULLPTR));
+        label_27->setText(QApplication::translate("MainWindow", "lfCharSet: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \320\275\320\260\320\261\320\276\321\200 \321\201\320\270\320\274\320\262\320\276\320\273\320\276\320\262. ", Q_NULLPTR));
+        label_28->setText(QApplication::translate("MainWindow", "lfOutPrecision: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \321\202\320\276\321\207\320\275\320\276\321\201\321\202\321\214 \320\262\321\213\320\262\320\276\320\264\320\260.", Q_NULLPTR));
+        label_29->setText(QApplication::translate("MainWindow", "lfClipPrecision: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \321\202\320\276\321\207\320\275\320\276\321\201\321\202\321\214 \320\276\321\202\321\201\320\265\321\207\320\265\320\275\320\270\321\217.", Q_NULLPTR));
+        label_30->setText(QApplication::translate("MainWindow", "lfQuality: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \320\272\320\260\321\207\320\265\321\201\321\202\320\262\320\276 \320\262\321\213\320\262\320\276\320\264\320\260", Q_NULLPTR));
+        label_31->setText(QApplication::translate("MainWindow", "lfPitchAndFamily: \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \321\210\320\270\321\200\320\270\320\275\321\203 \321\201\320\270\320\274\320\262\320\276\320\273\320\276\320\262 \320\270 \321\201\320\265\320\274\320\265\320\271\321\201\321\202\320\262\320\276 \321\210\321\200\320\270\321\204\321\202\320\260. ", Q_NULLPTR));
+        label_32->setText(QApplication::translate("MainWindow", "lfFaceName: \320\275\320\260\320\267\320\262\320\260\320\275\320\270\320\265 \320\263\320\260\321\200\320\275\320\270\321\202\321\203\321\200\321\213 \321\210\321\200\320\270\321\204\321\202\320\260.", Q_NULLPTR));
+        label_33->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_34->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_35->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_36->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_37->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_38->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_39->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_40->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_41->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_42->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_43->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_44->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_45->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_46->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_47->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_48->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_49->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_50->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_51->setText(QApplication::translate("MainWindow", "SPI_GETMOUSETRAILS: \320\236\320\277\321\200\320\265\320\264\320\265\320\273\321\217\320\265\321\202, \320\262\320\272\320\273\321\216\321\207\320\265\320\275\320\260 \320\273\320\270 \321\204\321\203\320\275\320\272\321\206\320\270\321\217 Mouse Trails. \n"
+"\320\255\321\202\320\260 \321\204\321\203\320\275\320\272\321\206\320\270\321\217 \321\203\320\273\321\203\321\207\321\210\320\260\320\265\321\202 \320\262\320\270\320\264\320\270\320\274\320\276\321\201\321\202\321\214 \320\264\320\262\320\270\320\266\320\265\320\275\320\270\320\271 \320\272\321\203\321\200\321\201\320\276\321\200\320\260 \320\274\321\213\321\210\320\270, \320\272\321\200\320\260\321\202\320\272\320\276\320\262\321\200\320\265\320\274\320\265\320\275\320\275\320\276 \n"
+"\320\277\320\276\320\272\320\260\320\267\321\213\320\262\320\260\321\217 \321\201\320\273\320\265\320\264 \320\272\321\203\321\200\321\201\320\276\321\200\320\276\320\262 \320\270 \320\261\321\213\321\201\321\202\321\200\320\276 \321\201\321\202\320\270\321\200\320\260\321"
+                        "\217 \320\270\321\205. \n"
+"Windows 2000: \321\215\321\202\320\276\321\202 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200 \320\275\320\265 \320\277\320\276\320\264\320\264\320\265\321\200\320\266\320\270\320\262\320\260\320\265\321\202\321\201\321\217.", Q_NULLPTR));
+        label_52->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_53->setText(QApplication::translate("MainWindow", "SPI_GETWORKAREA\n"
+"\320\241\321\202\321\200\321\203\320\272\321\202\321\203\321\200\320\260 \320\270\320\267\320\262\320\273\320\265\320\272\320\260\320\265\321\202 \321\200\320\260\320\267\320\274\320\265\321\200 \321\200\320\260\320\261\320\276\321\207\320\265\320\271 \320\276\320\261\320\273\320\260\321\201\321\202\320\270 \320\275\320\260 \320\276\321\201\320\275\320\276\320\262\320\275\320\276\320\274 \320\274\320\276\320\275\320\270\321\202\320\276\321\200\320\265 \320\264\320\270\321\201\320\277\320\273\320\265\321\217. ", Q_NULLPTR));
+        label_54->setText(QApplication::translate("MainWindow", "bottom", Q_NULLPTR));
+        label_55->setText(QApplication::translate("MainWindow", "left", Q_NULLPTR));
+        label_56->setText(QApplication::translate("MainWindow", "right", Q_NULLPTR));
+        label_57->setText(QApplication::translate("MainWindow", "top", Q_NULLPTR));
+        label_217->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_218->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_219->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_220->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "\320\241\320\270\321\201\321\202\320\265\320\274\320\275\321\213\320\265 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213", Q_NULLPTR));
+        label_221->setText(QApplication::translate("MainWindow", "\320\222\320\272\320\273\321\216\321\207\320\260\320\265\321\202 \320\270\320\273\320\270 \320\262\321\213\320\272\320\273\321\216\321\207\320\260\320\265\321\202 \320\277\320\276\320\273\320\275\320\276\320\265 \321\201\320\276\320\264\320\265\321\200\320\266\320\260\320\275\320\270\320\265 \320\276\320\272\320\275\320\260 \320\277\321\200\320\270 \320\277\320\265\321\200\320\265\320\274\320\265\321\211\320\265\320\275\320\270\320\270 \320\270\320\273\320\270 \n"
+"\320\270\320\267\320\274\320\265\320\275\320\265\320\275\320\270\320\270. 0 \320\264\320\273\321\217 \320\262\321\213\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\217 \321\200\320\265\320\266\320\270\320\274\320\260, \320\270\320\273\320\270 \320\275\320\265\320\275\321\203\320\273\320\265\320\262\320\276\320\265 \320\267\320\275\320\260\321\207\320\265\320\275\320\270\320\265 \n"
+"\320\264\320\273\321\217 \320\262\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\217 \321\200\320\265\320\266\320\270\320\274\320\260", Q_NULLPTR));
+        pushButton_17->setText(QApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        label_222->setText(QApplication::translate("MainWindow", "\320\223\320\276\321\200\321\217\321\207\320\270\320\265 \320\272\320\273\320\260\320\262\320\270\321\210\320\270 \320\277\320\265\321\200\320\265\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\217 \321\217\320\267\321\213\320\272\320\276\320\262 \320\262\320\262\320\276\320\264\320\260 \320\272\320\273\320\260\320\262\320\270\320\260\321\202\321\203\321\200\321\213. \n"
+"1 - \321\203\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \320\263\320\276\321\200\321\217\321\207\321\203\321\216 \320\272\320\273\320\260\320\262\320\270\321\210\321\203 \320\262 ALT + SHIFT, \n"
+"2 - CTRL + SHIFT \320\270 3 \320\276\321\202\320\272\320\273\321\216\321\207\320\260\320\265\321\202 \320\263\320\276\321\200\321\217\321\207\320\270\320\265 \320\272\320\273\320\260\320\262\320\270\321\210\320\270. ", Q_NULLPTR));
+        pushButton_18->setText(QApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        pushButton_19->setText(QApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        label_223->setText(QApplication::translate("MainWindow", "\320\243\321\201\321\202\320\260\320\275\320\260\320\262\320\273\320\270\320\262\320\260\320\265\321\202 \320\277\320\265\321\200\320\270\320\276\320\264 \320\262 \321\201\320\265\320\272\321\203\320\275\320\264\320\260\321\205, \320\272\320\276\321\202\320\276\321\200\321\213\320\271 \320\264\320\276\320\273\320\266\320\265\320\275 \320\277\321\200\320\276\320\271\321\202\320\270 \320\261\320\265\320\267 \320\264\320\265\320\271\321\201\321\202\320\262\320\270\320\271\n"
+"\320\277\320\276\320\273\321\214\320\267\320\276\320\262\320\260\321\202\320\265\320\273\321\217 \320\264\320\276 \321\202\320\276\320\263\320\276, \320\272\320\260\320\272 Windows \320\277\320\265\321\200\320\265\320\271\320\264\320\265\321\202 \320\262 \321\200\320\265\320\266\320\270\320\274 \320\276\321\202\320\272\320\273\321\216\321\207\320\265\320\275\320\270\321\217 \320\277\320\270\321\202\320\260\320\275\320\270\321\217. ", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "\320\241\320\270\321\201\321\202\320\265\320\274\320\275\321\213\320\265 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213", Q_NULLPTR));
+        label_63->setText(QApplication::translate("MainWindow", "\320\233\320\276\320\272\320\260\320\273\321\214\320\275\320\276\320\265 \320\262\321\200\320\265\320\274\321\217 \320\270 \320\264\320\260\321\202\320\260:", Q_NULLPTR));
+        label_64->setText(QApplication::translate("MainWindow", "\320\242\320\265\320\272\321\203\321\211\320\270\320\265 \320\277\320\260\321\200\320\260\320\274\320\265\321\202\321\200\321\213 \321\207\320\260\321\201\320\276\320\262\320\276\320\263\320\276 \320\277\320\276\321\217\321\201\320\260:", Q_NULLPTR));
+        label_65->setText(QApplication::translate("MainWindow", "\320\223\320\276\320\264:", Q_NULLPTR));
+        pushButton_4->setText(QApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        pushButton_5->setText(QApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        pushButton_6->setText(QApplication::translate("MainWindow", "\320\230\320\267\320\274\320\265\320\275\320\270\321\202\321\214", Q_NULLPTR));
+        label_67->setText(QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\217\321\206:", Q_NULLPTR));
+        label_68->setText(QApplication::translate("MainWindow", "\320\224\320\265\320\275\321\214 \320\275\320\265\320\264\320\265\320\273\320\270:", Q_NULLPTR));
+        label_69->setText(QApplication::translate("MainWindow", "\320\224\320\265\320\275\321\214:", Q_NULLPTR));
+        label_70->setText(QApplication::translate("MainWindow", "\320\247\320\260\321\201:", Q_NULLPTR));
+        label_71->setText(QApplication::translate("MainWindow", "\320\234\320\270\320\275\321\203\321\202\320\260:", Q_NULLPTR));
+        label_72->setText(QApplication::translate("MainWindow", "\320\241\320\265\320\272\321\203\320\275\320\264\320\260:", Q_NULLPTR));
+        label_73->setText(QApplication::translate("MainWindow", "\320\234\320\270\320\273\320\273\320\270\321\201\320\265\320\272\321\203\320\275\320\264\320\260:", Q_NULLPTR));
+        label_74->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_75->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_76->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_77->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_78->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_79->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_80->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_81->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        pushButton_7->setText(QApplication::translate("MainWindow", "\320\243\321\201\321\202\320\260\320\275\320\276\320\262\320\270\321\202\321\214", Q_NULLPTR));
+        label_111->setText(QApplication::translate("MainWindow", "ACTIVECAPTION \n"
+"\320\236\320\261\320\273\320\260\321\201\321\202\321\214 \320\267\320\260\320\263\320\276\320\273\320\276\320\262\320\272\320\260 \320\260\320\272\321\202\320\270\320\262\320\275\320\276\320\263\320\276 \320\276\320\272\320\275\320\260.", Q_NULLPTR));
+        label_112->setText(QApplication::translate("MainWindow", "MENUTEXT \320\242\320\265\320\272\321\201\321\202 \320\262 \320\274\320\265\320\275\321\216.", Q_NULLPTR));
+        label_113->setText(QApplication::translate("MainWindow", "COLOR_BTNFACE\n"
+"\320\246\320\262\320\265\321\202 \320\263\321\200\320\260\320\275\320\270 \320\264\320\273\321\217 \321\204\320\276\320\275\320\276\320\262 \320\264\320\270\320\260\320\273\320\276\320\263\320\276\320\262\320\276\320\263\320\276 \320\276\320\272\320\275\320\260.", Q_NULLPTR));
+        label_82->setText(QApplication::translate("MainWindow", "\320\243\321\201\321\202\320\260\320\275\320\276\320\262\320\270\321\202\321\214 \320\273\320\276\320\272\320\260\320\273\321\214\320\275\320\276\320\265 \320\262\321\200\320\265\320\274\321\217 \320\270 \320\264\320\260\321\202\321\203:", Q_NULLPTR));
+        label_83->setText(QApplication::translate("MainWindow", "\320\243\321\201\321\202\320\260\320\275\320\276\320\262\320\270\321\202\321\214 \320\273\320\276\320\272\320\260\320\273\321\214\320\275\320\276\320\265 \320\262\321\200\320\265\320\274\321\217 \320\270 \320\264\320\260\321\202\321\203:", Q_NULLPTR));
+        label_84->setText(QApplication::translate("MainWindow", "\320\223\320\276\320\264:", Q_NULLPTR));
+        label_86->setText(QApplication::translate("MainWindow", "\320\234\320\265\321\201\321\217\321\206:", Q_NULLPTR));
+        label_87->setText(QApplication::translate("MainWindow", "\320\224\320\265\320\275\321\214 \320\275\320\265\320\264\320\265\320\273\320\270:", Q_NULLPTR));
+        label_333->setText(QApplication::translate("MainWindow", "\320\234\320\270\320\275\321\203\321\202\320\260:", Q_NULLPTR));
+        label_334->setText(QApplication::translate("MainWindow", "\320\234\320\270\320\273\320\273\320\270\321\201\320\265\320\272\321\203\320\275\320\264\320\260:", Q_NULLPTR));
+        label_335->setText(QApplication::translate("MainWindow", "\320\224\320\265\320\275\321\214:", Q_NULLPTR));
+        label_339->setText(QApplication::translate("MainWindow", "\320\247\320\260\321\201:", Q_NULLPTR));
+        label_341->setText(QApplication::translate("MainWindow", "\320\241\320\265\320\272\321\203\320\275\320\264\320\260:", Q_NULLPTR));
+        label_85->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_88->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_89->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_90->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_336->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_337->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_338->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_340->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "\320\241\320\270\321\201\321\202\320\265\320\274\320\275\321\213\320\265 \321\206\320\262\320\265\321\202\320\260 \320\270 \321\200\320\260\320\261\320\276\321\202\320\260 \321\201\320\276 \320\262\321\200\320\265\320\274\320\265\320\275\320\265\320\274", Q_NULLPTR));
+        pushButton_8->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\265\321\205\320\260\320\273\320\270", Q_NULLPTR));
+        label_66->setText(QApplication::translate("MainWindow", "\320\230\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\321\217 \320\276 \321\200\320\260\321\201\320\277\320\276\320\273\320\276\320\266\320\265\320\275\320\270\320\270 \320\272\320\260\321\200\320\265\321\202\320\272\320\270", Q_NULLPTR));
+        label_91->setText(QApplication::translate("MainWindow", "x-\320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\320\260 ", Q_NULLPTR));
+        label_92->setText(QApplication::translate("MainWindow", "y-\320\272\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202a ", Q_NULLPTR));
+        label_95->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_96->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_99->setText(QApplication::translate("MainWindow", "\320\230\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\321\217 \320\276 \320\273\320\276\320\272\320\260\320\273\320\270\320\267\320\260\321\206\320\270\320\270", Q_NULLPTR));
+        label_106->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        label_107->setText(QApplication::translate("MainWindow", "\320\241\320\277\321\217\321\211\320\270\320\271 \321\200\320\265\320\266\320\270\320\274", Q_NULLPTR));
+        label_93->setText(QApplication::translate("MainWindow", "\320\230\320\275\321\204\320\276\321\200\320\274\320\260\321\206\320\270\321\217 \320\276 \321\201\320\276\321\201\321\202\320\276\321\217\320\275\320\270\320\270 \320\272\320\273\320\260\320\262\320\270\320\260\321\202\321\203\321\200\321\213", Q_NULLPTR));
+        label_97->setText(QApplication::translate("MainWindow", "TextLabel", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "\320\224\320\276\320\277\320\276\320\273\320\275\320\270\321\202\320\265\320\273\321\214\320\275\321\213\320\265 API - \321\204\321\203\320\275\320\272\321\206\320\270\320\270", Q_NULLPTR));
+    } // retranslateUi
+
+};
+
+namespace Ui {
+    class MainWindow: public Ui_MainWindow {};
+} // namespace Ui
+
+QT_END_NAMESPACE
+
+#endif // UI_MAINWINDOW_H

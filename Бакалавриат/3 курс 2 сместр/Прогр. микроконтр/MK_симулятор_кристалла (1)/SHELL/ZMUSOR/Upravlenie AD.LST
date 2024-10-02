@@ -1,0 +1,294 @@
+MCS-51 MACRO ASSEMBLER    LABA3OBR                                                                  12/11/;3   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LABA3OBR.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE LABA3OBR.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;90_grad equ 93
+                       2     ;0_grad equ 19
+                       3     
+0000                   4     ORG 0h
+0000 028100            5     JMP START
+000B                   6     org 0Bh
+000B 0281F5            7     jmp TIMERR0
+                       8     
+8100                   9     ORG 8100h
+                      10     START:
+8100 1281E6           11       call stop
+8103 7E00             12              mov R6, #0
+8105 7900             13            mov R1, #0 ;qejsmd{
+8107 7A00             14            mov R2, #0h ;lhmsr{
+8109 7B00             15           mov R3, #0h ;w`q{
+810B 7C00             16           mov R4, #0
+810D 7D00             17           mov R5, #0
+810F 7830             18           mov R0, #30h ;rejsyhi nrqw8r
+8111 AFFF             19             mov R7, 0ffh
+8113 7482             20             MOV A,#10000010b
+8115 900003           21             MOV DPTR,#3                   ;NASTROIKA BB55 NA NEOBHODIMYI REZHIM
+8118 F0               22             MOVX @DPTR,A
+8119 7411             23             MOV A,#00010001b
+811B 900000           24             MOV DPTR,#0                    ;NASTROIKA KOMUTATOROV NAPRYASHGENIA
+811E F0               25             MOVX @DPTR,A
+811F 438901           26             orl tmod, #00000001b                    ;T/C0 - 16 BITNUYI TAIMER (T/C1 NE TROGHEAM
+                             , T.K. ON ZANAT
+8122 D29F             27               setb SM0
+8124 D29C             28             setb REN
+8126 43A882           29             orl IE, #10000010b ;razresheniye preryvaniya
+                      30          label1:
+8129 BFFF02           31        cjne R7, #0FFh, time ;jnk-bn nrqw8rnb
+812C 80FB             32           jmp label1
+                      33     
+                      34     time:
+812E 752800           35       mov 28h, #0 ; tk`c oephnd` p`anr{ opnch
+8131 752900           36       mov 29h, #0 ; astep dk^ up`memh^ menau. gm`w. sck`
+8134 8F30             37        mov 30h, R7 ; up`mhrq^ g`d`mmne jnk-bn nrqewej
+8136 900002           38        mov dptr, #2
+8139 758C63           39        mov th0, #63h
+813C 758ABF           40         mov tl0, #0BFh
+                      41     
+813F D28C             42       setb TCON.4 ;g`osqj`el r`ilep0
+                      43     
+                      44     INDICATE:
+8141 308C52           45       jnb TCON.4, INDICATE_O
+8144 1281D5           46        call read_ACP
+                      47      ;  mov 29h, A
+8147 12822B           48        call kod_ugol
+                      49        ;mov A, 29h
+MCS-51 MACRO ASSEMBLER    LABA3OBR                                                                  12/11/;3   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      50     
+814A 75F00A           51        mov B, #10
+814D 84               52        div AB
+814E 4440             53        orl A, #01000000b ;lhmsr{ - deq^rjh
+8150 F0               54        movx @dptr, A
+8151 128221           55        call delay
+8154 E4               56        clr A
+8155 F0               57        movx @dptr, A
+                      58     
+8156 E5F0             59         mov A, B
+8158 4480             60         orl A, #10000000b ;lhmsr{-edhmhv{
+815A F0               61         movx @dptr, A
+815B 128221           62         call delay
+815E E4               63         clr A
+815F F0               64         movx @dptr, A
+                      65     
+8160 B52804           66            cjne A, 28h, m4 ;eqkh menaundhln onj`g`r| nrqewjs
+8163 E9               67              mov A, R1
+8164 02817E           68               jmp m5
+                      69        m4:
+8167 EB               70            mov A, R3  ; mnlep nrqewjh
+8168 B90313           71            cjne R1, #3, m5
+816B 7900             72               mov R1, #0
+816D 7E00             73                mov R6, #0
+816F 752800           74               mov 28h, #0
+8172 C28C             75               clr TCON.4
+8174 E4               76                clr A
+8175 F0               77               movx @dptr, A
+8176 18               78                 dec R0
+8177 028196           79               jmp INDICATE_O
+                      80          start1:
+817A C28C             81              clr TCON.4
+817C 8082             82              jmp START
+                      83        m5:
+817E 75F00A           84            mov B, #10
+8181 84               85            div AB
+8182 4410             86            orl A, #00010000b ;w`q{ - deq^rjh
+8184 F0               87            movx @dptr, A
+8185 128221           88           call delay
+8188 E4               89           clr A
+8189 F0               90           movx @dptr, A
+                      91     
+818A E5F0             92            mov A, B
+818C 4420             93            orl A, #00100000b ;w`q{-edhmhv{
+818E F0               94            movx @dptr, A
+818F 128221           95            call delay
+8192 E4               96            clr A
+8193 F0               97            movx @dptr, A
+8194 80AB             98     jmp INDICATE
+                      99     
+                     100     INDICATE_O:
+8196 E8              101        mov A, R0
+8197 C3              102        clr C
+8198 9430            103        subb A, #30h
+819A FB              104        mov R3, A
+MCS-51 MACRO ASSEMBLER    LABA3OBR                                                                  12/11/;3   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+819B 60DD            105        jz start1 ; eqkh bngbp`rhkhq| b m`w`kn
+819D 8629            106          mov 29h, @R0
+                     107        back:
+819F 1281D5          108            call read_ACP
+81A2 12822B          109            call kod_ugol
+81A5 B5290A          110           cjne A, 29h, M1 ;qp`bmhb`el rejsyee gm`w. q menaund. hg o`l^rh
+81A8 1281E6          111              call stop
+81AB 752801          112              mov 28h, #1
+81AE D28C            113              setb TCON.4
+81B0 808F            114              jmp INDICATE
+                     115     
+                     116           M1:
+81B2 4006            117              jc vpered_m  ; eqkh rejsyhi scnk < sck` b o`l^rh
+81B4 1281F0          118                 call nazad
+81B7 0281BD          119             jmp M2
+                     120           vpered_m:
+81BA 1281EB          121             call vpered
+                     122         M2:
+81BD 75F00A          123            mov B, #10
+81C0 84              124        div AB
+81C1 4440            125        orl A, #01000000b ;lhmsr{ - deq^rjh
+81C3 F0              126        movx @dptr, A
+81C4 128221          127        call delay
+81C7 E4              128        clr A
+81C8 F0              129        movx @dptr, A
+                     130     
+81C9 E5F0            131         mov A, B
+81CB 4480            132         orl A, #10000000b ;lhmsr{-edhmhv{
+81CD F0              133         movx @dptr, A
+81CE 128221          134         call delay
+81D1 E4              135         clr A
+81D2 F0              136         movx @dptr, A
+81D3 80CA            137     jmp back
+                     138     
+                     139     read_ACP:
+81D5 D290            140         SETB P1.0 ; Hmhvh`khg`vh^ onpr` P1.0
+81D7 D291            141        SETB P1.1 ; Hmhvh`khg`vh^ onpr` P1.1
+                     142      ;  CLR C ; Qanq  Q
+81D9 C290            143        CLR P1.0 ; G`osqj @VO
+                     144     
+81DB 2091FD          145        ACP: JB P1.1, ACP ; Fd8l qhcm`k` q @VO
+                     146     
+81DE 900001          147        MOV DPTR,#01h; Eqkh ophx8k qhcm`k nr @VO b{ahp`el pechqrp B
+81E1 E0              148        MOVX  A,@DPTR ; G`cpsf`el qndepfhlne pechqrp` B b pechqrp @
+81E2 900002          149        MOV DPTR,#02h
+81E5 22              150     RET
+                     151     
+                     152     stop:
+81E6 C296            153             clr P1.6
+81E8 C297            154             clr P1.7
+81EA 22              155     ret
+                     156     
+                     157     vpered:
+81EB C297            158             clr P1.7
+81ED D296            159             setb P1.6
+MCS-51 MACRO ASSEMBLER    LABA3OBR                                                                  12/11/;3   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+81EF 22              160     ret
+                     161     
+                     162     nazad:
+81F0 C296            163             clr P1.6
+81F2 D297            164             setb P1.7
+81F4 22              165     ret
+                     166     
+                     167     TIMERR0:
+81F5 0E              168        inc R6
+81F6 BE1921          169       cjne R6, #25, label2
+81F9 7E00            170         mov R6, #0
+81FB 09              171         inc R1
+81FC B90A1B          172       cjne R1, #10, label2
+81FF 7900            173         mov R1, #0
+8201 08              174         inc R0
+8202 31D5            175         call read_ACP
+8204 12822B          176         call kod_ugol
+8207 F6              177         mov @R0, A ;qnup`m^el gm`w. sck` b o`l^r|
+8208 E8              178         mov A, R0
+8209 C3              179        clr C
+820A 9430            180        subb A, #30h
+820C B5300B          181       cjne A, 30h, label2 ;qp`bmhb`el q g`d`mm{l gm`wemhel (R7)
+820F E8              182       mov A, R0
+8210 C3              183       clr C
+8211 9401            184       subb A,#1
+8213 F8              185       mov R0, A
+8214 C28C            186         clr TCON.4 ; nqr`m`bkhb`el r`ilep0
+8216 7900            187          mov R1, #0
+8218 7E00            188        mov R6, #0
+                     189       label2:
+821A 758C63          190         mov th0, #63h
+821D 758ABF          191         mov tl0, #0BFh
+8220 32              192     RETI
+                     193     
+                     194     delay:
+8221 7C00            195        mov R4, #0
+                     196        m7:
+8223 00              197          nop
+8224 00              198          nop
+8225 00              199          nop
+8226 0C              200          inc R4
+8227 BC00F9          201       cjne R4, #0, m7
+822A 22              202     ret
+                     203     
+                     204     kod_ugol:
+822B 75F05A          205        mov B, #90
+822E A4              206        mul AB
+822F F525            207        mov 25h, A
+8231 E5F0            208        mov A, B
+8233 23              209        rl A
+8234 F5F0            210       mov B, A
+8236 E525            211        mov A, 25h
+8238 23              212        rl A
+8239 5401            213        anl A, #1
+823B 53F0FE          214        anl B, #0FEh
+MCS-51 MACRO ASSEMBLER    LABA3OBR                                                                  12/11/;3   PAGE    5
+
+
+LOC  OBJ            LINE     SOURCE
+
+823E 45F0            215        orl A, B
+8240 22              216     ret
+                     217     
+                     218     END
+MCS-51 MACRO ASSEMBLER    LABA3OBR                                                                  12/11/;3   PAGE    6
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACP. . . .  C ADDR    81DBH   A       
+B. . . . .  D ADDR    00F0H   A       
+BACK . . .  C ADDR    819FH   A       
+DELAY. . .  C ADDR    8221H   A       
+IE . . . .  D ADDR    00A8H   A       
+INDICATE_O  C ADDR    8196H   A       
+INDICATE .  C ADDR    8141H   A       
+KOD_UGOL .  C ADDR    822BH   A       
+LABEL1 . .  C ADDR    8129H   A       
+LABEL2 . .  C ADDR    821AH   A       
+M1 . . . .  C ADDR    81B2H   A       
+M2 . . . .  C ADDR    81BDH   A       
+M4 . . . .  C ADDR    8167H   A       
+M5 . . . .  C ADDR    817EH   A       
+M7 . . . .  C ADDR    8223H   A       
+NAZAD. . .  C ADDR    81F0H   A       
+P1 . . . .  D ADDR    0090H   A       
+READ_ACP .  C ADDR    81D5H   A       
+REN. . . .  B ADDR    0098H.4 A       
+SM0. . . .  B ADDR    0098H.7 A       
+START. . .  C ADDR    8100H   A       
+START1 . .  C ADDR    817AH   A       
+STOP . . .  C ADDR    81E6H   A       
+TCON . . .  D ADDR    0088H   A       
+TH0. . . .  D ADDR    008CH   A       
+TIME . . .  C ADDR    812EH   A       
+TIMERR0. .  C ADDR    81F5H   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+VPERED_M .  C ADDR    81BAH   A       
+VPERED . .  C ADDR    81EBH   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

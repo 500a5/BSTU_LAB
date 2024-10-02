@@ -1,0 +1,148 @@
+MCS-51 MACRO ASSEMBLER    LAB2                                                                      11/17/;0   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN E:\UNIVER\MK\LAB2.OBJ
+ASSEMBLER INVOKED BY:  E:\UNIVER\MK\ASM51.EXE E:\UNIVER\MK\LAB2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h                       ;P^P5P:Q^P>Q^ Q^P5Q^Q^P0Q^Q^P0 P?Q^P>Q^P5Q^Q^P>Q^P0
+0000 028100            2                     jmp begin
+8100                   3     org 8100h
+8100 D290              4     begin:          setb p1.0       ;P^P8Q^ P3P0Q^P5P=P8Q^ P?Q^P5P>P1Q^P0P7P>P2P0P=P8Q^
+8102 C2D4              5                     clr psw.4       ;P^Q^P1P8Q^P0P5P< P1P0P=P: Q^P5P3P8Q^Q^Q^P>P2
+8104 C2D3              6                     clr psw.3
+                       7     ;                mov 2bh,#00011000b ;P?P5Q^P2Q^P9 Q^P;P5P2P0 P8P=P4P8P:P0Q^P>Q^ - 8
+                       8     ;                mov 2ch,#00100001b ;P2Q^P>Q^P>P9 P8P=P4P8P:P0Q^P>Q^ - 1
+                       9     ;                mov 2dh,#01000000b ;Q^Q^P5Q^P8P9 P8P=P4P8P:P0Q^P>Q^ - 0
+                      10     ;                mov 2eh,#10000101b ;Q^P5Q^P2P5Q^Q^Q^P9 P8P=P4P8P:P0Q^P>Q^ - 5 
+8106 900003           11                     mov dptr,#03h ;P^P4Q^P5Q^ P P# P2P> P2P=P5Q^P=P5P9 P?P0P<Q^Q^P8
+8109 7482             12                     mov a,#82h ;P!P>P4P5Q^P6P8P<P>P5 P P# - 10000010b
+810B F0               13                     movx @dptr,a 
+                      14     ;                mov dpl,#02h ;P^P4Q^P5Q^ P?P>Q^Q^P0 P! P2P> P2P=P5Q^P=P5P9 P?P0P<Q^Q^P8
+                      15                     
+                      16     ;B01:            mov r1,#0ah
+                      17     ;B06:            mov r2,#0ffh
+                      18     ;B05:            mov r0,#2eh
+                      19     
+                      20     ;B0A:            mov a,@r0
+                      21     ;                movx @dptr,a
+                      22     ;                mov r4,#0ffh
+                      23     ;B09:            djnz r4,B09 ;P7P0P4P5Q^P6P:P0 P4P;Q^ Q^P2P5Q^P5P=P8Q^ P8P=P4P8P:P0Q^P>Q^P0
+                      24     ;                dec r0 ;P2Q^P2P>P4P8P< P2 P?P>Q^Q^ P! P?P>P>Q^P5Q^P5P4P=P> Q^P8Q^P;P0 P?P>
+                              P0P4Q^P5Q^P0P< 2eh,2dh,2ch,2bh
+                      25     ;                cjne r0,#2ah, B0A
+                      26     ;B11:            djnz r4,B11
+                      27     ;                djnz r2,B05
+                      28     ;                djnz r1,B06
+                      29     ;P7P0P:P0P=Q^P8P2P0P5P< P2Q^P2P>P4P8Q^Q^ 8105 - "BIOS"
+810C 758200           30                     mov dpl,#00h ;P^P4Q^P5Q^ P?P>Q^Q^P0 P^ P2P> P2P=P5Q^P=P5P9 P?P0P<Q^Q^P8
+810F 7410             31                     mov a,#10h
+8111 F0               32                     movx @dptr,a ;P^P>P<P<Q^Q^P0Q^P>Q^ P?P5Q^P5P4P0P5Q^ P=P0P?Q^Q^P4P5P=P8P5 Q^
+                              P=P>P6P:P8 10h P=P0 P^P&P^
+8112 C290             33                     clr p1.0 ;Q^P1Q^P0Q^Q^P2P0P5P< P1P8Q^ P3P0Q^P5P=P8Q^ P?Q^P5P>P1Q^P0P7P>P2P0
+                             P=P8Q^
+8114 2091FD           34                     jb p1.1,$ ;P?P5Q^P5Q^P>P4, P5Q^P;P8 P^P&P^ P5Q  Q^ P=P5 P3P>Q^P>P2
+                      35     
+8117 758201           36     L08:            mov dpl,#01h ;P2 DPTR P0P4Q^P5Q^ P?P>Q^Q^P0 P^ P2P> P2P=P5Q^P=P5P9 P?P0P<Q^
+                             Q^P8
+811A E0               37                     movx a,@dptr ;Q^P8Q^P0P5P< P2 P0Q^Q^ P>Q^P8Q^Q^P>P2P0P=P=P>P5 P7P=P0Q^P5P=P
+                             8P5
+811B D290             38                     setb p1.0    ;Q^Q^Q^P0P=P0P2P;P8P2P0P5P< P1P8Q^ P3P0Q^P5P=P8Q^ P?Q^P5P>P1Q^
+                             P0P7P>P2P0P=P8Q^
+811D 758202           39                     mov dpl,#02h ;P2 DPTR P0P4Q^P5Q^ P?P>Q^Q^P0 P! P2P> P2P=P5Q^P=P5P9 P?P0P<Q^
+                             Q^P8
+8120 2480             40                     add a,#80h   
+8122 C290             41                     clr p1.0     ;Q^P1Q^P0Q^Q^P2P0P5P< P1P8Q^ P3P0Q^P5P=P8Q^ P?Q^P5P>P1Q^P0P7P>
+                             P2P0P=P8Q^, P^P&P^ P=P0Q^P8P=P0P5Q^ P>Q^P8Q^Q^P>P2Q^P2P0Q^Q^ Q^P8P3P=P0P;
+8124 9200             42                     mov 00h,c    ;P?P> P=Q^P;P5P2P>P<Q^ P0P4Q^P5Q^Q^ P7P0P?P8Q^Q^P2P0P5P< P1P8Q
+MCS-51 MACRO ASSEMBLER    LAB2                                                                      11/17/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                             ^ P?P5Q^P5P=P>Q^P0
+8126 30E702           43                     jnb acc.7,L00 ;P5Q^P;P8 Q^Q^P0Q^Q^P8P9 P1P8Q^ P0Q^Q^ == 0, Q^P> P?P5Q^P5Q^P
+                             >P4P8P<
+8129 F4               44                     cpl a   ;P8P=P2P5Q^Q^P8Q^ +
+812A 04               45                     inc a   ;+ P8P=P:Q^P5P<P5P=Q^
+812B 75F019           46     L00:            mov b,#19h ;#25
+812E 84               47                     div ab    ;P2 P0Q^Q^-Q^P5P;P>P5 P:P>P;P8Q^P5Q^Q^P2P> P^P>P;Q^Q^, P2 b-P>Q^Q
+                             ^P0Q^P>P:
+812F D2E5             48                     setb acc.5 ;P2Q^P2P>P4P8P< P=P0 P?P5Q^P2Q^P9 P8P=P4P8P:P0Q^P>Q^
+8131 F510             49                     mov 10h,a ;Q^P>Q^Q^. P?P>P4P3P>Q^P>P2P;. P1P0P9Q^ P?P> P0P4Q^P5Q^Q^ 10h
+8133 E5F0             50                     mov a,b  ;Q^P0P1P>Q^P0P5P< Q^ P>Q^Q^P0Q^P:P>P<
+                      51     
+8135 23               52                     rl a  ;Q^P4P2P8P3 P2P;P5P2P> //Q^P<P=P>P6P0P5P< P=P0 2
+8136 23               53                     rl a
+8137 75F00A           54                     mov b,#0ah ;#10
+813A 84               55                     div ab     ;P2 P0Q^Q^ P:P>P;P8Q^P5Q^Q^P2P> P4P5Q^Q^Q^Q^Q^
+813B D2E6             56                     setb acc.6 ;P2Q^P2P>P4P8P< P=P0 Q^Q^P5Q^P8P9 P8P=P4P8P:P0Q^P>Q^
+813D F511             57                     mov 11h,a  ;Q^P>Q^Q^P0P=Q^P5P< P2 P?P0P<Q^Q^P8
+813F D2F7             58                     setb b.7   ;P2Q^P2P>P4P8P< P=P0 Q^P5Q^P2P5Q^Q^Q^P9 P8P=P4P8P:P0Q^P>Q^
+8141 85F012           59                     mov 12h,b  ;Q^P>Q^Q^P0P=Q^P5P< P2 P?P0P<Q^Q^P8
+                      60     
+8144 7907             61     L01:            mov r1,#07h
+8146 7A0F             62     L06:            mov r2,#0Fh
+8148 7812             63     L05:            mov r0,#12h ; P0P4Q^P5Q^ P1P0P9Q^P0 P4P;Q^ Q^P5Q^P2P5Q^Q^P>P3P> P8P=P4P8P:P
+                             0Q^P>Q^P0
+                      64     
+814A E6               65     L0A:            mov a,@r0 
+814B F0               66                     movx @dptr,a 
+814C 7C00             67                     mov r4,#00h
+814E DCFE             68     L09:            djnz r4,L09 ;P7P0P4P5Q^P6P:P0
+8150 18               69                     dec r0      ;P?P5Q^P5Q^P>P4P8P< P: P1P0P9Q^Q^ P4P;Q^ Q^P;P5P4Q^Q^Q      P5P
+                             3P> P8P=P4P8P:P0Q^P>Q^P0
+8151 B80FF6           70                     cjne r0,#0fh, L0A ;P?P>Q^P;P5P4P=P8P< P2Q^P2P>P4P8P< P1P0P9Q^ P?P> P0P4Q^P5
+                             Q^Q^ 10h
+8154 DCFE             71     L11:            djnz r4,L11 ;P7P0P4P5Q^P6P:P0
+8156 DAF0             72                     djnz r2,L05 
+8158 D9EC             73                     djnz r1,L06 ;P2P;P>P6P5P=P=Q^P5 Q^P8P:P;Q^
+815A 20000B           74                     jb 00h,L02 ;P5Q^P;P8 Q^P8Q^P;P> P?P>P;P>P6P8Q^P5P;Q^P=P>P5, Q^P> P?P5Q^P5Q^
+                             P>P4P8P<
+                      75                                ;P8P=P0Q^P5 
+                      76     ;                clr a      ;P>P1P=Q^P;Q^P5P< P0Q^Q^
+                      77     ;                movx @dptr,a  ;P3P0Q^P8P< P2Q^P5 P8P=P4P8P:P0Q^P>Q^Q^
+815D 7410             78                     mov a,#00010000b
+815F F0               79                     movx @dptr,a
+8160 7907             80                     mov r1,#07h
+8162 7A00             81     L04:            mov r2,#00h
+8164 DAFE             82     L03:            djnz r2,L03
+8166 D9FA             83                     djnz r1,L04 ;P7P0P4P5Q^P6P:P0
+8168 2091D9           84     L02:            jb p1.1, L01 ;P?P5Q^P5Q^P>P4P8P<,Q^.P5. P2Q^P2P>P4P8P< Q^P> P6P5 Q^P0P<P>P5
+                              Q^P8Q^P;P>, P5Q^P;P8 P^P&P^ P=P5 P3P>Q^P>P2P>
+816B 80AA             85                     jmp L08      ;P5Q^P;P8 P3P>Q^P>P2P>, Q^P> P2Q^P5 P7P0P=P>P2P>
+                      86     end
+MCS-51 MACRO ASSEMBLER    LAB2                                                                      11/17/;0   PAGE    3
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . .  D ADDR    00E0H   A       
+B. . . . .  D ADDR    00F0H   A       
+BEGIN. . .  C ADDR    8100H   A       
+DPL. . . .  D ADDR    0082H   A       
+L00. . . .  C ADDR    812BH   A       
+L01. . . .  C ADDR    8144H   A       
+L02. . . .  C ADDR    8168H   A       
+L03. . . .  C ADDR    8164H   A       
+L04. . . .  C ADDR    8162H   A       
+L05. . . .  C ADDR    8148H   A       
+L06. . . .  C ADDR    8146H   A       
+L08. . . .  C ADDR    8117H   A       
+L09. . . .  C ADDR    814EH   A       
+L0A. . . .  C ADDR    814AH   A       
+L11. . . .  C ADDR    8154H   A       
+P1 . . . .  D ADDR    0090H   A       
+PSW. . . .  D ADDR    00D0H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

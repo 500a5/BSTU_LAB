@@ -1,0 +1,35 @@
+#ifndef MODEL3D_H
+#define MODEL3D_H
+
+#include <import_obj.h>
+#include <QMatrix4x4>
+
+class Model3D{
+    QVector<VertexData> v_d;
+    QVector<uint> indexes;
+    //QVector3D center;
+    QMatrix4x4 modelMatrix;   
+public:
+    Model3D(const QString &name);
+    const QVector<VertexData>& getVertexes() const;
+    const QVector<uint>& getIndexes() const;
+    const QMatrix4x4 getModelMatrix() const;
+};
+
+class ChessBoard{
+    Model3D base;
+    Model3D field;
+public:
+    ChessBoard(const QString &base, const QString &field):base(base), field(field){}
+    const QVector<VertexData>& getVertexes() const;
+    const QVector<uint>& getIndexes() const;
+    const QMatrix4x4 getModelMatrix() const;
+};
+
+class Chess:Model3D{
+    uint position;
+public:
+    void setPostion(uint pos);
+};
+
+#endif // MODEL3D_H

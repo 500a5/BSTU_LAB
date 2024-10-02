@@ -1,0 +1,79 @@
+MCS-51 MACRO ASSEMBLER    LOL2                                                                      01/24/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN D:\MCS8052\LOL2.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE D:\MCS8052\LOL2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1      org 0h 
+0000 020115            2      jmp start 
+000B                   3      org 0bh
+000B 02010A            4      jmp time_handle
+0100                   5      org 100h
+  FFFA                 6      timestep equ 65535-5
+                       7     
+                       8     getkey:
+0100 E8                9      mov a,r0
+0101 04               10      inc a
+0102 83               11      movc a,@a+pc
+0103 22               12      ret;
+0104 07               13      db  7,14,28,56,49,67
+0105 0E
+0106 1C
+0107 38
+0108 31
+0109 43
+                      14     
+                      15     time_handle:
+010A 3100             16      call getkey
+010C F590             17      mov p1,a
+010E 08               18      inc r0
+010F B80702           19      cjne r0,#7,tm1
+0112 7801             20      mov r0,#1
+                      21      tm1:
+                      22     
+0114 32               23      reti;
+                      24     
+                      25     start:
+0115 C2D3             26      clr rs0
+0117 C2D4             27      clr rs1
+0119 758901           28      mov tmod,#1
+011C 758AFA           29      mov tl0,#low(timestep)
+011F 758CFF           30      mov th0,#high(timestep)
+0122 7800             31      mov r0,#0
+0124 D2AF             32      setb ie. 7
+0126 D2A9             33      setb ie. 1
+0128 D28C             34      setb tr0
+                      35     
+012A 80FE             36     jmp $
+                      37     end
+MCS-51 MACRO ASSEMBLER    LOL2                                                                      01/24/:9   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E      T Y P E   V A L U E       A T T R I B U T E S
+
+GETKEY. . .  C ADDR    0100H   A       
+IE. . . . .  D ADDR    00A8H   A       
+P1. . . . .  D ADDR    0090H   A       
+RS0 . . . .  B ADDR    00D0H.3 A       
+RS1 . . . .  B ADDR    00D0H.4 A       
+START . . .  C ADDR    0115H   A       
+TH0 . . . .  D ADDR    008CH   A       
+TIME_HANDLE  C ADDR    010AH   A       
+TIMESTEP. .    NUMB    FFFAH   A       
+TL0 . . . .  D ADDR    008AH   A       
+TM1 . . . .  C ADDR    0114H   A       
+TMOD. . . .  D ADDR    0089H   A       
+TR0 . . . .  B ADDR    0088H.4 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

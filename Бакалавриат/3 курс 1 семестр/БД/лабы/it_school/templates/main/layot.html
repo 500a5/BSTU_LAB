@@ -1,0 +1,59 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/menu.css' %}">
+</head>
+<body>
+<div id="menuDemo">
+<!--start CssMenu-->
+<div class="menu-icon-wrapper">
+	<div class="menu-icon" onclick="toggleCssMenu(this)">
+		<div class="three-line">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</div>
+</div>
+<div id="cssmenu">
+    <ul>
+        <li><a href="{% url 'news' %}">Новости</a></li>
+        <li><a href="{% url 'events' %}">Анонс мероприятий</a></li>
+        <li><a href="{% url 'workers' %}">Сотрудники</a></li>
+        <li><a href="{% url 'references' %}">Обращения граждан</a></li>
+    </ul>
+</div>
+<tr>
+  {% if user.is_authenticated %}
+                        <td width="650px" align="right"><span class="GoTo"><a href="{% url 'logout' %}">Выйти ({{user.username}})</a></span></td>
+                    {% else %}
+                        <td width="550px" align="right"><span class="GoTo"><a href="{% url 'register' %}">Регистрация</a></span></td>
+                        <td width="110px" align="center"><span class="GoTo"><a href="{% url 'login' %}">Авторизация</a></span></td>
+                    {% endif %}
+                </tr>
+    <script>
+    function toggleCssMenu(icon) {
+        var cssmenu = document.getElementById('cssmenu');
+        if (icon.className.indexOf('active') == -1) {
+            icon.className = 'menu-icon active';
+			cssmenu.style.display = "block";
+			setTimeout(function(){cssmenu.className = 'active';},0);
+        }
+        else {
+            icon.className = 'menu-icon';
+			cssmenu.className = '';
+			setTimeout(function(){cssmenu.style.display = "none";},411);
+        }
+    }
+</script>
+    {% block content %} {% endblock %}
+</body>
+</html>

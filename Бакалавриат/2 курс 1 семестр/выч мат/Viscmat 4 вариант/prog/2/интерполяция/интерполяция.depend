@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1506270006 source:c:\users\hystou\desktop\Учёбка\2 r\Вычмат\kf,f_2\интерполяция\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"mod_niut.h"
+
+1506268581 c:\users\hystou\desktop\Учёбка\2 r\Вычмат\kf,f_2\интерполяция\mod_niut.h
+
+1506269997 source:c:\users\hystou\desktop\Учёбка\2 r\Вычмат\kf,f_2\интерполяция\mod_niut.c
+	<stdio.h>
+	<stdlib.h>
+	"mod_niut.h"
+	<math.h>
+
+1506270008 source:c:\users\Ира\desktop\Учёбка\2 r\Вычмат\ПРОГИ\kf,f_2\интерполяция\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"mod_niut.h"
+
+1506268582 c:\users\Ира\desktop\Учёбка\2 r\Вычмат\ПРОГИ\kf,f_2\интерполяция\mod_niut.h
+
+1506269998 source:c:\users\Ира\desktop\Учёбка\2 r\Вычмат\ПРОГИ\kf,f_2\интерполяция\mod_niut.c
+	<stdio.h>
+	<stdlib.h>
+	"mod_niut.h"
+	<math.h>
+

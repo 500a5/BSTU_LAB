@@ -1,0 +1,5 @@
+ORG 0H
+	MOV A, 1FH
+	MOV 1FH, 17H
+	MOV 17H, A
+END

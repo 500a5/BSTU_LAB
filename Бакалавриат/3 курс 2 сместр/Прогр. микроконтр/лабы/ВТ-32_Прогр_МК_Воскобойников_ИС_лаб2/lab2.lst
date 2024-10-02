@@ -1,0 +1,533 @@
+lab2                                                                                                                    PAGE 1
+                         1     ORG 0h
+0000 020055              2             jmp main
+                         3     step_time_int:
+                         4             ORG 0Bh;Тут прерывание от таймера номер 0
+000B C28D                5             CLR TF0;Очищаем флаг прерывания
+                         6
+000D 12006D              7             call step_time
+                         8
+0010 32                  9             RETI ;выход из перывания
+                        10
+                        11     semi_out_int:
+                        12             ORG 1Bh;Тут прерывание от таймера номер 1
+001B C28F               13             CLR TF1;Очистка флага прерывания
+001D 7590FF             14             MOV P1, #0FFh
+0020 D2B3               15             setb p3.3
+0022 D2B4               16             setb p3.4
+0024 D2B6               17             setb p3.6
+0026 D2B7               18             setb p3.7
+                        19
+                        20             ;первая лампочка
+0028 B80003             21             CJNE R0, #0h, lam_skip_1
+002B E9                 22             mov A, r1;берем число соответствующее лампочке
+002C C2B3               23             clr p3.3;выбираем лампочку
+                        24
+                        25             lam_skip_1:
+                        26             ;вторая лампочка
+002E B80105             27             CJNE R0, #1h, lam_skip_2
+0031 EA                 28             mov A, r2
+0032 D2B3               29             setb p3.3
+0034 C2B4               30             clr p3.4
+                        31
+                        32             lam_skip_2:
+0036 B80205             33             CJNE R0, #2h, lam_skip_3
+0039 EB                 34             mov A, r3
+003A D2B4               35             setb p3.4
+003C C2B6               36             clr p3.6
+                        37
+                        38             lam_skip_3:
+003E B80305             39             CJNE R0, #3h, lam_skip_4
+0041 EC                 40             mov A, r4
+0042 D2B6               41             setb p3.6
+0044 C2B7               42             clr p3.7
+                        43
+                        44             lam_skip_4:
+                        45
+                        46             ;Заносим цифру в A и вызываем функцию которая отображает ее в P1
+0046 120090             47             call get_semi_code
+                        48
+0049 B80102             49             CJNE R0, #1h, term;если вывод на вторую лампочку то там ставится точка, она получится по цент
+004C C297               50             CLR P1.7
+                        51
+                        52        term:
+004E 08                 53             inc R0  ;переходим к следующему сегменту
+004F B80402             54             CJNE R0, #00000100b, end_semo_circle ;Если дошли до конца семи сегментного индикатора то обну
+0052 7800               55             MOV R0,#0b
+                        56
+                        57        end_semo_circle:
+0054 32                 58             RETI;Выход из прерывания вывода
+                        59
+                        60     main:
+                        61
+                        62     ;T1 M1=1 M0=0 по прерыванию первого таймера мы выводим в индикатор
+                        63             ;T0 M1=0 M0=1 по этому прерыванию увеличиваем время
+0055 758921             64             MOV TMOD,#00100001b
+                        65
+0058 758CDC             66             MOV TH0, #0DCh;2^16-10000=55536=0D8F0h
+005B 758A00             67             MOV TL0, #0h
+                        68
+                        69             ;разрешаем прерывание от таймера 0
+005E D2A9               70             SETB ET0
+                        71             ;разрешаем прерывание от таймера 1
+0060 D2AB               72             SETB ET1
+                        73             ;разрешаем выполнение прерываний
+0062 D2AF               74             SETB EA
+                        75
+                        76
+0064 D28E               77             SETB TR1;запускаем таймер 1
+                        78
+                        79             ;инициализация начальных значений
+0066 1200D3             80             call init_timer
+                        81
+0069 D28C               82             SETB TR0;запускаем таймер 0
+                        83
+006B 80FE               84             jmp $;Бесконечный цикл работы
+                        85
+                        86     ;шаг таймера
+                        87     step_time:
+006D 758CDC             88             MOV TH0, #0DCh;обновляем настройки таймера
+0070 758A00             89             MOV TL0, #0h
+                        90
+                        91             ;получаем десятки секунд в r1
+0073 EE                 92             MOV A, r6
+0074 75F00A             93             MOV B, #0Ah
+0077 84                 94             DIV AB
+0078 F9                 95             MOV r1,A
+                        96
+                        97             ;получаем количество секунд в r2
+0079 AAF0               98             MOV r2,B
+                        99
+                       100             ;получаем сотни милисекунд в r3
+007B ED                101             MOV A, r5
+007C 75F00A            102             MOV B, #0Ah
+007F 84                103             DIV AB
+0080 FB                104             MOV r3,A
+                       105
+                       106             ;получаем десятки милисекунд в r4
+0081 ACF0              107             MOV r4,B
+                       108
+0083 0D                109             INC r5
+0084 BD6408            110             CJNE r5, #100, MS;Если не получили 1000 милисекунд прыгаем дальше
+                       111             ;Если получили обновляем счетчик
+0087 7D00              112             MOV r5, #0
+                       113
+0089 0E                114             INC r6
+008A BE0002            115             CJNE r6, #0, MS;Если не получили 60 секунд прыгаем дальше
+008D 7E00              116             MOV r6, #0;Если получили обновляем счетчик
+                       117
+                       118        MS:
+008F 22                119             RET
+                       120
+                       121     ;отображение цифры из А в P1
+                       122     get_semi_code:
+0090 B40904            123             cjne a,#9, num8
+0093 759090            124                     mov p1,#10010000b
+0096 22                125                     ret
+                       126             num8:
+0097 B40804            127             cjne a,#8, num7
+009A 759080            128                     mov p1,#10000000b
+009D 22                129                     ret
+                       130             num7:
+009E B40704            131             cjne a,#7, num6
+00A1 7590F8            132                     mov p1,#11111000b
+00A4 22                133                     ret
+                       134             num6:
+00A5 B40604            135             cjne a,#6, num5
+00A8 759082            136                     mov p1,#10000010b
+00AB 22                137                     ret
+                       138             num5:
+00AC B40504            139             cjne a,#5, num4
+00AF 759092            140                     mov p1,#10010010b
+00B2 22                141                     ret
+                       142             num4:
+00B3 B40404            143             cjne a,#4, num3
+00B6 759099            144                     mov p1,#10011001b
+00B9 22                145                     ret
+                       146             num3:
+00BA B40304            147             cjne a,#3, num2
+00BD 7590B0            148                     mov p1,#10110000b
+00C0 22                149                     ret
+                       150             num2:
+00C1 B40204            151             cjne a,#2, num1
+00C4 7590A4            152                     mov p1,#10100100b
+00C7 22                153                     ret
+                       154             num1:
+00C8 B40104            155             cjne a,#1, num0
+00CB 7590F9            156                     mov p1,#11111001b
+00CE 22                157                     ret
+                       158             num0:
+00CF 7590C0            159             mov p1,#11000000b
+00D2 22                160             ret
+                       161
+                       162     init_timer:
+                       163             ;считываем кол-во десятков часов
+00D3 12010B            164             call read_sim
+00D6 12017C            165             call pause
+                       166             ;закидываем считанное в соответствующие регистры
+00D9 EF                167             mov a, r7
+00DA F9                168             mov r1, a
+00DB 75F00A            169             mov b, #0Ah
+00DE A4                170             MUL ab
+                       171             ;переносим что бы оно не затерлось
+00DF F550              172             mov 50h, a
+                       173
+                       174             ;считываем кол-во часов
+00E1 12010B            175             call read_sim
+00E4 12017C            176             call pause
+                       177             ;восстанавливаем значение a
+00E7 E550              178             mov a, 50h
+                       179             ;закидываем считанное в соответствующие регистры
+00E9 8FF0              180             mov b, r7
+00EB AAF0              181             mov r2, b
+00ED 25F0              182             add a, b
+00EF FE                183             mov r6, a
+                       184
+                       185             ;считываем кол-во десятков минут
+00F0 12010B            186             call read_sim
+00F3 12017C            187             call pause
+                       188             ;закидываем считанное в соответствующие регистры
+00F6 EF                189             mov a, r7
+00F7 FB                190             mov r3, a
+00F8 75F00A            191             mov b, #0Ah
+00FB A4                192             MUL ab
+                       193             ;запоминаем a что б не потерлось
+00FC F550              194             mov 50h, a
+                       195
+                       196             ;считываем кол-во минут
+00FE 12010B            197             call read_sim
+                       198             ;восстанавливаем a
+0101 E550              199             mov a, 50h
+                       200             ;закидываем считанное в соответствующие регистры
+0103 8FF0              201             mov b, r7
+0105 ACF0              202             mov r4, b
+0107 25F0              203             add a, b
+0109 FD                204             mov r5, a
+                       205
+010A 22                206             ret
+                       207
+                       208     read_sim:
+010B 7F00              209             mov r7, #0
+                       210     read_loop:
+                       211             ;пока не считываем число в не выходим из цикла
+010D BF0005            212             cjne r7, #0, read_out
+0110 120116            213             call scanKeyBoard
+0113 80F8              214             jmp read_loop
+                       215
+                       216     read_out:
+0115 22                217             ret
+                       218
+                       219     ; Сканирование по рядам
+                       220     scanKeyBoard:
+0116 7580FF            221             mov p0, #11111111b
+                       222
+0119 C283              223             clr p0.3
+011B 120134            224             CALL scanRow1
+                       225
+011E D283              226             setb p0.3
+0120 C282              227             clr  p0.2
+0122 120148            228             CALL scanRow2
+                       229
+0125 D282              230             setb p0.2
+0127 C281              231             clr  p0.1
+0129 12015C            232             CALL scanRow3
+                       233
+012C D281              234             setb p0.1
+012E C280              235             clr  p0.0
+0130 120170            236             CALL scanRow4
+                       237
+0133 22                238             ret
+                       239
+                       240     ; Сканирование первого ряда
+                       241     scanRow1:
+0134 7401              242             MOV A, #1h
+0136 30860B            243             JNB P0.6, pressKeyR1
+                       244
+0139 7402              245             MOV A, #2h
+013B 308506            246             JNB P0.5, pressKeyR1
+                       247
+013E 7403              248             MOV A, #3h
+0140 308401            249             JNB P0.4, pressKeyR1
+                       250
+0143 22                251             ret ; ключ не найден
+                       252
+                       253          pressKeyR1:
+0144 12017A            254             call putc
+0147 22                255             ret
+                       256
+                       257     ; Сканирование второго ряда
+                       258     scanRow2:
+0148 7404              259             MOV A, #4h
+014A 30860B            260             JNB P0.6, pressKeyR2
+                       261
+014D 7405              262             MOV A, #5h
+014F 308506            263             JNB P0.5, pressKeyR2
+                       264
+0152 7406              265             MOV A, #6h
+0154 308401            266             JNB P0.4, pressKeyR2
+                       267
+0157 22                268             ret ; ключ не найден
+                       269
+                       270          pressKeyR2:
+0158 12017A            271             call putc
+015B 22                272             ret
+                       273
+                       274     ; Сканирование третьего ряда
+                       275     scanRow3:
+015C 7407              276             MOV A, #7h
+015E 30860B            277             JNB P0.6, pressKeyR3
+                       278
+0161 7408              279             MOV A, #8h
+0163 308506            280             JNB P0.5, pressKeyR3
+                       281
+0166 7409              282             MOV A, #9h
+0168 308401            283             JNB P0.4, pressKeyR3
+                       284
+016B 22                285             ret ; ключ не найден
+                       286
+                       287          pressKeyR3:
+016C 12017A            288             call putc
+016F 22                289             ret
+                       290
+                       291     ; Сканирование четвертого ряда
+                       292     scanRow4:
+0170 7400              293             MOV A, #0
+0172 308501            294             JNB P0.5, pressKeyR4
+                       295
+0175 22                296             ret ; ключ не найден
+                       297
+                       298          pressKeyR4:
+0176 12017A            299             call putc
+0179 22                300             ret
+                       301
+                       302     ;перевеод числа из A в r7
+                       303     putc:
+017A FF                304             mov r7, a
+017B 22                305             ret
+                       306
+                       307     ;ожидание что бы цифра проявилась
+                       308     pause:
+017C 75F0C8            309             mov b,#200
+017F D5F0FD            310             djnz b, $
+0182 22                311             ret
+                       312     END
+ASSEMBLY COMPLETE, NO ERRORS FOUND, NO WARNINGS
+
+
+SYMBOL TABLE:
+??MCU_8051_IDE . . . . . . . . . . .  N  NUMB  8051H  NOT USED
+??VERSION. . . . . . . . . . . . . .  N  NUMB  0149H  NOT USED
+AC . . . . . . . . . . . . . . . . .  B  ADDR  00D6H  NOT USED
+ACC. . . . . . . . . . . . . . . . .  D  ADDR  00E0H  NOT USED
+ACSR . . . . . . . . . . . . . . . .  D  ADDR  0097H  NOT USED
+ADCF . . . . . . . . . . . . . . . .  D  ADDR  00F6H  NOT USED
+ADCLK. . . . . . . . . . . . . . . .  D  ADDR  00F2H  NOT USED
+ADCON. . . . . . . . . . . . . . . .  D  ADDR  00F3H  NOT USED
+ADDH . . . . . . . . . . . . . . . .  D  ADDR  00F5H  NOT USED
+ADDL . . . . . . . . . . . . . . . .  D  ADDR  00F4H  NOT USED
+AUXR . . . . . . . . . . . . . . . .  D  ADDR  008EH  NOT USED
+AUXR1. . . . . . . . . . . . . . . .  D  ADDR  00A2H  NOT USED
+B. . . . . . . . . . . . . . . . . .  D  ADDR  00F0H
+BDRCON . . . . . . . . . . . . . . .  D  ADDR  009BH  NOT USED
+BDRCON_1 . . . . . . . . . . . . . .  D  ADDR  009CH  NOT USED
+BRL. . . . . . . . . . . . . . . . .  D  ADDR  009AH  NOT USED
+CCAP0H . . . . . . . . . . . . . . .  D  ADDR  00FAH  NOT USED
+CCAP0L . . . . . . . . . . . . . . .  D  ADDR  00EAH  NOT USED
+CCAP1H . . . . . . . . . . . . . . .  D  ADDR  00FBH  NOT USED
+CCAP1L . . . . . . . . . . . . . . .  D  ADDR  00EBH  NOT USED
+CCAP2H . . . . . . . . . . . . . . .  D  ADDR  00FCH  NOT USED
+CCAP3H . . . . . . . . . . . . . . .  D  ADDR  00FDH  NOT USED
+CCAP4H . . . . . . . . . . . . . . .  D  ADDR  00FEH  NOT USED
+CCAPL2H. . . . . . . . . . . . . . .  D  ADDR  00FCH  NOT USED
+CCAPL2L. . . . . . . . . . . . . . .  D  ADDR  00ECH  NOT USED
+CCAPL3H. . . . . . . . . . . . . . .  D  ADDR  00FDH  NOT USED
+CCAPL3L. . . . . . . . . . . . . . .  D  ADDR  00EDH  NOT USED
+CCAPL4H. . . . . . . . . . . . . . .  D  ADDR  00FEH  NOT USED
+CCAPL4L. . . . . . . . . . . . . . .  D  ADDR  00EEH  NOT USED
+CCAPM0 . . . . . . . . . . . . . . .  D  ADDR  00DAH  NOT USED
+CCAPM1 . . . . . . . . . . . . . . .  D  ADDR  00DBH  NOT USED
+CCAPM2 . . . . . . . . . . . . . . .  D  ADDR  00DCH  NOT USED
+CCAPM3 . . . . . . . . . . . . . . .  D  ADDR  00DDH  NOT USED
+CCAPM4 . . . . . . . . . . . . . . .  D  ADDR  00DEH  NOT USED
+CCF0 . . . . . . . . . . . . . . . .  B  ADDR  00D8H  NOT USED
+CCF1 . . . . . . . . . . . . . . . .  B  ADDR  00D9H  NOT USED
+CCF2 . . . . . . . . . . . . . . . .  B  ADDR  00DAH  NOT USED
+CCF3 . . . . . . . . . . . . . . . .  B  ADDR  00DBH  NOT USED
+CCF4 . . . . . . . . . . . . . . . .  B  ADDR  00DCH  NOT USED
+CCON . . . . . . . . . . . . . . . .  D  ADDR  00D8H  NOT USED
+CFINT. . . . . . . . . . . . . . . .  C  ADDR  0033H  NOT USED
+CH . . . . . . . . . . . . . . . . .  D  ADDR  00F9H  NOT USED
+CKCON. . . . . . . . . . . . . . . .  D  ADDR  008FH  NOT USED
+CKCON0 . . . . . . . . . . . . . . .  D  ADDR  008FH  NOT USED
+CKRL . . . . . . . . . . . . . . . .  D  ADDR  0097H  NOT USED
+CKSEL. . . . . . . . . . . . . . . .  D  ADDR  0085H  NOT USED
+CL . . . . . . . . . . . . . . . . .  D  ADDR  00E9H  NOT USED
+CLKREG . . . . . . . . . . . . . . .  D  ADDR  008FH  NOT USED
+CMOD . . . . . . . . . . . . . . . .  D  ADDR  00D9H  NOT USED
+CPRL2. . . . . . . . . . . . . . . .  B  ADDR  00C8H  NOT USED
+CR . . . . . . . . . . . . . . . . .  B  ADDR  00DEH  NOT USED
+CT2. . . . . . . . . . . . . . . . .  B  ADDR  00C9H  NOT USED
+CY . . . . . . . . . . . . . . . . .  B  ADDR  00D7H  NOT USED
+DP0H . . . . . . . . . . . . . . . .  D  ADDR  0083H  NOT USED
+DP0L . . . . . . . . . . . . . . . .  D  ADDR  0082H  NOT USED
+DP1H . . . . . . . . . . . . . . . .  D  ADDR  0085H  NOT USED
+DP1L . . . . . . . . . . . . . . . .  D  ADDR  0084H  NOT USED
+DPH. . . . . . . . . . . . . . . . .  D  ADDR  0083H  NOT USED
+DPL. . . . . . . . . . . . . . . . .  D  ADDR  0082H  NOT USED
+EA . . . . . . . . . . . . . . . . .  B  ADDR  00AFH
+EC . . . . . . . . . . . . . . . . .  B  ADDR  00AEH  NOT USED
+EECON. . . . . . . . . . . . . . . .  D  ADDR  0096H  NOT USED
+END_SEMO_CIRCLE. . . . . . . . . . .  C  ADDR  0054H
+ES . . . . . . . . . . . . . . . . .  B  ADDR  00ACH  NOT USED
+ET0. . . . . . . . . . . . . . . . .  B  ADDR  00A9H
+ET1. . . . . . . . . . . . . . . . .  B  ADDR  00ABH
+ET2. . . . . . . . . . . . . . . . .  B  ADDR  00ADH  NOT USED
+EX0. . . . . . . . . . . . . . . . .  B  ADDR  00A8H  NOT USED
+EX1. . . . . . . . . . . . . . . . .  B  ADDR  00AAH  NOT USED
+EXEN2. . . . . . . . . . . . . . . .  B  ADDR  00CBH  NOT USED
+EXF2 . . . . . . . . . . . . . . . .  B  ADDR  00CEH  NOT USED
+EXTI0. . . . . . . . . . . . . . . .  C  ADDR  0003H  NOT USED
+EXTI1. . . . . . . . . . . . . . . .  C  ADDR  0013H  NOT USED
+F0 . . . . . . . . . . . . . . . . .  B  ADDR  00D5H  NOT USED
+FE . . . . . . . . . . . . . . . . .  B  ADDR  009FH  NOT USED
+GET_SEMI_CODE. . . . . . . . . . . .  C  ADDR  0090H
+IE . . . . . . . . . . . . . . . . .  D  ADDR  00A8H  NOT USED
+IE0. . . . . . . . . . . . . . . . .  B  ADDR  0089H  NOT USED
+IE1. . . . . . . . . . . . . . . . .  B  ADDR  008BH  NOT USED
+INIT_TIMER . . . . . . . . . . . . .  C  ADDR  00D3H
+INT0 . . . . . . . . . . . . . . . .  B  ADDR  00B2H  NOT USED
+INT1 . . . . . . . . . . . . . . . .  B  ADDR  00B3H  NOT USED
+IP . . . . . . . . . . . . . . . . .  D  ADDR  00B8H  NOT USED
+IPH. . . . . . . . . . . . . . . . .  D  ADDR  00B7H  NOT USED
+IPH0 . . . . . . . . . . . . . . . .  D  ADDR  00B7H  NOT USED
+IPH1 . . . . . . . . . . . . . . . .  D  ADDR  00B3H  NOT USED
+IPL0 . . . . . . . . . . . . . . . .  D  ADDR  00B8H  NOT USED
+IPL1 . . . . . . . . . . . . . . . .  D  ADDR  00B2H  NOT USED
+IT0. . . . . . . . . . . . . . . . .  B  ADDR  0088H  NOT USED
+IT1. . . . . . . . . . . . . . . . .  B  ADDR  008AH  NOT USED
+KBE. . . . . . . . . . . . . . . . .  D  ADDR  009DH  NOT USED
+KBF. . . . . . . . . . . . . . . . .  D  ADDR  009EH  NOT USED
+KBLS . . . . . . . . . . . . . . . .  D  ADDR  009CH  NOT USED
+LAM_SKIP_1 . . . . . . . . . . . . .  C  ADDR  002EH
+LAM_SKIP_2 . . . . . . . . . . . . .  C  ADDR  0036H
+LAM_SKIP_3 . . . . . . . . . . . . .  C  ADDR  003EH
+LAM_SKIP_4 . . . . . . . . . . . . .  C  ADDR  0046H
+MAIN . . . . . . . . . . . . . . . .  C  ADDR  0055H
+MS . . . . . . . . . . . . . . . . .  C  ADDR  008FH
+NUM0 . . . . . . . . . . . . . . . .  C  ADDR  00CFH
+NUM1 . . . . . . . . . . . . . . . .  C  ADDR  00C8H
+NUM2 . . . . . . . . . . . . . . . .  C  ADDR  00C1H
+NUM3 . . . . . . . . . . . . . . . .  C  ADDR  00BAH
+NUM4 . . . . . . . . . . . . . . . .  C  ADDR  00B3H
+NUM5 . . . . . . . . . . . . . . . .  C  ADDR  00ACH
+NUM6 . . . . . . . . . . . . . . . .  C  ADDR  00A5H
+NUM7 . . . . . . . . . . . . . . . .  C  ADDR  009EH
+NUM8 . . . . . . . . . . . . . . . .  C  ADDR  0097H
+OSCCON . . . . . . . . . . . . . . .  D  ADDR  0086H  NOT USED
+OV . . . . . . . . . . . . . . . . .  B  ADDR  00D2H  NOT USED
+P. . . . . . . . . . . . . . . . . .  B  ADDR  00D0H  NOT USED
+P0 . . . . . . . . . . . . . . . . .  D  ADDR  0080H
+P1 . . . . . . . . . . . . . . . . .  D  ADDR  0090H
+P1M1 . . . . . . . . . . . . . . . .  D  ADDR  00D4H  NOT USED
+P1M2 . . . . . . . . . . . . . . . .  D  ADDR  00E2H  NOT USED
+P2 . . . . . . . . . . . . . . . . .  D  ADDR  00A0H  NOT USED
+P3 . . . . . . . . . . . . . . . . .  D  ADDR  00B0H
+P3M1 . . . . . . . . . . . . . . . .  D  ADDR  00D5H  NOT USED
+P3M2 . . . . . . . . . . . . . . . .  D  ADDR  00E3H  NOT USED
+P4 . . . . . . . . . . . . . . . . .  D  ADDR  00C0H  NOT USED
+P4M1 . . . . . . . . . . . . . . . .  D  ADDR  00D6H  NOT USED
+P4M2 . . . . . . . . . . . . . . . .  D  ADDR  00E4H  NOT USED
+P5 . . . . . . . . . . . . . . . . .  D  ADDR  00E8H  NOT USED
+PAUSE. . . . . . . . . . . . . . . .  C  ADDR  017CH
+PC . . . . . . . . . . . . . . . . .  B  ADDR  00BEH  NOT USED
+PCON . . . . . . . . . . . . . . . .  D  ADDR  0087H  NOT USED
+PPCL . . . . . . . . . . . . . . . .  B  ADDR  00BEH  NOT USED
+PRESSKEYR1 . . . . . . . . . . . . .  C  ADDR  0144H
+PRESSKEYR2 . . . . . . . . . . . . .  C  ADDR  0158H
+PRESSKEYR3 . . . . . . . . . . . . .  C  ADDR  016CH
+PRESSKEYR4 . . . . . . . . . . . . .  C  ADDR  0176H
+PS . . . . . . . . . . . . . . . . .  B  ADDR  00BCH  NOT USED
+PSL. . . . . . . . . . . . . . . . .  B  ADDR  00BCH  NOT USED
+PSW. . . . . . . . . . . . . . . . .  D  ADDR  00D0H  NOT USED
+PT0. . . . . . . . . . . . . . . . .  B  ADDR  00B9H  NOT USED
+PT0L . . . . . . . . . . . . . . . .  B  ADDR  00B9H  NOT USED
+PT1. . . . . . . . . . . . . . . . .  B  ADDR  00BBH  NOT USED
+PT1L . . . . . . . . . . . . . . . .  B  ADDR  00BBH  NOT USED
+PT2. . . . . . . . . . . . . . . . .  B  ADDR  00BDH  NOT USED
+PT2L . . . . . . . . . . . . . . . .  B  ADDR  00BDH  NOT USED
+PUTC . . . . . . . . . . . . . . . .  C  ADDR  017AH
+PX0. . . . . . . . . . . . . . . . .  B  ADDR  00B8H  NOT USED
+PX0L . . . . . . . . . . . . . . . .  B  ADDR  00B8H  NOT USED
+PX1. . . . . . . . . . . . . . . . .  B  ADDR  00BAH  NOT USED
+PX1L . . . . . . . . . . . . . . . .  B  ADDR  00BAH  NOT USED
+RB8. . . . . . . . . . . . . . . . .  B  ADDR  009AH  NOT USED
+RCAP2H . . . . . . . . . . . . . . .  D  ADDR  00CBH  NOT USED
+RCAP2L . . . . . . . . . . . . . . .  D  ADDR  00CAH  NOT USED
+RCLK . . . . . . . . . . . . . . . .  B  ADDR  00CDH  NOT USED
+RD . . . . . . . . . . . . . . . . .  B  ADDR  00B7H  NOT USED
+READ_LOOP. . . . . . . . . . . . . .  C  ADDR  010DH
+READ_OUT . . . . . . . . . . . . . .  C  ADDR  0115H
+READ_SIM . . . . . . . . . . . . . .  C  ADDR  010BH
+REN. . . . . . . . . . . . . . . . .  B  ADDR  009CH  NOT USED
+RESET. . . . . . . . . . . . . . . .  C  ADDR  0000H  NOT USED
+RI . . . . . . . . . . . . . . . . .  B  ADDR  0098H  NOT USED
+RS0. . . . . . . . . . . . . . . . .  B  ADDR  00D3H  NOT USED
+RS1. . . . . . . . . . . . . . . . .  B  ADDR  00D4H  NOT USED
+RXD. . . . . . . . . . . . . . . . .  B  ADDR  00B0H  NOT USED
+SADDR. . . . . . . . . . . . . . . .  D  ADDR  00A9H  NOT USED
+SADDR_0. . . . . . . . . . . . . . .  D  ADDR  00A9H  NOT USED
+SADDR_1. . . . . . . . . . . . . . .  D  ADDR  00AAH  NOT USED
+SADEN. . . . . . . . . . . . . . . .  D  ADDR  00B9H  NOT USED
+SADEN_0. . . . . . . . . . . . . . .  D  ADDR  00B9H  NOT USED
+SADEN_1. . . . . . . . . . . . . . .  D  ADDR  00BAH  NOT USED
+SBUF . . . . . . . . . . . . . . . .  D  ADDR  0099H  NOT USED
+SCANKEYBOARD . . . . . . . . . . . .  C  ADDR  0116H
+SCANROW1 . . . . . . . . . . . . . .  C  ADDR  0134H
+SCANROW2 . . . . . . . . . . . . . .  C  ADDR  0148H
+SCANROW3 . . . . . . . . . . . . . .  C  ADDR  015CH
+SCANROW4 . . . . . . . . . . . . . .  C  ADDR  0170H
+SCON . . . . . . . . . . . . . . . .  D  ADDR  0098H  NOT USED
+SEMI_OUT_INT . . . . . . . . . . . .  C  ADDR  001BH  NOT USED
+SINT . . . . . . . . . . . . . . . .  C  ADDR  0023H  NOT USED
+SM0. . . . . . . . . . . . . . . . .  B  ADDR  009FH  NOT USED
+SM1. . . . . . . . . . . . . . . . .  B  ADDR  009EH  NOT USED
+SM2. . . . . . . . . . . . . . . . .  B  ADDR  009DH  NOT USED
+SP . . . . . . . . . . . . . . . . .  D  ADDR  0081H  NOT USED
+SPCON. . . . . . . . . . . . . . . .  D  ADDR  00C3H  NOT USED
+SPCR . . . . . . . . . . . . . . . .  D  ADDR  00D5H  NOT USED
+SPDAT. . . . . . . . . . . . . . . .  D  ADDR  00C5H  NOT USED
+SPDR . . . . . . . . . . . . . . . .  D  ADDR  0086H  NOT USED
+SPSR . . . . . . . . . . . . . . . .  D  ADDR  00AAH  NOT USED
+SPSTA. . . . . . . . . . . . . . . .  D  ADDR  00C4H  NOT USED
+STEP_TIME. . . . . . . . . . . . . .  C  ADDR  006DH
+STEP_TIME_INT. . . . . . . . . . . .  C  ADDR  000BH  NOT USED
+T0 . . . . . . . . . . . . . . . . .  B  ADDR  00B4H  NOT USED
+T1 . . . . . . . . . . . . . . . . .  B  ADDR  00B5H  NOT USED
+T2CON. . . . . . . . . . . . . . . .  D  ADDR  00C8H  NOT USED
+T2MOD. . . . . . . . . . . . . . . .  D  ADDR  00C9H  NOT USED
+TB8. . . . . . . . . . . . . . . . .  B  ADDR  009BH  NOT USED
+TCLK . . . . . . . . . . . . . . . .  B  ADDR  00CCH  NOT USED
+TCON . . . . . . . . . . . . . . . .  D  ADDR  0088H  NOT USED
+TERM . . . . . . . . . . . . . . . .  C  ADDR  004EH
+TF0. . . . . . . . . . . . . . . . .  B  ADDR  008DH
+TF1. . . . . . . . . . . . . . . . .  B  ADDR  008FH
+TF2. . . . . . . . . . . . . . . . .  B  ADDR  00CFH  NOT USED
+TH0. . . . . . . . . . . . . . . . .  D  ADDR  008CH
+TH1. . . . . . . . . . . . . . . . .  D  ADDR  008DH  NOT USED
+TH2. . . . . . . . . . . . . . . . .  D  ADDR  00CDH  NOT USED
+TI . . . . . . . . . . . . . . . . .  B  ADDR  0099H  NOT USED
+TIMER0 . . . . . . . . . . . . . . .  C  ADDR  000BH  NOT USED
+TIMER1 . . . . . . . . . . . . . . .  C  ADDR  001BH  NOT USED
+TIMER2 . . . . . . . . . . . . . . .  C  ADDR  002BH  NOT USED
+TL0. . . . . . . . . . . . . . . . .  D  ADDR  008AH
+TL1. . . . . . . . . . . . . . . . .  D  ADDR  008BH  NOT USED
+TL2. . . . . . . . . . . . . . . . .  D  ADDR  00CCH  NOT USED
+TMOD . . . . . . . . . . . . . . . .  D  ADDR  0089H
+TR0. . . . . . . . . . . . . . . . .  B  ADDR  008CH
+TR1. . . . . . . . . . . . . . . . .  B  ADDR  008EH
+TR2. . . . . . . . . . . . . . . . .  B  ADDR  00CAH  NOT USED
+TXD. . . . . . . . . . . . . . . . .  B  ADDR  00B1H  NOT USED
+WDTCON . . . . . . . . . . . . . . .  D  ADDR  00A7H  NOT USED
+WDTPRG . . . . . . . . . . . . . . .  D  ADDR  00A7H  NOT USED
+WDTRST . . . . . . . . . . . . . . .  D  ADDR  00A6H  NOT USED
+WR . . . . . . . . . . . . . . . . .  B  ADDR  00B6H  NOT USED

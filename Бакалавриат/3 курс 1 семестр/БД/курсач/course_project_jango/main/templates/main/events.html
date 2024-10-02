@@ -1,0 +1,18 @@
+{% extends 'main/layot.html' %}
+
+{% block title%}
+    Анонс мероприятий
+{% endblock %}
+
+{% block content%}
+    <div class="features" align="center">
+         <h1 align="center">Анонс мероприятий</h1>
+            {% for el in events %}
+                <div class="alert alert-warning">
+                    <h3>{{ el.title }}</h3>
+                    <p>{{  el.anons}}</p>
+                    <a href="{% url 'events-detail' el.id %}" class="btn btn-warning">Подробнее</a>
+                </div>
+            {% endfor %}
+     </div>
+{% endblock %}

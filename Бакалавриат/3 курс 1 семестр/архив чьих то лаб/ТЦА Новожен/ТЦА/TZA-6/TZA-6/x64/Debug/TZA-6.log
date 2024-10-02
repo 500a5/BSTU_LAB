@@ -1,0 +1,4 @@
+﻿  TZA-6.cpp
+C:\Users\Novoz\YandexDisk\5 sem\ТЦА\TZA-6\TZA-6\TZA-6.cpp(155,16): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Novoz\YandexDisk\5 sem\ТЦА\TZA-6\TZA-6\TZA-6.cpp(175,16): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+  TZA-6.vcxproj -> C:\Users\Novoz\YandexDisk\5 sem\ТЦА\TZA-6\x64\Debug\TZA-6.exe

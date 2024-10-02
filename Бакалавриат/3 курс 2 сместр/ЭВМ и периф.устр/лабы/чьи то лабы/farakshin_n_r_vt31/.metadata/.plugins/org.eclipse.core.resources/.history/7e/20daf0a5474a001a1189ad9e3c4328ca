@@ -1,0 +1,88 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+
+char robot_1[8]={
+                    0b00000000,
+                    0b00000010,
+                    0b00000100,
+                    0b00001000,
+                    0b00000100,
+                    0b00000010,
+                    0b00000000,
+                    0b00000000
+};
+
+char robot_2[8]={
+                    0b00000100,
+                    0b00000100,
+                    0b00000100,
+                    0b00000100,
+                    0b00000100,
+                    0b00000100,
+                    0b00000100,
+                    0b00000100
+};
+
+char robot_3[8]={
+                    0b00000000,
+                    0b00000100,
+                    0b00001010,
+                    0b00000100,
+                    0b00000000,
+                    0b00000000,
+                    0b00000000,
+                    0b00000000
+};
+
+void Disable_Watchdog(){
+    WDTCTL = WDTPW+WDTHOLD; // Disable watchdog timer
+}
+
+void Print_Message(char *buf){
+    int cur_row = 0;
+    int start = 0;
+    LCD_set_pos(cur_row, 0);
+    int n = 0;
+    while (buf[n]){
+        if (buf[n] == '\n'){
+            if (cur_row > 0){
+                return;
+            }
+            cur_row++;
+            buf[n] = 0;
+            LCD_message(&(buf[start]));
+            start = n+1;
+            LCD_set_pos(cur_row, 0);
+        }
+        n++;
+    }
+}
+
+
+
+void main(void) {
+    Disable_Watchdog();
+    Init_System_Clock(); // Start generators
+    Init_System();      // Set port1 to output
+    LCD_init();         // Set ports for LCD
+    LCD_clear();
+    char msg[80] = "ยา-31\nิเ๐เ๊๘่ํ อ.ะ.";
+    LCD_message(msg);   // Output message
+    LCD_WriteCommand(0x40);
+    int i;
+    for (i = 0; i<8; i++){
+        LCD_WriteData(robot_1[i]);
+    }
+    LCD_WriteData(0);
+    while(1){
+
+    }
+}

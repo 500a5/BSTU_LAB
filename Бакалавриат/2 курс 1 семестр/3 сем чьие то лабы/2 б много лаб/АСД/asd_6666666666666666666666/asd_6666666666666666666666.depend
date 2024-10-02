@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1511637408 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6666666666666666666666\main.c
+	<stdio.h>
+	<stdlib.h>
+	"zap.h"
+	"ctek.h"
+
+1511637027 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6666666666666666666666\zap.h
+
+1511637027 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6666666666666666666666\zap.c
+	<stdio.h>
+	<stdlib.h>
+	"zap.h"
+
+1511637173 source:c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6666666666666666666666\ctek.c
+	<stdio.h>
+	<stdlib.h>
+	"ctek.h"
+
+1511637173 c:\users\hystou\desktop\Ó÷¸áêà\2 r\ÀÑÄ\asd_6666666666666666666666\ctek.h
+	"zap.h"
+

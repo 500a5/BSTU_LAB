@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1511521419 source:c:\users\acer\desktop\лабы\матлогика\3\m3\main.c
+	<stdlib.h>
+	<stdio.h>
+	<locale.h>
+	<math.h>
+

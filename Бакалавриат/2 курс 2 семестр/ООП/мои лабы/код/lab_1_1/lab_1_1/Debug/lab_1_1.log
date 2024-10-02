@@ -1,0 +1,10 @@
+﻿  lab_1_1.cpp
+C:\Users\500a5\source\repos\lab_1_1\lab_1_1\lab_1_1.cpp(12,41): warning C4474: "fprintf" : для строки формата передано слишком много аргументов
+C:\Users\500a5\source\repos\lab_1_1\lab_1_1\lab_1_1.cpp(12,41): message : заполнители и их параметры ожидают переменное число аргументов в количестве 1, но было предоставлено 2
+C:\Users\500a5\source\repos\lab_1_1\lab_1_1\lab_1_1.cpp(8,1): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(208): message : см. объявление "fopen"
+C:\Users\500a5\source\repos\lab_1_1\lab_1_1\lab_1_1.cpp(26,25): warning C4477: "fscanf": в строке форматирования "%d" требуется аргумент типа "int *", но вариативный аргумент "1" имеет тип "int"
+C:\Users\500a5\source\repos\lab_1_1\lab_1_1\lab_1_1.cpp(21,1): error C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(208): message : см. объявление "fopen"
+C:\Users\500a5\source\repos\lab_1_1\lab_1_1\lab_1_1.cpp(26,1): error C4996: 'fscanf': This function or variable may be unsafe. Consider using fscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\ucrt\stdio.h(1197): message : см. объявление "fscanf"

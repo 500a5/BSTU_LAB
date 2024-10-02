@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/TI_/bch_code.h
+cyclic_coding.cpp
+C:/Users/500a5/CLionProjects/TI_/cyclic_coding.cpp
+
+C:/Users/500a5/CLionProjects/TI_/cyclic_coding.cpp
+cyclic_coding.h
+C:/Users/500a5/CLionProjects/TI_/cyclic_coding.h
+
+C:/Users/500a5/CLionProjects/TI_/cyclic_coding.h
+vector
+-
+random
+-
+time.h
+-
+iostream
+-
+algorithm
+-
+iterator
+-
+
+C:/Users/500a5/CLionProjects/TI_/main.cpp
+iostream
+-
+fstream
+-
+bitset
+-
+string
+-
+bch_code.h
+C:/Users/500a5/CLionProjects/TI_/bch_code.h
+

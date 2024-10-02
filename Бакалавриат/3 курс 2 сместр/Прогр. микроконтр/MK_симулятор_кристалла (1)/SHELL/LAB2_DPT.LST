@@ -1,0 +1,502 @@
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LAB2_DPT.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE LAB2_DPT.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+  00DC                 1     T0_C equ 220                    ;210 MINUS POTERI NA COMANDI
+  000C                 2     C0_C equ 12                     ;125/10
+  0094                 3     VT4 bit P1.4
+  0095                 4     VT5 bit P1.5
+  0096                 5     VT6 bit P1.6
+  0097                 6     VT7 bit P1.7
+  0030                 7     MEMORY_DPL data 30h
+  0031                 8     MEMORY_DPH data 31h
+  0032                 9     TIME data 32h
+  00F0                10     TIME_MAX equ 240
+  0033                11     TIME_START data 33h
+  0034                12     TIME_STOP data 34h
+  0035                13     OBOROT data 35h
+  0036                14     NAPR_SKOR data 36h
+  0037                15     EDINICA data 37h
+  0038                16     DESYATKA data 38h
+  0039                17     RAZGON data 39h
+  0040                18     VIV_UST DATA 40h                ;DLYA VIVODA USTAVKI VREMENI (2 RAZRYADA) I CHASTOTI (V Hz 
+                             - 2 RAZRYADA)
+  0078                19     C_VIV_UST EQU 120               ;120*4*5ms=2,4s (bilo 120)
+  0078                20     F_REVERS bit 2Fh.0
+  0079                21     GOTOVO bit 2Fh.1
+  007A                22     GOTOV_TIME bit 2Fh.2
+  007B                23     MEMORY_CY bit 2Fh.3
+                      24     
+0000                  25     org 0h
+0000 028100           26       jmp start
+                      27     
+000B                  28     org 0Bh
+000B 028234           29       jmp schet
+                      30     
+8100                  31     org 8100h
+                      32     start:
+8100 7482             33       mov A,#82h
+8102 758203           34       mov DPL,#3h
+8105 F0               35       movx @DPTR,A
+8106 D2D4             36       setb RS1
+8108 E589             37       mov A,TMOD
+810A 4407             38       orl A,#00000111b              ;rezhim 3: L-schetchik, H-taimer
+810C F589             39       mov TMOD,A
+810E 758AF4           40       mov TL0,#not(C0_C-1)
+8111 758C24           41       mov TH0,#not(T0_C-1)
+8114 D2AF             42       setb EA                       ;razreshenie prerivanii
+8116 D2A9             43       setb ET0                      ;razreshenie prerivanii ot taimera 0
+8118 D28C             44       setb TR0                      ;start taimera 0
+                      45     
+                      46     episod:
+811A 908600           47       mov DPTR,#8600h
+811D 858230           48       mov MEMORY_DPL,DPL
+8120 858331           49       mov MEMORY_DPH,DPH
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      50     
+                      51     etap:
+8123 753200           52       mov TIME,#0
+8126 753500           53       mov OBOROT,#0
+8129 753600           54       mov NAPR_SKOR,#0
+812C D294             55       setb VT4
+812E D295             56       setb VT5
+8130 D296             57       setb VT6
+8132 D297             58       setb VT7
+8134 853082           59       mov DPL,MEMORY_DPL
+8137 853183           60       mov DPH,MEMORY_DPH
+813A A3               61       inc DPTR
+813B E0               62       movx A,@DPTR
+813C B40002           63       cjne A,#0,zadanie
+813F 80D9             64       sjmp episod
+                      65     
+                      66     zadanie:
+8141 F532             67       mov TIME,A
+8143 A3               68       inc DPTR
+8144 858230           69       mov MEMORY_DPL,DPL
+8147 858331           70       mov MEMORY_DPH,DPH
+814A E0               71       movx A,@DPTR
+814B F536             72       mov NAPR_SKOR,A
+814D 128152           73       call propeller
+8150 80D1             74       sjmp etap
+                      75     
+                      76     ;osnovnaya programma
+                      77     
+                      78     propeller:
+8152 12823A           79       call razgon_time_1
+8155 C3               80       clr C
+8156 C278             81       clr F_REVERS
+8158 C279             82       clr GOTOVO
+815A C27A             83       clr GOTOV_TIME
+815C E536             84       mov A,NAPR_SKOR
+815E 33               85       rlc A
+815F 30D702           86       jnb CY,speed
+8162 D278             87       setb F_REVERS
+                      88     
+                      89     speed:
+8164 13               90       rrc A
+8165 75F005           91       mov B,#5
+8168 547F             92       anl A,#01111111b
+816A 84               93       div AB                        ;V A - CELOE, V B - OSTATOK
+816B A8F0             94       mov R0,B
+816D 75F017           95       mov B,#23                     ;PRI MAX 50 OB/SEK
+8170 A4               96       mul AB
+8171 28               97       add A,R0
+8172 F533             98       mov TIME_START,A
+8174 F8               99       mov R0,A
+8175 74F0            100       mov A,#TIME_MAX
+8177 98              101       subb A,R0
+8178 F534            102       mov TIME_STOP,A
+817A 0533            103       inc TIME_START
+817C 0534            104       inc TIME_STOP
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+817E 7A0A            105       mov R2,#10
+8180 12828C          106       call vivod
+8183 7E04            107       mov R6,#4
+8185 207850          108       jb F_REVERS,revers
+                     109     
+                     110     ;odno napravlenie
+                     111     
+8188 C297            112       clr VT7
+                     113     
+                     114     pr_chas:
+818A C295            115       clr VT5
+818C A933            116       mov R1,TIME_START
+                     117     
+                     118     pr_chas_start:
+818E 1282C9          119       call zaderzhka_1
+8191 D9FB            120       djnz R1,pr_chas_start
+8193 D295            121       setb VT5
+8195 A934            122       mov R1,TIME_STOP
+                     123     
+                     124     pr_chas_stop:
+8197 1282C9          125       call zaderzhka_1
+819A D9FB            126       djnz R1,pr_chas_stop
+819C E535            127       mov A,OBOROT
+819E FB              128       mov R3,A
+819F 753500          129       mov OBOROT,#0
+81A2 128226          130       call raschet
+81A5 207A04          131       jb GOTOV_TIME,wait_1          ;ESLI 3s PROSHLO, TO PEREHODIM K REGULIRIVANIU
+81A8 DD05            132       djnz R5,pr_chas_speed
+81AA D27A            133       setb GOTOV_TIME
+                     134     
+                     135     wait_1:
+81AC 12824F          136       call edit
+                     137     
+                     138     ;pr_chas_indikacia
+                     139     
+                     140     pr_chas_speed:
+81AF 307909          141       jnb GOTOVO,pr_chas_desyatki
+81B2 BE0306          142       cjne R6,#3,pr_chas_desyatki
+81B5 7410            143       mov A,#10h                    ;ESLI NOT(REVERS), TO MIGAET 0
+81B7 F0              144       movx @DPTR,A
+81B8 1E              145       dec R6
+81B9 8010            146       sjmp pr_chas_prop
+                     147     
+                     148     pr_chas_desyatki:
+81BB DEFE            149       djnz R6,pr_chas_desyatki
+81BD 7E04            150       mov R6,#4
+81BF E538            151       mov A,DESYATKA
+81C1 4440            152       orl A,#01000000b
+81C3 F0              153       movx @DPTR,A
+81C4 8005            154       sjmp pr_chas_prop
+                     155     
+                     156     pr_chas_edinici:
+81C6 E537            157       mov A,EDINICA
+81C8 4480            158       orl A,#10000000b
+81CA F0              159       movx @DPTR,A
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     160     
+                     161     pr_chas_prop:
+81CB 3079BC          162       jnb GOTOVO,pr_chas
+81CE DABA            163       djnz R2,pr_chas
+81D0 7A0A            164       mov R2,#10
+81D2 D532B5          165       djnz TIME,pr_chas
+81D5 028225          166       jmp exit
+                     167     
+                     168     ;obratnoe napravlenie
+                     169     
+                     170     revers:
+81D8 C294            171       clr VT4
+                     172     
+                     173     chas:
+81DA C296            174       clr VT6
+81DC A933            175       mov R1,TIME_START
+                     176     
+                     177     chas_start:
+81DE 1282C9          178       call zaderzhka_1
+81E1 D9FB            179       djnz R1,chas_start
+81E3 D296            180       setb VT6
+81E5 A934            181       mov R1,TIME_STOP
+                     182     
+                     183     chas_stop:
+81E7 1282C9          184       call zaderzhka_1
+81EA D9FB            185       djnz R1,chas_stop
+81EC E535            186       mov A,OBOROT
+81EE FB              187       mov R3,A
+81EF 753500          188       mov OBOROT,#0
+81F2 128226          189       call raschet
+81F5 207A04          190       jb GOTOV_TIME,wait_2          ;ESLI 3s PROSHLO, TO PEREHODIM K REGULIROVANIU
+81F8 DD05            191       djnz R5,chas_speed
+81FA D27A            192       setb GOTOV_TIME
+                     193     wait_2:
+81FC 12824F          194       call edit
+                     195     
+                     196     ;chas_indikacia
+                     197     
+                     198     chas_speed:
+81FF 307909          199       jnb GOTOVO,chas_desyatki
+8202 BE0306          200       CJNE R6,#3,chas_desyatki
+8205 7411            201       mov A,#11h                    ;ESLI REVERS, TO MIGAET 1
+8207 F0              202       movx @DPTR,A
+8208 1E              203       dec R6
+8209 8010            204       sjmp chas_prop
+                     205     
+                     206     chas_desyatki:
+820B DE09            207       djnz R6,chas_edinici
+820D 7E04            208       mov R6,#4
+820F E538            209       mov A,DESYATKA
+8211 4440            210       orl A,#01000000b
+8213 F0              211       movx @DPTR,A
+8214 8005            212       sjmp chas_prop
+                     213     
+                     214     chas_edinici:
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    5
+
+
+LOC  OBJ            LINE     SOURCE
+
+8216 E537            215       mov A,EDINICA
+8218 4480            216       orl A,#10000000b
+821A F0              217       movx @DPTR,A
+                     218     
+                     219     chas_prop:
+821B 3079BC          220       jnb GOTOVO,chas
+821E DABA            221       djnz R2,chas
+8220 7A0A            222       mov R2,#10
+8222 D536B5          223       djnz NAPR_SKOR,chas
+                     224     
+                     225     exit:
+8225 22              226     ret
+                     227     
+                     228     raschet:
+8226 EB              229       mov A,R3
+8227 75F00A          230       mov B,#10
+822A 84              231       div AB
+822B F538            232       mov DESYATKA,A
+822D 85F037          233       mov EDINICA,B
+8230 900002          234       mov DPTR,#2
+8233 22              235     ret
+                     236     
+                     237     schet:
+8234 0535            238       inc OBOROT
+8236 758AF4          239       mov TL0,#not(C0_C-1)
+8239 32              240     reti
+                     241     
+                     242     razgon_time_1:                  ;OPREDELYAEM ZNACH_R_REGUL DLYA BISTRODEISTVIYA & TOCHNOSTI
+823A C3              243       clr C
+823B E536            244       mov A,NAPR_SKOR
+823D 547F            245       anl A,#01111111b
+823F 9405            246       subb A,#5
+8241 30D705          247       jnb CY,razgon_time_2
+8244 753905          248       mov RAZGON,#5                 ;N<=5           500ms
+8247 8003            249       sjmp razgon_exit
+                     250     
+                     251     razgon_time_2:
+8249 753905          252       mov RAZGON,#5
+                     253     
+                     254     razgon_exit:
+824C AD39            255       mov R5,RAZGON
+824E 22              256     ret
+                     257     
+                     258     edit:
+824F E536            259       mov A,NAPR_SKOR
+8251 547F            260       anl A,#01111111b
+8253 F536            261       mov NAPR_SKOR,A
+8255 EB              262       mov A,R3
+8256 C3              263       clr C
+8257 C279            264       clr GOTOVO
+8259 9536            265       subb A,NAPR_SKOR
+825B 927B            266       mov MEMORY_CY,C
+825D B40004          267       cjne A,#0,reg_start
+8260 D279            268       setb GOTOVO
+8262 8027            269       sjmp reg_stop
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    6
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     270     
+                     271     reg_start:
+8264 207B13          272       jb MEMORY_CY,up
+                     273     
+                     274     ;down:
+8267 E534            275       mov A,TIME_STOP
+8269 B4EF08          276       cjne A,#239,down_reg
+826C 7534EF          277       mov TIME_STOP,#239            ;ZAGLUSHKA PO NIZHNEMU ZNACHENIU
+826F 753301          278       mov TIME_START,#1
+8272 8017            279       sjmp reg_stop
+                     280     
+                     281     down_reg:
+8274 0534            282       inc TIME_STOP
+8276 1533            283       dec TIME_START
+8278 8011            284       sjmp reg_stop
+                     285     
+                     286     up:
+827A E533            287       mov A,TIME_START
+827C B4EF08          288       cjne A,#239,up_reg
+827F 7533EF          289       mov TIME_START,#239           ;ZAGLUSHKA PO VERHNEMY ZNACHENIU
+8282 753401          290       mov TIME_STOP,#1
+8285 8004            291       sjmp reg_stop
+                     292     
+                     293     up_reg:
+8287 0533            294       inc TIME_START
+8289 1534            295       dec TIME_STOP
+                     296     
+                     297     reg_stop:
+                     298     
+828B 22              299     ret
+                     300     
+                     301     vivod:
+828C 754078          302       mov VIV_UST,#C_VIV_UST
+                     303       indicator:
+828F E532            304         mov A,TIME
+8291 75F00A          305         mov B,#10
+8294 84              306         div AB
+8295 900002          307         mov DPTR,#2
+8298 4410            308         orl A,#00010000b
+829A F0              309         movx @DPTR,A
+829B 1282DD          310         call zaderzhka_2
+829E E5F0            311         mov A,B
+82A0 4420            312         orl A,#00100000b
+82A2 F0              313         movx @DPTR,A
+82A3 1282DD          314         call zaderzhka_2
+82A6 E536            315         mov A,NAPR_SKOR
+82A8 547F            316         anl A,#01111111b
+82AA 75F00A          317         mov B,#10
+82AD 84              318         div AB
+82AE 4440            319         orl A,#01000000b
+82B0 F0              320         movx @DPTR,A
+82B1 1282DD          321         call zaderzhka_2
+82B4 E5F0            322         mov A,B
+82B6 4480            323         orl A,#10000000b
+82B8 F0              324         movx @DPTR,A
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    7
+
+
+LOC  OBJ            LINE     SOURCE
+
+82B9 1282DD          325         call zaderzhka_2
+82BC 307806          326         jnb F_REVERS,vpered
+82BF 7400            327         mov A,#0
+82C1 F0              328         movx @DPTR,A
+82C2 1282E4          329         call zaderzhka_3
+                     330     
+                     331     vpered:
+82C5 D540C7          332       djnz VIV_UST,indicator
+82C8 22              333     ret
+                     334     
+                     335     zaderzhka_1:                    ;(420mks)
+82C9 758C24          336       mov TH0,#not(T0_C-1)
+82CC D28E            337       setb TR1
+82CE 7C02            338       mov R4,#2
+                     339       povtor_1:
+82D0 308FFD          340         jnb TF1,$
+82D3 C28F            341         clr TF1
+82D5 758C24          342         mov TH0,#not(T0_C-1)
+82D8 DCF6            343         djnz R4,povtor_1
+82DA C28E            344       clr TR1
+82DC 22              345     ret
+                     346     
+                     347     zaderzhka_2:                    ;(5ms)
+82DD 7F06            348       mov R7,#6                     ;(bilo 12)
+                     349       povtor_2:
+82DF 51C9            350         call zaderzhka_1
+82E1 DFFC            351         djnz R7,povtor_2
+82E3 22              352     ret
+                     353     
+                     354     zaderzhka_3:                    ;(21ms)
+82E4 7F19            355       mov R7,#25                    ;(bilo 50)
+                     356       povtor_3:
+82E6 51C9            357         call zaderzhka_1
+82E8 DFFC            358         djnz R7,povtor_3
+82EA 22              359     ret
+                     360     
+                     361     end
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    8
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E           T Y P E   V A L U E       A T T R I B U T E S
+
+B. . . . . . . .  D ADDR    00F0H   A       
+C_VIV_UST. . . .    NUMB    0078H   A       
+C0_C . . . . . .    NUMB    000CH   A       
+CHAS_DESYATKI. .  C ADDR    820BH   A       
+CHAS_EDINICI . .  C ADDR    8216H   A       
+CHAS_PROP. . . .  C ADDR    821BH   A       
+CHAS_SPEED . . .  C ADDR    81FFH   A       
+CHAS_START . . .  C ADDR    81DEH   A       
+CHAS_STOP. . . .  C ADDR    81E7H   A       
+CHAS . . . . . .  C ADDR    81DAH   A       
+CY . . . . . . .  B ADDR    00D0H.7 A       
+DESYATKA . . . .  D ADDR    0038H   A       
+DOWN_REG . . . .  C ADDR    8274H   A       
+DPH. . . . . . .  D ADDR    0083H   A       
+DPL. . . . . . .  D ADDR    0082H   A       
+EA . . . . . . .  B ADDR    00A8H.7 A       
+EDINICA. . . . .  D ADDR    0037H   A       
+EDIT . . . . . .  C ADDR    824FH   A       
+EPISOD . . . . .  C ADDR    811AH   A       
+ET0. . . . . . .  B ADDR    00A8H.1 A       
+ETAP . . . . . .  C ADDR    8123H   A       
+EXIT . . . . . .  C ADDR    8225H   A       
+F_REVERS . . . .  B ADDR    002FH.0 A       
+GOTOV_TIME . . .  B ADDR    002FH.2 A       
+GOTOVO . . . . .  B ADDR    002FH.1 A       
+INDICATOR. . . .  C ADDR    828FH   A       
+MEMORY_CY. . . .  B ADDR    002FH.3 A       
+MEMORY_DPH . . .  D ADDR    0031H   A       
+MEMORY_DPL . . .  D ADDR    0030H   A       
+NAPR_SKOR. . . .  D ADDR    0036H   A       
+OBOROT . . . . .  D ADDR    0035H   A       
+P1 . . . . . . .  D ADDR    0090H   A       
+POVTOR_1 . . . .  C ADDR    82D0H   A       
+POVTOR_2 . . . .  C ADDR    82DFH   A       
+POVTOR_3 . . . .  C ADDR    82E6H   A       
+PR_CHAS_DESYATKI  C ADDR    81BBH   A       
+PR_CHAS_EDINICI.  C ADDR    81C6H   A       
+PR_CHAS_PROP . .  C ADDR    81CBH   A       
+PR_CHAS_SPEED. .  C ADDR    81AFH   A       
+PR_CHAS_START. .  C ADDR    818EH   A       
+PR_CHAS_STOP . .  C ADDR    8197H   A       
+PR_CHAS. . . . .  C ADDR    818AH   A       
+PROPELLER. . . .  C ADDR    8152H   A       
+RASCHET. . . . .  C ADDR    8226H   A       
+RAZGON_EXIT. . .  C ADDR    824CH   A       
+RAZGON_TIME_1. .  C ADDR    823AH   A       
+RAZGON_TIME_2. .  C ADDR    8249H   A       
+RAZGON . . . . .  D ADDR    0039H   A       
+REG_START. . . .  C ADDR    8264H   A       
+REG_STOP . . . .  C ADDR    828BH   A       
+REVERS . . . . .  C ADDR    81D8H   A       
+MCS-51 MACRO ASSEMBLER    LAB2_DPT                                                                  12/14/;0   PAGE    9
+
+
+N A M E           T Y P E   V A L U E       A T T R I B U T E S
+
+RS1. . . . . . .  B ADDR    00D0H.4 A       
+SCHET. . . . . .  C ADDR    8234H   A       
+SPEED. . . . . .  C ADDR    8164H   A       
+START. . . . . .  C ADDR    8100H   A       
+T0_C . . . . . .    NUMB    00DCH   A       
+TF1. . . . . . .  B ADDR    0088H.7 A       
+TH0. . . . . . .  D ADDR    008CH   A       
+TIME_MAX . . . .    NUMB    00F0H   A       
+TIME_START . . .  D ADDR    0033H   A       
+TIME_STOP. . . .  D ADDR    0034H   A       
+TIME . . . . . .  D ADDR    0032H   A       
+TL0. . . . . . .  D ADDR    008AH   A       
+TMOD . . . . . .  D ADDR    0089H   A       
+TR0. . . . . . .  B ADDR    0088H.4 A       
+TR1. . . . . . .  B ADDR    0088H.6 A       
+UP_REG . . . . .  C ADDR    8287H   A       
+UP . . . . . . .  C ADDR    827AH   A       
+VIV_UST. . . . .  D ADDR    0040H   A       
+VIVOD. . . . . .  C ADDR    828CH   A       
+VPERED . . . . .  C ADDR    82C5H   A       
+VT4. . . . . . .  B ADDR    0090H.4 A       
+VT5. . . . . . .  B ADDR    0090H.5 A       
+VT6. . . . . . .  B ADDR    0090H.6 A       
+VT7. . . . . . .  B ADDR    0090H.7 A       
+WAIT_1 . . . . .  C ADDR    81ACH   A       
+WAIT_2 . . . . .  C ADDR    81FCH   A       
+ZADANIE. . . . .  C ADDR    8141H   A       
+ZADERZHKA_1. . .  C ADDR    82C9H   A       
+ZADERZHKA_2. . .  C ADDR    82DDH   A       
+ZADERZHKA_3. . .  C ADDR    82E4H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

@@ -1,0 +1,150 @@
+MCS-51 MACRO ASSEMBLER    KATIA                                                                     12/25/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN D:\MCS8052\KATIA.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE D:\MCS8052\KATIA.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+----                   1     cseg at 0h
+0000 028100            2     jmp start
+8100                   3          org 8100h
+8100 900003            4     start:             mov DPTR,#3h
+8103 7482              5         mov A,#82h
+8105 F0                6            movx @DPTR, A
+8106 D290              7            setb P1.0
+8108 900000            8           mov DPTR,#0h
+810B 7420              9            mov A,#20h
+810D F0               10           movx @DPTR,A
+                      11              ;****************
+810E 75302D           12            mov 30h,#45
+8111 753114           13           mov 31h,#20
+8114 75320A           14            mov 32h,#10
+8117 75332D           15           mov 33h,#45
+811A 753400           16           mov 34h,#0
+811D AF30             17           mov R7,30h
+811F 7830             18            mov R0,#30h
+                      19         
+                      20                         begin:
+8121 7E05             21            mov   R6, #5
+                      22           beg:
+8123 312B             23            acall acp
+8125 801C             24             sjmp  srav
+                      25          m1:
+8127 DEFA             26            djnz  R6, beg
+                      27            stop:
+8129 80FE             28           sjmp  stop
+                      29                      
+                      30                            acp:
+812B D290             31            setb  P1.0
+812D 128168           32           call  delay
+8130 128168           33          call  delay
+8133 128168           34            call  delay
+8136 C290             35            clr   P1.0
+                      36          k:
+8138 2091FD           37             jb    P1.1, k
+813B 900001           38         mov   DPTR, #1
+813E E0               39           movx  A, @DPTR
+813F 941E             40        subb  A, #30
+8141 F9               41          mov   R1, A
+8142 22               42          ret
+                      43               
+                      44                          srav:
+8143 E9               45           mov   A, R1
+8144 8F50             46           mov   50h, R7
+8146 B55011           47          cjne  A, 50h, sr1
+8149 D297             48            Setb  P1.7
+814B D296             49            Setb  P1.6
+814D 3179             50            acall sec
+MCS-51 MACRO ASSEMBLER    KATIA                                                                     12/25/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+814F 08               51             inc   R0
+8150 E6               52            mov   A, @R0
+8151 FF               53            mov   R7, A
+8152 318D             54           acall begin1
+8154 318D             55           acall begin1
+8156 318D             56           acall begin1
+8158 80CD             57             sjmp  m1
+                      58              sr1:
+815A 4006             59            Jc    dn
+815C D297             60            setb  P1.7
+815E C296             61           clr   P1.6
+8160 80C1             62          sjmp  beg
+                      63            dn:
+8162 D296             64           setb  P1.6
+8164 C297             65           clr   P1.7
+8166 80BB             66           sjmp  beg
+                      67       
+                      68                          delay:
+8168 7BFF             69             mov  R3, #0ffh
+816A DBFE             70        d1: djnz R3, d1
+816C 7BFF             71              mov  R3, #0ffh
+816E DBFE             72         d2: djnz R3, d2
+8170 7BFF             73            mov  R3, #0ffh
+8172 DBFE             74         d3: djnz R3, d3
+8174 7BFF             75           mov  R3, #0ffh
+8176 DBFE             76         d4: djnz R3, d4
+8178 22               77             ret
+                      78                              
+                      79                               sec:
+8179 7C19             80             mov  R4, #25
+                      81                              sec1:
+817B 7B64             82           mov  R3, #100
+                      83                                sec2:
+817D 7D08             84            mov  R5, #8
+                      85          sec3:
+817F A4               86           mul  ab
+8180 1A               87           dec  R2
+8181 BA00FB           88           cjne R2, #0, sec3
+8184 1B               89             dec  R3
+8185 BB00F5           90            cjne R3, #0, sec2
+8188 1C               91          dec  R4
+8189 BC00EF           92            cjne R4, #0, sec1
+818C 22               93           ret
+                      94             begin1:
+818D 3168             95            call delay
+818F 3168             96            call delay
+8191 3168             97          call delay
+8193 3168             98         call delay
+8195 22               99             ret            
+                     100        End
+MCS-51 MACRO ASSEMBLER    KATIA                                                                     12/25/:9   PAGE    3
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACP. . . .  C ADDR    812BH   A       
+BEG. . . .  C ADDR    8123H   A       
+BEGIN. . .  C ADDR    8121H   A       
+BEGIN1 . .  C ADDR    818DH   A       
+D1 . . . .  C ADDR    816AH   A       
+D2 . . . .  C ADDR    816EH   A       
+D3 . . . .  C ADDR    8172H   A       
+D4 . . . .  C ADDR    8176H   A       
+DELAY. . .  C ADDR    8168H   A       
+DN . . . .  C ADDR    8162H   A       
+K. . . . .  C ADDR    8138H   A       
+M1 . . . .  C ADDR    8127H   A       
+P1 . . . .  D ADDR    0090H   A       
+SEC. . . .  C ADDR    8179H   A       
+SEC1 . . .  C ADDR    817BH   A       
+SEC2 . . .  C ADDR    817DH   A       
+SEC3 . . .  C ADDR    817FH   A       
+SR1. . . .  C ADDR    815AH   A       
+SRAV . . .  C ADDR    8143H   A       
+START. . .  C ADDR    8100H   A       
+STOP . . .  C ADDR    8129H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

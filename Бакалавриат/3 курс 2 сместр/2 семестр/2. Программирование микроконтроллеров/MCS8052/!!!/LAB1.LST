@@ -1,0 +1,154 @@
+MCS-51 MACRO ASSEMBLER    LAB1                                                                      11/24/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LAB1.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE LAB1.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1      org 0h
+0000 020003            2      jmp start
+                       3     start:
+0003 900000            4       mov DPTR, #0
+0006 D29F              5       setb SCON.7 ; Sqr`m`bkhb`el pefhl 2 p`anr{ m` 9600 jCv
+0008 C29E              6       clr SCON.6
+000A 758DFD            7       mov TH1, #0FDh
+000D 758920            8       mov TMOD, #20h
+0010 7C01              9       mov R4, #1h ; Tk`c m`f`rh^ jk`bhxh
+                      10     loop1:
+0012 7880             11       mov R0, #10000000b
+                      12     loop2:
+0014 B80802           13       cjne R0, #8h, loop3
+0017 80F9             14       jmp loop1
+                      15     loop3:
+0019 E8               16       mov A, R0   ; Qdbhc`el a`ir qj`mhpnb`mh^ bkebn vhjkhweqjh
+001A 23               17       rl A
+001B F8               18       mov R0, A  
+001C 758000           19       mov P0, #0h ; Namsk^el onpr
+001F A9B0             20       mov R1, P3  ; Qwhr{b`el b{undm{e khmhh q 3-cn onpr`
+0021 B9FF08           21       cjne R1, #11111111b, next ;
+0024 BC0005           22       cjne R4, #0h, next ; Eqkh jk`bhx` m`f`r`
+0027 7C01             23       mov R4, #1h
+0029 A3               24       inc DPTR
+002A 80E6             25       jmp loop1
+                      26     next:
+002C BC01E3           27       cjne R4, #1h, loop1
+002F 8880             28       mov P0, R0  ; B onpr 0 b{d`el a`ir qj`mhpnb`mh^, qndepf`yhi 1 rnk|jn b ndmnl ahre
+0031 E9               29       mov A, R1 
+0032 65B0             30       xrl A, P3   ; Eqkh b{undm{e khmhh 3-cn me onpr` hglemhkhq|
+0034 60DE             31       jz loop2    ; rn oepeirh m` loop2
+0036 E5B0             32       mov A, P3
+0038 64FF             33       xrl A, #11111111b ; Eqkh b{undm{e khmhh 3-cn onpr` bqe edhmhv{,
+003A 70D8             34       jnz loop2         ; gm`whr jk`bhx` me m`f`r`
+003C E8               35       mov A, R0   ; Qdbhc`el oepbne qk`c`elne m` 1 ahr bop`bn vhjkhweqjh
+003D 03               36       rr A
+003E F8               37       mov R0, A
+003F E9               38       mov A, R1   ; Brnpne bkebn m` 2 ahr` 
+0040 541F             39       anl A, #1Fh  ; Namsk^el qr`pxhe 3 ahr`
+0042 23               40       rl A
+0043 23               41       rl A
+0044 28               42       add A, R0   ; B{whqk^el smhj`k|m{i scan-jnd
+                      43       ; Mhfe openap`gsel scan-jnd b ASCII-jnd
+0045 B47802           44         cjne A, #78h, j1
+0048 7430             45             mov A, #030h
+004A B4F802           46     j1: cjne A, #0F8h, j2
+004D 7431             47             mov A, #31h
+004F B4F402           48     j2: cjne A, #0F4h, j3
+0052 7432             49         mov A, #32h
+0054 B4EC02           50     j3: cjne A, #0ECh, j4
+MCS-51 MACRO ASSEMBLER    LAB1                                                                      11/24/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+0057 7433             51         mov A, #33h
+0059 B47902           52     j4: cjne A, #079h, j5
+005C 7434             53         mov A, #34h
+005E B47502           54     j5: cjne A, #075h, j6
+0061 7435             55         mov A, #35h
+0063 B46D02           56     j6: cjne A, #06Dh, j7
+0066 7436             57         mov A, #36h
+0068 B47A02           58     j7: cjne A, #07Ah, j8
+006B 7437             59         mov A, #37h
+006D B47602           60     j8: cjne A, #076h, j9
+0070 7438             61         mov A, #38h
+0072 B46E02           62     j9: cjne A, #06Eh, jA
+0075 7439             63         mov A, #39h
+0077 B47C02           64     jA: cjne A, #07Ch, jB1
+007A 7441             65         mov A, #41h
+007C B47002           66     jB1: cjne A, #070h, jC1
+007F 7442             67         mov A, #42h
+0081 B4DC02           68     jC1: cjne A, #0DCh, jD
+0084 7443             69         mov A, #43h
+0086 B4BC02           70     jD: cjne A, #0BCh, jE
+0089 7444             71         mov A, #44h
+008B B45D02           72     jE: cjne A, #05Dh, jF
+008E 7445             73         mov A, #45h
+0090 B43D02           74     jF: cjne A, #03Dh, jG
+0093 7446             75         mov A, #46h
+0095 B45E02           76     jG: cjne A, #05Eh, jH
+0098 7447             77         mov A, #47h
+009A B43E02           78     jH: cjne A, #03Eh, jI
+009D 7448             79         mov A, #48h
+009F B46002           80     jI: cjne A, #060h, jJ
+00A2 7449             81         mov A, #49h
+00A4 B44002           82     jJ: cjne A, #040h, next2
+00A7 744A             83         mov A, #4Ah 
+                      84     next2:
+00A9 F0               85       movx @DPTR, A ; G`ohq{b`el bn bmexm~~ o`l^r|
+00AA A2D0             86       mov C, P
+00AC 929B             87       mov TB8, C ; G`ohuhb`el ahr o`phrer`
+00AE F599             88       mov SBUF, A ; Nrop`bk^el wepeg onqkednb`rek|m{i onpr
+00B0 7C00             89       mov R4, #0h ; Tk`c m`f`rh^ jk`bhxh - m`f`r`
+00B2 0112             90       jmp loop1
+00B4 80FE             91     jmp $
+                      92     end
+MCS-51 MACRO ASSEMBLER    LAB1                                                                      11/24/:9   PAGE    3
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+J1 . . . .  C ADDR    004AH   A       
+J2 . . . .  C ADDR    004FH   A       
+J3 . . . .  C ADDR    0054H   A       
+J4 . . . .  C ADDR    0059H   A       
+J5 . . . .  C ADDR    005EH   A       
+J6 . . . .  C ADDR    0063H   A       
+J7 . . . .  C ADDR    0068H   A       
+J8 . . . .  C ADDR    006DH   A       
+J9 . . . .  C ADDR    0072H   A       
+JA . . . .  C ADDR    0077H   A       
+JB1. . . .  C ADDR    007CH   A       
+JC1. . . .  C ADDR    0081H   A       
+JD . . . .  C ADDR    0086H   A       
+JE . . . .  C ADDR    008BH   A       
+JF . . . .  C ADDR    0090H   A       
+JG . . . .  C ADDR    0095H   A       
+JH . . . .  C ADDR    009AH   A       
+JI . . . .  C ADDR    009FH   A       
+JJ . . . .  C ADDR    00A4H   A       
+LOOP1. . .  C ADDR    0012H   A       
+LOOP2. . .  C ADDR    0014H   A       
+LOOP3. . .  C ADDR    0019H   A       
+NEXT . . .  C ADDR    002CH   A       
+NEXT2. . .  C ADDR    00A9H   A       
+P. . . . .  B ADDR    00D0H.0 A       
+P0 . . . .  D ADDR    0080H   A       
+P3 . . . .  D ADDR    00B0H   A       
+SBUF . . .  D ADDR    0099H   A       
+SCON . . .  D ADDR    0098H   A       
+START. . .  C ADDR    0003H   A       
+TB8. . . .  B ADDR    0098H.3 A       
+TH1. . . .  D ADDR    008DH   A       
+TMOD . . .  D ADDR    0089H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

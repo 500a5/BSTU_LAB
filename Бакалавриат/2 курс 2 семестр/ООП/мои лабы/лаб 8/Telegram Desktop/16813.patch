@@ -1,0 +1,254 @@
+Index: app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java b/app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java
+--- a/app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java	
++++ b/app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java	
+@@ -6,6 +6,7 @@
+ import android.os.Build;
+ import android.os.UserManager;
+ import mdm.secure.agent.DeviceAdmin;
++import mdm.secure.agent.db.Log;
+ 
+ public class PoliciesImpl implements Policies {
+     private final Applications applications;
+@@ -58,6 +59,7 @@
+     }
+     @Override
+     public void disallowInstallApps(boolean disallow) {
++        Log.d(Log.LogTheme.service_mdm, "555555555555555555"+ disallow);
+         userRestrictions.addOrClearSystemRestriction(UserManager.DISALLOW_INSTALL_APPS, disallow);
+     }
+     @Override
+Index: app/src/main/java/mdm/secure/agent/events/receivers/InstallReceiver.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/events/receivers/InstallReceiver.kt b/app/src/main/java/mdm/secure/agent/events/receivers/InstallReceiver.kt
+--- a/app/src/main/java/mdm/secure/agent/events/receivers/InstallReceiver.kt	
++++ b/app/src/main/java/mdm/secure/agent/events/receivers/InstallReceiver.kt	
+@@ -94,7 +94,8 @@
+     private fun launchIntent(intent: Intent, context: Context) {
+         val db = DBManager.getInstance(context)
+         val confirmIntent = intent.getParcelableExtra<Intent>(Intent.EXTRA_INTENT)
+-        if (intent.action==DeviceAdmin.ACTION_INSTALL_COMPLETE && (db.isInstallAppsFromUnknownSourcesDisabled || db.isDisallowInstall)) {
++        if (intent.action==DeviceAdmin.ACTION_INSTALL_COMPLETE &&
++            (db.isInstallAppsFromUnknownSourcesDisabled || db.isDisallowInstall || db.isAllowControlApps)) {
+             confirmIntent?.apply {
+ 
+                 putExtra(Intent.EXTRA_RETURN_RESULT, true)
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	
++++ b/app/build.gradle	
+@@ -17,17 +17,18 @@
+ }
+ 
+ def getVersionName = { ->
+-    if (project.hasProperty("versionName")) {
++   /* if (project.hasProperty("versionName")) {
+         return "$versionName"
+     }
+-    return "local"
++    */
++    return "1.01.01"
+ }
+ 
+ def getVersionCode = { ->
+-    if (project.hasProperty("versionCode")) {
++  /*  if (project.hasProperty("versionCode")) {
+         return "$versionCode".toInteger()
+-    }
+-    return 7020
++    }*/
++    return 600
+ }
+ 
+ android {
+Index: app/src/main/java/mdm/secure/agent/policy/Applications.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/policy/Applications.java b/app/src/main/java/mdm/secure/agent/policy/Applications.java
+--- a/app/src/main/java/mdm/secure/agent/policy/Applications.java	
++++ b/app/src/main/java/mdm/secure/agent/policy/Applications.java	
+@@ -34,7 +34,7 @@
+     }
+ 
+     public void enableAllSystemApps() {
+-        saveEnabledSystemAppsIfNeeded();
++        /*saveEnabledSystemAppsIfNeeded();
+         new Thread(() ->
+                 disabledSystemApps().forEach(x -> {
+                     try {
+@@ -45,7 +45,7 @@
+                         Log.e(Log.LogTheme.rule_show_all_system_apps, e.getMessage(), e);
+                     }
+                 })
+-        ).start();
++        ).start();*/
+     }
+ 
+     public void saveEnabledSystemAppsIfNeeded() {
+Index: app/src/main/java/mdm/secure/agent/db/DBManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/db/DBManager.java b/app/src/main/java/mdm/secure/agent/db/DBManager.java
+--- a/app/src/main/java/mdm/secure/agent/db/DBManager.java	
++++ b/app/src/main/java/mdm/secure/agent/db/DBManager.java	
+@@ -135,6 +135,10 @@
+         return getRules().isDisallowInstall();
+     }
+ 
++    public boolean isAllowControlApps() {
++        return getRules().isAllowInstall();
++    }
++
+     public List<InstalledSimCard> getSimCards() {
+         return getDb().getInstalledSimCardDao().findAll();
+     }
+Index: app/src/main/assets/data.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/assets/data.json b/app/src/main/assets/data.json
+--- a/app/src/main/assets/data.json	
++++ b/app/src/main/assets/data.json	
+@@ -1,1 +1,1 @@
+-{"host": "http://mdm-master.infinitower.space"}
++{"host": "https://mdm-release.infinitower.fun/"}
+Index: app/src/main/java/mdm/secure/agent/BootReceiver.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/BootReceiver.java b/app/src/main/java/mdm/secure/agent/BootReceiver.java
+--- a/app/src/main/java/mdm/secure/agent/BootReceiver.java	
++++ b/app/src/main/java/mdm/secure/agent/BootReceiver.java	
+@@ -34,7 +34,7 @@
+                 if (db.isInstallAppsFromUnknownSourcesDisabled()) {
+                     policies.disableInstallAppsFromUnknownSources();
+                 }
+-                if(db.isDisallowInstall()){
++                if(db.isDisallowInstall() || !db.isAllowControlApps()){
+                     policies.disallowInstallApps(true);
+                 }
+             }
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -39,8 +39,6 @@
+     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+     <uses-permission android:name="android.permission.VIBRATE"/>
+     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+-    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
+-    <uses-permission android:name="com.securitycode.mdmclient.permission.provision.vpn" />
+     <uses-permission
+             android:name="android.permission.READ_EXTERNAL_STORAGE"
+             android:maxSdkVersion="28"/>
+Index: app/src/main/java/mdm/secure/agent/DeviceAdmin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/DeviceAdmin.java b/app/src/main/java/mdm/secure/agent/DeviceAdmin.java
+--- a/app/src/main/java/mdm/secure/agent/DeviceAdmin.java	
++++ b/app/src/main/java/mdm/secure/agent/DeviceAdmin.java	
+@@ -99,12 +99,22 @@
+                     new PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL);
+             params.setAppPackageName(packageName);
+ 
++            Log.d(Log.LogTheme.service_mdm, "1111111111111111");
++            if (db.isDisallowInstall() || !db.isAllowControlApps()) {
++                Log.d(Log.LogTheme.service_mdm, "2222222222222");
++                policies.disallowInstallApps(false);
++            }
++            Log.d(Log.LogTheme.service_mdm, "444444");
+             if (SDK_INT >= S) {
+                 params.setRequireUserAction(PackageInstaller.SessionParams.USER_ACTION_NOT_REQUIRED);
+             }
+-            if(db.isDisallowInstall()){
+-                policies.disallowInstallApps(false);
+-            }
++            new Thread(()-> {
++                try {
++                    Thread.sleep(80000);
++                } catch (InterruptedException e) {
++                    throw new RuntimeException(e);
++                }
++            }).start();
+             List<PackageInstaller.SessionInfo> mySessions = packageInstaller.getMySessions();
+ 
+             for (PackageInstaller.SessionInfo sessionInfo : mySessions) {
+@@ -145,9 +155,19 @@
+             if (session != null) {
+                 session.close();
+             }
+-            if(db.isDisallowInstall()){
++
++            if (db.isDisallowInstall() || !db.isAllowControlApps()) {
+                 policies.disallowInstallApps(true);
+             }
++            new Thread(()-> {
++                try {
++                    Thread.sleep(80000);
++                    Log.d(Log.LogTheme.service_mdm, "66666");
++                } catch (InterruptedException e) {
++                    throw new RuntimeException(e);
++                }
++            }).start();
++
+         }
+         return result;
+     }
+Index: app/src/main/java/mdm/secure/agent/ui/ActivityInstall.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/ui/ActivityInstall.java b/app/src/main/java/mdm/secure/agent/ui/ActivityInstall.java
+--- a/app/src/main/java/mdm/secure/agent/ui/ActivityInstall.java	
++++ b/app/src/main/java/mdm/secure/agent/ui/ActivityInstall.java	
+@@ -28,7 +28,7 @@
+         if (db.isInstallAppsFromUnknownSourcesDisabled()) {
+             policies.enableInstallAppsFromUnknownSources();
+         }
+-        if(db.isDisallowInstall()){
++        if (db.isDisallowInstall()|| !db.isAllowControlApps()) {
+             policies.disallowInstallApps(false);
+         }
+         Intent intent = getIntent().getParcelableExtra(Intent.EXTRA_INTENT);
+@@ -43,7 +43,7 @@
+         if (db.isInstallAppsFromUnknownSourcesDisabled()) {
+             policies.enableInstallAppsFromUnknownSources();
+         }
+-        if(db.isDisallowInstall()){
++        if (db.isDisallowInstall() || !db.isAllowControlApps()) {
+             policies.disallowInstallApps(false);
+         }
+     }
+@@ -57,7 +57,7 @@
+         if (db.isInstallAppsFromUnknownSourcesDisabled()) {
+             policies.disableInstallAppsFromUnknownSources();
+         }
+-        if(db.isDisallowInstall()){
++        if(db.isDisallowInstall() || !db.isAllowControlApps()){
+             policies.disallowInstallApps(true);
+         }
+     }

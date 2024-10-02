@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/admin/CLionProjects/Dismat_2year/4.2/main.c
+stdio.h
+-
+malloc.h
+-
+stdlib.h
+-
+time.h
+-
+unistd.h
+-
+

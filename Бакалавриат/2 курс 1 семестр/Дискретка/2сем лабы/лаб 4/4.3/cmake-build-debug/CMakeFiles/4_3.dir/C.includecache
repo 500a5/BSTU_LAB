@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/4.3/Kraskal_algorithm.h
+stdio.h
+-
+stdlib.h
+-
+malloc.h
+-
+
+C:/Users/500a5/CLionProjects/4.3/main.c
+stdio.h
+-
+malloc.h
+-
+ctype.h
+-
+Kraskal_algorithm.h
+C:/Users/500a5/CLionProjects/4.3/Kraskal_algorithm.h
+

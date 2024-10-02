@@ -1,0 +1,412 @@
+MCS-51 MACRO ASSEMBLER    LABA2M                                                                    02/04/;1   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LABA2M.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE LABA2M.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+  0064                 2     TIME EQU 100            ;0,1ms
+  0039                 3     sCH DATA 39h
+  0037                 4     N1_SEC DATA 37h         ;YACHEIKA PAMATI SCHITAUSCHYAIA 1sec 200*0,25ms=500ms clrSEC, ZATEM
+                              500ms setbSEC
+  0038                 5     N2_SEC DATA 38h
+  0036                 6     N3_SEC DATA 36h
+  0035                 7     rezh DATA 35h
+  0034                 8     kol DATA 34h
+  0033                 9     kol1 DATA 33h
+  0032                10     N4_SEC DATA 32h         ;DK_ PEFHL@ 3
+  0064                11     C_SEC EQU 100           ;CONSTANTA DLYA SECUNDOMERA
+  000A                12     C2_SEC EQU 10            ;CONSTANTA DLYA SECUNDOMERA b{ap`mmn no{rm{l osr8l
+  004B                13     C3_SEC EQU 75           ;jnkhweqrbn onbrnpemhi dk^ 15-h qejsmd
+  000E                14     SEC_REZH2 EQU 14          ;CONSTANTA DLYA SECUNDOMERA
+  1388                15     TIME2 EQU 5000          ;5ms
+  007D                16     imp EQU 125             ;Jnkhweqrbn hlosk|qnb ndmncn nanpnr`
+                      17     
+0000                  18      org 00h
+0000 028100           19      jmp start
+                      20     
+000B                  21      org 000Bh
+000B 0282EC           22      jmp TIMER_0
+                      23     
+8100                  24      org 8100h
+                      25     
+                      26     start:
+8100 900003           27             mov DPTR,#03h   ;B{anp pechqrp` sop`bkemh^ b 55-nl
+8103 7482             28             mov A,#82h      ;B{anp jnl`md{ (B-bbnd,C-b{bnd, A-b{bnd)
+8105 F0               29             movx @DPTR,A
+8106 F0               30             MOVX @DPTR,A
+8107 75364B           31             MOV N3_SEC,#C3_SEC              ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+810A 75A882           32             mov IE, #10000010b
+810D E589             33             MOV A,TMOD
+810F 4407             34             ORL A,#00000111b
+8111 F589             35             MOV TMOD,A                      ;Pefhl 3
+8113 753501           36             MOV REZH,#01H                   ;g`d`8l m`w`k|m{i pefhl dk^ dbhc`rek^
+8116 AC35             37             MOV R4,rezh
+8118 753406           38             MOV KOL,#06H
+811B D28C             39             setb tr0
+                      40     
+811D 758202           41             MOV DPL,#02h
+8120 7411             42               mov A,#11h
+8122 F0               43             MOVX @DPTR,A
+8123 7D06             44             mov R5, #06H
+                      45     
+                      46         GO:
+8125 758A00           47             mov TL0,#00H
+8128 753900           48             MOV SCH,#00H
+812B 758A83           49             MOV Tl0,#NOT(imp-1)
+MCS-51 MACRO ASSEMBLER    LABA2M                                                                    02/04/;1   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+812E 753764           50             MOV N1_SEC,#C_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8131 75380A           51             MOV N2_SEC,#C2_SEC              ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8134 75320E           52             MOV N4_SEC,#SEC_REZH2               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8137 753302           53             MOV kol1,#02h                   ;jnkhweqrbn onbrnpemhi pefhl` g` vhjk
+813A 12815C           54             CALL PYSK
+813D 1282C6           55             call preob
+8140 1282D2           56             CALL VIVOD
+8143 1D               57             dec R5
+8144 FE               58             mov R6, A
+8145 ED               59             mov A, R5
+                      60             jm Finish
+*** ____________________________________^
+*** ERROR #1, LINE #60 (0), SYNTAX ERROR
+8146 EE               61             mov A, R6
+8147 D536DB           62             DJNZ N3_SEC,GO
+814A 75364B           63             MOV N3_SEC,#C3_SEC              ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+814D 0535             64             inc rezh
+814F AC35             65             MOV R4,rezh
+                      66     
+8151 D534D1           67             DJNZ KOL,GO
+8154 753501           68             MOV REZH,#01H
+8157 AC35             69             MOV R4,rezh
+                      70                     djne KOL,
+*** ______________________________________________^
+*** ERROR #1, LINE #70 (60), SYNTAX ERROR
+                      71     
+8159 753406           72             MOV KOL,#06h                   ;jnkhweqrbn vhjknb
+                      73     
+                      74     
+                      75      PYSK:                               ;ondopncp`ll` `m`khg` m`op`bkemh^ bp`yemh^
+815C C28F             76             clr TF1
+815E E4               77             clr A
+815F F58D             78             mov th1,A
+8161 758C9C           79             MOV Th0,#NOT(TIME-1)
+8164 D28E             80             setb tr1
+                      81     
+8166 BC010C           82             CJnE R4,#01H,REZH2           ;hqj~wemhe 1-ncn pefhl`
+                      83     
+8169 7590A0           84       REZH1:mov P1,#10100000b
+816C 758202           85             MOV DPL,#02h
+816F 7411             86             mov A,#11h
+8171 F0               87             MOVX @DPTR,A
+8172 028181           88             JMP MET3
+                      89     
+8175 BC0220           90       REZH2:CJnE R4,#02H,REZH3           ;hqj~wemhe 2-ncn pefhl`
+8178 759050           91             mov P1,#01010000b
+817B 758202           92             MOV DPL,#02h
+817E 7481             93             mov A,#81h
+8180 F0               94             MOVX @DPTR,A
+                      95     
+                      96        MET3:
+                      97     
+8181 308FFD           98             jnb tf1,$
+8184 D537D5           99             DJNZ N1_SEC,PYSK
+8187 753764          100             MOV N1_SEC,#C_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+MCS-51 MACRO ASSEMBLER    LABA2M                                                                    02/04/;1   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+818A D538CF          101             DJNZ N2_SEC,PYSK
+818D 75380A          102             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8190 D533C9          103             DJNZ KOL1,PYSK
+8193 E539            104             mov A,SCH
+8195 0282C5          105             JMP EXIT
+                     106     
+                     107       REZH3:
+8198 BC0349          108             CJnE R4,#03H,REZH4
+819B C28F            109             clr TF1
+819D E4              110             clr A
+819E F58D            111             mov th1,A
+81A0 758C9C          112             MOV Th0,#NOT(TIME-1)
+81A3 D28E            113             setb tr1
+                     114     
+81A5 759000          115             MOV P1,#00000000b
+81A8 758202          116             MOV DPL,#02h
+81AB 7481            117             mov A,#81h
+81AD F0              118             MOVX @DPTR,A
+81AE 308FFD          119             jnb tf1,$
+81B1 D532E4          120             DJNZ N4_SEC,REZH3
+81B4 753214          121             MOV N4_SEC,#14h               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+81B7 D538DE          122             DJNZ N2_SEC,REZH3
+81BA 75380A          123             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+                     124     
+81BD 753246          125             MOV N4_SEC,#46h
+                     126     
+                     127     met31:
+81C0 C28F            128             clr TF1
+81C2 E4              129             clr A
+81C3 F58D            130             mov th1,A
+81C5 758C9C          131             MOV Th0,#NOT(TIME-1)
+81C8 D28E            132             setb tr1
+                     133     
+81CA 759050          134             MOV P1,#01010000b
+81CD 308FFD          135             jnb tf1,$
+81D0 D532ED          136             DJNZ N4_SEC,met31
+81D3 753246          137             MOV N4_SEC,#46H             ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+81D6 D538E7          138             DJNZ N2_SEC,met31
+81D9 75380A          139             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+81DC D533E1          140             DJNZ KOL1,met31
+81DF E539            141             mov A,SCH
+81E1 0282C5          142             JMP EXIT
+                     143     
+                     144     
+                     145       REZH4:
+81E4 BC0449          146             CJnE R4,#04H,REZH5
+81E7 C28F            147             clr TF1
+81E9 E4              148             clr A
+81EA F58D            149             mov th1,A
+81EC 758C9C          150             MOV Th0,#NOT(TIME-1)
+81EF D28E            151             setb tr1
+                     152     
+81F1 759000          153             MOV P1,#00000000b
+                     154     
+81F4 758202          155             MOV DPL,#02h
+MCS-51 MACRO ASSEMBLER    LABA2M                                                                    02/04/;1   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+81F7 7411            156             mov A,#11h
+81F9 F0              157             MOVX @DPTR,A
+                     158     
+81FA 308FFD          159             jnb tf1,$
+81FD D532E4          160             DJNZ N4_SEC,REZH4
+8200 753214          161             MOV N4_SEC,#14h               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8203 D538DE          162             DJNZ N2_SEC,REZH4
+8206 75380A          163             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+                     164     
+8209 753246          165             MOV N4_SEC,#46h
+                     166     
+                     167     met41:
+820C C28F            168             clr TF1
+820E E4              169             clr A
+820F F58D            170             mov th1,A
+8211 758C9C          171             MOV Th0,#NOT(TIME-1)
+8214 D28E            172             setb tr1
+                     173     
+8216 7590A0          174             MOV P1,#10100000b
+8219 308FFD          175             jnb tf1,$
+821C D532ED          176             DJNZ N4_SEC,met41
+821F 753246          177             MOV N4_SEC,#46H             ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8222 D538E7          178             DJNZ N2_SEC,met41
+8225 75380A          179             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8228 D533E1          180             DJNZ KOL1,met41
+822B E539            181             mov A,SCH
+822D 0282C5          182             JMP EXIT
+                     183     
+                     184       REZH5:
+8230 BC0549          185             CJnE R4,#05H,REZH6           ;hqj~wemhe 3-ncn pefhl`
+                     186     
+8233 C28F            187             clr TF1
+8235 E4              188             clr A
+8236 F58D            189             mov th1,A
+8238 758C9C          190             MOV Th0,#NOT(TIME-1)
+823B D28E            191             setb tr1
+                     192     
+823D 759000          193             MOV P1,#00000000b
+                     194     
+8240 758202          195             MOV DPL,#02h
+8243 7411            196             mov A,#11h
+8245 F0              197             MOVX @DPTR,A
+                     198     
+8246 308FFD          199             jnb tf1,$
+8249 D532E4          200             DJNZ N4_SEC,REZH5
+824C 75323C          201             MOV N4_SEC,#3ch               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+824F D538DE          202             DJNZ N2_SEC,REZH5
+8252 75380A          203             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+                     204     
+8255 75321E          205             MOV N4_SEC,#1eh
+                     206     
+                     207     met51:
+8258 C28F            208             clr TF1
+825A E4              209             clr A
+825B F58D            210             mov th1,A
+MCS-51 MACRO ASSEMBLER    LABA2M                                                                    02/04/;1   PAGE    5
+
+
+LOC  OBJ            LINE     SOURCE
+
+825D 758C9C          211             MOV Th0,#NOT(TIME-1)
+8260 D28E            212             setb tr1
+                     213     
+8262 7590A0          214             MOV P1,#10100000b
+8265 308FFD          215             jnb tf1,$
+8268 D532ED          216             DJNZ N4_SEC,met51
+826B 75321E          217             MOV N4_SEC,#1eH             ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+826E D538E7          218             DJNZ N2_SEC,met51
+8271 75380A          219             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8274 D533E1          220             DJNZ KOL1,met51
+                     221     
+8277 E539            222             mov A,SCH
+8279 0282C5          223             JMP EXIT
+                     224     
+                     225       REZH6:
+827C C28F            226             clr TF1
+827E E4              227             clr A
+827F F58D            228             mov th1,A
+8281 758C9C          229             MOV Th0,#NOT(TIME-1)
+8284 D28E            230             setb tr1
+                     231     
+8286 759000          232             MOV P1,#00000000b
+                     233     
+8289 758202          234             MOV DPL,#02h
+828C 7481            235             mov A,#81h
+828E F0              236             MOVX @DPTR,A
+                     237     
+828F 308FFD          238             jnb tf1,$
+8292 D532E7          239             DJNZ N4_SEC,REZH6
+8295 75323C          240             MOV N4_SEC,#3ch               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+8298 D538E1          241             DJNZ N2_SEC,REZH6
+829B 75380A          242             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+                     243     
+829E 75321E          244             MOV N4_SEC,#1eh
+                     245     
+                     246     met61:
+82A1 C28F            247             clr TF1
+82A3 E4              248             clr A
+82A4 F58D            249             mov th1,A
+82A6 758C9C          250             MOV Th0,#NOT(TIME-1)
+82A9 D28E            251             setb tr1
+                     252     
+82AB 759050          253             MOV P1,#01010000b
+82AE 308FFD          254             jnb tf1,$
+82B1 D532ED          255             DJNZ N4_SEC,met61
+82B4 75321E          256             MOV N4_SEC,#1eH             ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+82B7 D538E7          257             DJNZ N2_SEC,met61
+82BA 75380A          258             MOV N2_SEC,#C2_SEC               ;ZADANIE NACHAL'NOGO ZNACHENIA DLYA SECUNDOMERA
+82BD D533E1          259             DJNZ KOL1,met61
+82C0 E539            260             mov A,SCH
+82C2 0282F4          261             JMP finish
+                     262     
+                     263     
+                     264     
+                     265       EXIT:
+MCS-51 MACRO ASSEMBLER    LABA2M                                                                    02/04/;1   PAGE    6
+
+
+LOC  OBJ            LINE     SOURCE
+
+82C5 22              266      RET
+                     267     
+                     268      preob:                                 ;openap`gnb`mhe
+82C6 75F005          269             MOV B,#05H
+82C9 A4              270             mul AB
+82CA 75F00A          271             MOV B,#0AH
+82CD 84              272             DIV AB
+82CE A8F0            273             MOV R0,b
+82D0 F9              274             MOV R1,A
+82D1 22              275       RET
+                     276     VIVOD:
+82D2 75F002          277             MOV B,#02H
+82D5 E536            278             MOV A,N3_SEC
+82D7 84              279             DIV AB
+82D8 758202          280             MOV DPL,#02h
+82DB ADF0            281             MOV R5,B
+82DD BD0107          282             CJNE R5,#01H,MET5
+                     283     
+82E0 E8              284             MOV A,R0
+82E1 4440            285             ORL A,#01000000b
+82E3 F0              286             MOVX @DPTR,A
+82E4 0282EB          287             jmp met6
+                     288     
+82E7 E9              289     MET5:   MOV A,R1
+82E8 4420            290             ORL A,#00100000b
+82EA F0              291             MOVX @DPTR,A
+                     292     MET6:
+82EB 22              293     RET
+                     294     
+                     295     
+                     296     TIMER_0:
+82EC 0539            297       INC SCH
+82EE 758A83          298       MOV Tl0,#NOT(imp-1)
+82F1 D28C            299       setb tr0
+82F3 32              300     RETI
+                     301     
+                     302     FINISH:
+82F4 850090          303             mov P1,0
+                     304     end
+MCS-51 MACRO ASSEMBLER    LABA2M                                                                    02/04/;1   PAGE    7
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+B. . . . .  D ADDR    00F0H   A       
+C_SEC. . .    NUMB    0064H   A       
+C2_SEC . .    NUMB    000AH   A       
+C3_SEC . .    NUMB    004BH   A       
+DJNE . . .    ----    ----            
+DPL. . . .  D ADDR    0082H   A       
+EXIT . . .  C ADDR    82C5H   A       
+FINISH . .  C ADDR    82F4H   A       
+GO . . . .  C ADDR    8125H   A       
+IE . . . .  D ADDR    00A8H   A       
+IMP. . . .    NUMB    007DH   A       
+JM . . . .    ----    ----            
+KOL. . . .  D ADDR    0034H   A       
+KOL1 . . .  D ADDR    0033H   A       
+MET3 . . .  C ADDR    8181H   A       
+MET31. . .  C ADDR    81C0H   A       
+MET41. . .  C ADDR    820CH   A       
+MET5 . . .  C ADDR    82E7H   A       
+MET51. . .  C ADDR    8258H   A       
+MET6 . . .  C ADDR    82EBH   A       
+MET61. . .  C ADDR    82A1H   A       
+N1_SEC . .  D ADDR    0037H   A       
+N2_SEC . .  D ADDR    0038H   A       
+N3_SEC . .  D ADDR    0036H   A       
+N4_SEC . .  D ADDR    0032H   A       
+P1 . . . .  D ADDR    0090H   A       
+PREOB. . .  C ADDR    82C6H   A       
+PYSK . . .  C ADDR    815CH   A       
+REZH . . .  D ADDR    0035H   A       
+REZH1. . .  C ADDR    8169H   A       
+REZH2. . .  C ADDR    8175H   A       
+REZH3. . .  C ADDR    8198H   A       
+REZH4. . .  C ADDR    81E4H   A       
+REZH5. . .  C ADDR    8230H   A       
+REZH6. . .  C ADDR    827CH   A       
+SCH. . . .  D ADDR    0039H   A       
+SEC_REZH2.    NUMB    000EH   A       
+START. . .  C ADDR    8100H   A       
+TF1. . . .  B ADDR    0088H.7 A       
+TH0. . . .  D ADDR    008CH   A       
+TH1. . . .  D ADDR    008DH   A       
+TIME . . .    NUMB    0064H   A       
+TIME2. . .    NUMB    1388H   A       
+TIMER_0. .  C ADDR    82ECH   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+TR1. . . .  B ADDR    0088H.6 A       
+VIVOD. . .  C ADDR    82D2H   A       
+
+
+MCS-51 MACRO ASSEMBLER    LABA2M                                                                    02/04/;1   PAGE    8
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, 2 ERRORS FOUND (70)

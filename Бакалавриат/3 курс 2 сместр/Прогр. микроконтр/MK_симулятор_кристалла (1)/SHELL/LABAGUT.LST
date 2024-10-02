@@ -1,0 +1,254 @@
+MCS-51 MACRO ASSEMBLER    LABAGUT                                                                   12/08/;0   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LABAGUT.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE LABAGUT.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+  0030                 1             ZADERG DATA 30h
+  0031                 2             EDIN DATA 31h
+  0032                 3             DES DATA 32h
+  0002                 4             P_C EQU 2
+  0082                 5             INIT_PPI EQU 10000010b
+  0003                 6             RWCU EQU 3
+  0033                 7             DELTA DATA 33h
+  0034                 8             NAPRAVLENIE DATA 34h
+                       9     
+0000                  10             ORG 00h
+0000 028100           11             JMP START
+                      12     
+000B                  13             ORG 0Bh
+000B 028213           14             JMP OBOROT
+                      15     
+001B                  16             ORG 1Bh
+001B 028218           17             JMP TIME
+                      18     
+8100                  19             ORG 8100h
+8100 7482             20     START:  MOV A,#INIT_PPI
+8102 758203           21             MOV DPL,#RWCU                   ;NASTROIKA BB55 NA NEOBHODIMYI REZHIM
+8105 F0               22             MOVX @DPTR,A
+8106 758907           23             MOV TMOD,#00000111b
+8109 758134           24             MOV 081h,#34h
+810C D2D3             25             setb RS0
+810E D2D4             26             setb RS1
+8110 75A800           27             MOV IE,#0
+8113 7400             28             MOV A,#0
+8115 7E00             29             MOV R6,#0
+8117 753400           30             MOV NAPRAVLENIE,#0
+811A D2AF             31             SETB IE.7
+811C D2AB             32             SETB IE.3
+811E D2A9             33             SETB IE.1
+8120 753301           34             MOV DELTA,#1
+8123 753001           35             MOV ZADERG,#1
+8126 758C14           36             MOV TH0,#20
+8129 758A82           37             MOV TL0,#130
+812C D28C             38             SETB TR0
+812E D28E             39             SETB TR1
+8130 128163           40             CALL ZAPYCK
+8133 B464FD           41     CYCLE1: CJNE A,#100,$       ;100ms
+8136 7400             42               MOV A,#0
+8138 09               43               INC R1
+8139 12817B           44               CALL POVTOR
+813C B90503           45               CJNE R1,#5,M2
+813F 1281F4           46                CALL RACHET
+8142 B906EE           47     M2:     CJNE R1,#6,CYCLE1   ;otchitivaem 600ms
+8145 7900             48               MOV R1,#0
+8147 1281A2           49               CALL INTERVAL
+814A 08               50               INC R0
+MCS-51 MACRO ASSEMBLER    LABAGUT                                                                   12/08/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+814B B864E5           51             CJNE R0,#100,CYCLE1  ;600*100=60000=60=1
+814E 7800             52               MOV R0,#0
+8150 12816D           53               CALL VEKTORv
+8153 0E               54               INC R6
+8154 BE02DC           55             CJNE R6,#2,CYCLE1
+8157 128166           56               CALL INVERSIA
+815A 7E00             57               MOV R6,#0
+815C 80D5             58             SJMP CYCLE1
+815E 753000           59             MOV ZADERG,#0
+8161 80FE             60             SJMP $
+                      61     
+                      62     
+8163 B296             63     ZAPYCK: CPL P1.6
+8165 22               64             RET
+                      65     
+8166 B297             66     INVERSIA: CPL P1.7
+8168 B296             67               CPL P1.6
+816A D294             68               SETB P1.4
+816C 22               69             RET
+                      70     
+816D AF34             71     VEKTORv: MOV R7,NAPRAVLENIE
+816F BF0005           72             CJNE R7,#0,M3
+8172 753401           73                 MOV NAPRAVLENIE,#1
+8175 8003             74             SJMP M4
+8177 753400           75     M3:       MOV NAPRAVLENIE,#0
+817A 22               76     M4:     RET
+                      77     
+                      78     
+817B 1281BE           79     POVTOR: CALL ZADERGKA
+817E 128182           80             CALL VIVOD
+8181 22               81             RET
+                      82     
+8182 C0E0             83     VIVOD:  PUSH ACC
+8184 BB000C           84             CJNE R3,#0,EDV
+8187 7B01             85               MOV R3,#1
+8189 E532             86               MOV A,DES
+818B 4440             87               ORL A,#01000000b
+818D 758202           88               MOV DPL,#P_C
+8190 F0               89               MOVX @DPTR,A
+8191 800A             90             SJMP DALEE2
+8193 7B00             91     EDV:      MOV R3,#0
+8195 E531             92               MOV A,EDIN
+8197 4480             93               ORL A,#10000000b
+8199 758202           94               MOV DPL,#P_C
+819C F0               95               MOVX @DPTR,A
+819D 7400             96     DALEE2: mov A,#0
+819F D0E0             97               POP ACC
+81A1 22               98             RET
+                      99     
+81A2 C0E0            100     INTERVAL: PUSH ACC
+81A4 7400            101               mov a,#0
+81A6 AF34            102               MOV R7,NAPRAVLENIE
+81A8 BF0006          103               CJNE R7,#0,M5
+81AB E533            104                 MOV A,DELTA
+81AD 2530            105                 ADD A,ZADERG
+MCS-51 MACRO ASSEMBLER    LABAGUT                                                                   12/08/;0   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+81AF 8006            106               SJMP M6
+81B1 E530            107     M5:         MOV A,ZADERG
+81B3 9533            108                 SUBB A,DELTA
+                     109                 SJNE A,#0,M6
+*** __________________________________________^
+*** ERROR #1, LINE #109 (0), SYNTAX ERROR
+81B5 7401            110                 MOV A,#1
+81B7 F530            111     M6:         MOV ZADERG,A
+81B9 7400            112               mov A,#0
+81BB D0E0            113               POP ACC
+81BD 22              114             RET
+                     115     
+81BE 20961A          116     ZADERGKA: JB P1.6,M7
+81C1 7F00            117               MOV R7,#0
+81C3 AF30            118               mov R7,zaderg
+81C5 BF620A          119               cjne R7,#98,m12
+81C8 753061          120               mov zaderg,#97
+81CB C294            121               CLR P1.4
+81CD B530FD          122               CJNE A,ZADERG,$
+81D0 8005            123               sjmp m13
+81D2 C294            124     m12:      CLR P1.4
+81D4 B530FD          125               CJNE A,ZADERG,$
+81D7 D294            126     m13:      SETB P1.4
+81D9 8016            127               SJMP M8
+81DB AF30            128     M7:       mov R7,zaderg
+81DD BF620A          129               cjne R7,#98,m14
+81E0 753061          130               mov zaderg,#97
+81E3 C295            131               CLR P1.5
+81E5 B530FD          132               CJNE A,ZADERG,$
+81E8 8005            133               sjmp m15
+81EA C295            134     m14:      CLR P1.5
+81EC B530FD          135               CJNE A,ZADERG,$
+81EF D295            136     m15:      SETB P1.5
+81F1 7F00            137     M8:       MOV R7,#0
+81F3 22              138               RET
+                     139     
+81F4 C0E0            140     RACHET: PUSH ACC
+81F6 7400            141             mov a,#0
+81F8 753100          142             mov edin,#0
+81FB 753200          143             mov des,#0
+81FE EA              144             MOV A,R2
+81FF 75F002          145             MOV B,#2
+8202 A4              146             MUL AB
+8203 75F00A          147             MOV B,#10
+8206 84              148             DIV AB
+8207 F532            149             MOV DES,A
+8209 85F031          150             MOV EDIN,B
+820C 7A00            151             MOV R2,#0
+820E 7400            152             mov A,#0
+8210 D0E0            153             POP ACC
+8212 22              154             RET
+                     155     
+8213 758A82          156     OBOROT: MOV TL0,#130
+8216 0A              157             INC R2
+8217 32              158             RETI
+MCS-51 MACRO ASSEMBLER    LABAGUT                                                                   12/08/;0   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     159     
+8218 758C14          160     TIME:   MOV TH0,#20
+821B 0D              161             INC R5
+821C BD0403          162             CJNE R5,#4,M1   ;zdem 1 ms
+821F 7D00            163               MOV R5,#0
+8221 04              164               INC A
+8222 32              165     M1:     RETI
+                     166     END
+MCS-51 MACRO ASSEMBLER    LABAGUT                                                                   12/08/;0   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E      T Y P E   V A L U E       A T T R I B U T E S
+
+ACC . . . .  D ADDR    00E0H   A       
+B . . . . .  D ADDR    00F0H   A       
+CYCLE1. . .  C ADDR    8133H   A       
+DALEE2. . .  C ADDR    819DH   A       
+DELTA . . .  D ADDR    0033H   A       
+DES . . . .  D ADDR    0032H   A       
+DPL . . . .  D ADDR    0082H   A       
+EDIN. . . .  D ADDR    0031H   A       
+EDV . . . .  C ADDR    8193H   A       
+IE. . . . .  D ADDR    00A8H   A       
+INIT_PPI. .    NUMB    0082H   A       
+INTERVAL. .  C ADDR    81A2H   A       
+INVERSIA. .  C ADDR    8166H   A       
+M1. . . . .  C ADDR    8222H   A       
+M12 . . . .  C ADDR    81D2H   A       
+M13 . . . .  C ADDR    81D7H   A       
+M14 . . . .  C ADDR    81EAH   A       
+M15 . . . .  C ADDR    81EFH   A       
+M2. . . . .  C ADDR    8142H   A       
+M3. . . . .  C ADDR    8177H   A       
+M4. . . . .  C ADDR    817AH   A       
+M5. . . . .  C ADDR    81B1H   A       
+M6. . . . .  C ADDR    81B7H   A       
+M7. . . . .  C ADDR    81DBH   A       
+M8. . . . .  C ADDR    81F1H   A       
+NAPRAVLENIE  D ADDR    0034H   A       
+OBOROT. . .  C ADDR    8213H   A       
+P_C . . . .    NUMB    0002H   A       
+P1. . . . .  D ADDR    0090H   A       
+POVTOR. . .  C ADDR    817BH   A       
+RACHET. . .  C ADDR    81F4H   A       
+RS0 . . . .  B ADDR    00D0H.3 A       
+RS1 . . . .  B ADDR    00D0H.4 A       
+RWCU. . . .    NUMB    0003H   A       
+SJNE. . . .    ----    ----            
+START . . .  C ADDR    8100H   A       
+TH0 . . . .  D ADDR    008CH   A       
+TIME. . . .  C ADDR    8218H   A       
+TL0 . . . .  D ADDR    008AH   A       
+TMOD. . . .  D ADDR    0089H   A       
+TR0 . . . .  B ADDR    0088H.4 A       
+TR1 . . . .  B ADDR    0088H.6 A       
+VEKTORV . .  C ADDR    816DH   A       
+VIVOD . . .  C ADDR    8182H   A       
+ZADERG. . .  D ADDR    0030H   A       
+ZADERGKA. .  C ADDR    81BEH   A       
+ZAPYCK. . .  C ADDR    8163H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, 1 ERROR FOUND (109)

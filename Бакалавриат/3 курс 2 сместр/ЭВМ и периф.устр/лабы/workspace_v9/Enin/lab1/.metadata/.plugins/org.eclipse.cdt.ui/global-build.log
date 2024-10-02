@@ -1,0 +1,656 @@
+
+**** Clean-only build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k clean 
+ 
+DEL /F  "MSP430-LCD.hex"  "MSP430-LCD.out" 
+DEL /F "I2C.obj" "keys.obj" "lcd.obj" "leds.obj" "main.obj" "msp430_initialize_unused_interrrupt_vectors.obj" "sysfunc.obj" 
+DEL /F "I2C.d" "keys.d" "lcd.d" "leds.d" "main.d" "msp430_initialize_unused_interrrupt_vectors.d" "sysfunc.d" 
+Finished clean
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../I2C.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="I2C.d_raw"  "../I2C.c"
+"../I2C.c", line 39: remark #1528-D: (ULP 3.1) Detected flag polling using I2CBUSY. Recommend using an interrupt combined with enter LPMx and ISR
+"../I2C.c", line 47: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../I2C.c", line 55: remark #1528-D: (ULP 3.1) Detected flag polling using I2CBUSY. Recommend using an interrupt combined with enter LPMx and ISR
+"../I2C.c", line 64: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+Finished building: "../I2C.c"
+ 
+Building file: "../keys.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="keys.d_raw"  "../keys.c"
+"../keys.c", line 21: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../keys.c", line 32: remark #1545-D: (ULP 14.1) Array index of type "int". Recommend using "unsigned int"
+"../keys.c", line 69: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+Finished building: "../keys.c"
+ 
+Building file: "../lcd.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="lcd.d_raw"  "../lcd.c"
+"../lcd.c", line 172: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../lcd.c", line 204: remark #2553-D: (ULP 14.1) Array index (involving "b") of type "int". Recommend using "unsigned int"
+Finished building: "../lcd.c"
+ 
+Building file: "../leds.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="leds.d_raw"  "../leds.c"
+Finished building: "../leds.c"
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building file: "../msp430_initialize_unused_interrrupt_vectors.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="msp430_initialize_unused_interrrupt_vectors.d_raw"  "../msp430_initialize_unused_interrrupt_vectors.c"
+Finished building: "../msp430_initialize_unused_interrrupt_vectors.c"
+ 
+Building file: "../sysfunc.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="sysfunc.d_raw"  "../sysfunc.c"
+"../sysfunc.c", line 24: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../sysfunc.c", line 33: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../sysfunc.c", line 33: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../sysfunc.c", line 34: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../sysfunc.c", line 34: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+"../sysfunc.c", line 40: remark #1544-D: (ULP 13.1) Detected loop counting up. Recommend loops count down as detecting zeros is easier
+"../sysfunc.c", line 40: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+Finished building: "../sysfunc.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 13: error #20: identifier "WDTPSW" is undefined
+1 error detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 8: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 8: error #148: declaration is incompatible with "volatile unsigned int WDTCTL" (declared at line 196 of "C:\TI\ccs930\ccs\ccs_base\msp430\include\msp430f1611.h")
+"../main.c", line 8: error #20: identifier "WDTPSW" is undefined
+"../main.c", line 8: remark #1535-D: (ULP 8.1) variable "WDTCTL" is used as a constant. Recommend declaring variable as either 'static const' or 'const'
+2 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+Finished building: "../main.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+"../main.c", line 17: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+Finished building: "../main.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+"../main.c", line 17: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+Finished building: "../main.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+"../main.c", line 29: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+Finished building: "../main.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+"../main.c", line 25: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+Finished building: "../main.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+gmake: Nothing to be done for 'all'.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+"../main.c", line 26: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+Finished building: "../main.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 11: error #171: expected a declaration
+"../main.c", line 42: warning #12-D: parsing restarts here after previous syntax error
+"../main.c", line 43: error #80: expected a type specifier
+"../main.c", line 43: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 43: error #148: declaration is incompatible with "void LCD_WriteData(char)" (declared at line 66 of "..\function_prototype.h")
+"../main.c", line 44: error #80: expected a type specifier
+"../main.c", line 44: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 44: error #148: declaration is incompatible with "void LCD_WriteCommand(char)" (declared at line 67 of "..\function_prototype.h")
+"../main.c", line 45: error #80: expected a type specifier
+"../main.c", line 45: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 46: error #80: expected a type specifier
+"../main.c", line 46: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 47: error #80: expected a type specifier
+"../main.c", line 47: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #148: declaration is incompatible with "void LCD_set_pos(byte, byte)" (declared at line 59 of "..\function_prototype.h")
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #148: declaration is incompatible with "void LCD_set_cursor(byte)" (declared at line 62 of "..\function_prototype.h")
+"../main.c", line 50: error #80: expected a type specifier
+"../main.c", line 50: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 52: error #171: expected a declaration
+"../main.c", line 53: error #171: expected a declaration
+16 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 11: error #171: expected a declaration
+"../main.c", line 42: warning #12-D: parsing restarts here after previous syntax error
+"../main.c", line 43: error #80: expected a type specifier
+"../main.c", line 43: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 43: error #148: declaration is incompatible with "void LCD_WriteData(char)" (declared at line 66 of "..\function_prototype.h")
+"../main.c", line 44: error #80: expected a type specifier
+"../main.c", line 44: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 44: error #148: declaration is incompatible with "void LCD_WriteCommand(char)" (declared at line 67 of "..\function_prototype.h")
+"../main.c", line 45: error #80: expected a type specifier
+"../main.c", line 45: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 46: error #80: expected a type specifier
+"../main.c", line 46: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 47: error #80: expected a type specifier
+"../main.c", line 47: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #148: declaration is incompatible with "void LCD_set_pos(byte, byte)" (declared at line 59 of "..\function_prototype.h")
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #148: declaration is incompatible with "void LCD_set_cursor(byte)" (declared at line 62 of "..\function_prototype.h")
+"../main.c", line 50: error #80: expected a type specifier
+"../main.c", line 50: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 52: error #171: expected a declaration
+"../main.c", line 53: error #171: expected a declaration
+16 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 11: error #171: expected a declaration
+"../main.c", line 42: warning #12-D: parsing restarts here after previous syntax error
+"../main.c", line 43: error #80: expected a type specifier
+"../main.c", line 43: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 43: error #148: declaration is incompatible with "void LCD_WriteData(char)" (declared at line 66 of "..\function_prototype.h")
+"../main.c", line 44: error #80: expected a type specifier
+"../main.c", line 44: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 44: error #148: declaration is incompatible with "void LCD_WriteCommand(char)" (declared at line 67 of "..\function_prototype.h")
+"../main.c", line 45: error #80: expected a type specifier
+"../main.c", line 45: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 46: error #80: expected a type specifier
+"../main.c", line 46: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 47: error #80: expected a type specifier
+"../main.c", line 47: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #148: declaration is incompatible with "void LCD_set_pos(byte, byte)" (declared at line 59 of "..\function_prototype.h")
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #148: declaration is incompatible with "void LCD_set_cursor(byte)" (declared at line 62 of "..\function_prototype.h")
+"../main.c", line 50: error #80: expected a type specifier
+"../main.c", line 50: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 52: error #171: expected a declaration
+"../main.c", line 53: error #171: expected a declaration
+16 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 11: error #171: expected a declaration
+"../main.c", line 42: warning #12-D: parsing restarts here after previous syntax error
+"../main.c", line 43: error #80: expected a type specifier
+"../main.c", line 43: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 43: error #148: declaration is incompatible with "void LCD_WriteData(char)" (declared at line 66 of "..\function_prototype.h")
+"../main.c", line 44: error #80: expected a type specifier
+"../main.c", line 44: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 44: error #148: declaration is incompatible with "void LCD_WriteCommand(char)" (declared at line 67 of "..\function_prototype.h")
+"../main.c", line 45: error #80: expected a type specifier
+"../main.c", line 45: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 46: error #80: expected a type specifier
+"../main.c", line 46: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 47: error #80: expected a type specifier
+"../main.c", line 47: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #148: declaration is incompatible with "void LCD_set_pos(byte, byte)" (declared at line 59 of "..\function_prototype.h")
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #148: declaration is incompatible with "void LCD_set_cursor(byte)" (declared at line 62 of "..\function_prototype.h")
+"../main.c", line 50: error #80: expected a type specifier
+"../main.c", line 50: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 52: error #171: expected a declaration
+"../main.c", line 53: error #171: expected a declaration
+16 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 11: error #171: expected a declaration
+"../main.c", line 42: warning #12-D: parsing restarts here after previous syntax error
+"../main.c", line 43: error #80: expected a type specifier
+"../main.c", line 43: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 43: error #148: declaration is incompatible with "void LCD_WriteData(char)" (declared at line 66 of "..\function_prototype.h")
+"../main.c", line 44: error #80: expected a type specifier
+"../main.c", line 44: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 44: error #148: declaration is incompatible with "void LCD_WriteCommand(char)" (declared at line 67 of "..\function_prototype.h")
+"../main.c", line 45: error #80: expected a type specifier
+"../main.c", line 45: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 46: error #80: expected a type specifier
+"../main.c", line 46: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 47: error #80: expected a type specifier
+"../main.c", line 47: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #148: declaration is incompatible with "void LCD_set_pos(byte, byte)" (declared at line 59 of "..\function_prototype.h")
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #148: declaration is incompatible with "void LCD_set_cursor(byte)" (declared at line 62 of "..\function_prototype.h")
+"../main.c", line 50: error #80: expected a type specifier
+"../main.c", line 50: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 52: error #171: expected a declaration
+"../main.c", line 53: error #171: expected a declaration
+16 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 11: error #171: expected a declaration
+"../main.c", line 42: warning #12-D: parsing restarts here after previous syntax error
+"../main.c", line 43: error #80: expected a type specifier
+"../main.c", line 43: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 43: error #148: declaration is incompatible with "void LCD_WriteData(char)" (declared at line 66 of "..\function_prototype.h")
+"../main.c", line 44: error #80: expected a type specifier
+"../main.c", line 44: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 44: error #148: declaration is incompatible with "void LCD_WriteCommand(char)" (declared at line 67 of "..\function_prototype.h")
+"../main.c", line 45: error #80: expected a type specifier
+"../main.c", line 45: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 46: error #80: expected a type specifier
+"../main.c", line 46: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 47: error #80: expected a type specifier
+"../main.c", line 47: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #148: declaration is incompatible with "void LCD_set_pos(byte, byte)" (declared at line 59 of "..\function_prototype.h")
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #148: declaration is incompatible with "void LCD_set_cursor(byte)" (declared at line 62 of "..\function_prototype.h")
+"../main.c", line 50: error #80: expected a type specifier
+"../main.c", line 50: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 52: error #171: expected a declaration
+"../main.c", line 53: error #171: expected a declaration
+16 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 11: error #171: expected a declaration
+"../main.c", line 42: warning #12-D: parsing restarts here after previous syntax error
+"../main.c", line 43: error #80: expected a type specifier
+"../main.c", line 43: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 43: error #148: declaration is incompatible with "void LCD_WriteCommand(char)" (declared at line 67 of "..\function_prototype.h")
+"../main.c", line 44: error #80: expected a type specifier
+"../main.c", line 44: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 44: error #148: declaration is incompatible with "void LCD_WriteData(char)" (declared at line 66 of "..\function_prototype.h")
+"../main.c", line 45: error #80: expected a type specifier
+"../main.c", line 45: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 46: error #80: expected a type specifier
+"../main.c", line 46: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 47: error #80: expected a type specifier
+"../main.c", line 47: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #148: declaration is incompatible with "void LCD_set_pos(byte, byte)" (declared at line 59 of "..\function_prototype.h")
+"../main.c", line 50: error #80: expected a type specifier
+"../main.c", line 50: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 50: error #148: declaration is incompatible with "void LCD_set_cursor(byte)" (declared at line 62 of "..\function_prototype.h")
+"../main.c", line 51: error #80: expected a type specifier
+"../main.c", line 51: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 53: error #171: expected a declaration
+"../main.c", line 54: error #171: expected a declaration
+17 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+ 
+>> Compilation failure
+subdir_rules.mk:9: recipe for target 'main.obj' failed
+"../main.c", line 11: error #171: expected a declaration
+"../main.c", line 42: warning #12-D: parsing restarts here after previous syntax error
+"../main.c", line 43: error #80: expected a type specifier
+"../main.c", line 43: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 43: error #148: declaration is incompatible with "void LCD_WriteCommand(char)" (declared at line 67 of "..\function_prototype.h")
+"../main.c", line 44: error #80: expected a type specifier
+"../main.c", line 44: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 44: error #148: declaration is incompatible with "void LCD_WriteData(char)" (declared at line 66 of "..\function_prototype.h")
+"../main.c", line 45: error #80: expected a type specifier
+"../main.c", line 45: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 46: error #80: expected a type specifier
+"../main.c", line 46: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 47: error #80: expected a type specifier
+"../main.c", line 47: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 48: error #80: expected a type specifier
+"../main.c", line 48: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: error #80: expected a type specifier
+"../main.c", line 49: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 49: error #148: declaration is incompatible with "void LCD_set_pos(byte, byte)" (declared at line 59 of "..\function_prototype.h")
+"../main.c", line 50: error #80: expected a type specifier
+"../main.c", line 50: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 50: error #148: declaration is incompatible with "void LCD_set_cursor(byte)" (declared at line 62 of "..\function_prototype.h")
+"../main.c", line 51: error #80: expected a type specifier
+"../main.c", line 51: warning #78-D: this declaration has no storage class or type specifier
+"../main.c", line 53: error #171: expected a declaration
+"../main.c", line 54: error #171: expected a declaration
+17 errors detected in the compilation of "../main.c".
+gmake: *** [main.obj] Error 1
+gmake: Target 'all' not remade because of errors.
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+Building file: "../main.c"
+Invoking: MSP430 Compiler
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/ccs_base/msp430/include" --include_path="C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi --preproc_with_compile --preproc_dependency="main.d_raw"  "../main.c"
+"../main.c", line 45: remark #1527-D: (ULP 2.1) Detected SW delay loop using empty loop. Recommend using a timer module instead
+Finished building: "../main.c"
+ 
+Building target: "MSP430-LCD.out"
+Invoking: MSP430 Linker
+"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/bin/cl430" -vmsp -Ooff --use_hw_mpy=16 --advice:power="all" --define=__MSP430F1611__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --abi=eabi -z -m"MSP430-LCD.map" --heap_size=80 --stack_size=80 --cinit_hold_wdt=on -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/ccs_base/msp430/include" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/lib" -i"C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="MSP430-LCD_linkInfo.xml" --use_hw_mpy=16 --rom_model -o "MSP430-LCD.out" "./I2C.obj" "./keys.obj" "./lcd.obj" "./leds.obj" "./main.obj" "./msp430_initialize_unused_interrrupt_vectors.obj" "./sysfunc.obj" "../lnk_msp430f1611.cmd"  -llibc.a 
+<Linking>
+remark #10371-D: (ULP 1.1) Detected no uses of low power mode state changing instructions
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 1 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 2 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 5 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+remark #10372-D: (ULP 4.1) Detected uninitialized Port 6 in this project. Recommend initializing all unused ports to eliminate wasted current consumption on unused pins.
+Finished building target: "MSP430-LCD.out"
+ 
+
+**** Build Finished ****
+
+**** Build of configuration Debug for project MSP430-LCD ****
+
+"C:\\TI\\ccs930\\ccs\\utils\\bin\\gmake" -k all 
+ 
+gmake: Nothing to be done for 'all'.
+
+**** Build Finished ****

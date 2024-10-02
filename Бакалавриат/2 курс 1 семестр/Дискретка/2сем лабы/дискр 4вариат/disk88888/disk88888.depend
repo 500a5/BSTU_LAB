@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1513365358 source:c:\users\hystou\desktop\”чЄбка\2 r\дискр\disk88888\dijkstra.cpp
+	"dijkstra.h"
+
+1513365234 c:\users\hystou\desktop\”чЄбка\2 r\дискр\disk88888\dijkstra.h
+	<stdio.h>
+	<stdlib.h>
+

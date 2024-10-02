@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1482076504 source:d:\-=documents=-\dropbox\sd_lb7\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tree.c"
+
+1482076069 d:\-=documents=-\dropbox\sd_lb7\tree.c
+	"tree.h"
+
+1482061766 d:\-=documents=-\dropbox\sd_lb7\tree.h
+	<stdlib.h>
+	<stdio.h>
+
+1512931707 source:c:\users\hystou\desktop\гїИсър\sd_lb7\main.c
+	<stdio.h>
+	<stdlib.h>
+	"tree.c"
+
+1512930605 c:\users\hystou\desktop\гїИсър\sd_lb7\tree.c
+	"tree.h"
+	<stdio.h>
+	<stdlib.h>
+
+1482061766 c:\users\hystou\desktop\гїИсър\sd_lb7\tree.h
+	<stdlib.h>
+	<stdio.h>
+

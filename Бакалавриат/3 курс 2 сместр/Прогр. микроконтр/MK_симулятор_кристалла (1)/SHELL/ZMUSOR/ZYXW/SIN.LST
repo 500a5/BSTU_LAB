@@ -1,0 +1,265 @@
+MCS-51 MACRO ASSEMBLER    SIN                                                                       12/26/;1   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\SIM8052\SIN.OBJ
+ASSEMBLER INVOKED BY:  C:\SIM8052\ASM51.EXE C:\SIM8052\SIN.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 02818A            2     jmp begin
+000B                   3     org 000bh
+000B 028232            4     jmp tim1
+8100                   5     org 8100h
+                       6     ;20.54
+                       7     ;42.26
+                       8     PAUSA:
+8100 75F002            9     mov b,#02
+8103 84               10     div ab
+8104 F514             11     mov 14h,a
+8106 B40003           12     cjne a,#00h,ee
+8109 02811B           13     jmp ee2
+                      14     ee:
+810C 75100A           15     PAUSA2: mov 10h,#10d
+810F 751162           16     PAUSA3: mov 11h,#98d
+8112 D511FD           17     PAUSA4: djnz 11h,PAUSA4
+8115 D510F7           18     djnz 10h,PAUSA3
+8118 D514F1           19     djnz 14h,PAUSA2
+                      20     ;pausa
+                      21     ee2:
+811B 22               22     ret
+                      23     ;+++++++++++++++
+                      24     vivod1:
+811C EB               25     MOV a,r3
+811D 75F002           26     mov b,#02h
+8120 A4               27     mul ab
+                      28     ;mov a,b
+8121 7B00             29     mov r3,#00h
+8123 900002           30     mov dptr,#0002h
+8126 75F00A           31     mov b,#10d
+8129 84               32     div ab
+812A E5F0             33     mov a,b
+812C 540F             34     ANL A,#00001111b
+812E D2E5             35     setb acc.5
+8130 F0               36     movx @dptr,a
+8131 22               37     ret
+                      38        
+                      39     vivod2:
+8132 EB               40     MOV a,r3
+8133 75F002           41     mov b,#02h
+8136 A4               42     mul ab
+                      43     ;mov a,b
+8137 75F00A           44     mov b,#10d
+813A 84               45     div ab
+813B 7B00             46     mov r3,#00h
+813D 900002           47     mov dptr,#0002h
+8140 540F             48     ANL A,#00001111b
+8142 D2E4             49     setb acc.4
+8144 F0               50     movx @dptr,a
+MCS-51 MACRO ASSEMBLER    SIN                                                                       12/26/;1   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8145 22               51     ret
+                      52     ;+++++++++++++++
+                      53     per1:
+8146 751F00           54             mov 1fh,#00d
+8149 751E14           55             mov 1eh,#20d
+814C 751D24           56             mov 1dh,#36d
+814F 751C34           57             mov 1ch,#52d
+8152 751B40           58             mov 1bh,#64d
+8155 751A4C           59             mov 1ah,#76d
+8158 751954           60             mov 19h,#84d
+815B 75185C           61             mov 18h,#92d
+815E 751760           62             mov 17h,#96d
+8161 751662           63             mov 16h,#98d
+8164 751564           64             mov 15h,#100d
+8167 22               65     ret
+                      66     per2:
+8168 751F00           67             mov 1fh,#00d
+816B 751E0A           68             mov 1eh,#10d
+816E 751D12           69             mov 1dh,#18d
+8171 751C1A           70             mov 1ch,#26d
+8174 751B20           71             mov 1bh,#32d
+8177 751A26           72             mov 1ah,#38d
+817A 75192A           73             mov 19h,#42d
+817D 75182E           74             mov 18h,#46d
+8180 751730           75             mov 17h,#48d
+8183 751631           76             mov 16h,#49d
+8186 751532           77             mov 15h,#50d
+8189 22               78     ret
+                      79     begin:
+818A C2D4             80     clr psw.4
+818C C2D3             81     clr psw.3               
+818E 900003           82     mov dptr,#03h
+8191 7482             83     mov a,#82h
+8193 F0               84     movx @dptr,a   
+8194 D2AF             85             setb ie.7
+8196 D2A9             86             setb ie.1    
+8198 758905           87                     mov TMOD,#00000101b 
+819B 758C23           88                     mov th0,#35d;255
+819E 758A82           89                     mov TL0,#82h
+81A1 7928             90             mov r1,#040d    
+81A3 7A3C             91             mov r2,#03ch   
+                      92             
+81A5 E9               93             mov a,r1
+81A6 75F004           94             mov b,#04h
+81A9 84               95             div ab
+81AA 75F001           96             mov b,#01h
+81AD 84               97             div ab
+81AE F8               98             mov r0,a
+81AF FC               99             mov r4,a
+81B0 D28C            100     setb TCON.4 
+                     101     
+81B2 E51C            102     mov a,28d
+                     103     ;mov dptr,#0002h
+81B4 75F00A          104     mov b,#10d
+81B7 84              105     div ab
+MCS-51 MACRO ASSEMBLER    SIN                                                                       12/26/;1   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+81B8 D2E6            106     setb acc.6
+81BA F0              107     movx @dptr,a
+81BB 7AFF            108     mov r2,#0ffh
+81BD 79FF            109     zad2:mov r1,#0ffh
+                     110     za:
+81BF D9FE            111     djnz r1,za
+81C1 DAFA            112     djnz r2,zad2
+                     113     
+                     114     period:
+81C3 0D              115     inc r5
+81C4 7512A0          116     mov 12h,#10100000b
+                     117     ;mov 13h,#10010000b
+81C7 751360          118     mov 13h,#01100000b
+81CA 3146            119     call per1
+81CC 0281D7          120     jmp start
+                     121     period2:
+81CF 751250          122     mov 12h,#01010000b
+81D2 751360          123     mov 13h,#01100000b 
+81D5 3168            124     call per2  
+                     125     start:    
+81D7 781F            126     mov r0,#1fh
+                     127     first1:
+81D9 18              128     dec r0
+81DA 7E0A            129     mov r6,#0ah
+                     130     L1:
+81DC E6              131     mov a,@r0
+81DD 851290          132     mov p1,12h
+81E0 128100          133     lcall PAUSA
+                     134     ;\------/
+                     135     
+81E3 E6              136     mov a,@r0
+81E4 9464            137     subb a,#100d
+81E6 F4              138     cpl a
+81E7 04              139     inc a
+                     140       
+81E8 851390          141     mov p1,13h
+81EB 128100          142     lcall PAUSA
+81EE BE0603          143     cjne r6,#06h,tyu
+81F1 12811C          144     lcall vivod1
+                     145     tyu:
+81F4 DEE6            146     djnz R6,L1
+81F6 128132          147     lcall vivod2
+81F9 B815DD          148     cjne r0,#15h,first1
+81FC 028203          149     jmp fit
+81FF 80CE            150     w1:jmp period2
+8201 80C0            151     w2:jmp period
+                     152     
+                     153     fit:
+8203 7815            154     mov r0,#15h
+                     155     
+                     156     first2:
+8205 758301          157     mov dph,#01h
+8208 7E0A            158     mov r6,#0ah
+820A 08              159     inc r0
+                     160     L2:
+MCS-51 MACRO ASSEMBLER    SIN                                                                       12/26/;1   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     161     
+820B E6              162     mov a,@r0
+820C 851290          163     mov p1,12h
+820F 128100          164     lcall PAUSA
+                     165     
+                     166     
+8212 E6              167     mov a,@r0
+8213 9464            168     subb a,#100d    ;b{whqk^el t2
+8215 F4              169     cpl a
+8216 04              170     inc a
+                     171     
+8217 851390          172     mov p1,13h              ;meqhllerphwm{i g`jnm(10010000)
+821A 128100          173     lcall PAUSA
+821D BE0603          174     cjne r6,#06h,tyz
+8220 12811C          175     lcall vivod1
+                     176     tyz:
+8223 DEE6            177     djnz r6,L2
+8225 128132          178     lcall vivod2
+8228 B81FDA          179     cjne r0,#1fh,first2
+                     180     ;******
+822B E512            181     mov a,12h
+822D 20E7CF          182     jb acc.7,w1
+8230 80CF            183     jmp w2
+                     184     
+8232 0B              185             tim1:  inc r3
+8233 758C23          186             mov th0,#35d;255
+8236 758A82          187             mov tl0,#82h
+8239 32              188             reti
+                     189     
+                     190     end
+MCS-51 MACRO ASSEMBLER    SIN                                                                       12/26/;1   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . .  D ADDR    00E0H   A       
+B. . . . .  D ADDR    00F0H   A       
+BEGIN. . .  C ADDR    818AH   A       
+DPH. . . .  D ADDR    0083H   A       
+EE . . . .  C ADDR    810CH   A       
+EE2. . . .  C ADDR    811BH   A       
+FIRST1 . .  C ADDR    81D9H   A       
+FIRST2 . .  C ADDR    8205H   A       
+FIT. . . .  C ADDR    8203H   A       
+IE . . . .  D ADDR    00A8H   A       
+L1 . . . .  C ADDR    81DCH   A       
+L2 . . . .  C ADDR    820BH   A       
+P1 . . . .  D ADDR    0090H   A       
+PAUSA. . .  C ADDR    8100H   A       
+PAUSA2 . .  C ADDR    810CH   A       
+PAUSA3 . .  C ADDR    810FH   A       
+PAUSA4 . .  C ADDR    8112H   A       
+PER1 . . .  C ADDR    8146H   A       
+PER2 . . .  C ADDR    8168H   A       
+PERIOD . .  C ADDR    81C3H   A       
+PERIOD2. .  C ADDR    81CFH   A       
+PSW. . . .  D ADDR    00D0H   A       
+START. . .  C ADDR    81D7H   A       
+TCON . . .  D ADDR    0088H   A       
+TH0. . . .  D ADDR    008CH   A       
+TIM1 . . .  C ADDR    8232H   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TYU. . . .  C ADDR    81F4H   A       
+TYZ. . . .  C ADDR    8223H   A       
+VIVOD1 . .  C ADDR    811CH   A       
+VIVOD2 . .  C ADDR    8132H   A       
+W1 . . . .  C ADDR    81FFH   A       
+W2 . . . .  C ADDR    8201H   A       
+ZA . . . .  C ADDR    81BFH   A       
+ZAD2 . . .  C ADDR    81BDH   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

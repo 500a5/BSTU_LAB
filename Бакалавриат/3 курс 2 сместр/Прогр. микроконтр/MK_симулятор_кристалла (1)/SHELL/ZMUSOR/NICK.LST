@@ -1,0 +1,267 @@
+MCS-51 MACRO ASSEMBLER    NICK                                                                      12/24/;2   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN NICK.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE NICK.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+  002F                 1     start_tormoz_length EQU 2Fh
+  002E                 2     start_imp_length EQU 2Eh
+  REG                  3     sector EQU R7                           ;ychastok
+  002D                 4     kol_obor EQU 2Dh
+  REG                  5     time_counter1 EQU R4
+  REG                  6     time_counter2 EQU R6
+  002C                 7     speed EQU 2Ch
+                       8     
+0000                   9     ORG 00h
+0000 028100           10     JMP START
+                      11     
+000B                  12     org 000BH
+000B 028149           13     jmp COUNTER
+                      14     
+001B                  15     org 001Bh
+001B 02814F           16     jmp TIMER
+                      17     
+8100                  18     ORG 8100h
+                      19     
+                      20     START:
+8100 900003           21                     mov DPTR,#3
+8103 7482             22                     mov A,#82h
+8105 F0               23                     movx @DPTR,A
+8106 900002           24                     mov DPTR, #2
+                      25     
+8109 7D0F             26                     mov R5, #15;m`w.dkhm` hlosk|q`
+810B 8D2E             27                     mov start_imp_length, R5
+810D 74FF             28                     mov A, #255
+810F 9D               29                     subb A, R5
+8110 F8               30                     mov R0, A ;counter_space
+8111 FB               31                     mov R3, A ;counter_decrement
+8112 F52F             32                     mov start_tormoz_length, A
+                      33     
+8114 7A01             34                     mov R2, #1 ;counter_impuls
+8116 752D00           35                     mov kol_obor, #0
+                      36     
+8119 7F00             37             mov sector, #0
+                      38     
+811B 758927           39             mov TMOD,#00100111b
+811E 75A89A           40             mov IE, #10011010b ;razresheniye preryvaniya
+                      41     
+8121 D295             42             setb P1.5
+8123 D297             43             setb P1.7
+                      44     
+8125 C294             45             clr P1.4
+8127 C296             46             clr P1.6
+                      47     
+8129 758C05           48             mov TH0, #5
+812C D28E             49             setb TR1
+812E 758A05           50             mov TL0, #5
+MCS-51 MACRO ASSEMBLER    NICK                                                                      12/24/;2   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8131 D28C             51             setb TR0
+                      52     
+                      53     vivod:
+8133 E52C             54             mov A, speed
+8135 75F00A           55             mov B,#10
+8138 84               56             div AB
+                      57     
+8139 2440             58             add A, #01000000b
+813B F0               59             movx @DPTR, A
+813C 00               60             nop
+813D 00               61             nop
+813E E5F0             62             mov A, B
+8140 2480             63             add A, #10000000b
+8142 F0               64             movx @DPTR, A
+8143 00               65             nop
+8144 00               66             nop
+8145 80EC             67             jmp vivod
+                      68     
+8147 80FE             69             jmp $
+                      70     
+                      71     COUNTER:
+8149 052D             72             inc kol_obor
+814B 758A05           73             mov TL0, #5
+814E 32               74     RETI
+                      75     
+                      76     TIMER:
+814F 0C               77             inc time_counter1
+8150 BCFF15           78             cjne time_counter1,#255,label_select
+8153 0E               79             inc time_counter2
+8154 7C00             80             mov time_counter1, #0
+8156 BE100F           81             cjne time_counter2,#16,label_select
+8159 7E00             82             mov time_counter2,#0
+815B F9               83             mov R1, A
+815C E52D             84             mov A,kol_obor
+815E 75F002           85             mov B, #2
+8161 A4               86             mul AB
+8162 F52C             87             mov speed, A
+8164 752D00           88             mov kol_obor,#0
+8167 E9               89             mov A, R1
+                      90     
+                      91             label_select:
+8168 BF0003           92             cjne sector,#0,label1
+816B 12817E           93             call razgon
+                      94     
+                      95             label1:
+816E BF0103           96             cjne sector,#1,label2
+8171 1281A4           97             call constant
+                      98     
+                      99             label2:
+8174 BF0203          100             cjne sector,#2,label3
+8177 1281C1          101             call tormoz
+                     102     
+                     103             label3:
+817A 758C05          104             mov TH0, #5
+817D 32              105     RETI
+MCS-51 MACRO ASSEMBLER    NICK                                                                      12/24/;2   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     106     
+                     107     razgon:
+817E 20960E          108             jb P1.6,INTERVAL
+8181 1A              109             dec R2
+8182 BA001E          110             cjne R2,#0,NEXT
+8185 0D              111             inc R5
+8186 ED              112             mov A, R5
+8187 FA              113             mov R2, A
+8188 D296            114             setb P1.6
+818A C297            115             clr P1.7
+818C 0281A3          116             jmp NEXT
+                     117     
+                     118             INTERVAL:
+818F 18              119             dec R0
+8190 B80010          120             cjne R0,#0,NEXT
+8193 1B              121             dec R3
+8194 EB              122             mov A,R3
+8195 F8              123             mov R0,A
+                     124     
+8196 D297            125             setb P1.7
+8198 C296            126             clr P1.6
+                     127     
+819A BB0006          128             cjne R3,#0,NEXT
+819D 7F01            129             mov R7,#1
+                     130     
+819F 78FF            131             mov R0, #255
+81A1 7BFF            132             mov R3, #255
+                     133     
+                     134     NEXT:
+81A3 22              135     RET
+                     136     
+                     137     constant:
+81A4 D295            138             setb P1.5
+81A6 D297            139             setb P1.7
+81A8 C294            140             clr P1.4
+81AA C296            141             clr P1.6
+                     142     
+81AC 18              143             dec R0
+81AD B80010          144             cjne R0,#0,const_end
+81B0 1B              145             dec R3
+81B1 EB              146             mov A,R3
+81B2 F8              147             mov R0,A
+                     148     
+81B3 BB000A          149             cjne R3,#0,const_end
+81B6 7F02            150             mov R7,#2
+                     151     
+81B8 78FE            152             mov R0, #254
+81BA 7AFF            153             mov R2, #255
+81BC 7BFF            154             mov R3, #255
+81BE 7DFF            155             mov R5, #255
+                     156     const_end:
+81C0 22              157     RET
+                     158     
+                     159     tormoz:
+                     160     
+MCS-51 MACRO ASSEMBLER    NICK                                                                      12/24/;2   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+81C1 20960E          161     jb P1.6,INTERVAL_t
+                     162     
+81C4 1A              163             dec R2
+81C5 BA0F28          164             cjne R2,#15,tormoz_end
+81C8 1D              165             dec R5
+81C9 ED              166             mov A, R5
+81CA FA              167             mov R2, A
+81CB D296            168             setb P1.6
+81CD C297            169               clr P1.7
+81CF 0281F0          170             jmp tormoz_end
+                     171     
+                     172             INTERVAL_t:
+81D2 08              173             inc R0
+81D3 B8FF1A          174             cjne R0,#255,tormoz_end
+81D6 1B              175             dec R3
+81D7 EB              176             mov A,R3
+81D8 F8              177             mov R0,A
+                     178     
+81D9 D297            179             setb P1.7
+81DB C296            180             clr P1.6
+                     181     
+81DD BB0F10          182             cjne R3,#15,tormoz_end
+81E0 7F00            183             mov R7,#0
+                     184     
+81E2 C294            185             clr P1.4
+81E4 C296            186             clr P1.6
+81E6 D295            187             setb P1.5
+81E8 D297            188             setb P1.7
+                     189     
+                     190     
+81EA 78FF            191             mov R0, #255
+81EC 7A32            192             mov R2, #50
+81EE 7BFF            193             mov R3, #255
+                     194     tormoz_end:
+81F0 22              195     RET
+                     196     
+                     197     END
+MCS-51 MACRO ASSEMBLER    NICK                                                                      12/24/;2   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E              T Y P E   V A L U E       A T T R I B U T E S
+
+B . . . . . . . . .  D ADDR    00F0H   A       
+CONST_END . . . . .  C ADDR    81C0H   A       
+CONSTANT. . . . . .  C ADDR    81A4H   A       
+COUNTER . . . . . .  C ADDR    8149H   A       
+IE. . . . . . . . .  D ADDR    00A8H   A       
+INTERVAL_T. . . . .  C ADDR    81D2H   A       
+INTERVAL. . . . . .  C ADDR    818FH   A       
+KOL_OBOR. . . . . .    NUMB    002DH   A       
+LABEL_SELECT. . . .  C ADDR    8168H   A       
+LABEL1. . . . . . .  C ADDR    816EH   A       
+LABEL2. . . . . . .  C ADDR    8174H   A       
+LABEL3. . . . . . .  C ADDR    817AH   A       
+NEXT. . . . . . . .  C ADDR    81A3H   A       
+P1. . . . . . . . .  D ADDR    0090H   A       
+RAZGON. . . . . . .  C ADDR    817EH   A       
+SECTOR. . . . . . .    REG     R7              
+SPEED . . . . . . .    NUMB    002CH   A       
+START_IMP_LENGTH. .    NUMB    002EH   A       
+START_TORMOZ_LENGTH    NUMB    002FH   A       
+START . . . . . . .  C ADDR    8100H   A       
+TH0 . . . . . . . .  D ADDR    008CH   A       
+TIME_COUNTER1 . . .    REG     R4              
+TIME_COUNTER2 . . .    REG     R6              
+TIMER . . . . . . .  C ADDR    814FH   A       
+TL0 . . . . . . . .  D ADDR    008AH   A       
+TMOD. . . . . . . .  D ADDR    0089H   A       
+TORMOZ_END. . . . .  C ADDR    81F0H   A       
+TORMOZ. . . . . . .  C ADDR    81C1H   A       
+TR0 . . . . . . . .  B ADDR    0088H.4 A       
+TR1 . . . . . . . .  B ADDR    0088H.6 A       
+VIVOD . . . . . . .  C ADDR    8133H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

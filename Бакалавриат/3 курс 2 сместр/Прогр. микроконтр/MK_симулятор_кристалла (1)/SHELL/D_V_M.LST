@@ -1,0 +1,253 @@
+MCS-51 MACRO ASSEMBLER    D_V_M                                                                     11/10/;0   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\SHELL\D_V_M.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE C:\SHELL\D_V_M.TXT
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; PEREMENNIE
+  0090                 2     MK_ADC BIT P1.0                 ;SIGNAL GASHENIE/PREOBRAZOVANIE
+  0030                 3     INF_ADC DATA 30h        ;HRANITCA PRINYATOE OT ADC CHISLO 
+  0091                 4     ADC_MK BIT P1.1         ;SIGNAL GOTOV
+  0031                 5     SOTNI DATA 31h          ;SOTNI VIVODIMOGO CHISLA
+  0032                 6     DES DATA 32h                    ;DESYATKI
+  0033                 7     EDIN DATA 33h           ;EDINICI
+  2710                 8     TIME EQU 10000          ;10ms
+  0082                 9     INIT_PPI EQU 10000010b  ;A-VIVOD, B-VVOD, C-VIVOD(INDIKACIA) DLYA BB55
+  0010                10     INIT_KN EQU 0010000b    ;VIBOR 2-OGO KOMMUTATORA NAPRYASHGENIA I 1 PORT
+  0000                11     P_A EQU 0               ;ADDRESS PORTA A V BB55
+  0001                12     P_B EQU 1               ;ADDRESS PORTA B
+  0002                13     P_C EQU 2               ;ADDRESS PORTA C
+  0003                14     RWCU EQU 3              ;ADDRESS UPRAV. SLOVA BB55
+  0034                15     C_TIME0 DATA 34h        ;YACHEIKA PAMATI - CONSTANTI TAIMERA
+  000A                16     TC_F_N EQU 10           ;TAIMERNAYA CONSTANTA DLYA OTRICATELNIH CHISEL
+  0035                17     N_P DATA 35h            ;SHETHIK DLYA POL. CHISEL
+  0036                18     N_N DATA 36h            ;OTRICAT. CHISEL
+  0003                19     C_F_P EQU 3             ;3*200ms
+  0002                20     C_F_N EQU 2             ;2*300ms
+  007F                21     B_Z BIT 2Fh.7           ;FLAG OTRICATELNOGO CHISLA
+                      22     
+0000                  23     ORG 0h
+0000 028100           24     JMP START
+                      25     
+8100                  26     ORG 8100h
+                      27     START:
+8100 7482             28             MOV A,#INIT_PPI
+8102 758203           29             MOV DPL,#RWCU                   ;NASTROIKA BB55 NA NEOBHODIMYI REZHIM
+8105 F0               30             MOVX @DPTR,A
+8106 7410             31             MOV A,#INIT_KN
+8108 758200           32             MOV DPL,#P_A                    ;NASTROIKA KOMUTATOROV NAPRYASHGENIA
+810B F0               33             MOVX @DPTR,A            
+810C E589             34             MOV A,TMOD
+810E 4401             35             ORL A,#0000001b 
+8110 F589             36             MOV TMOD,A                      ;T/C0 - 16 BITNUYI TAIMER (T/C1 NE TROGHEAM, T.K. O
+                             N ZANAT NA RXD,TXD
+8112 758CD8           37             MOV TH0,#HIGH(NOT(TIME-1))
+8115 758AF0           38             MOV TL0,#LOW(NOT(TIME-1))
+                      39             GO:
+8118 128123           40                     CALL ADC
+811B 2091FD           41                     JB ADC_MK,$     ;ZHDEM 30mks - PREOBRAZOVANIE "ADC"
+811E 12812C           42                     CALL OBSCH
+8121 80F5             43                     SJMP GO
+                      44     
+                      45     ;PODPROGRAMMA STARTA "ADC"
+                      46     ADC:
+8123 D290             47             SETB MK_ADC             ;SBROS "ADC"
+8125 00               48             NOP
+8126 00               49             NOP
+MCS-51 MACRO ASSEMBLER    D_V_M                                                                     11/10/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8127 00               50             NOP
+8128 00               51             NOP
+8129 C290             52             CLR MK_ADC               ;NACHAT' PREOBRAZOVANIE
+812B 22               53     RET
+                      54     
+                      55     ;PODPROGRAMA ZAPUSKAYUSHUASA PO SINGNALY GOTOV NA LINIY P1.1
+                      56     OBSCH:
+812C 758201           57             MOV DPL,#P_B            ;POLYCHAEM DANNIE S "ADC" -
+812F E0               58             MOVX A,@DPTR            ; - CHEREZ PORT B BB55
+8130 F530             59             MOV INF_ADC,A           ;ZAPIS V YACHEIKY PAMATI PRINYATOGO CHISLA
+8132 C3               60             CLR C
+8133 33               61             RLC A                   ;SDVIG A VLEVO DLAYA OPREDELENIE ZNAKA CHISLA PO - 
+8134 B3               62             CPL C                   ;INVERTIRUEM, T.K. OY(OPAM)-INV. => 1-POLOSHITEL., A 0-OTRI
+                             CAT.
+8135 30D70F           63             JNB CY,OTRIC            ;PEREHOD NA OTRICAT VETKY
+                      64     ;POLOSHITELNIE-----------------------------------------------------------------------------
+                             ---  
+8138 C27F             65             CLR B_Z
+813A 12815F           66             CALL RASCHET
+813D 753503           67             MOV N_P,#C_F_P
+                      68     CYCLE1:
+8140 1281A9           69             CALL VIVOD
+8143 D535FA           70             DJNZ N_P,CYCLE1         ;3-I RAZA VIVODIM POLOZHITELNOE CHISLO PO 200ms => 200*3=60
+                             0ms
+8146 22               71             RET
+                      72             OTRIC:                  ;OTRICATELNIE----------------------------
+8147 D27F             73                     SETB B_Z
+8149 12815F           74                     CALL RASCHET
+814C 753602           75                     MOV N_N,#C_F_N
+                      76             CYCLE2:
+814F 1281A9           77                     CALL VIVOD
+8152 75340A           78                     MOV C_TIME0,#TC_F_N     ;TAK ZHE VIVODIM ODIN TAKT=200ms, ZATEM ZADERSHKA N
+                             A 100ms
+                      79             CYCLE3:                         ;(10*ms*10=100) DLYA EFFECTA MIGANIYA OTRCAT. CHISE
+                             L
+8155 1281CB           80                     CALL DELAY
+8158 D534FA           81                     DJNZ C_TIME0,CYCLE3
+815B D536F1           82                     DJNZ N_N,CYCLE2 ;V ITOGE POLUCHIM 2*(200ms+100ms)=600ms. T.O. OBRAZOM INTER
+                             VALI
+815E 22               83             RET                             ;VREMENI RAVNI DLYA POL. I OTRICAT. CHISEL
+                      84     
+                      85     ;PODPROGRAMMA RASHCETA VIVODIMIH RAZRYADOV CHISLA
+                      86     RASCHET:
+815F 753100           87             MOV SOTNI,#0                    ;OBNYLENIE CONSTANT
+8162 753200           88             MOV DES,#0
+8165 753300           89             MOV EDIN,#0
+8168 D2D3             90             SETB RS0                ;VIBIRAEM 3-I BANK REGISTROV, T.K. PREDIDUSHIE ZANATI
+816A D2D4             91             SETB RS1                ;PROGRAMMOI MONITOR (MYI  ISPOLZUEM  R0)
+816C B3               92             CPL C                   ;VOZVRASHAEM ICHODNOE SOSTOYANIE FLAGA "C"
+816D 13               93             RRC A                   ;VOZVRASHAEM ISHODNOE CHILSO, POSLE PROVERKI NA ZNAK
+816E 547F             94             ANL A,#01111111b                ;VIDELYAEM TOLKO INFORMACIUY
+8170 307F03           95             JNB B_Z,NEXT            ;ELSI CHISLO MEN'SHE 0, TO NEOBHODIMO ESCHE PROINVERTIROVAT
+                             '
+8173 F4               96             CPL A
+8174 547F             97             ANL A,#01111111b        
+MCS-51 MACRO ASSEMBLER    D_V_M                                                                     11/10/;0   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      98     NEXT:
+8176 75F004           99             MOV B,#4                ;MAX INF_ADC=128, A VIHODNOE 5120mV=> 512/128=4
+8179 A4              100             MUL AB                  ;V B-STARSHAYA CHAST'
+817A A8F0            101             MOV R0,B                ;BUFFER R3 DLYA RABOTI FUNKCII
+817C B80104          102             CJNE R0,#1,SOT          ;ESLI B.0=1 TO CHISLO BOLSHE 255=> - 
+817F 753102          103             MOV SOTNI,#2            ; - KAK MINIMUM SOTEN 2-E
+8182 C3              104             CLR C
+                     105     SOT:  
+8183 9464            106             SUBB A,#100              ;OPREDELYAEM KOL-VO SOTEN V CHISLE
+8185 20D704          107             JB CY,VOZVRAT
+8188 0531            108             INC SOTNI
+818A 80F7            109             SJMP SOT
+                     110     VOZVRAT:
+818C 2464            111             ADD A,#100
+818E B80102          112             CJNE R0,#1,VPERED        ;PROPUSKAEM ETAP, ESLI CHISLO MEN'SHE 255
+8191 2437            113             ADD A,#55                ;OSTAVHAYASIA CHAST' OT 255 B.0
+                     114     VPERED:
+8193 04              115             INC A                    ;NEOBHODIMO DOBAVIT', T.K. NE 0 PERVUI, A 1 V NASHEI ;SIST
+                             EME
+8194 75F064          116             MOV B,#100
+8197 84              117             DIV AB
+8198 B40102          118             CJNE A,#1,DALEE
+819B 0531            119             INC SOTNI
+                     120     DALEE:
+819D C5F0            121             XCH A,B
+819F 75F00A          122             MOV B,#10
+81A2 84              123             DIV AB
+81A3 F532            124             MOV DES,A
+81A5 85F033          125             MOV EDIN,B
+81A8 22              126     RET
+                     127     
+                     128     ;PODPROGRAMMA VIVODA NA INDICATORY
+                     129     VIVOD:
+81A9 E531            130             MOV A,SOTNI
+81AB 4410            131             ORL A,#00010000b                ;VIVOD 1 CIFRI
+81AD 758202          132             MOV DPL,#P_C
+81B0 F0              133             MOVX @DPTR,A
+81B1 1281CB          134             CALL DELAY              ;ZADERSHKA 10ms
+81B4 E532            135             MOV A,DES
+81B6 4420            136             ORL A,#00100000b
+81B8 F0              137             MOVX @DPTR,A
+81B9 1281CB          138             CALL DELAY
+81BC E533            139             MOV A,EDIN
+81BE 4440            140             ORL A,#01000000b
+81C0 F0              141             MOVX @DPTR,A
+81C1 1281CB          142             CALL DELAY
+81C4 7480            143             MOV A,#10000000b        ;VIVOD POSLEDNEI CIFRI (VSEGDA 0)
+81C6 F0              144             MOVX @DPTR,A
+81C7 1281CB          145             CALL DELAY
+81CA 22              146     RET
+                     147     
+                     148     ;PODPROGRAMMA REGULIRUEMOI ZADERZHKI
+                     149     DELAY:
+81CB D28C            150             SETB TR0
+81CD 308DFD          151             JNB TF0,$
+MCS-51 MACRO ASSEMBLER    D_V_M                                                                     11/10/;0   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+81D0 C28D            152             CLR TF0
+81D2 C28C            153             CLR TR0
+81D4 758CD8          154             MOV TH0,#HIGH(NOT(TIME-1))
+81D7 758AF0          155             MOV TL0,#LOW(NOT(TIME-1))
+81DA 22              156     RET
+                     157     
+                     158     END
+MCS-51 MACRO ASSEMBLER    D_V_M                                                                     11/10/;0   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ADC_MK . .  B ADDR    0090H.1 A       
+ADC. . . .  C ADDR    8123H   A       
+B_Z. . . .  B ADDR    002FH.7 A       
+B. . . . .  D ADDR    00F0H   A       
+C_F_N. . .    NUMB    0002H   A       
+C_F_P. . .    NUMB    0003H   A       
+C_TIME0. .  D ADDR    0034H   A       
+CY . . . .  B ADDR    00D0H.7 A       
+CYCLE1 . .  C ADDR    8140H   A       
+CYCLE2 . .  C ADDR    814FH   A       
+CYCLE3 . .  C ADDR    8155H   A       
+DALEE. . .  C ADDR    819DH   A       
+DELAY. . .  C ADDR    81CBH   A       
+DES. . . .  D ADDR    0032H   A       
+DPL. . . .  D ADDR    0082H   A       
+EDIN . . .  D ADDR    0033H   A       
+GO . . . .  C ADDR    8118H   A       
+INF_ADC. .  D ADDR    0030H   A       
+INIT_KN. .    NUMB    0010H   A       
+INIT_PPI .    NUMB    0082H   A       
+MK_ADC . .  B ADDR    0090H.0 A       
+N_N. . . .  D ADDR    0036H   A       
+N_P. . . .  D ADDR    0035H   A       
+NEXT . . .  C ADDR    8176H   A       
+OBSCH. . .  C ADDR    812CH   A       
+OTRIC. . .  C ADDR    8147H   A       
+P_A. . . .    NUMB    0000H   A       
+P_B. . . .    NUMB    0001H   A       
+P_C. . . .    NUMB    0002H   A       
+P1 . . . .  D ADDR    0090H   A       
+RASCHET. .  C ADDR    815FH   A       
+RS0. . . .  B ADDR    00D0H.3 A       
+RS1. . . .  B ADDR    00D0H.4 A       
+RWCU . . .    NUMB    0003H   A       
+SOT. . . .  C ADDR    8183H   A       
+SOTNI. . .  D ADDR    0031H   A       
+START. . .  C ADDR    8100H   A       
+TC_F_N . .    NUMB    000AH   A       
+TF0. . . .  B ADDR    0088H.5 A       
+TH0. . . .  D ADDR    008CH   A       
+TIME . . .    NUMB    2710H   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+VIVOD. . .  C ADDR    81A9H   A       
+VOZVRAT. .  C ADDR    818CH   A       
+VPERED . .  C ADDR    8193H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

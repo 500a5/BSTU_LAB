@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1535308216 source:c:\users\Александр\desktop\Прога\Звук\prog_1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<dos.h>
+

@@ -1,0 +1,20 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+void main(void) {
+    char * buf;
+    int i;
+    for(i = 10; i < 29; i++){
+        buf[i - 10] = i;
+    }
+    WDTCTL = WDTPW + WDTHOLD;
+    Init_system();
+    Init_system_clock();
+    UART_init(1, 7, 1, 0, 0);
+    UART_message(buf);
+    UART_off();
+}

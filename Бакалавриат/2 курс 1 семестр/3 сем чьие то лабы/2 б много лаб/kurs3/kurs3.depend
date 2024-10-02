@@ -1,0 +1,73 @@
+# depslib dependency file v1.0
+1512821132 source:c:\users\Èðà\desktop\kurs3\inout.c
+	<stdio.h>
+	<stdlib.h>
+	"inout.h"
+
+1512502044 c:\users\Èðà\desktop\kurs3\inout.h
+
+1513086833 source:c:\users\Èðà\desktop\kurs3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"inout.h"
+	"point.h"
+
+1513086860 c:\users\Èðà\desktop\kurs3\point.h
+	"inout.h"
+
+1513086860 source:c:\users\Èðà\desktop\kurs3\point.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"point.h"
+	"inout.h"
+
+1512821132 source:c:\users\hystou\desktop\kurs3\inout.c
+	<stdio.h>
+	<stdlib.h>
+	"inout.h"
+
+1512502044 c:\users\hystou\desktop\kurs3\inout.h
+
+1513097159 source:c:\users\hystou\desktop\kurs3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"inout.h"
+	"point.h"
+
+1513086860 c:\users\hystou\desktop\kurs3\point.h
+	"inout.h"
+
+1513097065 source:c:\users\hystou\desktop\kurs3\point.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"point.h"
+	"inout.h"
+
+1512821132 source:c:\users\hystou\desktop\Ó÷¸áêà\kurs3\inout.c
+	<stdio.h>
+	<stdlib.h>
+	"inout.h"
+
+1512502044 c:\users\hystou\desktop\Ó÷¸áêà\kurs3\inout.h
+
+1513097159 source:c:\users\hystou\desktop\Ó÷¸áêà\kurs3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	"inout.h"
+	"point.h"
+
+1513086860 c:\users\hystou\desktop\Ó÷¸áêà\kurs3\point.h
+	"inout.h"
+
+1513102132 source:c:\users\hystou\desktop\Ó÷¸áêà\kurs3\point.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"point.h"
+	"inout.h"
+

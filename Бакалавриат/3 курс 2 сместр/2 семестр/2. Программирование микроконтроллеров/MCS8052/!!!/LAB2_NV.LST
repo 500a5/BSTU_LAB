@@ -1,0 +1,295 @@
+MCS-51 MACRO ASSEMBLER    LAB2_NV                                                                   12/25/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN LAB2_NV.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE LAB2_NV.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1      org 0h
+0000 0281DB            2      jmp start
+000B                   3      org 000Bh
+000B 028100            4      jmp timer
+8100                   5      org 8100h
+                       6      timer:
+8100 D2D3              7        setb RS0
+8102 C2D3              8        clr RS0
+8104 32                9      reti
+                      10      showtimeorspeed: ; B{bnd bpelemh h qjnpnqrh m` hmdhj`rnp
+8105 EF               11        mov A, R7
+8106 23               12        rl A
+8107 23               13        rl A
+8108 FF               14        mov R7, A
+8109 B40112           15        cjne A, #00000001b, i1
+810C E58A             16        mov A, TL0
+810E 75F003           17        mov B, #3
+8111 A4               18        mul AB
+8112 75F002           19        mov B, #2
+8115 84               20        div AB
+8116 75F00A           21        mov B, #10
+8119 84               22        div AB
+811A 4410             23        orl A, #00010000b ; Oepb{i hmdhj`rnp
+811C F0               24        movx @DPTR, A
+811D 22               25        ret
+811E B40414           26     i1:cjne A, #00000100b, i2
+8121 E58A             27        mov A, TL0
+8123 75F003           28        mov B, #3
+8126 A4               29        mul AB
+8127 75F002           30        mov B, #2
+812A 84               31        div AB
+812B 75F00A           32        mov B, #10
+812E 84               33        div AB
+812F E5F0             34        mov A, B
+8131 4420             35        orl A, #00100000b ; Brnpni hmdhj`rnp
+8133 F0               36        movx @DPTR, A
+8134 22               37        ret
+8135 B41009           38     i2:cjne A, #00010000b, i3
+8138 E8               39        mov A, R0
+8139 75F00A           40        mov B, #10
+813C 84               41        div AB
+813D 4440             42        orl A, #01000000b ; Rperhi hmdhj`rnp
+813F F0               43        movx @DPTR, A
+8140 22               44        ret
+8141 E8               45     i3:mov A, R0
+8142 75F00A           46        mov B, #10
+8145 84               47        div AB
+8146 E5F0             48        mov A, B
+8148 4480             49        orl A, #10000000b ; Werb8pr{i hmdhj`rnp
+814A F0               50        movx @DPTR, A
+MCS-51 MACRO ASSEMBLER    LAB2_NV                                                                   12/25/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+814B 22               51      ret
+                      52      
+                      53      constlevel:
+814C F590             54        mov P1, A
+                      55     q1:
+814E 7980             56        mov R1, #128
+                      57     q2:
+8150 758A00           58        mov TL0, #0
+8153 7A00             59        mov R2, #0
+                      60     q3:
+8155 00               61        nop
+8156 00               62        nop
+8157 00               63        nop
+8158 00               64        nop
+8159 00               65        nop
+815A 00               66        nop
+815B 00               67        nop
+815C 00               68        nop
+815D 00               69        nop
+815E 00               70        nop
+815F 00               71        nop
+8160 00               72        nop
+8161 00               73        nop
+8162 00               74        nop
+8163 00               75        nop
+8164 00               76        nop
+8165 00               77        nop
+8166 00               78        nop
+8167 00               79        nop
+8168 00               80        nop
+8169 00               81        nop
+816A 00               82        nop
+816B 00               83        nop
+816C 00               84        nop
+816D 00               85        nop
+816E 00               86        nop
+816F 00               87        nop
+8170 00               88        nop
+8171 00               89        nop
+8172 00               90        nop
+8173 DAE0             91        djnz R2, q3
+8175 3105             92        call showtimeorspeed
+8177 D9D7             93        djnz R1, q2
+8179 D8D3             94        djnz R0, q1
+817B 22               95      ret
+                      96      ; Khmeim{i sw`qrnj
+                      97      linelevel:
+817C FD               98        mov R5, A
+817D AEF0             99        mov R6, B
+                     100     j1:
+817F 7A80            101        mov R2, #128
+                     102     j2:
+8181 E9              103        mov A, R1
+8182 FB              104        mov R3, A
+8183 7400            105        mov A, #0
+MCS-51 MACRO ASSEMBLER    LAB2_NV                                                                   12/25/:9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+8185 99              106        subb A, R1
+8186 3401            107        addc A, #1
+8188 FC              108        mov R4, A
+8189 758A00          109        mov TL0, #0h
+818C 8D90            110        mov P1, R5
+                     111     j3:
+818E 00              112        nop
+818F 00              113        nop
+8190 00              114        nop
+8191 00              115        nop
+8192 00              116        nop
+8193 00              117        nop
+8194 00              118        nop
+8195 00              119        nop
+8196 00              120        nop
+8197 00              121        nop
+8198 00              122        nop
+8199 00              123        nop
+819A 00              124        nop
+819B 00              125        nop
+819C 00              126        nop
+819D 00              127        nop
+819E 00              128        nop
+819F 00              129        nop
+81A0 00              130        nop
+81A1 00              131        nop
+81A2 00              132        nop
+81A3 00              133        nop
+81A4 00              134        nop
+81A5 00              135        nop
+81A6 00              136        nop
+81A7 00              137        nop
+81A8 00              138        nop
+81A9 00              139        nop
+81AA 00              140        nop
+81AB 00              141        nop
+81AC DBE0            142        djnz R3, j3 ; Nrqwhr{b`el oepb{i hmrepb`k
+81AE 8E90            143        mov P1, R6
+                     144     j4:
+81B0 00              145        nop
+81B1 00              146        nop
+81B2 00              147        nop
+81B3 00              148        nop
+81B4 00              149        nop
+81B5 00              150        nop
+81B6 00              151        nop
+81B7 00              152        nop
+81B8 00              153        nop
+81B9 00              154        nop
+81BA 00              155        nop
+81BB 00              156        nop
+81BC 00              157        nop
+81BD 00              158        nop
+81BE 00              159        nop
+81BF 00              160        nop
+MCS-51 MACRO ASSEMBLER    LAB2_NV                                                                   12/25/:9   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+81C0 00              161        nop
+81C1 00              162        nop
+81C2 00              163        nop
+81C3 00              164        nop
+81C4 00              165        nop
+81C5 00              166        nop
+81C6 00              167        nop
+81C7 00              168        nop
+81C8 00              169        nop
+81C9 00              170        nop
+81CA 00              171        nop
+81CB 00              172        nop
+81CC 00              173        nop
+81CD 00              174        nop
+81CE DCE0            175        djnz R4, j4 ; Nrqwhr{b`el brnpni hmrepb`k
+81D0 3105            176        call showtimeorspeed
+81D2 DAAD            177        djnz R2, j2
+81D4 19              178        dec R1
+81D5 19              179        dec R1
+81D6 19              180        dec R1
+81D7 19              181        dec R1
+81D8 D8A5            182        djnz R0, j1
+81DA 22              183      ret
+                     184     start:
+81DB D2AF            185      setb EA
+81DD D2AF            186      setB IE.7
+81DF D2A9            187      setB IE.1
+81E1 900003          188      mov DPTR, #3
+81E4 7482            189      mov A, #82h
+81E6 F0              190      movx @DPTR, A
+81E7 900002          191      mov DPTR, #2
+81EA E589            192      mov A, TMOD
+81EC 54F0            193      anl A, #0F0h ; Me rpnc`el oepb{i r`ilep
+81EE 4405            194      orl A, #05h
+81F0 F589            195      mov TMOD, A ; Pefhl p`anr{ r`ilep` 0 - r`ilep
+81F2 D28C            196      setb TR0 ; G`osqj`el r`ilep 0
+81F4 7F01            197      mov R7, #1
+                     198      ; --- Oepb`^ qr`dh^ ---
+81F6 783C            199      mov R0, #60 ;  Jnkhweqrbn qejsmd
+81F8 74A0            200      mov A, #10100000b ; Bp`y`el dbhc`rek| b ndms qrnpnms
+81FA 314C            201      call constlevel
+                     202      ; --- Brnp`^ qr`dh^ ---
+81FC 783C            203      mov R0, #60 ; Bpel^ b{onkmemh^, b qejsmd`u
+81FE 7900            204      mov R1, #0 ; M`w`k|m`^ qjnpnqr| - l`jqhl`k|m`^ (60 nanpnrnb b qejsmds)
+8200 74A0            205      mov A, #10100000b
+8202 75F090          206      mov B, #10010000b
+8205 317C            207      call linelevel
+                     208      ; --- Rperhi }r`o ---
+8207 781E            209      mov R0, #30  ; Dkhrek|mnqr| - 30 qejsmd
+8209 74F0            210      mov A, #11110000b   ; Nqr`m`bkhb`el dbhc`rek|
+820B 314C            211      call constlevel
+                     212      ; --- 4 qr`dh^ ---
+820D 781E            213      mov R0, #30 ; Bpel^ b{onkmemh^, b qejsmd`u
+820F 7900            214      mov R1, #0 ; M`w`k|m`^ qjnpnqr| - mskeb`^
+8211 7460            215      mov A, #01100000b
+MCS-51 MACRO ASSEMBLER    LAB2_NV                                                                   12/25/:9   PAGE    5
+
+
+LOC  OBJ            LINE     SOURCE
+
+8213 75F050          216      mov B, #01010000b
+8216 317C            217      call linelevel
+                     218      ; --- O^r`^ qr`dh^ ---
+8218 781E            219      mov R0, #30
+821A 7980            220      mov R1, #128 ; M`w`k|m`^ qjnpnqr| - 30 nanpnrnb b qejsmds
+821C 7450            221      mov A, #01010000b
+821E 75F060          222      mov B, #01100000b
+8221 317C            223      call linelevel
+8223 7590FF          224      mov P1, #0FFh ; Nqr`m`bkhb`el dbhc`rek|
+8226 7400            225      mov A, #00000000b
+8228 F0              226      movx @DPTR, A
+8229 80FE            227      jmp $
+                     228     end
+MCS-51 MACRO ASSEMBLER    LAB2_NV                                                                   12/25/:9   PAGE    6
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E          T Y P E   V A L U E       A T T R I B U T E S
+
+B . . . . . . .  D ADDR    00F0H   A       
+CONSTLEVEL. . .  C ADDR    814CH   A       
+EA. . . . . . .  B ADDR    00A8H.7 A       
+I1. . . . . . .  C ADDR    811EH   A       
+I2. . . . . . .  C ADDR    8135H   A       
+I3. . . . . . .  C ADDR    8141H   A       
+IE. . . . . . .  D ADDR    00A8H   A       
+J1. . . . . . .  C ADDR    817FH   A       
+J2. . . . . . .  C ADDR    8181H   A       
+J3. . . . . . .  C ADDR    818EH   A       
+J4. . . . . . .  C ADDR    81B0H   A       
+LINELEVEL . . .  C ADDR    817CH   A       
+P1. . . . . . .  D ADDR    0090H   A       
+Q1. . . . . . .  C ADDR    814EH   A       
+Q2. . . . . . .  C ADDR    8150H   A       
+Q3. . . . . . .  C ADDR    8155H   A       
+RS0 . . . . . .  B ADDR    00D0H.3 A       
+SHOWTIMEORSPEED  C ADDR    8105H   A       
+START . . . . .  C ADDR    81DBH   A       
+TIMER . . . . .  C ADDR    8100H   A       
+TL0 . . . . . .  D ADDR    008AH   A       
+TMOD. . . . . .  D ADDR    0089H   A       
+TR0 . . . . . .  B ADDR    0088H.4 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

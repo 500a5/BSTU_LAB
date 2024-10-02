@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1530530578 source:c:\users\Александр\desktop\Прога\Практика\tema_5_3\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+
+1530631481 source:c:\users\Александр\desktop\Прога\Практика\tema_5_3(Алгоритм есть, но не починен)\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+

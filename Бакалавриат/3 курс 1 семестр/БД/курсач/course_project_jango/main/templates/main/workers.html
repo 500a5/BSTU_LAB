@@ -1,0 +1,17 @@
+{% extends 'main/layot.html' %}
+
+{% block title%}
+    Сотрудники
+{% endblock %}
+
+{% block content%}
+       <div class="features" align="center">
+         <h1 align="center">Работники администрации</h1>
+            {% for el in workers %}
+                <div class="alert alert-warning">
+                    <h3>{{ el.surname }} {{  el.name}}  {{  el.middlename}}</h3>
+                <a href="{% url 'workers-detail' el.id %}" class="btn btn-warning">Подробнее</a>
+                </div>
+            {% endfor %}
+    </div>
+{% endblock %}

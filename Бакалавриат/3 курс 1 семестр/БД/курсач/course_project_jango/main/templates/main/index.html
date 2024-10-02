@@ -1,0 +1,18 @@
+{% extends 'main/layot.html' %}
+
+{% block title%}
+    Новости
+{% endblock %}
+
+{% block content%}
+    <div class="features" align="center">
+         <h1 align="center">Новости администрации</h1>
+            {% for el in news %}
+                <div class="alert alert-warning">
+                    <h3>{{ el.title }}</h3>
+                    <p>{{  el.anons}}</p>
+                    <a href="{% url 'news-detail' el.id %}" class="btn btn-warning">Подробнее</a>
+                </div>
+            {% endfor %}
+    </div>
+{% endblock %}

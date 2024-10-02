@@ -1,0 +1,35 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+void Disable_Watchdog(){
+    WDTCTL = WDTPW+WDTHOLD; // Disable watchdog timer
+}
+
+/*
+ * Разработать программу передачи 100 чисел (от 0 до 99)
+ * из микроконтроллера MSP430F1611 в ПЭВМ по интерфейсу
+ * USB в соответствии с протоколом: модуль USART1,
+ * скорость обмена данными 19200 бит/с, режим обмена асинхронный,
+ * 8 битов данных без бита четности
+ */
+
+#define USB 0
+
+void main(void) {
+    Disable_Watchdog();
+    Init_System_Clock();
+    Init_System();
+    UART_init(7, // databits = 7
+              1, // stopbits = 1
+              0, // контроль четности
+              USB);
+    int i = 0;
+    while(1){
+        UART_sendbyte(0xFF);
+    }
+    UART_off();
+}

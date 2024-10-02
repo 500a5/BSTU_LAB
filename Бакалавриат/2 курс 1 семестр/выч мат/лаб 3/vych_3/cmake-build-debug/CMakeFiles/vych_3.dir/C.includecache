@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/vych_3/calculation_of_integrals.c
+calculation_of_integrals.h
+C:/Users/500a5/CLionProjects/vych_3/calculation_of_integrals.h
+
+C:/Users/500a5/CLionProjects/vych_3/calculation_of_integrals.h
+
+C:/Users/500a5/CLionProjects/vych_3/main.c
+stdio.h
+-
+math.h
+-
+calculation_of_integrals.h
+C:/Users/500a5/CLionProjects/vych_3/calculation_of_integrals.h
+

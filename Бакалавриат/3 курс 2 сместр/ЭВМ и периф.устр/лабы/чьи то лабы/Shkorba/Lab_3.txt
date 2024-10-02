@@ -1,0 +1,32 @@
+void main(void) {
+    _enable_interrupt();
+    WDTCTL = WDTPW + WDTHOLD;
+    Init_System_Clock();
+    Init_System();
+    Init_I2C();
+    char KEYS_last;
+    char f = 1;
+    while(f){
+        KEYS_last = KEYS_waitkey();
+        switch(KEYS_last){
+        case '1':
+            LED_set(1);
+            wait_1ms(500);
+            LED_reset(1);
+            break;
+        case '6':
+            LED_set(2);
+            wait_1ms(500);
+            LED_reset(2);
+            break;
+        case '8':
+            LED_set(3);
+            wait_1ms(500);
+            LED_reset(3);
+            break;
+        case '*':
+            f = 0;
+            break;
+        }
+    }
+}

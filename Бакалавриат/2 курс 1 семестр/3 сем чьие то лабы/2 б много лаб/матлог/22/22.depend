@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1510241936 source:c:\users\hystou\desktop\Учёбка\2 r\матлог\22\main.cpp
+	<iostream>
+	<set>
+	<string>
+	<cmath>
+	<vector>
+	<stack>
+

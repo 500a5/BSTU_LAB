@@ -1,0 +1,243 @@
+MCS-51 MACRO ASSEMBLER    LAB3JE                                                                    01/19/:9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN D:\9671~1\BE4B~1\MCS805~1\LAB3JE.OBJ
+ASSEMBLER INVOKED BY:  D:\9671~1\BE4B~1\MCS805~1\ASM51.EXE D:\9671~1\BE4B~1\MCS805~1\LAB3JE.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0
+0000 028100            2     ljmp start
+                       3     
+000B                   4     org 000Bh
+000B 0281AE            5             ljmp m1
+                       6     
+                       7     
+                       8     
+8100                   9     org 8100h
+                      10     start:
+                      11     
+                      12     ; `brng`onkmemhe gm`wemhi cp`thj` tsmjvhh bn bmexm~~ o`l^r|--------------------------------
+                             ----
+8100 7D00             13         mov r5, #0
+8102 780A             14             MOV R0, #10
+8104 7401             15             mov A,#1
+8106 908200           16         mov dptr,#8200h 
+                      17             
+                      18     M7:     
+8109 7E0A             19         mov r6,#10
+                      20     m17:
+                      21             
+810B F0               22             movx @dptr,A
+810C 0D               23             inc r5  
+810D A3               24             inc DPTR
+810E FF               25             mov R7, A
+810F 7400             26             mov A,#0
+8111 F0               27             movx @dptr,A
+8112 EF               28             mov A,R7
+8113 A3               29             inc DPTR
+8114 0D               30             inc r5
+8115 DEF4             31             djnz r6, m17
+8117 14               32             dec A
+8118 D8EF             33             djnz R0,M7
+                      34             
+811A 7805             35             MOV R0, #5
+                      36         
+                      37     M8:     
+811C 7E0A             38         mov r6,#10
+                      39     m18:
+                      40             
+811E F0               41             movx @dptr,A
+811F 0D               42             inc r5  
+8120 A3               43             inc DPTR
+8121 FF               44             mov R7, A
+8122 7400             45             mov A,#0
+8124 F0               46             movx @dptr,A
+8125 EF               47             mov A,R7
+8126 A3               48             inc DPTR
+8127 0D               49             inc r5
+MCS-51 MACRO ASSEMBLER    LAB3JE                                                                    01/19/:9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+8128 DEF4             50             djnz r6, m18
+812A 04               51             inc A
+812B D8EF             52             djnz R0,M8
+                      53             
+812D 781E             54             MOV R0, #30
+812F 7414             55             mov A, #20
+                      56     M9:     
+8131 7E0A             57         mov r6,#10
+                      58     m19:
+                      59             
+8133 F0               60             movx @dptr,A
+8134 0D               61             inc r5  
+8135 A3               62             inc DPTR
+8136 FF               63             mov R7, A
+8137 7401             64             mov A,#1
+8139 F0               65             movx @dptr,A
+813A EF               66             mov A,R7
+813B A3               67             inc DPTR
+813C 0D               68             inc r5
+813D DEF4             69             djnz r6, m19
+813F D8F0             70             djnz R0,M9
+                      71             
+8141 781E             72             MOV R0, #30
+8143 7428             73             mov A, #40
+                      74             
+                      75             M10:    
+8145 7E0A             76         mov r6,#10
+                      77     m20:
+                      78             
+8147 F0               79             movx @dptr,A
+8148 0D               80             inc r5  
+8149 A3               81             inc DPTR
+814A FF               82             mov R7, A
+814B 7401             83             mov A,#1
+814D F0               84             movx @dptr,A
+814E EF               85             mov A,R7
+814F A3               86             inc DPTR
+8150 0D               87             inc r5
+8151 DEF4             88             djnz r6, m20
+8153 D8F0             89             djnz R0,M10
+                      90             
+8155 781E             91             MOV R0, #30
+8157 743C             92             mov A, #60
+                      93             
+                      94             M11:    
+8159 7E0A             95         mov r6,#10
+                      96     m21:
+                      97             
+815B F0               98             movx @dptr,A
+815C 0D               99             inc r5  
+815D A3              100             inc DPTR
+815E FF              101             mov R7, A
+815F 7401            102             mov A,#1
+8161 F0              103             movx @dptr,A
+8162 EF              104             mov A,R7
+MCS-51 MACRO ASSEMBLER    LAB3JE                                                                    01/19/:9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+8163 A3              105             inc DPTR
+8164 0D              106             inc r5
+8165 DEF4            107             djnz r6, m21
+8167 D8F0            108             djnz R0,M11
+                     109     
+                     110     ; jnmev `brng`onkmemh^---------------------------------------------------------------------
+                             --------------------------   
+                     111     ; m`w`kn opncp`ll{      
+8169 D2AF            112             setb ea
+816B E589            113      mov a,tmod
+816D C2E0            114      clr acc.0
+816F C2E1            115     clr acc.1
+8171 C2E2            116     clr acc.2
+8173 C2E3            117     clr acc.3
+                     118     
+8175 F589            119         mov tmod,a
+8177 D2AF            120             setB IE.7
+8179 D2A9            121             setB IE.1
+                     122             
+817B D28C            123             setB tcon.4
+817D 900000          124         mov dptr, #000h
+                     125     m6:     
+8180 E0              126             movx a, @dptr
+8181 FB              127             mov r3, a
+8182 A3              128             inc dptr
+8183 E0              129             movx a, @dptr
+8184 F9              130             mov r1, a ; b pechqrpe reoep| up`mhr|w^ 0 hkh 1 jnrnp`^ nrbew`er g` qrnpnms bp`yemh
+                             ^
+8185 74FF            131             mov a, #255
+                     132             
+                     133             
+8187 9B              134             subb a,r3
+8188 F8              135             mov r0,a
+8189 EB              136             mov a,r3
+                     137             
+818A B90012          138             cjne r1,#0, crut
+                     139     t9:
+                     140             
+818D D297            141             setB p1.7
+818F D295            142             setB p1.5
+8191 70FA            143             jnz t9
+8193 E8              144         mov a,r0
+                     145             
+                     146     t8:     
+                     147             
+8194 C297            148             clr p1.7
+8196 C295            149             clr p1.5
+8198 70FA            150             jnz t8
+                     151     cob:    
+819A A3              152             inc dptr
+819B DDE3            153             djnz r5,m6
+819D 80FE            154     jmp $
+                     155     
+                     156     crut:
+                     157         t19:
+MCS-51 MACRO ASSEMBLER    LAB3JE                                                                    01/19/:9   PAGE    4
+
+
+LOC  OBJ            LINE     SOURCE
+
+                     158             
+819F D296            159             setB p1.6
+81A1 D294            160             setB p1.4
+81A3 70FA            161             jnz t19
+81A5 E8              162         mov a,r0
+                     163             
+                     164     t18:    
+                     165             
+81A6 C296            166             clr p1.6
+81A8 C294            167             clr p1.4
+81AA 70FA            168             jnz t18
+81AC 80EC            169     jmp cob
+                     170     
+                     171     m1: 
+81AE 14              172             dec a
+81AF 32              173     reti
+                     174     
+                     175     
+                     176     end
+MCS-51 MACRO ASSEMBLER    LAB3JE                                                                    01/19/:9   PAGE    5
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . .  D ADDR    00E0H   A       
+COB. . . .  C ADDR    819AH   A       
+CRUT . . .  C ADDR    819FH   A       
+EA . . . .  B ADDR    00A8H.7 A       
+IE . . . .  D ADDR    00A8H   A       
+M1 . . . .  C ADDR    81AEH   A       
+M10. . . .  C ADDR    8145H   A       
+M11. . . .  C ADDR    8159H   A       
+M17. . . .  C ADDR    810BH   A       
+M18. . . .  C ADDR    811EH   A       
+M19. . . .  C ADDR    8133H   A       
+M20. . . .  C ADDR    8147H   A       
+M21. . . .  C ADDR    815BH   A       
+M6 . . . .  C ADDR    8180H   A       
+M7 . . . .  C ADDR    8109H   A       
+M8 . . . .  C ADDR    811CH   A       
+M9 . . . .  C ADDR    8131H   A       
+P1 . . . .  D ADDR    0090H   A       
+START. . .  C ADDR    8100H   A       
+T18. . . .  C ADDR    81A6H   A       
+T19. . . .  C ADDR    819FH   A       
+T8 . . . .  C ADDR    8194H   A       
+T9 . . . .  C ADDR    818DH   A       
+TCON . . .  D ADDR    0088H   A       
+TMOD . . .  D ADDR    0089H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

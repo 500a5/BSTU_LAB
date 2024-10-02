@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1508683932 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\Табло\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1508683752 c:\users\hystou\desktop\Учёбка\2 r\АСД\Табло\table.h
+
+1508683746 source:c:\users\hystou\desktop\Учёбка\2 r\АСД\Табло\table.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<math.h>
+	"table.h"
+

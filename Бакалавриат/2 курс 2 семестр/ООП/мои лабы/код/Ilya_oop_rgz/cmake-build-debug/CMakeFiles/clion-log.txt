@@ -1,0 +1,39 @@
+"D:\Program Files\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" "E:\яУНИВЕР\2 курс 2 семестр\ООП\мои лабы\код\Ilya_oop_rgz"
+-- The C compiler identification is GNU 8.1.0
+-- The CXX compiler identification is GNU 8.1.0
+-- Check for working C compiler: D:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/gcc.exe
+-- Check for working C compiler: D:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/gcc.exe - broken
+CMake Error at D:/Program Files/JetBrains/CLion 2020.2.1/bin/cmake/win/share/cmake-3.17/Modules/CMakeTestCCompiler.cmake:60 (message):
+  The C compiler
+
+    "D:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/gcc.exe"
+
+  is not able to compile a simple test program.
+
+  It fails with the following output:
+
+    Change Dir: E:/СЏРЈРќР�Р’Р•Р /2 РєСѓСЂСЃ 2 СЃРµРјРµСЃС‚СЂ/РћРћРџ/РјРѕРё Р»Р°Р±С‹/РєРѕРґ/Ilya_oop_rgz/cmake-build-debug/CMakeFiles/CMakeTmp
+    
+    Run Build Command(s):D:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe cmTC_4e2bc/fast && D:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/mingw32-make.exe  -f CMakeFiles\cmTC_4e2bc.dir\build.make CMakeFiles/cmTC_4e2bc.dir/build
+    mingw32-make.exe[1]: Entering directory 'E:/В в•™в•ђв•љв”¬в”јв•Ё/2 СЉС”РЃС‘ 2 С‘С…СЊС…С‘Р„РЃ/в•¬в•¬в•§/СЊСЋС€ С‹СЂСЃв€љ/СЉСЋС„/Ilya_oop_rgz/cmake-build-debug/CMakeFiles/CMakeTmp'
+    Building C object CMakeFiles/cmTC_4e2bc.dir/testCCompiler.c.obj
+    "D:\Program Files (x86)\mingw-w64\i686-8.1.0-posix-dwarf-rt_v6-rev0\mingw32\bin\gcc.exe"    -o CMakeFiles\cmTC_4e2bc.dir\testCCompiler.c.obj   -c "E:\в•¤Рџв•ЁРів•ЁР­в•ЁРЁв•ЁРўв•ЁРҐв•ЁР°\2 в•Ёв•‘в•¤Р“в•¤Рђв•¤Р‘ 2 в•¤Р‘в•Ёв•Ўв•Ёв•ќв•Ёв•Ўв•¤Р‘в•¤Р’в•¤Рђ\в•ЁР®в•ЁР®в•ЁРЇ\в•Ёв•ќв•Ёв•›в•Ёв•• в•Ёв•—в•Ёв–‘в•Ёв–’в•¤Р›\в•Ёв•‘в•Ёв•›в•Ёв”¤\Ilya_oop_rgz\cmake-build-debug\CMakeFiles\CMakeTmp\testCCompiler.c"
+    gcc.exe: error: E:\в•¤Рџв•ЁРів•ЁР­в•ЁРЁв•ЁРўв•ЁРҐв•ЁР°\2 в•Ёв•‘в•¤Р“в•¤Рђв•¤Р‘ 2 в•¤Р‘в•Ёв•Ўв•Ёв•ќв•Ёв•Ўв•¤Р‘в•¤Р’в•¤Рђ\в•ЁР®в•ЁР®в•ЁРЇ\в•Ёв•ќв•Ёв•›в•Ёв•• в•Ёв•—в•Ёв–‘в•Ёв–’в•¤Р›\в•Ёв•‘в•Ёв•›в•Ёв”¤\Ilya_oop_rgz\cmake-build-debug\CMakeFiles\CMakeTmp\testCCompiler.c: No such file or directory
+    gcc.exe: fatal error: no input files
+    compilation terminated.
+    mingw32-make.exe[1]: *** [CMakeFiles\cmTC_4e2bc.dir\build.make:85: CMakeFiles/cmTC_4e2bc.dir/testCCompiler.c.obj] Error 1
+    mingw32-make.exe[1]: Leaving directory 'E:/В в•™в•ђв•љв”¬в”јв•Ё/2 СЉС”РЃС‘ 2 С‘С…СЊС…С‘Р„РЃ/в•¬в•¬в•§/СЊСЋС€ С‹СЂСЃв€љ/СЉСЋС„/Ilya_oop_rgz/cmake-build-debug/CMakeFiles/CMakeTmp'
+    mingw32-make.exe: *** [Makefile:140: cmTC_4e2bc/fast] Error 2
+    
+    
+
+  
+
+  CMake will not be able to correctly generate this project.
+Call Stack (most recent call first):
+  CMakeLists.txt:2 (project)
+
+
+-- Configuring incomplete, errors occurred!
+See also "E:/СЏРЈРќР�Р’Р•Р /2 РєСѓСЂСЃ 2 СЃРµРјРµСЃС‚СЂ/РћРћРџ/РјРѕРё Р»Р°Р±С‹/РєРѕРґ/Ilya_oop_rgz/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "E:/СЏРЈРќР�Р’Р•Р /2 РєСѓСЂСЃ 2 СЃРµРјРµСЃС‚СЂ/РћРћРџ/РјРѕРё Р»Р°Р±С‹/РєРѕРґ/Ilya_oop_rgz/cmake-build-debug/CMakeFiles/CMakeError.log".

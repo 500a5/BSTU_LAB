@@ -1,0 +1,40 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+void main(void) {
+    WDTCTL = WDTPW + WDTHOLD;
+
+    Init_System();
+    Init_System_Clock();
+    LCD_init();
+
+    LCD_set_pos(0,2);
+    LCD_message("Горохов и");
+    LCD_set_pos(1,0);
+    LCD_message("Сидорова ВТ-31");
+
+    LCD_set_cursor(3);
+
+    LCD_WriteCommand(64);
+
+    LCD_WriteByte(0b000000000,1);
+    LCD_WriteByte(0b000000000,1);
+    LCD_WriteByte(0b000010010,1);
+    LCD_WriteByte(0b000000000,1);
+    LCD_WriteByte(0b000010010,1);
+    LCD_WriteByte(0b000001100,1);
+    LCD_WriteByte(0b000000000,1);
+    LCD_WriteByte(0b000000000,1);
+
+    LCD_set_pos(0,0);
+    LCD_WriteByte(0,1);
+
+    while(1);
+}

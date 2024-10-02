@@ -1,0 +1,37 @@
+MCS-51 MACRO ASSEMBLER    28                                                                        04/03/;2   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN D:\MCS8052\28.OBJ
+ASSEMBLER INVOKED BY:  D:\MCS8052\ASM51.EXE D:\MCS8052\28.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0
+0000 7A08              2             MOV R2,#8
+0002 7818              3             mov r0,#24
+0004 7910              4             mov r1,#16
+0006 E7                5     mo:     mov a,@r1
+0007 C6                6             xch a,@r0
+0008 F7                7             mov @r1,a
+0009 08                8             inc r0
+000A 09                9             inc r1
+000B DAF9             10             djnz r2,mo
+000D 80FE             11             jmp$
+                      12             end
+MCS-51 MACRO ASSEMBLER    28                                                                        04/03/;2   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+MO . . . .  C ADDR    0006H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

@@ -1,0 +1,31 @@
+﻿  TZA-3.cpp
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(15,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(64,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(87,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(110,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(352,22): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(355,24): warning C4018: <=: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(362,24): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(365,18): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(369,11): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(374,26): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(406,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(425,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(428,24): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(455,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(501,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(741,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(859,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(889,22): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(919,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(950,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(981,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(1074,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(1104,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(1135,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\TZA-3\TZA-3\TZA-3.cpp(1166,23): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 178 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  TZA-3.vcxproj -> C:\Users\Novoz\source\repos\TZA-3\Release\TZA-3.exe

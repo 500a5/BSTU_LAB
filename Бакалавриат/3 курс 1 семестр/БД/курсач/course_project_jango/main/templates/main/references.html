@@ -1,0 +1,19 @@
+{% extends 'main/layot.html' %}
+
+{% block title%}
+    Обращения граждан
+{% endblock %}
+
+{% block content%}
+    <div class="features" align="center">
+         <h1 align="center">Форма обратной связи</h1>
+         <form method="post">
+        {% csrf_token %}
+
+              {{ form.title }}<br>
+              {{ form.text }}<br><br>
+             <span>{{error  }}</span>
+        <button align="center" class="btn btn-success" type="submit" >Отправить</button>
+    </form>
+    </div>
+{% endblock %}

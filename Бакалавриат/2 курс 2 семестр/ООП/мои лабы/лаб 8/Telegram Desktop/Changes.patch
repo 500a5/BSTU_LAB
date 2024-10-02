@@ -1,0 +1,280 @@
+Index: app/src/main/java/mdm/secure/agent/ActivityMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/ActivityMain.java b/app/src/main/java/mdm/secure/agent/ActivityMain.java
+--- a/app/src/main/java/mdm/secure/agent/ActivityMain.java	
++++ b/app/src/main/java/mdm/secure/agent/ActivityMain.java	
+@@ -21,7 +21,9 @@
+ import androidx.drawerlayout.widget.DrawerLayout;
+ import com.google.android.material.navigation.NavigationView;
+ import locker.agent.secure.mdm.lockermdmwrapperlibrary.LockerBroadcastReceiver;
++import mdm.secure.agent.db.DBManager;
+ import mdm.secure.agent.db.Log;
++import mdm.secure.agent.db.entity.Rules;
+ import mdm.secure.agent.location.LocationLogic;
+ import mdm.secure.agent.permissions.Permissions;
+ import mdm.secure.agent.policy.Applications;
+@@ -568,7 +570,20 @@
+         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+         if (!prefs.getBoolean("first_start", false)) {
+             prefs.edit().putBoolean("first_start", true).apply();
+-            new Applications(this).enableAllSystemApps();
++
++            DBManager dbManager = DBManager.getInstance(this);
++            Rules rules = dbManager.getRules();
++            rules.setShowAllSystemApps(true);
++            dbManager.setRule(rules);
++
++            Log.e(Log.LogTheme.rule_show_all_system_apps, "showAllSystemAppsOnFirstStart strt  ");
++            Applications applications = Applications.getInstance(this);
++            applications.saveEnabledSystemAppsIfNeeded();
++            applications.enableAllSystemApps();
++
++
++           // RulesManager.getInstance(this).restartInstallMonitor(null);
++
+         }
+     }
+ }
+Index: app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java b/app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java
+--- a/app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java	
++++ b/app/src/main/java/mdm/secure/agent/policy/PoliciesImpl.java	
+@@ -15,7 +15,7 @@
+     private final ComponentName componentName;
+ 
+     public PoliciesImpl(Context context) {
+-        applications = new Applications(context);
++        applications = Applications.getInstance(context);
+         userRestrictions = new UserRestrictions(context);
+         allowControlApps = new AllowControlApps(context);
+         devicePolicyManager = (DevicePolicyManager) context.getSystemService(Context.DEVICE_POLICY_SERVICE);
+Index: app/src/main/java/mdm/secure/agent/policy/Applications.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/policy/Applications.java b/app/src/main/java/mdm/secure/agent/policy/Applications.java
+--- a/app/src/main/java/mdm/secure/agent/policy/Applications.java	
++++ b/app/src/main/java/mdm/secure/agent/policy/Applications.java	
+@@ -7,24 +7,36 @@
+ import android.content.pm.ApplicationInfo;
+ import android.content.pm.PackageManager;
+ 
++import java.util.ArrayList;
+ import java.util.Arrays;
+ import java.util.List;
+ import java.util.Set;
+ import java.util.stream.Collectors;
+ import java.util.stream.Stream;
+ 
++import mdm.secure.agent.db.entity.ApplicationInstall;
++import mdm.secure.agent.policy.manager.RulesManager;
++import rx.schedulers.Schedulers;
++import kotlin.Unit;
+ import mdm.secure.agent.DeviceAdmin;
+ import mdm.secure.agent.db.DBManager;
+ import mdm.secure.agent.db.Log;
+ import mdm.secure.agent.db.entity.Settings;
++import rx.Observable;
++
+ 
+ public class Applications {
+ 
++    private static Applications mInstatnce = null;
+     private static final String TAG = "Applications";
+     private final DevicePolicyManager mDevicePolicyManager;
+     private final PackageManager mPackageManager;
+     private final ComponentName mAdminComponentName;
+     private final DBManager mDBManager;
++    public boolean f = false;
++    private Thread t = null;
++    private boolean fff = true;
++    private Thread s = null;
+ 
+     public Applications(Context context) {
+         mPackageManager = context.getPackageManager();
+@@ -33,22 +45,56 @@
+         mDBManager = DBManager.getInstance(context);
+     }
+ 
++    public static synchronized Applications getInstance(Context context) {
++        if (mInstatnce == null) {
++            mInstatnce = new Applications(context);
++        }
++        return mInstatnce;
++    }
++
+     public void enableAllSystemApps() {
+-        saveEnabledSystemAppsIfNeeded();
+-        new Thread(() ->
+-                disabledSystemApps().forEach(x -> {
++        Log.e(Log.LogTheme.rule_show_all_system_apps, "enableAllSystemApps start ");
++        fff = true;
++
++        t = new Thread(() -> {
++
++                List<String> kek = disabledSystemApps()
++                        .collect(Collectors.toList());
++
++                for (String x : kek) {
+                     try {
+                         Thread.sleep(5000);
++                        if (!fff) break;
+                         mDevicePolicyManager.enableSystemApp(mAdminComponentName, x);
+                         mDevicePolicyManager.setApplicationHidden(mAdminComponentName, x, false);
+                     } catch (Exception e) {
+                         Log.e(Log.LogTheme.rule_show_all_system_apps, e.getMessage(), e);
+                     }
+-                })
+-        ).start();
++                    Log.e(Log.LogTheme.rule_show_all_system_apps, "enableAllSystemApps ruuning  " + x);
++                }
++
++                f = false;
++                Log.e(Log.LogTheme.rule_show_all_system_apps, "enableAllSystemApps finish 1  ");
++
++        }
++        );
++
++        if (s.isAlive()) {
++            try {
++                s.join();
++            } catch (InterruptedException e) {
++                throw new RuntimeException(e);
++            }
++        }
++        t.start();
++        f = true;
++        Log.e(Log.LogTheme.rule_show_all_system_apps, "enableAllSystemApps finish 2  ");
++
+     }
+ 
+     public void saveEnabledSystemAppsIfNeeded() {
++        s = new Thread(()->{
++        Log.e(Log.LogTheme.rule_show_all_system_apps, "saveEnabledSystemAppsIfNeeded strt  ");
+         Settings settings = mDBManager.getDb().getSettingsDao().findFirst();
+         if (settings!=null && settings.getDefaultApps().isEmpty()) {
+             String joined = enabledSystemApps()
+@@ -57,9 +103,15 @@
+             settings.setDefaultApps(joined);
+             mDBManager.getDb().getSettingsDao().update(settings);
+         }
++
++        });
++
++        Log.e(Log.LogTheme.rule_show_all_system_apps, "saveEnabledSystemAppsIfNeeded finisg   ");
+     }
+ 
+     public void disableAllSystemAppsExceptDefault() {
++    fff =false;
++
+         Settings settings = mDBManager.getDb().getSettingsDao().findFirst();
+         List<String> defaultApps = Arrays.asList(settings.getDefaultApps().split(";"));
+         mPackageManager
+@@ -68,6 +120,7 @@
+                 .map(x -> x.packageName)
+                 .filter(x -> !defaultApps.contains(x))
+                 .forEach(x -> mDevicePolicyManager.setApplicationHidden(mAdminComponentName, x, true));
++
+     }
+ 
+     private Stream<String> disabledSystemApps() {
+@@ -86,4 +139,11 @@
+                 .map(x -> x.packageName);
+     }
+ 
++   /* public Stream<String> getNotInstalledSystemApps() {
++        Stream<String> installSystemApps = enabledSystemApps();
++        Settings settings = mDBManager.getDb().getSettingsDao().findFirst();
++        List<String> defaultApps = Arrays.asList(settings.getDefaultApps().split(";"));
++        disabledSystemApps -
++    }*/
++
+ }
+Index: app/src/main/java/mdm/secure/agent/db/DBManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/db/DBManager.java b/app/src/main/java/mdm/secure/agent/db/DBManager.java
+--- a/app/src/main/java/mdm/secure/agent/db/DBManager.java	
++++ b/app/src/main/java/mdm/secure/agent/db/DBManager.java	
+@@ -130,6 +130,9 @@
+     public boolean isInstallAppsFromUnknownSourcesDisabled() {
+         return getRules().isInstallAppsFromUnknownSourcesDisabled();
+     }
++    public boolean isShowAllSystemApplication(){
++        return  getRules().isShowAllSystemApps();
++    }
+ 
+     public boolean isDisallowInstall() {
+         return getRules().isDisallowInstall();
+Index: app/src/main/java/mdm/secure/agent/BootReceiver.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/BootReceiver.java b/app/src/main/java/mdm/secure/agent/BootReceiver.java
+--- a/app/src/main/java/mdm/secure/agent/BootReceiver.java	
++++ b/app/src/main/java/mdm/secure/agent/BootReceiver.java	
+@@ -7,8 +7,10 @@
+ import androidx.core.content.ContextCompat;
+ 
+ import mdm.secure.agent.db.DBManager;
++import mdm.secure.agent.policy.Applications;
+ import mdm.secure.agent.policy.Policies;
+ import mdm.secure.agent.policy.PoliciesImpl;
++import mdm.secure.agent.policy.manager.RulesManager;
+ import mdm.secure.agent.provision.Util;
+ import mdm.secure.agent.services.ServiceMDM;
+ import mdm.secure.agent.utils.Browsers;
+@@ -37,6 +39,9 @@
+                 if(db.isDisallowInstall()){
+                     policies.disallowInstallApps(true);
+                 }
++                if(db.isShowAllSystemApplication()){
++                    policies.showAllSystemApps();
++                }
+             }
+         }
+     }
+Index: app/src/main/java/mdm/secure/agent/policy/rule/ShowAllSystemApps.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/policy/rule/ShowAllSystemApps.java b/app/src/main/java/mdm/secure/agent/policy/rule/ShowAllSystemApps.java
+--- a/app/src/main/java/mdm/secure/agent/policy/rule/ShowAllSystemApps.java	
++++ b/app/src/main/java/mdm/secure/agent/policy/rule/ShowAllSystemApps.java	
+@@ -57,7 +57,7 @@
+             Notify.apply(rulesManager.getContext(), R.string.notify_message_system_apps);
+         }
+     }
+-
++//
+     public void setEnabled(Context context, boolean enable) {
+         ShowAllSystemApps.enable = enable;
+         Policies policies = new PoliciesImpl(context);
+Index: app/src/main/java/mdm/secure/agent/policy/AllowControlApps.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/mdm/secure/agent/policy/AllowControlApps.java b/app/src/main/java/mdm/secure/agent/policy/AllowControlApps.java
+--- a/app/src/main/java/mdm/secure/agent/policy/AllowControlApps.java	
++++ b/app/src/main/java/mdm/secure/agent/policy/AllowControlApps.java	
+@@ -23,6 +23,7 @@
+         this.userRestrictions = new UserRestrictions(context);
+     }
+ 
++
+     public void setAllowControlApps(boolean allowInstall) {
+         if (!(this.devicePolicyManager != null && this.devicePolicyManager.isAdminActive(this.componentName))) {
+             throw new AssertionError("Admin permissions expected");

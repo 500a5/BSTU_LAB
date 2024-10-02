@@ -1,0 +1,20 @@
+void main(void) {
+    WDTCTL = WDTPW + WDTHOLD;
+    Init_System_Clock();
+    Init_System();
+
+    char i;
+    char j = 10;
+    UART_init(1, 7, 1, 0, 0);
+    while(1)
+    {
+        for(i = 0; i < 20; i++)
+        {
+            UART_sendbyte(j); // передача байта
+            j++;
+        }
+        UART_off();
+    }
+
+    //wait_1ms(10000);
+}

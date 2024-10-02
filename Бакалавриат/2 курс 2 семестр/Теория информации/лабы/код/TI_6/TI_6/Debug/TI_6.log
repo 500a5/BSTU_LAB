@@ -1,0 +1,8 @@
+﻿  TI_6.cpp
+C:\Users\500a5\source\repos\TI_6\TI_6\polynom.cpp(265,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\TI_6\TI_6\polynom.cpp(275,30): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\TI_6\TI_6\polynom.cpp(286,30): warning C4018: >=: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\TI_6\TI_6\TI_6.cpp(44,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\500a5\source\repos\TI_6\TI_6\TI_6.cpp(87,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\TI_6\TI_6\TI_6.cpp(198,35): warning C4018: <: несоответствие типов со знаком и без знака
+  TI_6.vcxproj -> C:\Users\500a5\source\repos\TI_6\Debug\TI_6.exe

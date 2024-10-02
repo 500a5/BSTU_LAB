@@ -1,0 +1,3 @@
+C:/Users/500a5/CLionProjects/asd4/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/500a5/CLionProjects/asd4/cmake-build-debug/CMakeFiles/asd4.dir
+C:/Users/500a5/CLionProjects/asd4/cmake-build-debug/CMakeFiles/edit_cache.dir

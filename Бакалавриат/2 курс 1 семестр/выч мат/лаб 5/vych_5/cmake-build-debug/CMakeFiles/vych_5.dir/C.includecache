@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/vych_5/LFN.c
+LFN.h
+C:/Users/500a5/CLionProjects/vych_5/LFN.h
+
+C:/Users/500a5/CLionProjects/vych_5/LFN.h
+

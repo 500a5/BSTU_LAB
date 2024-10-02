@@ -1,0 +1,9 @@
+
+Available disk drives : C:\
+FreeBytesAvail   116,  TotalNumOfBytes  44,  TotalNumOfFreeBytes   1833435136
+	Maximum Component  Length 255
+	Volume Name  Acer
+	Volume Serial Number  2865879232
+	File System  NTFS
+	System flags 0x03E706FF
+Drive type FIXED

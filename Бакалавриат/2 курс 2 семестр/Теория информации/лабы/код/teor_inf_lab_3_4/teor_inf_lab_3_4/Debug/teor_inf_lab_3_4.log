@@ -1,0 +1,41 @@
+﻿  coding.cpp
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(48,34): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(53,34): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(60,34): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(62,37): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(77,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(78,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(83,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(85,31): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(97,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(127,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(130,25): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(133,25): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): error C3511: "code": вызов делегирующего конструктора должен быть единственным инициализатором члена
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): message : Сообщение диагностики возникло в созданной компилятором функции "code::code(const code &)"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): error C2664: "code::code(code &&)": невозможно преобразовать аргумент 1 из "const std::string" в "const code &"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): message : Причина: невозможно преобразовать "const std::string" в "const code"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): message : Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.h(21,1): message : см. объявление "code::code"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): message : Сообщение диагностики возникло в созданной компилятором функции "code::code(const code &)"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): error C2437: "name": инициализация уже выполнена
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): message : Сообщение диагностики возникло в созданной компилятором функции "code::code(const code &)"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): error C2437: "prob": инициализация уже выполнена
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(151,1): message : Сообщение диагностики возникло в созданной компилятором функции "code::code(const code &)"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(156,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(158,27): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(167,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.cpp(180,27): warning C4018: <: несоответствие типов со знаком и без знака
+  teor_inf_lab_3_4.cpp
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): error C3511: "code": вызов делегирующего конструктора должен быть единственным инициализатором члена
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): message : Сообщение диагностики возникло в созданной компилятором функции "code::code(const code &)"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): error C2664: "code::code(code &&)": невозможно преобразовать аргумент 1 из "const std::string" в "const code &"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): message : Причина: невозможно преобразовать "const std::string" в "const code"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): message : Для выполнения данного преобразования нет доступного оператора преобразования, определенного пользователем, или вызов оператора невозможен
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\coding.h(21,1): message : см. объявление "code::code"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): message : Сообщение диагностики возникло в созданной компилятором функции "code::code(const code &)"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): error C2437: "name": инициализация уже выполнена
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): message : Сообщение диагностики возникло в созданной компилятором функции "code::code(const code &)"
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): error C2437: "prob": инициализация уже выполнена
+C:\Users\500a5\source\repos\teor_inf_lab_3_4\teor_inf_lab_3_4\teor_inf_lab_3_4.cpp(50,1): message : Сообщение диагностики возникло в созданной компилятором функции "code::code(const code &)"
+  Создание кода...

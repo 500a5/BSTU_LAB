@@ -1,0 +1,13 @@
+Microsoft Virtual PC 2007 для Windows 8
+-------
+запускаем, ставим
+virtual-pc-2007-x64-setup.exe (для 64 битной ОС) или
+virtual-pc-2007-x86-setup.exe (для 32 битной ОС)
+
+кидаем в папку с заменой файлов C:\Program Files\Microsoft Virtual PC
+Brazilian.dict (русификатор) и
+Virtual PC.exe
+
+заменяем vmm.sys в папке C:\Windows\system32\Drivers
+новым файлом из папок vmm(x32) или vmm(x64) в зависимости от битности ОС
+

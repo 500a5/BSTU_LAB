@@ -1,0 +1,30 @@
+#include <msp430.h> 
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+
+#pragma vector=PORT1_VECTOR
+__interrupt void KEYS_interrupt()
+{
+
+}
+
+
+void main(void) {
+    _enable_interrupt();
+    WDTCTL = WDTPW + WDTHOLD;
+    Init_System_Clock();
+    Init_System();
+    Init_I2C();
+    char f = 1;
+    I2C_WriteByte(0x00, 0x0F, 0x73);
+    I2C_WriteByte(0x03, 0x0F, 0x73);
+    while(f){
+
+    }
+}

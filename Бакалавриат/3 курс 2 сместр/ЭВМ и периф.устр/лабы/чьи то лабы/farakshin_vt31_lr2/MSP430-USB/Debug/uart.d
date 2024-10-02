@@ -1,0 +1,23 @@
+# FIXED
+
+uart.obj: ../uart.c
+uart.obj: ../function_prototype.h
+uart.obj: ../system_define.h
+uart.obj: C:/TI/ccs930/ccs/ccs_base/msp430/include/msp430.h
+uart.obj: C:/TI/ccs930/ccs/ccs_base/msp430/include/msp430f1611.h
+uart.obj: C:/TI/ccs930/ccs/ccs_base/msp430/include/in430.h
+uart.obj: C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include/intrinsics.h
+uart.obj: C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include/intrinsics_legacy_undefs.h
+uart.obj: ../sysfunc.h
+uart.obj: ../uart.h
+
+../uart.c: 
+../function_prototype.h: 
+../system_define.h: 
+C:/TI/ccs930/ccs/ccs_base/msp430/include/msp430.h: 
+C:/TI/ccs930/ccs/ccs_base/msp430/include/msp430f1611.h: 
+C:/TI/ccs930/ccs/ccs_base/msp430/include/in430.h: 
+C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include/intrinsics.h: 
+C:/TI/ccs930/ccs/tools/compiler/ti-cgt-msp430_18.12.4.LTS/include/intrinsics_legacy_undefs.h: 
+../sysfunc.h: 
+../uart.h: 

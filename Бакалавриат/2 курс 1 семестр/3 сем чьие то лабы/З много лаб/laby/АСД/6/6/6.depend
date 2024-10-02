@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1511693781 source:c:\users\acer\desktop\лабы\асд\6\6\fifo.c
+
+1511721282 source:c:\users\acer\desktop\лабы\асд\6\6\main.c
+	<stdio.h>
+	<stdlib.h>
+	<locale.h>
+	<time.h>
+

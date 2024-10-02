@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1510497832 source:c:\users\hystou\desktop\Учёбка\Какие-то проги\vich_6\vi6.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"vi6.h"
+
+1510498064 c:\users\hystou\desktop\Учёбка\Какие-то проги\vich_6\vi6.h
+
+1510498064 source:c:\users\hystou\desktop\Учёбка\Какие-то проги\vich_6\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"vi6.h"
+

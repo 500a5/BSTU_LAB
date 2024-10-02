@@ -1,0 +1,16 @@
+﻿  asm8.cpp
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(26,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(56): warning C4414: j1: короткий переход к функции преобразован в ближний переход
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(106,1): warning C4102: j1: неиспользованная метка
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(272,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(279,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(347,23): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(412,25): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(419,25): warning C4018: <: несоответствие типов со знаком и без знака
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(127): warning C4731: Sort_asm: регистр указателя фрейма "ebp" изменен встроенным кодом на языке ассемблера
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(128): warning C4731: Sort_asm: регистр указателя фрейма "ebp" изменен встроенным кодом на языке ассемблера
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(162): warning C4731: Sort_asm: регистр указателя фрейма "ebp" изменен встроенным кодом на языке ассемблера
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(187): warning C4731: Sort_asm: регистр указателя фрейма "ebp" изменен встроенным кодом на языке ассемблера
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(188): warning C4731: Sort_asm: регистр указателя фрейма "ebp" изменен встроенным кодом на языке ассемблера
+C:\Users\Novoz\source\repos\asm8\asm8\asm8.cpp(223): warning C4731: Sort_asm: регистр указателя фрейма "ebp" изменен встроенным кодом на языке ассемблера
+  asm8.vcxproj -> C:\Users\Novoz\source\repos\asm8\Debug\asm8.exe

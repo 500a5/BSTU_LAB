@@ -1,0 +1,191 @@
+MCS-51 MACRO ASSEMBLER    0ACP                                                                      06/10/;9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN 0ACP.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE 0ACP.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1             ORG 0h
+0000 028100            2             JMP START
+                       3     
+8100                   4             org 8100h
+                       5     START:
+8100 1281BA            6             call stop
+8103 7482              7             MOV A, #10000010b
+8105 758203            8             MOV DPL, #3
+8108 F0                9             MOVX @DPTR, A
+8109 7411             10             MOV A, #00010001b
+810B 758200           11             MOV DPL, #0
+810E F0               12             MOVX @DPTR, A
+810F E589             13             MOV A, TMOD
+8111 4401             14             ORL A, #00000001b
+8113 F589             15             MOV TMOD,A 
+                      16     
+8115 C2D3             17             clr PSW.3
+8117 C2D4             18             clr PSW.4
+8119 7400             19             mov a, #0
+811B 908600           20             mov dptr, #8600h
+811E F0               21             movx  @dptr, A
+                      22     
+                      23     main:
+811F 908600           24             mov dptr, #8600h
+8122 E0               25             movx A, @dptr
+8123 7008             26             jnz go
+8125 12815F           27             call ACP
+8128 12818E           28             call print
+812B 80F2             29             jmp main
+                      30     
+                      31     go:
+812D 908600           32             mov dptr, #8600h
+8130 E0               33             movx A, @dptr
+8131 F5F0             34             mov B, A
+8133 E8               35             mov A, R0
+8134 B5F003           36             cjne A, B, m1
+8137 028157           37             jmp stoim
+                      38     m1:
+813A 05F0             39             inc b
+813C B5F003           40             cjne A, B, m2
+813F 028157           41             jmp stoim
+                      42     m2:
+8142 15F0             43             dec b
+8144 B5F003           44             cjne A, B, m3
+8147 028157           45             jmp stoim
+                      46     m3:
+814A 95F0             47             subb A, B
+814C 4006             48             jc m4
+814E 1281C4           49             call back
+8151 028157           50             jmp stoim
+MCS-51 MACRO ASSEMBLER    0ACP                                                                      06/10/;9   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      51     m4:
+8154 1281BF           52             call forward
+                      53     stoim:
+8157 12815F           54             call ACP
+815A 12818E           55             call print
+815D 80CE             56     jmp go
+                      57     
+                      58     ACP:
+815F D296             59             SETB P1.6
+8161 D297             60             SETB P1.7
+8163 C3               61             CLR C 
+8164 C297             62             CLR P1.7
+8166 2096FD           63             JB P1.6, $
+                      64     
+8169 900001           65             MOV DPTR, #01h
+816C E0               66             MOVX A, @DPTR
+816D F8               67             mov R0,A
+816E 75F00A           68             mov B, #10
+8171 84               69             div AB
+8172 AFF0             70             mov R7, B
+8174 75F007           71             mov B, #7
+8177 A4               72             mul AB
+8178 F8               73             mov R0, A
+8179 EF               74             mov A, R7
+817A 75F007           75             mov B, #7
+817D A4               76             mul AB
+817E 75F00A           77             mov B, #10
+8181 84               78             div AB
+8182 98               79             subb A, R0
+8183 F8               80             mov R0, A
+8184 7E00             81             mov R6, #0b
+                      82     
+                      83     delenie:
+8186 FF               84             mov R7, A
+8187 0E               85             INC R6
+8188 940A             86             subb A, #00001010b
+818A 50FA             87             jnc delenie
+818C 1E               88             DEC R6
+818D 22               89     ret
+                      90     
+                      91     print:
+818E 900002           92             mov DPTR, #2
+8191 EE               93             MOV A, R6
+8192 540F             94             ANL A, #00001111b
+8194 4440             95             ORL a, #01000000b
+8196 F0               96             MOVX @DPTR, A
+8197 1281AA           97             CALL pause
+819A 7400             98             mov A, #0h
+819C F0               99             movx @DPTR, A
+819D EF              100             MOV A,R7
+819E 540F            101             ANL A, #00001111b
+81A0 4480            102             ORL A, #10000000b
+81A2 F0              103             MOVX @DPTR, A
+81A3 1281AA          104             CALL pause
+81A6 7400            105             mov A, #0h
+MCS-51 MACRO ASSEMBLER    0ACP                                                                      06/10/;9   PAGE    3
+
+
+LOC  OBJ            LINE     SOURCE
+
+81A8 F0              106             movx @DPTR, A
+81A9 22              107     ret
+                     108     
+                     109     pause:
+81AA 758CFA          110            MOV TH0, #HIGH(64000)
+81AD 758A00          111            MOV TL0, #LOW(64000)
+81B0 D28C            112            SETB TR0
+81B2 308DFD          113            JNB TF0, $
+81B5 C28D            114            CLR TF0
+81B7 C28C            115            CLR TR0
+81B9 22              116     RET
+                     117     
+                     118     stop:
+81BA C296            119             clr P1.6
+81BC C297            120             clr P1.7
+81BE 22              121     ret
+                     122     
+                     123     forward:
+81BF C297            124             clr P1.7
+81C1 D296            125             setb P1.6
+81C3 22              126     ret
+                     127     
+                     128     back:
+81C4 C296            129             clr P1.6
+81C6 D297            130             setb P1.7
+81C8 22              131     ret
+                     132     
+                     133     END
+MCS-51 MACRO ASSEMBLER    0ACP                                                                      06/10/;9   PAGE    4
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACP. . . .  C ADDR    815FH   A       
+B. . . . .  D ADDR    00F0H   A       
+BACK . . .  C ADDR    81C4H   A       
+DELENIE. .  C ADDR    8186H   A       
+DPL. . . .  D ADDR    0082H   A       
+FORWARD. .  C ADDR    81BFH   A       
+GO . . . .  C ADDR    812DH   A       
+M1 . . . .  C ADDR    813AH   A       
+M2 . . . .  C ADDR    8142H   A       
+M3 . . . .  C ADDR    814AH   A       
+M4 . . . .  C ADDR    8154H   A       
+MAIN . . .  C ADDR    811FH   A       
+P1 . . . .  D ADDR    0090H   A       
+PAUSE. . .  C ADDR    81AAH   A       
+PRINT. . .  C ADDR    818EH   A       
+PSW. . . .  D ADDR    00D0H   A       
+START. . .  C ADDR    8100H   A       
+STOIM. . .  C ADDR    8157H   A       
+STOP . . .  C ADDR    81BAH   A       
+TF0. . . .  B ADDR    0088H.5 A       
+TH0. . . .  D ADDR    008CH   A       
+TL0. . . .  D ADDR    008AH   A       
+TMOD . . .  D ADDR    0089H   A       
+TR0. . . .  B ADDR    0088H.4 A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

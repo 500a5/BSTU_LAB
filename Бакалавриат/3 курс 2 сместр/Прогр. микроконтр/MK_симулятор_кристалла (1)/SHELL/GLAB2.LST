@@ -1,0 +1,122 @@
+MCS-51 MACRO ASSEMBLER    GLAB2                                                                     12/20/;0   PAGE    1
+
+
+DOS 6.22 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN GLAB2.OBJ
+ASSEMBLER INVOKED BY:  C:\SHELL\ASM51.EXE GLAB2.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+0000 028100            2       jmp Start
+8100                   3     org 8100h
+                       4     Start:
+8100 D290              5       setb p1.0
+8102 C2D4              6       clr psw.4
+8104 C2D3              7       clr psw.3
+8106 900003            8       mov dptr,#03h
+8109 7482              9       mov a,#82h
+810B F0               10       movx @dptr,a
+810C 900000           11       mov dptr,#00h
+810F 7410             12       mov a,#10h
+8111 F0               13       movx @dptr,a
+8112 C290             14       clr p1.0
+                      15     IsBusy:
+8114 2091FD           16       jb p1.1,IsBusy
+                      17     
+                      18     Ready:
+8117 900001           19       mov dptr,#01h
+811A E0               20       movx a,@dptr
+811B D290             21       setb p1.0
+811D 900002           22       mov dptr,#02h
+8120 2480             23       add a,#80h
+8122 C290             24       clr p1.0
+8124 9200             25       mov 00h,c
+8126 30E702           26       jnb acc.7,Positive
+8129 F4               27       cpl a
+812A 04               28       inc a
+                      29     Positive:
+812B 75F019           30       mov b,#19h
+812E 84               31       div ab
+812F D2E5             32       setb acc.5
+8131 F510             33       mov 10h,a
+8133 E5F0             34       mov a,b
+                      35     
+8135 23               36       rl a
+8136 23               37       rl a
+8137 75F00A           38       mov b,#0ah
+813A 84               39       div ab
+813B D2E6             40       setb acc.6
+813D F511             41       mov 11h,a
+813F D2F7             42       setb b.7
+8141 85F012           43       mov 12h,b
+                      44     
+                      45     Output:
+8144 7907             46       mov r1,#07h
+                      47     Output_0:
+8146 7A0F             48       mov r2,#0Fh
+                      49     Output_1:
+8148 7812             50       mov r0,#12h
+MCS-51 MACRO ASSEMBLER    GLAB2                                                                     12/20/;0   PAGE    2
+
+
+LOC  OBJ            LINE     SOURCE
+
+                      51     
+                      52     OutputNum:
+814A E6               53       mov a,@r0
+814B F0               54       movx @dptr,a
+814C 7C00             55       mov r4,#00h
+                      56     Pause_0:
+814E DCFE             57       djnz r4,Pause_0
+8150 18               58       dec r0
+8151 B80FF6           59       cjne r0,#0fh, OutputNum
+                      60     Pause_1:
+8154 DCFE             61       djnz r4,Pause_1
+8156 DAF0             62       djnz r2,Output_1
+8158 D9EC             63       djnz r1,Output_0
+815A 20000B           64       jb 00h,IsPositive
+815D 7480             65       mov a,#80h
+815F F0               66       movx @dptr,a
+8160 790F             67       mov r1,#0fh
+                      68     Pause_2:
+8162 7A00             69       mov r2,#00h
+                      70     Pause_3:
+8164 DAFE             71       djnz r2,Pause_3
+8166 D9FA             72       djnz r1,Pause_2
+                      73     IsPositive:
+8168 2091D9           74       jb p1.1, Output
+816B 80AA             75       jmp Ready
+                      76     end
+MCS-51 MACRO ASSEMBLER    GLAB2                                                                     12/20/;0   PAGE    3
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+ACC. . . .  D ADDR    00E0H   A       
+B. . . . .  D ADDR    00F0H   A       
+ISBUSY . .  C ADDR    8114H   A       
+ISPOSITIVE  C ADDR    8168H   A       
+OUTPUT_0 .  C ADDR    8146H   A       
+OUTPUT_1 .  C ADDR    8148H   A       
+OUTPUT . .  C ADDR    8144H   A       
+OUTPUTNUM.  C ADDR    814AH   A       
+P1 . . . .  D ADDR    0090H   A       
+PAUSE_0. .  C ADDR    814EH   A       
+PAUSE_1. .  C ADDR    8154H   A       
+PAUSE_2. .  C ADDR    8162H   A       
+PAUSE_3. .  C ADDR    8164H   A       
+POSITIVE .  C ADDR    812BH   A       
+PSW. . . .  D ADDR    00D0H   A       
+READY. . .  C ADDR    8117H   A       
+START. . .  C ADDR    8100H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

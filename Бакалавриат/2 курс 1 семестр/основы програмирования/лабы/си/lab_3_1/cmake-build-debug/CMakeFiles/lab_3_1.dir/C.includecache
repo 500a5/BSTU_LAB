@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/500a5/CLionProjects/lab_3_1/main.c
+stdio.h
+-
+stdbool.h
+-
+process.h
+-
+zagalovok_bool_arr.h
+C:/Users/500a5/CLionProjects/lab_3_1/zagalovok_bool_arr.h
+
+C:/Users/500a5/CLionProjects/lab_3_1/zagalovok_bool_arr.h
+

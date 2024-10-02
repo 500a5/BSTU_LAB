@@ -1,0 +1,30 @@
+MCS-51 MACRO ASSEMBLER    JOJO                                                                      09/11/;9   PAGE    1
+
+
+DOS 5.0 (038-N) MCS-51 MACRO ASSEMBLER, V2.3
+OBJECT MODULE PLACED IN C:\SHELL\JOJO.OBJ
+ASSEMBLER INVOKED BY:  C:\PROGRA~1\KOMPIL\ASM51.EXE C:\SHELL\JOJO.ASM
+                       
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0
+                       2     lbl:
+0000 08                3     inc R0
+0001 B805FC            4     cjne R0, #5, lbl
+                       5     end
+MCS-51 MACRO ASSEMBLER    JOJO                                                                      09/11/;9   PAGE    2
+
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E     T Y P E   V A L U E       A T T R I B U T E S
+
+LBL. . . .  C ADDR    0000H   A       
+
+
+REGISTER BANK(S) USED: 0
+
+ASSEMBLY COMPLETE, NO ERRORS FOUND

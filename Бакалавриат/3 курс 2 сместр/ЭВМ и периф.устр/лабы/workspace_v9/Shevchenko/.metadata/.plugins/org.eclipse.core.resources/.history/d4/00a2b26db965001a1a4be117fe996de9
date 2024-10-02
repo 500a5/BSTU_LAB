@@ -1,0 +1,50 @@
+#include <msp430.h> 
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+void main(void) {
+    _enable_interrupt();
+        WDTCTL = WDTPW + WDTHOLD;
+        Init_System_Clock();
+        Init_System();
+        Init_I2C();
+        char KEYS_last;
+        char f = 1;
+        char KEYS_new;
+        LED_clear();
+        while(f){
+            KEYS_last = KEYS_waitkey();
+            switch(KEYS_last){
+            case '4':
+                LED_set(1);
+                wait_1ms(500);
+                LED_reset(1);
+                break;
+            case '7':
+                LED_set(2);
+                wait_1ms(500);
+                LED_reset(2);
+                break;
+            case '8':
+                LED_set(3);
+                wait_1ms(500);
+                LED_reset(3);
+                break;
+            case '*':
+                KEYS_new = KEYS_waitkey();
+                if(KEYS_new == '#')
+                    f = 0;
+                break;
+            case '#':
+                KEYS_new = KEYS_waitkey();
+                if(KEYS_new == '*')
+                    f = 0;
+                break;
+            }
+        }
+}

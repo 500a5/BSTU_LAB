@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1505645496 source:c:\users\Фантом\desktop\МАТЛООГИКА\111\main.cpp
+	<iostream>
+	<math.h>
+
+1505909129 source:c:\users\Сергей\desktop\111\main.cpp
+	<iostream>
+	<math.h>
+
+1505909129 source:e:\Библиотеки\Технолог\Мат. логика и ТА\111\main.cpp
+	<iostream>
+	<math.h>
+
+1506106022 source:c:\users\hystou\desktop\Учёбка\2 r\матлог\первая лабаааа\main.cpp
+	<iostream>
+	<math.h>
+	"knf.h"
+
+1506106084 c:\users\hystou\desktop\Учёбка\2 r\матлог\первая лабаааа\knf.h
+
+1506106084 source:c:\users\hystou\desktop\Учёбка\2 r\матлог\первая лабаааа\knf.cpp
+	<iostream>
+	<math.h>
+

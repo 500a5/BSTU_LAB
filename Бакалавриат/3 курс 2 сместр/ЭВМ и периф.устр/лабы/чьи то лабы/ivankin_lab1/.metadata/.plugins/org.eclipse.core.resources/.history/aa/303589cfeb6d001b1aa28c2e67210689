@@ -1,0 +1,56 @@
+#include <msp430.h> 
+#include "stdio.h"
+#include "system_define.h"
+#include "system_variable.h"
+#include "function_prototype.h"
+#include "lcd.h"
+#include "sysfunc.h"
+#include "main.h"
+
+/*
+ * main.c
+ */
+void main(void)
+{
+    /*
+    char name[15] = "Иванкин Кирилл\0";
+    char gr[5] = "ВТ-32";*/
+    char sym[8] = {
+                   0b00000000, 0b00011011,
+                   0b00011111, 0b00011111,
+                   0b00001110, 0b00000100,
+                   0b00000000, 0b00000000
+                  };
+    char sym2[8] = {
+                   0b00000000, 0b00011011,
+                   0b00010101, 0b00010001,
+                   0b00001010, 0b00000100,
+                   0b00000000, 0b00000000
+                  };
+    WDTCTL = WDTPW + WDTHOLD;
+    Init_System();
+    Init_System_Clock();
+    LCD_init();
+    LCD_clear();
+    /*
+    LCD_set_cursor(3);
+    LCD_message(name);
+    LCD_set_pos(1, 0);
+    LCD_message(gr);
+    */
+    LCD_WriteCommand(0x40);
+    int i = 0;
+    for(i = 0; i < 8; i++)
+        LCD_WriteData(sym[i]);
+    for(i = 0; i < 8; i++)
+        LCD_WriteData(sym2[i]);
+
+    LCD_set_pos(0, 0);
+    while(1)
+    {
+        LCD_WriteData(0);
+        wait_1ms(20);
+        LCD_set_pos(0, 0);
+        LCD_WriteData(1);
+    }
+}
